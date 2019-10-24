@@ -1,18 +1,10 @@
 import React from "react";
 import { Link } from "gatsby";
 import Layout from "../components/layout.js";
+
+
 export default () => 
 
-
-/* WORKING VERSION OF LINK ON GITHUB
-<div>
-      <Link to="/coding/contact/">Contact</Link>
-    </div>
-    <div>
-      
-      <Link to="/coding/about/">About</Link>
-    </div>
-*/
 <Layout>
 <div>
     <div>
@@ -20,7 +12,7 @@ export default () =>
     </div>
     <div>
       
-      <Link to="about/">About</Link>
+      <Link to="/about/">About</Link>
     </div>
 </div>
   <div>
@@ -31,6 +23,8 @@ export default () =>
       <a href="./about">about with a tag</a>
     </div>
   </div>
+
+
   <h1>Hello Gats!!</h1>
   <p>What a world</p>
   <img src="https://source.unsplash.com/random/400x200" alt=""/>
