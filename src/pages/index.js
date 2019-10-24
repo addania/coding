@@ -16,11 +16,11 @@ export default () =>
 <Layout>
 <div>
     <div>
-      <Link to="/coding/contact/">Testing Prefexis if they work Contact</Link>
+      <Link to="/contact/">Testing Prefexis if they work Contact</Link>
     </div>
     <div>
       
-      <Link to="/coding/about/">About</Link>
+      <Link to="about/">About</Link>
     </div>
 </div>
   <div>
