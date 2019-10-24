@@ -3,21 +3,32 @@ import { Link } from "gatsby";
 import Layout from "../components/layout.js";
 export default () => 
 
-<Layout>
+
+/* WORKING VERSION OF LINK ON GITHUB
 <div>
-    <div>
       <Link to="/coding/contact/">Contact</Link>
     </div>
     <div>
+      
+      <Link to="/coding/about/">About</Link>
+    </div>
+*/
+<Layout>
+<div>
+    <div>
+      <Link to="/coding/contact/">Testing Prefexis if they work Contact</Link>
+    </div>
+    <div>
+      
       <Link to="/coding/about/">About</Link>
     </div>
 </div>
   <div>
     <div>
-      <a href="/contact">contact with a tag</a>
+      <a href="./contact">contact with a tag</a>
     </div>
     <div>
-      <a href="/about">about with a tag</a>
+      <a href="./about">about with a tag</a>
     </div>
   </div>
   <h1>Hello Gats!!</h1>
