@@ -1,13 +1,14 @@
 import React from "react";
-
-import Header from "../components/header.js"
+import Layout from "../components/layout.js";
+import Header from "../components/header.js";
 
 export default () => (
-  <div style={{ color: `teal` }}>
+  
+  <Layout>
     
     <h1>About Gatsby</h1>
     <p>Such wow. Very React.</p>
     <Header headerText="Text added by PROPS" />
     <Header headerText="It's pretty cool" />
-  </div>
+  </Layout>
 )
