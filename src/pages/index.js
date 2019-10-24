@@ -4,28 +4,12 @@ import Layout from "../components/layout.js";
 
 
 export default () => 
-
+(<div>
 <Layout>
-<div>
-    <div>
-      <Link to="/contact/">Testing Prefexis if they work Contact</Link>
-    </div>
-    <div>
-      
-      <Link to="/about/">About</Link>
-    </div>
-</div>
-  <div>
-    <div>
-      <a href="./contact">contact with a tag</a>
-    </div>
-    <div>
-      <a href="./about">about with a tag</a>
-    </div>
-  </div>
-
-
-  <h1>Hello Gats!!</h1>
-  <p>What a world</p>
+  <h1>Coding Adventure</h1>
+  <p>Welcome to my block about my baby steps in coding universe. I hope you will enojoy reading and find some useful information</p>
   <img src="https://source.unsplash.com/random/400x200" alt=""/>
+
 </Layout>
+</div>
+)
