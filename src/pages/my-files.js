@@ -27,7 +27,7 @@ export default ( {data} ) => {
     return (
         <Layout>
       <div>
-        <h1>My Site's FFFFiles</h1>
+        <h1>My Site's Files</h1>
         <table>
           <thead>
             <tr>
@@ -37,8 +37,7 @@ export default ( {data} ) => {
               <th>name</th>
             </tr>
           </thead>
-          <tbody>
-              
+          <tbody> 
             {data.allFile.edges.map(({ node }, index) => (
               <tr key={index}>
                 <td>{node.base}</td>
