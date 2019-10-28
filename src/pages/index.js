@@ -1,13 +1,14 @@
 import React from "react";
 import Layout from "../components/layout.js";
-import { graphql } from "gatsby";
-
+import { Link, graphql } from "gatsby";
+import SEO from "../components/seo.js"
 
 export default ( {data} ) => {
   console.log(data)
 return (
 <div>
 <Layout>
+  
   <h1>Coding Adventure</h1>
   <p>Welcome to the blog about my journey through coding universe. I hope you will enjoy reading and find some useful information</p>
   <img src="https://source.unsplash.com/random/400x200" alt=""/>
@@ -27,7 +28,9 @@ return (
             {data.allMarkdownRemark.edges.map(({ node }, index) => (
               <tr key={index}>
                 <td>{node.frontmatter.date}</td>
+                <Link to={node.fields.slug}>
                 <td>{node.frontmatter.title}</td>
+                </Link>
                 <td>{node.excerpt}</td>
                 <td>{node.html}</td>
               </tr>
@@ -42,7 +45,7 @@ return (
 
 export const query = graphql` 
 query {
-  allMarkdownRemark {
+  allMarkdownRemark (sort: {fields:[frontmatter___date], order:DESC}) {
     edges {
       node {
         id
@@ -51,6 +54,9 @@ query {
         frontmatter {
           date
           title
+        }
+        fields {
+          slug
         }
         timeToRead
         html

@@ -9,6 +9,7 @@ module.exports = {
   siteMetadata: {
     title: "Coding Addventures with Addania",
     author: "Addania",
+    description: `Coding experience blog`,
   },
   pathPrefix: "/coding",
   plugins: [
@@ -26,5 +27,7 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-react-helmet`,
   ],
 }
