@@ -1,0 +1,41 @@
+@font-face {
+  font-family: "Metric";
+  font-display: swap;
+  src: url("./Metric-Light.otf");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Metric";
+  font-display: swap;
+  src: url("./Metric-Regular.otf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Metric";
+  font-display: swap;
+  src: url("./Metric-Medium.otf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Metric";
+  font-display: swap;
+  src: url("./Metric-Semibold.otf");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Metric";
+  font-display: swap;
+  src: url("./Metric-Bold.otf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Metric";
+  font-display: swap;
+  src: url("./Metric-Black.otf");
+  font-weight: 800;
+}

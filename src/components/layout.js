@@ -21,12 +21,12 @@ const data = useStaticQuery (
   `
 )
 return (
-  <div style={{ margin: `3rem auto`, maxWidth: 650, padding: `0 1rem` }}>
+  <div style={{ margin: `3rem auto`, maxWidth: 800, padding: `0 1rem` }}>
     <header style={{ marginBottom: `1.5rem` }}>
       <Link to="/" style={{ textShadow: `none`, backgroundImage: `none` }}>
         <h3 style={{ display: `inline` }}>{data.site.siteMetadata.author}</h3>
       </Link>
-      <ul style={{ listStyle: `none`, float: `right` }}>
+      <ul style={{ listStyle: `none`, float: `right`, }}>
         <ListLink to="/">Home</ListLink>
         <ListLink to="/about/">About</ListLink>
         <ListLink to="/contact/">Contact</ListLink>
@@ -34,7 +34,7 @@ return (
       <hr />
     </header>
     {children}
-    <h3>{data.site.siteMetadata.title}</h3>
+    
     <hr />
     <footer style={{ marginBottom: `1.5rem` }}>
         <p style={{ display: `inline`, align: "right" }}>© 2019 Design and Development by {data.site.siteMetadata.author}</p>
@@ -42,3 +42,5 @@ return (
   </div>
 )
 }
+
+// <h3>{data.site.siteMetadata.title}</h3>

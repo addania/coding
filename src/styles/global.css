@@ -1,3 +1,21 @@
 html {
-    background-color: lavenderblush;
+    background-color: rgb(48, 48, 48);
+    color: white;
+  }
+
+  h3, h1, h2, p, th, td{
+    color: white;
+  }
+
+  a{
+    text-shadow: none;
+    text-decoration: none;
+    background-image: none;
+    color: teal;
+  }
+
+  blockquote {
+    font-size: 20px;
+    font-style: normal;
+    border-left: 0.2rem solid teal;
   }

@@ -2,6 +2,8 @@ import React from "react";
 import Layout from "../components/layout.js";
 import { Link, graphql } from "gatsby";
 import SEO from "../components/seo.js"
+import { Carousel } from "../components/carousel.js"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default ( {data} ) => {
   console.log(data)
@@ -11,6 +13,7 @@ return (
   
   <h1>Coding Adventure</h1>
   <p>Welcome to the blog about my journey through coding universe. I hope you will enjoy reading and find some useful information</p>
+  <Carousel />
   <img src="https://source.unsplash.com/random/400x200" alt=""/>
   <h1>ALL BLOGS</h1>
   <p>{data.allMarkdownRemark.totalCount} Posts</p>
@@ -21,7 +24,7 @@ return (
               <th>Date</th>
               <th>Title</th>
               <th>Excerpt</th>
-              <th>HTML</th>
+              
             </tr>
           </thead>
           <tbody> 
@@ -29,10 +32,10 @@ return (
               <tr key={index}>
                 <td>{node.frontmatter.date}</td>
                 <Link to={node.fields.slug}>
-                <td>{node.frontmatter.title}</td>
+                <td style={{color: "teal"}}>{node.frontmatter.title}</td>
                 </Link>
                 <td>{node.excerpt}</td>
-                <td>{node.html}</td>
+                
               </tr>
             ))}
           </tbody>
