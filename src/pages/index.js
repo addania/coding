@@ -14,8 +14,8 @@ return (
   <h1>Coding Adventure</h1>
   <p>Welcome to the blog about my journey through coding universe. I hope you will enjoy reading and find some useful information</p>
   <Carousel />
-  <img src="https://source.unsplash.com/random/400x200" alt=""/>
-  <h1>ALL BLOGS</h1>
+  
+  <h2>ALL BLOGS</h2>
   <p>{data.allMarkdownRemark.totalCount} Posts</p>
   
   <table>

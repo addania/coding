@@ -1,6 +1,6 @@
 ---
 title: "Google Fonts in React"
-date: "2019-09-30"
+date: "2019-10-01"
 ---
 
 It took me a while to figure out how to import Google fonts to React. Very good library of around 1000 fonts can be found on w3schools
