@@ -9,18 +9,14 @@ What are higher order functions? According to Wikipedia:
 > 1. takes one or more functions as arguments (i.e. procedural parameters),
 > 2. returns a function as its result.
 
-<code>For example an array method .reduce is a higher order function because it takes a function called reducer as a parameter:
-</code>
+For example an array method .reduce is a higher order function because it takes a function called reducer as a parameter:
 
-```js
+
+```javascript
 const [myArray, setMyArray] = useState([1, 4, 2]) 
-
 <p>Im a reducer and SUM is: {myArray.reduce(reducer)}</p>
-
 const reducer = (accumulator, currentValue, index) => {
-        accumulator = (accumulator + currentValue)
-        
+        accumulator = (accumulator + currentValue)        
         return (accumulator);
     } 
-```
-        
+```   

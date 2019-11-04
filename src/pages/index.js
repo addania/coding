@@ -4,6 +4,7 @@ import { Link, graphql } from "gatsby";
 import SEO from "../components/seo.js"
 import { Carousel } from "../components/carousel.js"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./index.css";
 
 export default ( {data} ) => {
   console.log(data)
