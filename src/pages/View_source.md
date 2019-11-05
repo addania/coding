@@ -5,10 +5,13 @@ date: "2019-10-05"
 
 How to view the source code in browser?
 
-A) go to chrome, your page -> more tools -> developer tool -> press Control U 
+> go to chrome, your page -> more tools -> developer tool -> press Control  
 
-B) paste <code>view-source:</code> int fromt of your https
-
+> paste this in front of your https
+```
+view-source:
+```
 Example:
-
-view-source:https://addania.github.io/SamOnHands/
+```
+view-source:https://addania.github.io/MyProject/
+```

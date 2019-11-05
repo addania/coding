@@ -14,8 +14,12 @@ a) Passing word props as arguments and then accessing props like so: props.name
 or
 
 ``` 
-<Button children="I AM A CHILD" name="ABC" color="green"></Button>
+<Button children="I AM A CHILD" name="ABC" color="green"/>
 ```
+
+Please note: when using second option I need to have self closing tag, because if I have <Button></Button> an empty stace between opening and closing tag will overwrite my children property!
+
+Please note: It is a good practice to write children betwee opening and closing tags (option A), rather than using it as property (option B)
 
 When we then define the button component, we can retrieve the children props like this
 

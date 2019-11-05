@@ -1,12 +1,14 @@
 import React from "react";
+import pic4 from "./img/pic4.jpg";
 import pic1 from "./img/car1.jpg";
 import pic2 from "./img/car2.jpg";
 import pic3 from "./img/car3.jpg";
 
 const imageArray = [
-  pic1,
-  pic2,
-  pic3,
+  pic4,
+  pic4,
+  pic4,
+  pic4,
 ];
 
 export class Carousel extends React.Component {

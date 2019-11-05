@@ -12,14 +12,14 @@ return (
 <div>
 <Layout>
   
-  <h1>Coding Adventure</h1>
-  <p>Welcome to the blog about my journey through coding universe. I hope you will enjoy reading and find some useful information</p>
+  <h1 style={{textAlign: "center"}}>Cooding Adventures</h1>
+  <p style={{textAlign: "center"}}>Welcome to the blog about my journey through coding universe. I hope you will enjoy reading and find some useful information</p>
   <Carousel />
   
-  <h2>ALL BLOGS</h2>
-  <p>{data.allMarkdownRemark.totalCount} Posts</p>
+  <h3 style={{textAlign: "center"}}>ALL BLOGS</h3>
+  <p style={{textAlign: "center"}}>{data.allMarkdownRemark.totalCount} Posts</p>
   
-  <table>
+  <table style={{textAlign: "center"}}>
           <thead>
             <tr>
               <th>Date</th>
@@ -32,9 +32,9 @@ return (
             {data.allMarkdownRemark.edges.map(({ node }, index) => (
               <tr key={index}>
                 <td>{node.frontmatter.date}</td>
-                <Link to={node.fields.slug}>
+                <a href={node.fields.slug}>
                 <td style={{color: "teal"}}>{node.frontmatter.title}</td>
-                </Link>
+                </a>
                 <td>{node.excerpt}</td>
                 
               </tr>

@@ -14,12 +14,14 @@ date: "2019-10-09"
 
 1) PAGE QUERIES:
 > One way to query data is to use page queries from site Metadata. This option is only available for pages (it is not available for non-page compoenents like layout.js) In order to do so, open the gatsby-config file and paste this into it:
+```
 module.exports = {
   siteMetadata: {
     title: "Coding Addventures with Addania",
   },
-
+```
 > then go to you About page and add following code:
+```
 import React from "react";
 import { graphql } from "gatsby";
 
@@ -38,6 +40,7 @@ query {
   }
 }
 `
+```
 
 > Please not that a constant query is outside of the componenet and by convention at the end of the file.
 
@@ -48,15 +51,18 @@ query {
 > Navigate to layout.js file
 
 > Import useStaticQuery and graphql from gatsy
+```
 import { Link, useStaticQuery, graphql } from "gatsby";
-
+```
 
 > function component needs to have {} brackets after =>
+```
 export default ({ children }) => {
 ...
 }
-
+```
 > create a function component which will have this constant before return function
+```
 const data = useStaticQuery (
   graphql`
   query {
@@ -68,11 +74,14 @@ const data = useStaticQuery (
   }
   `
 )
-
+```
 > Use query inside of the return function
+```
 <h3>{data.site.siteMetadata.title}</h3>
+```
 
 > Entire example layout.js is here:
+```
 import React from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
 
@@ -116,10 +125,11 @@ return (
   </div>
 )
 }
-
+```
 > In order to make sure to write the queries correctly we use tool called GraphiQL. It is available by default when our local development is running (gastby develop) and is accessible here:
+```
 http://localhost:8000/___graphql
-
+```
 
 
 

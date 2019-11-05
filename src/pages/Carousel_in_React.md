@@ -3,7 +3,7 @@ title: "Carousel in React"
 date: "2019-10-04"
 ---
 
-Example code to create carouseel component with 3 images slideshow
+Just admit it, carousels are simply cool!  :) Sooo, how to make one? Example code to create carousel component with 3 images slideshow is provided below. 
 
 ``` 
 import React from "react"
@@ -37,8 +37,6 @@ componentDidMount(){
         }
 
   render (){
-  /*  const number=this.state.picSelector+1;
-      this.setState({picSelector: number});*/
     return (
       <div>
       <img src={this.state.picsForCarousel[this.state.picSelector]} style={{
@@ -48,9 +46,9 @@ componentDidMount(){
         width: "40%"
       }} alt="" />
       </div>
-    )
-    
-    ;
+    );
   }
 };
 ```
+
+Did it work? I hope yes. Have fun!

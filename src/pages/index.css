@@ -4,6 +4,23 @@ pre code {
 }
 
 pre {
-  background-color: rgb(48, 48, 48);
+  /*background-color: rgb(2, 59, 92);*/
+  background-color:teal;
+}
 
+body {
+  margin-top: -30px;
+}
+
+td, tr, th {
+ font-Size: 15px;
+
+}
+
+td {
+  border-bottom: none;
+}
+
+tr {
+  border-bottom: 1px solid hsla(0,0%,0%,0.12);
 }
