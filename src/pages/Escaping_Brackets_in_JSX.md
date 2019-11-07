@@ -3,10 +3,11 @@ title: "Escaping curly brackets in JSX"
 date: "2019-10-28"
 ---
 
-Imagine you want to display in a p tag the following:
+Imagine you want to display following text in a p tag :
+```
 the way you use props is {props.name}
-
-If you write the code in the following way:
+```
+If you write the code like this:
 ```
 <p>the way you use props is {props.name}</p>
 ```
