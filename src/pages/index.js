@@ -16,7 +16,7 @@ return (
   <p style={{textAlign: "center"}}>Welcome to the blog about my journey through coding universe. I hope you will enjoy reading and find some useful information</p>
   <Carousel />
   
-  <h3 style={{textAlign: "center"}}>ALL BLOGS</h3>
+  <h3 style={{textAlign: "center"}}>ALL ARTICLES</h3>
   <p style={{textAlign: "center", fontSize:"15px", color: "grey"}}>{data.allMarkdownRemark.totalCount} Posts</p>
   
   <table style={{textAlign: "justify", textJustify: "inter-word"}}>
