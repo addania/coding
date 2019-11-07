@@ -2,14 +2,15 @@ import React from "react";
 import Layout from "../components/layout.js";
 import Header from "../components/header.js";
 import { graphql } from "gatsby";
-import SEO from "../components/seo.js"
-import { Carousel } from "../components/carousel.js"
+import SEO from "../components/seo.js";
+import { Carousel } from "../components/carousel.js";
 
 export default ( {data}) => (
   
   <Layout>
 
     <h2 style={{textAlign: "center"}}>About {data.site.siteMetadata.title}</h2>
+    <p style={{textAlign: "center"}}>with Addania</p>
     <Carousel/>
     <p style={{  textAlign: "justify",  textJustify: "inter-word"}}>
     <blockquote>Programming has always been for me like looking at another galaxy from the surface of Earth and admiring its endless beauty. 

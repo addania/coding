@@ -19,6 +19,7 @@ td, tr, th {
 
 td {
   border-bottom: none;
+  text-align: justify;
 }
 
 tr {

@@ -12,14 +12,14 @@ return (
 <div>
 <Layout>
   
-  <h1 style={{textAlign: "center"}}>Coding Adventures</h1>
+  <h2 style={{textAlign: "center"}}>Coding Adventures</h2>
   <p style={{textAlign: "center"}}>Welcome to the blog about my journey through coding universe. I hope you will enjoy reading and find some useful information</p>
   <Carousel />
   
   <h3 style={{textAlign: "center"}}>ALL BLOGS</h3>
-  <p style={{textAlign: "center"}}>{data.allMarkdownRemark.totalCount} Posts</p>
+  <p style={{textAlign: "center", fontSize:"15px", color: "grey"}}>{data.allMarkdownRemark.totalCount} Posts</p>
   
-  <table style={{textAlign: "center"}}>
+  <table style={{textAlign: "justify", textJustify: "inter-word"}}>
           <thead>
             <tr>
               <th>Date</th>
