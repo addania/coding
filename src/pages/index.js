@@ -32,9 +32,9 @@ return (
             {data.allMarkdownRemark.edges.map(({ node }, index) => (
               <tr key={index}>
                 <td>{node.frontmatter.date}</td>
-                <a href={node.fields.slug}>
+                <Link to={node.fields.slug}>
                 <td style={{color: "teal"}}>{node.frontmatter.title}</td>
-                </a>
+                </Link>
                 <td>{node.excerpt}</td>
                 
               </tr>
