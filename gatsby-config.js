@@ -7,7 +7,7 @@
 module.exports = {
   /* Your site config here */
   siteMetadata: {
-    title: "Coding Addventures with Addania",
+    title: "Coding Adventures with Addania",
     author: "Addania",
     description: `Coding experience blog`,
   },

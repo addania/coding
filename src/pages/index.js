@@ -12,7 +12,7 @@ return (
 <div>
 <Layout>
   
-  <h1 style={{textAlign: "center"}}>Cooding Adventures</h1>
+  <h1 style={{textAlign: "center"}}>Coding Adventures</h1>
   <p style={{textAlign: "center"}}>Welcome to the blog about my journey through coding universe. I hope you will enjoy reading and find some useful information</p>
   <Carousel />
   

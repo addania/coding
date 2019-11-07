@@ -3,11 +3,11 @@ title: "CSS"
 date: "2019-10-11"
 ---
 
-Selectors
+**Selectors**
 
 Selectors enable to select certain html element(s) and apply CSS styles to it. Selectors are how we can select certain html elements. In CSS there are 3 ways how we can select elements
 
-A) by tag name - this scenario will style the teal colour to ALL p tags in the page
+**A) by tag name** - this scenario will style the teal colour to ALL p tags in the page
 
 HTML:
 ```
@@ -19,7 +19,7 @@ p {
  color: tile;
 }
 ```
-B) by class name. In case of class names we need to pre-pend period in front of the class name. They are meant to bee ree-used over many elements.
+**B) by class name** - In case of class names we need to pre-pend period in front of the class name. They are meant to bee ree-used over many elements.
 
 HTML:
 ```
@@ -32,7 +32,7 @@ CSS:
 }
 ```
 
-C) By id of the element. Id is completely unique per site. We ned to pre-pend hashtag. An ID is meant to style only one element.
+**C) By id of the element** - Id is completely unique per site. We ned to pre-pend hashtag. An ID is meant to style only one element.
 
 
 HTML:
@@ -106,6 +106,9 @@ h1, .menu {
 font-family: Georgia;
 }
 ```
+
+**Commands**
+
 > Font styles and families
 httpshttps://www.codecademy.com/learn/learn-css://www.w3.org/Style/Examples/007/fonts.en.html
 
@@ -187,13 +190,13 @@ font-family: cursive;
 ```
 > The Box model includes the content area’s size (width and height) and the element’s padding, border, and margin. The properties include:
 
-Width and height — specifies the width and height of the content area.
+**Width and height** — specifies the width and height of the content area.
 
-Padding — specifies the amount of space between the content area and the border.
+**Padding** — specifies the amount of space between the content area and the border.
 
-Border — specifies the thickness and style of the border surrounding the content area and padding.
+**Border** — specifies the thickness and style of the border surrounding the content area and padding.
 
-Margin — specifies the amount of space between the border and the outside edge of the element.
+**Margin** — specifies the amount of space between the border and the outside edge of the element.
 
 > Width and height
 ```
@@ -204,11 +207,11 @@ p {
 ```
 > A border is a line that surrounds an element, like a frame around a painting. Borders can be set with a specific width, style, and color.
 
-width — The thickness of the border. A border’s thickness can be set in pixels or with one of the following keywords: thin, medium, or thick.
+**width** — The thickness of the border. A border’s thickness can be set in pixels or with one of the following keywords: thin, medium, or thick.
 
-style — The design of the border. Web browsers can render any of 10 different styles. Some of these styles include: none, dotted, and solid.
+**style** — The design of the border. Web browsers can render any of 10 different styles. Some of these styles include: none, dotted, and solid.
 
-color — The color of the border. Web browsers can render colors using a few different formats, including 140 built-in color keywords.
+**color** — The color of the border. Web browsers can render colors using a few different formats, including 140 built-in color keywords.
 ```
 p {
   border: 3px solid coral;
@@ -281,8 +284,8 @@ margin: 10px 15px;
 ```
 
 > Margin: Margin property also allows to position an element in the center of another containing element. There are 2 requirements in order to do it:
-1) top and bottom margin is defined and then followed by word auto, meaning right and left margin will be done automatically based on the width of the element and the container in which we want to center it
-2) width of the element needs to be defined and needs to be smaller than the width of the container where the element resides
+1/ top and bottom margin is defined and then followed by word auto, meaning right and left margin will be done automatically based on the width of the element and the container in which we want to center it
+2/ width of the element needs to be defined and needs to be smaller than the width of the container where the element resides
 
 ```
 div {

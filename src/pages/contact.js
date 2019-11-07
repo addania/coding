@@ -3,35 +3,10 @@ import Layout from "../components/layout.js"
 import { graphql } from "gatsby";
 import SEO from "../components/seo.js";
 
-export default ( { data } ) => 
+export default () => 
 
 <Layout>
-  
-  <h1>I am a contact page!</h1>
-  <p>What a world</p>
-  <img src="https://source.unsplash.com/random/400x200" alt=""/>
+  <div>
+  <p style={{width: "600px", margin: "0 auto"}}>Do you have some constructive feedback? You can contact me at: zabacinka@yahoo.com</p>
+  </div>
 </Layout>
-
-export const query = graphql` 
-query {
-  allMarkdownRemark (sort: {fields:[frontmatter___date], order:DESC}) {
-    edges {
-      node {
-        id
-        excerpt
-        rawMarkdownBody
-        frontmatter {
-          date
-          title
-        }
-        fields {
-          slug
-        }
-        timeToRead
-        html
-      }
-    }
-    totalCount
-  }
-  }
-  ` 

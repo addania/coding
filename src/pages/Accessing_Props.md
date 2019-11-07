@@ -5,7 +5,7 @@ date: "2019-10-26"
 
 There are two ways how to access props passed to a component
 
-a) Using props as argument of the functional component and accessing them like: props.namee
+a) Using props as argument of the functional component and accessing them with props.name
 
 ```
 const Button = (props) => {

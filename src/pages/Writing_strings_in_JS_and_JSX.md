@@ -3,7 +3,7 @@ title: "Writing strings in JS and JSX"
 date: "2019-10-14"
 ---
 
-Template literal
+**Template literal**
 
 In JSX land, we dont need to use any special character to write a string, all variables in between curly brackets will be interpreted as a string
 

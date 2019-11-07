@@ -41,7 +41,7 @@ function handleClick(event) {
 console.log("Event: ", event); will return the whole event OBJECT (on which we can click and see all nodes). If we wrote console.log("Event: " + event); event object would be stringyfied and we wont have opportunity to explore the OBJECT!!
 
 
-We might need to get some info from the element which called our event handler. For example onClick. With the onClick, we can use the information provided in event object and retrieve data about our componenet which triggered the event from event object. But this approach is not good, becasue it retrieves data from the DOM. In React we dont want to relz on DOM because it is outside of the React world. 
+We might need to get some info from the element which called our event handler. For example onClick. With the onClick, we can use the information provided in event object and retrieve data about our componenet which triggered the event from event object. But this approach is not good, becasue it retrieves data from the DOM. In React we dont want to rely on DOM because it is outside of the React world. 
 
 ``` 
 function handleClick(event) {
@@ -53,7 +53,6 @@ function handleClick(event) {
       })
     );
   }
-
 <button onClick={handleClick} name={"pete"} id={"schw"} last="IM HIDDEN">
         Add Pete
       </button>
@@ -70,10 +69,7 @@ It is better to use it in this way:
         children="We are the children"
         last="IM LAST NAME"
       />
-
-
 function Button({ onClickZ, name, last, children }) {
   return <button onClick={() => onClickZ(name, last)}>{children}</button>;
 }
-
 ```

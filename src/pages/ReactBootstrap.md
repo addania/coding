@@ -3,12 +3,20 @@ title: "React Bootstrap"
 date: "2019-10-12"
 ---
 
-> Go to your project directory and then to install React bootstrap (delivers COMPONENETS like Col, Row) and Bootstrap itself (both)
+At first let us take a look at what React Bootstrap is and how it differs from Bootstrap:
 
+React bootstrap provides component like Row, Col, etc. They aree useful to create a grid layout.
+
+Bootstrap provides CSS for styling your data.
+
+> Open your command line
+
+> Go to your project directory and then install React Bootstrap (delivers COMPONENETS like Col, Row) and Bootstrap itself (CSS)
+```
 npm install react-bootstrap bootstrap
-
-> Import creat
+```
 
 > As React bootstrap dosnt ship explicitly with CSS we need to import them to our index.js or addp.js
-
+```
 import 'bootstrap/dist/css/bootstrap.min.css';
+```

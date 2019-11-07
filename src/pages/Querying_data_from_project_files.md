@@ -6,9 +6,11 @@ date: "2019-10-10"
 > We can query images, or content of the website (text) from files in our project folder.
 
 > Firstly open your command line in Ubuntu and install the gatsby package called source filesystem plugin. The filesystem source plugin lets you query data ABOUT files (note: but it does NOT allow you to query data inside files, for that we have another plugin called transform)
+```
 npm install --save gatsby-source-filesystem
-
+```
 > Secondly open the gatsby-config.js and add this plugin there:
+```
 plugins: [
     {
       resolve: `gatsby-source-filesystem`,
@@ -17,15 +19,19 @@ plugins: [
         path: `${__dirname}/src/`,
       },
     },
-
+```
 > Save and restart gatsby development environment
+```
 gatsby develop
-
-> open the http://localhost:8000/___graphql Two new elements will be added there: files and allFile
-
+```
+> Two new elements will be added there: files and allFile
+```
+http://localhost:8000/___graphql
+```
 > Select some items for our query. For example base is the name of the file, prettySize is the size of th efile, relativeDirectory is a folder in which file resides, etc
 
 > Lets use this data and print it to console
+```
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
@@ -51,8 +57,10 @@ export const query = graphql`
     }
   }
 `
+```
 
 > Lets make the data beautiful in a table:
+```
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
@@ -100,21 +108,22 @@ export const query = graphql`
     }
   }
 `
+```
+> ```<table>``` tag creates a table
 
-> <table> tag creates a table
 
+> ```<thread>``` tag is used to group header content in an HTML table. The ```<thead>``` element is used in conjunction with the ```<tbody>``` and ```<tfoot>``` elements to specify each part of a table (header, body, footer). Browsers can use these elements to enable scrolling of the table body independently of the header and footer. Also, when printing a large table that spans multiple pages, these elements can enable the table header and footer to be printed at the top and bottom of each page. The ```<thead>``` tag must be used in the following context: As a child of a ```<table>``` element, after any ```<caption>```, and ```<colgroup>``` elements, and before any ```<tbody>```, ```<tfoot>```, and ```<tr>``` elements.
 
-> <thread> tag is used to group header content in an HTML table. The <thead> element is used in conjunction with the <tbody> and <tfoot> elements to specify each part of a table (header, body, footer). Browsers can use these elements to enable scrolling of the table body independently of the header and footer. Also, when printing a large table that spans multiple pages, these elements can enable the table header and footer to be printed at the top and bottom of each page. The <thead> tag must be used in the following context: As a child of a <table> element, after any <caption>, and <colgroup> elements, and before any <tbody>, <tfoot>, and <tr> elements. 
+> ```<tr>``` tag means table row
 
-> <tr> tag means table row
+> ```<th>``` tag means one column in a table header
 
-> <th> tag means one column in a table header
-
-> <td> tag means one column in the table data
+> ```<td>``` tag means one column in the table data
 
 > for each tr we will take all available data into columns
 
 > How does this part of the code work?
+```
 {data.allFile.edges.map(({ node }, index) => (
               <tr key={index}>
                 <td>{node.base}</td>
@@ -123,9 +132,9 @@ export const query = graphql`
                 <td>{node.name}</td>
               </tr>
             ))}
-
-
+```
 > Map is a method which can be called on an array. When we query data, you can see on the right column on GraphiQL how our data will look like: For example:
+```
 {
   "data": {
     "allFile": {
@@ -233,60 +242,72 @@ export const query = graphql`
     }
   }
 }
-
-Notice how data.allFile.edges returns an ARRAY of OBJECTS!!!! Which means we can use array method called map on it. Map works in a way that it itterated through every single element of the array and performs a certain function in it. It doesnt change original array, but creates a new array on which the function is performed.  One small example is here:
-
+```
+Notice how data.allFile.edges returns an ARRAY of OBJECTS!! Which means we can use array method called map on it. Map works in a way that it itterated through every single element of the array and performs a certain function in it. It doesnt change original array, but creates a new array on which the function is performed.  One small example is here:
+```
 var array1 = [1, 4, 9, 16];
 // pass a function to map
 const map1 = array1.map(x => x * 2);
 
 console.log(map1);
 // expected output: Array [2, 8, 18, 32]
-
+```
 > x is the element of the array which we currentl itterate through
 
-> Documentation of Map is here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
-
+> Documentation of Map is here: 
+```
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+```
 > Notice how the syntax looks:
+```
 var new_array = arr.map(function callback(currentValue[, index[, array]]) {
     // Return element for new_array
 }[, thisArg])
+```
+> this means that when using .map method we can use the current object we are on, but also its index!! Which mean  index 0,1,2, etc
 
-> this means that when using .map method we can use the current object we are on, but also its index!!!! which mean  index 0,1,2, etc
-
-> in our .map method we have a function which takes 2 arguments: ({ node }, index)
+> in our .map method we have a function which takes 2 arguments:
+```
+({ node }, index)
+```
 { node } is an actual object which resides under data.allFile.edges
 It should actually be called node, otherwise we will have an error.
 index is the index of the element in our array on which we are currently itterating.
 
-> for each element in our array, we will create a <tr> tag which will have a unique property key which will be equal to the index of that element in the array
-<tr key={index}>
+> for each element in our array, we will create a ```<tr>``` tag which will have a unique property key which will be equal to the index of that element in the array
+```<tr key={index}>
 ...
 </tr> 
-
-> then this table row (tr) will create 4 columns <td>
-each of <td> tags will access the element of array, which is in fact an object, where we retrieve values for example: node.base
+```
+> then this table row (tr) will create 4 columns ```<td>```
+Each of ```<td>``` tags will access the element of array, which is in fact an object, where we retrieve values for example: node.base
 
 
 > In React each array element over which we will itterate needs a unique key property. 
 Each time you iterate over an array you have to set the key prop to each of the resulting DOM element as React needs it to optimize the re-rendering. 
 React for example will detect duplicates and only renders the first node with this key. Without key={index} there will be an error in console that each child in the list should have a unique key property. More reading:
+```
 https://stackoverflow.com/questions/28329382/understanding-unique-keys-for-array-children-in-react-js
 https://stackoverflow.com/questions/37651660/react-each-child-in-an-array-or-iterator-should-have-a-unique-key-prop?rq=1
-
+```
 > The filesystem source plugin lets you query data ABOUT files but what if you want to query data INSIDE files? To make this possible, Gatsby supports transformer plugins which take raw content from source plugins and transform it into something more usable. Example: markdown files .md
 
 
 > create a new markdow file under your pages folder
+```
 blog_post.md
+```
 
 > look at the GrphiQL and refresh the query, you will see the new .md file in there
 
 
 > First install transformer plugin
+```
 npm install --save gatsby-transformer-remark
+```
 
 > add plugin to gatsby config
+```
 module.exports = {
   siteMetadata: {
     title: `Pandas Eating Lots`,
@@ -309,14 +330,9 @@ module.exports = {
     },
   ],
 }
-
+```
 > restart your development environment with
+```
 gatsby develop
-
-
+```
 > in GraphiQL we will see the new item allMarkdownRemark
-
-
-
-
-

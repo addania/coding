@@ -4,8 +4,9 @@ date: "2019-10-15"
 ---
 
 Sometimes we want to store some data in the local storage of the browser, so that we can use them on the next session. Command to set the local storage is:
+```
 window.localStorage.setItem('myInput', value)
-
+```
 Example code:
 ```
 import React from "react";
@@ -31,5 +32,6 @@ render () {
 }
 ```
 > In order to retrieve item from the local storage we use code
-
+```
 window.localStorage.getItem('myInput')
+```

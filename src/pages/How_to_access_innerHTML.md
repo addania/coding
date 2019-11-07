@@ -8,8 +8,9 @@ Ever wodered how to access inner html of an element? Lets say we want to work wi
 <button>Hello</button>
 ```
 This is how we can access it: 
+```
 props.children
-
+```
 In fact we can also rewrite the whole tag:
 ```
 <button children="Hello" />

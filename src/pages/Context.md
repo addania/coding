@@ -66,9 +66,7 @@ const C = () => (
 > Complete example:
 ``` 
 import React from "react";
-
 const ColorContext = React.createContext(null);
-
 export function SimpleContext(){
     return (
         <ColorContext.Provider value="green">
@@ -76,7 +74,6 @@ export function SimpleContext(){
         </ColorContext.Provider>
         )
     }
-
 const D = () => {
     return (
         <div>
@@ -85,7 +82,6 @@ const D = () => {
         </div>
     )
 }
-
 const C = () => {
     return (
         <ColorContext.Consumer>
@@ -95,26 +91,19 @@ const C = () => {
         </ColorContext.Consumer>
     )
 }
-
-
 ```
 
 > With HOOKs we can make this even more elegant
 ```
 import React, { useContext } from "react";
-
 const ColorContext = React.createContext(
     { value: "purple"}
 );
-
 export function SimpleContextUsewithHook(){
-    return (
-        
-        <D />
-        
+    return (        
+        <D />        
         )
     }
-
 const D = () => {
     return (
         <div>
@@ -123,14 +112,12 @@ const D = () => {
         </div>
     )
 }
-
 const C = () => {
     const context = useContext(ColorContext);
     return (  
-        <p style={{color: context.value}}>I am a C component summoned by D but I received beautiful purple colour from my dear Parent</p>  
+        <p style={{color: context.value}}>I am a C component summoned by D but I received beautiful purple colour from my dear Parent</p> 
     )
 }
-
 ```
 
 > Complex example with classes where we still use provider because we also want to be able to update the team and info which team is using
@@ -139,7 +126,6 @@ const C = () => {
 import React from 'react';
 import { render } from 'react-dom';
 import './style.css';
-
 const ProfileContext = React.createContext();
 class ProfileProvider extends React.Component {
   state = {
@@ -162,13 +148,11 @@ class ProfileProvider extends React.Component {
     )
   }
 }
-
 const App = () => (
   <ProfileProvider>
     <Profile />
   </ProfileProvider>
 )
-
 const Profile = () => (
   <div className="profile">
     <ProfileContext.Consumer>
@@ -177,7 +161,6 @@ const Profile = () => (
     <User />
   </div>
 )
-
 const User = () => (
   <div className="user">
     <ProfileContext.Consumer>
@@ -200,7 +183,6 @@ const User = () => (
     </ProfileContext.Consumer>
   </div>
 )
-
 const Team = () => (
   <ProfileContext.Consumer>
     {context =>
@@ -210,7 +192,6 @@ const Team = () => (
     }
   </ProfileContext.Consumer>
 )
-
 render(<App />, document.getElementById('root'));
 ``` 
 
@@ -219,9 +200,7 @@ render(<App />, document.getElementById('root'));
 import React, { Component, useContext } from 'react';
 import { render } from 'react-dom';
 import './style.css';
-
 const ProfileContext = React.createContext();
-
 class ProfileProvider extends Component {
   state = {
     company: 'Progress',
@@ -243,7 +222,6 @@ class ProfileProvider extends Component {
     )
   }
 }
-
 let Profile = () => {
   const context = useContext(ProfileContext);
   return (
@@ -253,10 +231,9 @@ let Profile = () => {
     </div>
   )
 }
-
 let User = () => {
   const context = useContext(ProfileContext);
-  return (
+ return (
     <div className="user">
       <a href={context.url}>
         <img src={context.userImage} width="138px" />
@@ -273,7 +250,6 @@ let User = () => {
     </div>
   )
 }
-
 let Team = () => {
   const context = useContext(ProfileContext);
   return (
@@ -282,7 +258,6 @@ let Team = () => {
     </div>
   )
 }
-
 class App extends Component {
   render() {
     return (
@@ -292,11 +267,8 @@ class App extends Component {
     );
   }
 }
-
 render(<App />, document.getElementById('root'));
 ```
+> Resource: 
 
-render(<App />, document.getElementById('root'));
-
-```
-> Resource: https://www.robinwieruch.de/react-context
+https://www.robinwieruch.de/react-context
