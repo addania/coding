@@ -3,21 +3,23 @@ title: "Array Methods .reduce"
 date: "2019-10-22"
 ---
 
-Reduce method is very powerful one which allows you to iterate thrgouh all elements in an array, perform certain calculation on it and then returns a single value.
+Reduce method is very powerful one which allows you to iterate through all elements in an array, perform certain calculations on it and then returns something: a single value, array, etc.
 
-Let start with an array
+Let's start with an array:
 ```
 const myArray = [1,4,2]
 ```
 We want to sum this up and return one value of the total sum which would be 7
 
-We can call
+We can call:
 ```
 myArray.reduce(reducer, initialValue);
 ```
-where reducer is a function. Which means that .reduce calls upon another function which we need to define. initialValue is optional, we can kick it off with some staring value, but for the first simple example we will skip it.
+**reducer** is a function, which means that .reduce calls upon another function which we need to define. 
 
-Example reducer function
+**initialValue** is optional, we can kick it off with some starting value, but for the first simple example we will skip it.
+
+Example reducer function:
 ```
   const reducer = (accumulator, currentValue) => {
         accumulator = (accumulator + currentValue)        
@@ -30,7 +32,7 @@ reducer takes in 2 arguments:
 
 **current value** - value at which we are currently iterating, initially this will be value of second element in array which is number 4 (unless we set initial value, then the initial currentValue will be the first element)
 
-There can be other arguments like currentIndex (index of currentValue where the itteration currently happens) but the most basic example is with above-mentioned two.
+There can be other arguments like currentIndex (index of currentValue where the iteration currently happens) but the most basic example is with above-mentioned two.
 
 Each iteration ( or function call ) will deliver a returning value! It means on each step return will be executed. This returning value is going to get passed into next step!
 

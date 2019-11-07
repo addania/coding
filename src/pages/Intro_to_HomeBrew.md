@@ -5,23 +5,23 @@ date: "2019-09-24"
 
 HomeBrew helps to install softwares.
 
-> see current version of homebrew
+> See current version of homebrew
 ```
 brew -v
 ```
-> update brew
+> Update brew
 ```
 brew update
 ```
-> installing software hello
+> Installing software hello
 ```
 brew install hello
 ```
-> install node
+> Install node
 ```
 brew install node
 ```
-> checking version of node
+> Checking version of node
 ```
 node --version
 ```

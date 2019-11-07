@@ -8,7 +8,7 @@ GraphQL is a technology for querying data and was developed by Facebook to allow
 Why do we prefer to query data anyway? Imagine you have yout site title ("My page") on various subpages, lets say on 20 subpages. Imagine you realize that this title is rather lame and you want to change it to somethis cooler ("Welcome to my awesome page!"). Then you have to go through all your code, every single page and change the hard typed title 20 times. However, it would be better if we could store our great title in some safe place from where each subpage would retrieve it. Then you would only need to change the title of the page once and everything would be updated automatically. Isnt it totally cool? Automation, saving time, error-prone. Let`s use awesome technologies and their potential to make our lives easier.
 
 There are several GraphQL query types:
-> A) Page queries, which can only be done my PAGES (not by standalone compoenents)
+> A) Page queries, which can only be done my PAGES (not by standalone components)
 
 >B) Non-pages components queries (such as layout.js)
 

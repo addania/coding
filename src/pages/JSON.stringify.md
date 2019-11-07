@@ -13,7 +13,7 @@ const myArray = [1, 2, 4];
 <p>My array is {myArray}</p>
 ```
 
-> If you want to diplay however: My array is [1,2,4] you neeed to use JSON.stringify
+> If you want to diplay however: My array is [1,2,4] you need to use JSON.stringify
 ```
 <p>My array is {JSON.stringify(myArray)}</p>
 ```

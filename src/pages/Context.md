@@ -3,16 +3,20 @@ title: "Context"
 date: "2019-10-16"
 ---
 
-> Instead of passing down props through tree of nexted child components (sometimes as much as 20+ times from parent to the last child), there is a better way how components can receive props. The way is called context and is something like a global variable.
+> Instead of passing down props through tree of nested child components (often as much as 20+ times from parent to the last child), there is a better way how components can receive props. The way is called **context** and you can think of it as something like a global variable.
 
 > Imagine component structure:
 A -> D -> C
 
 > A is parent and only summons D component. Then D summons  C
 
-> A has prop for theme ( value: "green") which needs to be passed C. But only to C. Other components like D doesnt care about this prop.
+> A has prop for theme ( value: "green") which needs to be passed to C. But only to C. Other component like D doesnt care about this prop.
 
-> Top level component PROVIDES context and child component CONSUMES the context. Provider example: component called A.  Consumer Example: componenet called D
+> Top level component PROVIDES context and child component CONSUMES the context. 
+
+Provider example: component A.  
+
+Consumer Example: componenet called D
 
 > A: provides theme
 
@@ -45,7 +49,7 @@ const A = () => (
 
 > A doesnt pass any props to D component. It makes value green available to all child components. A summons D component.
 
-> Lets look at C component. Now that A has made the vlue greeen available to all children, C can assess that value:
+> Lets look at C component. Now that A has made the value green available to all children, C can access that value:
 
 
 ```
@@ -120,7 +124,7 @@ const C = () => {
 }
 ```
 
-> Complex example with classes where we still use provider because we also want to be able to update the team and info which team is using
+> Complex example with classes where we still use provider because we also want to be able to update the team
 
 ```
 import React from 'react';

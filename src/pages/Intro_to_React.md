@@ -8,9 +8,9 @@ React is a closed environmnet and can be run in browser, on your local machine (
 
 When I am developing a website in React I need to be able to see what I am building. I can do these:
 
-- A: doubleclick on my html file (index.html) and open it in browser. However, it wont really work. Other pages will not load, because I am only openineg filepath in browser.
+A/ doubleclick on my html file (index.html) and open it in browser. However, it won't really work. Other pages will not load, because I am only openineg filepath in browser.
 
-- B: run a web server locally on my machine (pc)
+B/ run a web server locally on my machine (pc)
 
 In order to run a web server on my machine, I need to install node.js
 

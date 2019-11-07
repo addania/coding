@@ -19,7 +19,7 @@ p {
  color: tile;
 }
 ```
-**B) by class name** - In case of class names we need to pre-pend period in front of the class name. They are meant to bee ree-used over many elements.
+**B) by class name** - In case of class names we need to ad period in front of the class name. They are meant to be re-used over many elements.
 
 HTML:
 ```
@@ -32,7 +32,7 @@ CSS:
 }
 ```
 
-**C) By id of the element** - Id is completely unique per site. We ned to pre-pend hashtag. An ID is meant to style only one element.
+**C) By id of an element** - Id is completely unique per site. We ned to add hashtag. An ID is meant to style only one element.
 
 
 HTML:
@@ -61,7 +61,7 @@ color: blue;
 color: red;
 }
 ```
-> There is only one way how to over-ride ID selector and namely by !importnat syntax. This was can overrride any CSS styling ans should be only used as a last resort (because this one is very hard to override). In the example below, the colour of header will be blue.
+> There is only one way how to over-ride ID selector and namely by <code>!important</code> syntax. This can overrride any CSS styling and should be only used as a last resort (because this one is very hard to override). In the example below, the colour of header will be blue.
 HTML:
 ```
 <h1 class="headere">Hi</h1>
@@ -77,7 +77,7 @@ h1 {
 }
 ```
 
-> Chaining selectors: we are able to chain more selectors and make them even more specific. In the example below, CSS style will be applied to h1 tags but only thosee which have class name teal.
+> Chaining selectors: we are able to chain more selectors and make them even more specific. In the example below, CSS style will be applied to h1 tags but only those which have class name teal.
 ```
 h1.teal {
 color: teal;
@@ -120,6 +120,7 @@ font-family: Garamond;
 }
 ```
 > General rules about font-families:
+
 The font specified in a stylesheet must be installed on a user’s computer in order for that font to display when a user visits the web page. The default typeface for all HTML elements is Times New Roman. It’s a good practice to limit the number of fonts used on a web page to 2 or 3. This helps the page load faster in some cases and is usually a good design decision. When the name of a font consists of more than one word, it’s a best practice to enclose the font’s name in quotes. Example:
 ```
 h1 {
@@ -146,8 +147,10 @@ h1 {
 }
 ```
 > Setting color of text can be done in two ways:
-A) foreground colour  for example colour of the text itself, property to do this is called color
-B) background colour, property to do this is background-color
+
+**A) foreground colour**  for example colour of the text itself, property to do this is called <code>color</code>
+
+**B) background colour** property using <code>background-color</code>
 ```
 h1 {
   color: red;
@@ -160,7 +163,7 @@ h1 {
   opacity: 0.5;
 }
 ```
-> Adding image as a background to an element. URL can be link to exterenal site or fie within the project folder
+> Adding image as a background to an element. URL can be link to exterenal site or file path within the project folder
 ```
 .main-banner {
   background-image: url("https://www.example.com/image.jpg");
@@ -182,7 +185,7 @@ h3 {
 text-transform: capitalize;
 }
 ```
-> Text cursive. Note, this does not mean italics. Cursive only emulates handwriting
+> Text cursive. Note, this does not mean italics. Cursive only emulates hand-writing
 ```
 .cursive {
 font-family: cursive;
@@ -205,7 +208,7 @@ p {
   width: 240px;
 }
 ```
-> A border is a line that surrounds an element, like a frame around a painting. Borders can be set with a specific width, style, and color.
+> A border is a line what surrounds an element, like a frame around a painting. Borders can be set with a specific width, style, and color.
 
 **width** — The thickness of the border. A border’s thickness can be set in pixels or with one of the following keywords: thin, medium, or thick.
 
@@ -224,7 +227,7 @@ div.container {
   border-radius: 5px;
 }
 ```
-> perfect circle border - set the radius equel to height of the box or 100%
+> perfect circle border - set the radius equal to height of the box or 100%
 ```
 div.container {
   height: 60px;
@@ -242,7 +245,7 @@ padding-bottom: 30px;
 padding-left: 15px;
 ```
 
->Padding: In order to have same padding on all four sides, use
+>Padding: In order to have same padding on all four sides use:
 ```
 padding: 10px;
 ```
@@ -257,9 +260,9 @@ padding: 10px 15px 20px 30px;
 padding: 10px 15px;
 ```
 
->Padding: Top and Bottom paddings (vertical paddings) DO NOT collapse!
+>Padding: Top and Bottom paddings (vertical paddings) **DO NOT** collapse!
 
->Padding: Left and Right paddings (horizontal paddings) DO NOT collapse! And are always added together.
+>Padding: Left and Right paddings (horizontal paddings) **DO NOT** collapse! And are always added together.
 
 >Margin: Space outside of the border. It has following values:
 ```
@@ -269,7 +272,7 @@ margin-bottom: 10px;
 margin-left: 30px;
 ```
 
->Margin: If you want to have same margin on all four sides, use:
+>Margin: If you want to have same margin on all four sides use:
 ```
 margin: 10px;
 ```
@@ -284,8 +287,10 @@ margin: 10px 15px;
 ```
 
 > Margin: Margin property also allows to position an element in the center of another containing element. There are 2 requirements in order to do it:
-1/ top and bottom margin is defined and then followed by word auto, meaning right and left margin will be done automatically based on the width of the element and the container in which we want to center it
-2/ width of the element needs to be defined and needs to be smaller than the width of the container where the element resides
+
+**1/** top and bottom margin is defined and then followed by word auto, meaning right and left margin will be done automatically based on the width of the element and the container in which we want to center it
+
+**2/** width of the element needs to be defined and needs to be smaller than the width of the container where the element resides
 
 ```
 div {
@@ -294,9 +299,9 @@ margin: 0px auto;
 }
 ```
 
->Margin: Top and Bottom margin is also called: Vertical margin. Left and Right margin is called Horizontal Margin
+>Margin: Top and Bottom margin is also called: **Vertical margin**. Left and Right margin is called **Horizontal Margin**
 
->Margin: Top and Bottom margin (vertical margins) collapse! The larger of the two vertical margins sets the distance between adjacent elements. For example: if top element has margin bottom of 20px and bottom element margin top of 30px, then the effective distance between these 2 elements is 30px.
+>Margin: Top and Bottom margin (vertical margins) **COLLAPSE**! The larger of the two vertical margins sets the distance between adjacent elements. For example: if top element has margin bottom of 20px and bottom element margin top of 30px, then the effective distance between these 2 elements is 30px.
 
 ```
 #img-one {
@@ -308,7 +313,7 @@ margin: 0px auto;
 }
 ```
 
->Margin: Left and Right margins (horizontal margins) DO NOT collapse! And are always added together. If left element has margin right of 10px and right element marin left of 10 px. Then the effective distance of the elements is 20px.
+>Margin: Left and Right margins (horizontal margins) **DO NOT** collapse! And are always added together. If left element has margin right of 10px and right element marin left of 10 px. Then the effective distance of the elements is 20px.
 
 ```
 #img-one {

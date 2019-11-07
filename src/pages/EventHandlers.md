@@ -17,11 +17,10 @@ But we can also access all our custom properties by:
 event.target.attribute.XXX
 ```
 
-where XXX is name of our custom property. Please note however, that this is not a reliable way yo retrieve data. This way uses DOM and DOM does not keep this data longer than the moment when the event triggered. FOr that reason we might also need  include 
+where XXX is name of our custom property. Please note however, that this is not a reliable way to retrieve data. This way uses DOM and DOM does not keep this data longer than the moment when the event triggered. For that reason we might also need to include 
 ```
 event.persist()
 ```
-
 
 Example:
 ```
@@ -38,7 +37,7 @@ function handleClick(event) {
 </button>
 ```
 
-console.log("Event: ", event); will return the whole event OBJECT (on which we can click and see all nodes). If we wrote console.log("Event: " + event); event object would be stringyfied and we wont have opportunity to explore the OBJECT!!
+> PLEASE NOTE: console.log("Event: ", event); will return the whole event OBJECT (on which we can click and see all nodes). If we wrote console.log("Event: " + event); event object would be stringyfied and we wont have opportunity to explore the OBJECT!!
 
 
 We might need to get some info from the element which called our event handler. For example onClick. With the onClick, we can use the information provided in event object and retrieve data about our componenet which triggered the event from event object. But this approach is not good, becasue it retrieves data from the DOM. In React we dont want to rely on DOM because it is outside of the React world. 
@@ -53,7 +52,7 @@ function handleClick(event) {
       })
     );
   }
-<button onClick={handleClick} name={"pete"} id={"schw"} last="IM HIDDEN">
+<button onClick={handleClick} name={"pete"} id={"grey"} last="IM HIDDEN">
         Add Pete
       </button>
 ```

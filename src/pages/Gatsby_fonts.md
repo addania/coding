@@ -7,7 +7,7 @@ date: "2019-10-08"
 ```
 npm install --save gatsby-plugin-typography react-typography typography typography-theme-fairy-gates
 ```
-> Then you need to open gatsby-config.js file. This is the file where we need to add plugins or site configuration. IN order to use tzpographz plugin we need to change this:
+> Then you need to open gatsby-config.js file. This is the file where we need to add plugins or site configuration. In order to use typography plugin we need to change this:
 ```
 module.exports = {
   plugins: [
@@ -21,11 +21,11 @@ module.exports = {
 }
 ```
 
-> create new folder under src called "utils"
+> Create new folder under src called "utils"
 
-> add a new js file called: typography.js
+> Add a new js file called: typography.js
 
-> add this code to the file:
+> Add this code to the file:
 ```
 import Typography from "typography"
 import fairyGateTheme from "typography-theme-fairy-gates"
@@ -34,7 +34,7 @@ export const { scale, rhythm, options } = typography
 export default typography
 ```
 
-> start development server
+> Start development server
 ```
 gatsby develop
 ```

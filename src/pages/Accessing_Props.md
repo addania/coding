@@ -3,9 +3,9 @@ title: "Accessing Props"
 date: "2019-10-26"
 ---
 
-There are two ways how to access props passed to a component
+There are two ways how to access props passed to a component.
 
-a) Using props as argument of the functional component and accessing them with props.name
+**a)** Using props as argument of the functional component and accessing them with <code>props.name</code>
 
 ```
 const Button = (props) => {
@@ -15,7 +15,7 @@ const Button = (props) => {
 }
 ```
 
-b) or alternatively passing name of prop inside curly brackets of the functional component and then accessing props like: onClick
+**b)** or alternatively passing name of prop inside curly brackets of the functional component and then accessing props like: <code>name</code>
 ```
 const Button = ({name}) => {
   return (

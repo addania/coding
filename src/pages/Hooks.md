@@ -5,13 +5,13 @@ date: "2019-10-07"
 
 > Description
 
-Hooks allow function components to have states. It eliminates completely usage of classes. It is recommended to use function components with hooks rather than classes with state. Class componenets might be deeprecated in future. Advantagee of hooks is that we can createe our own hooks and logic behind them. 
+Hooks allow function components to have states. It eliminates completely usage of classes. It is recommended to use function components with hooks rather than classes with state. Class componnets might be deprecated in future. Advantage of hooks is that we can create our own hooks and logic behind them. 
 
 >Examples of hooks:
 
-useState - allows function component to have state
+**useState** - allows function component to have state
 
-useEffect - allows function component to use a certain function any time component renders, it is equivalent to lifecycles of class components
+**useEffect** - allows function component to use a certain function any time component renders, it is equivalent to lifecycles of class components
 
 > Importing
 

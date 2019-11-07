@@ -14,37 +14,40 @@ Ubuntu directory on PC:
 Controls:
 
 Copy/Paste works differently in Ubuntu: ctrl+shift+c for copy, crtl+shift+v for paste
+
 Some commands will start with sudo which means to run as administrator
+
 j and k keys allows navigate up and down
+
 h and l allow to navigate left and right
 
 Commands:
 
-> to show which directory I am currently in we use command pwd (print working directory)
+> To show which directory I am currently in we use command pwd (print working directory)
 ```
 pwd
 ```
-> to display list of all files in a current directory
+> To display list of all files in a current directory
 ```
 ls
 ```
-> to display list of all files in a current directory including hidden files (those with ., ex: .git)
+> To display list of all files in a current directory including hidden files (those with ., ex: .git)
 ```
 ls -a
 ```
-> change directory cd + name of the directory (ex: cd src will go to folder called src in your currnet folder), this is to go one directory down the tree
+> Change directory cd + name of the directory (ex: cd src will go to folder called src in your current folder), this is to go one directory down the tree
 ```
 cd src
 ```
-> to go one directory up the tree
+> To go one directory up the tree
 ```
 cd ..
 ```
-> to create a folder
+> To create a folder
 ```
 mkdir
 ```
-> to create a new file called global.css
+> To create a new file called global.css
 ```
 touch global.css
 ```

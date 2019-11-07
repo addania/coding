@@ -45,7 +45,7 @@ Above example is useful when we need to provide arguments to the function. But i
 ``` 
 onClickZ(name,last)
 ```
-we would actuallz CALL function, hence we need to use
+we would actually CALL function, hence we need to use:
 ```
 ()=>onClickZ(name,last)
 ```
