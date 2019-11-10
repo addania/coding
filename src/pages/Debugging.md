@@ -3,13 +3,13 @@ title: "Debugging"
 date: "2019-10-25"
 ---
 
-Imagine we add to our code a linee like this:
+Imagine we add to our code a line like this:
 ```
 debugger;
 ```
 Then we are able to execute code only up until this line. 
 
-You need to go to your website and open the DEV TOOLS (without opening dev tools you wont be able to see the debugger stopping at the given place)
+You need to go to your website and open the DEV TOOLS (without opening the dev tools you won't be able to see the debugger stopping at the given place).
 
 Automatical execution will stop and we will be able to use console to check for any value of our variable and hence check if all variables have correct values. 
 
@@ -24,7 +24,7 @@ We can put
 event.target
 ```
 
-and see all the options we have that can be used as event.target. Target.event set is pre-defined and doesnt display any custom values, like prop names.
+and see all the options we have that can be used as event.target. Target.event set is pre-defined and doesn't display any custom values, like prop names.
 
 To read custom properties, we can use:
 ```

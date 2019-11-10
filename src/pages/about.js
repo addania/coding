@@ -19,11 +19,11 @@ export default ( {data}) => (
       On many occassions in my life I had a chance to take out a focus glass and look at one or two stars within. 
       <br/><br/>
       In the high school I opted out for programming as one of subject for my school-leaving exam. 
-      This was a place where we played with a robot Karl and building blocks. So much fun!
+      This was a place where we played with robot <code>Karl</code> and building blocks. So much fun!
       At that time I was already considering going for university and pursuiting coding as my future career.
-      Despite, graduating with the highest score in this subject and teachers advicing me to go forward with it during my studies,
+      Despite, graduating with the highest score in this subject and teachers advising me to go forward with it during my studies,
       I got discouraged seeing all my other classmates (all males for that matter) and their already andvanced skills in programming. 
-      Feeling completely green and unexperienced compared to them, I decided not to follow this path and went for Economy and Management.
+      Feeling completely green and inexperienced compared to them, I decided not to follow this path and went for Economy and Management.
       <br/><br/>
       During my studies I found my interest in Marketing but the coding universe has always been lurking somewhere at the back of my mind.
       <br/><br/>

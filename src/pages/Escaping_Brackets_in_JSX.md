@@ -2,8 +2,15 @@
 title: "Escaping curly brackets in JSX"
 date: "2019-10-28"
 ---
+Only one advice here:
 
-Imagine you want to display following text in a p tag :
+```
+RUUUUUUUUUUN
+```
+
+:)
+
+Apart from that, imagine you want to display following text in a p tag :
 ```
 the way you use props is {props.name}
 ```
