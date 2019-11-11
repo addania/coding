@@ -65,6 +65,10 @@ pathPrefix: "/MyProject",
 "build": "gatsby build --prefix-paths",
 ```
 
+```
+"deploy": "gatsby build --prefix-paths && gh-pages -d public -b master",
+```
+
 > Add your project files to **LOCAL** git
 ```
 git add .
@@ -119,6 +123,168 @@ ALWAYS commit code to the repository and then nmp run deploy!! You will avoid lo
 
 Actually the good practise is to use master branch for pushing my code and to use gh-pages branch for publishing. In this guide I made it vice versa
 
+> Additionally
+
+> Install your typography:
+```
+npm install --save gatsby-plugin-typography typography react-typography typography-theme-fairy-gates gatsby-plugin-emotion @emotion/core
+```
+
+> Add typography to your package.json
+```
+module.exports = {
+  plugins: [
+    `gatsby-plugin-emotion`,
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography`,
+      },
+    },
+  ],
+}
+```
+
+> Install source filesystem
+```
+npm install --save gatsby-source-filesystem
+```
+
+> Add following code to gatsby-config.js
+```
+  plugins: [
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `src`,
+        path: `${__dirname}/src/`,
+      },
+    },
+```
+
+> Add transformer remark to be able to work with markdown files:
+```
+npm install --save gatsby-transformer-remark
+```
+
+> Add this code to gatsby-config to module exports plugins:
+```
+`gatsby-transformer-remark`,
+```
+> Create gatbsy-node.js file in the same folder as gatsby-config
+
+> add this code to gatsby node:
+```
+const path= require(`path`)
+const { createFilePath } = require(`gatsby-source-filesystem`)
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions
+  if (node.internal.type === `MarkdownRemark`) {
+    const slug = createFilePath({ node, getNode, basePath: `pages` })
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    })
+  }
+}
+exports.createPages = async ({ graphql, actions }) => {
+   
+const {createPage} = actions
+    const result = await graphql(`
+      query {
+        allMarkdownRemark {
+          edges {
+            node {
+              fields {
+                slug
+              }
+            }
+          }
+        }
+      }
+    `)
+    result.data.allMarkdownRemark.edges.forEach(({node}) =>{
+       createPage({
+           path: node.fields.slug,
+           component: path.resolve(`./src/templates/blog-post.js`),
+           context: {
+             slug: node.fields.slug,
+           },
+       })
+
+    })
+  }
+```
+
+> install manifest (if it throws error, then skip):
+```
+npm install --save gatsby-plugin-manifest
+```
+
+> add manifest plugin to gatsby-config.js (this can throw error, then skip)
+```
+Copygatsby-config.js: copy code to clipboard
+{
+  plugins: [
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `GatsbyJS`,
+        short_name: `GatsbyJS`,
+        start_url: `/`,
+        background_color: `#6b37bf`,
+        theme_color: `#6b37bf`,
+        // Enables "Add to Homescreen" prompt and disables browser UI (including back button)
+        // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
+        display: `standalone`,
+        icon: `src/images/icon.png`, // This path is relative to the root of the site.
+      },
+    },
+  ]
+}
+```
+
+> Add offline support by installing:
+```
+npm install --save gatsby-plugin-offline
+```
+
+> Add offline support to gatsby-config to module export plugins:
+```
+`gatsby-plugin-offline`,
+```
+
+> Add react helmet by installing:
+```
+npm install --save gatsby-plugin-react-helmet react-helmet
+```
+
+> Add react helmet to gatsby-config:
+
+```
+`gatsby-plugin-react-helmet`,
+```
+
+> plus site metadata should have author and description:
+```
+module.exports = {
+  siteMetadata: {
+    title: `Pandas Eating Lots`,
+    description: `A simple description about pandas eating lots...`,
+    author: `gatsbyjs`,
+  },
+```
+
+> Install react bootstrap and bootstrap:
+```
+npm install react-bootstrap bootstrap
+```
+
+
 >Useful Sources:
 
 https://iolivia.me/posts/7-gatsby-deploy-github/
+
+https://www.gatsbyjs.org/tutorial/part-four/
+

@@ -30,3 +30,12 @@ JavaScript (or in short JS) was in 2016 officially named as ECMAScriptXXXX where
 
 > T39
 is a committee which works on new features/bugs, votes on proposals, etc. It contains 50-100 members of different companies like Google, Mozilla, etc
+
+> Birthday
+JS was creeated in 1995
+
+> Compatibility
+JS is and will always be backwards compatible. Code written in 1995 will still run (on updated browsers) and won't break. JS however is NOT forward compatible. Latest JS will not run on OLD browsers!
+
+
+
