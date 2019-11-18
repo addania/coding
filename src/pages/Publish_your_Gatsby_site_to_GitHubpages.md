@@ -123,11 +123,21 @@ ALWAYS commit code to the repository and then nmp run deploy!! You will avoid lo
 
 Actually the good practise is to use master branch for pushing my code and to use gh-pages branch for publishing. In this guide I made it vice versa
 
-> Additionally
+> Additionally:
+
+> Brose your typography in typography.js here:
+https://kyleamathews.github.io/typography.js/
+
+> Choose the one you like
 
 > Install your typography:
 ```
 npm install --save gatsby-plugin-typography typography react-typography typography-theme-fairy-gates gatsby-plugin-emotion @emotion/core
+```
+
+> Another example:
+```
+npm install --save gatsby-plugin-typography typography react-typography typography-theme-moraga gatsby-plugin-emotion @emotion/core
 ```
 
 > Add typography to your package.json
@@ -143,6 +153,28 @@ module.exports = {
     },
   ],
 }
+```
+
+> Under foldere src create a new folder utils
+
+> in src/utils folder create a new typography.js file
+
+> Input this code into the typography.js
+```
+import Typography from "typography"
+import fairyGateTheme from "typography-theme-fairy-gates"
+const typography = new Typography(fairyGateTheme)
+export const { scale, rhythm, options } = typography
+export default typography
+```
+
+> Another example:
+```
+import Typography from "typography"
+import moragaTheme from "typography-theme-moraga"
+const typography = new Typography(moragaTheme)
+export const { scale, rhythm, options } = typography
+export default typography
 ```
 
 > Install source filesystem
