@@ -8,9 +8,13 @@ Loops in JS
 There are many loops in JS which we can use:
 
 **for** - looping through a block of code for a given number of times
+
 **for/in** - looping through properties(values) of an <code>object</code>
+
 **for/of** - looping through values of an <code>array</code>
+
 **while** - looping through a block of code as long as a specified condition is true
+
 **do/while** - looping through a block of code once, and then repeating the loop as long as a specified condition is true
 
 **for**
