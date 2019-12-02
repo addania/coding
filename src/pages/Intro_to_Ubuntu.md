@@ -51,3 +51,8 @@ mkdir
 ```
 touch global.css
 ```
+
+> To cancel something running in the command line:
+```
+control-C
+```
