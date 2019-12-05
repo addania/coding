@@ -3,7 +3,7 @@ title: "While Loop and React State"
 date: "2019-11-15"
 ---
 
-Imagine have a while look in which you are updating state:
+Imagine to have a <code>while</code> look in which you are updating state:
 ```
 export const CodeAdvent20180102 = () => {
   const [frequencyChanges, setFrequencyChanges] = useState([
@@ -45,8 +45,8 @@ export const CodeAdvent20180102 = () => {
 
 Updating state within while loop risks running into infinite loop especially if the loop condition is based on the state.
 
-Why??? 
+Why??
 
-It is bcause the way state works in the React. For performance reasons, when we update thee state and use that state info immeediateellz afterwards, it is not guaranteed that it will be updated. State updated asznchronously and sometimes state updates are batched (groupeed) for performance reasons! 
+It is bcause the way state works in the React. For performance reasons, when we update the state and use that state info immediatelly afterwards, it is not guaranteed that it will be updated. State updated asynchronously and sometimes state updates are batched (grouped) for performance reasons! 
 
 So dont rely on states too much!

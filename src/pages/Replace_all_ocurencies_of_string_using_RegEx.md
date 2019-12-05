@@ -1,6 +1,6 @@
 ---
 title: "Replace all occureencies of a string with RegEx"
-date: "2019-11-24"
+date: "2019-12-04"
 ---
 
 Regular expressions allow to match certain patters.

@@ -6,7 +6,7 @@ date: "2019-11-27"
 
 Recusion is a function that calls itself.
 
-Example usage of recursive functions to calculate factorial. lets say we want to calculate factorial of number <code>n</code>. If <code>n=3</code>, then factorial of <code>n</code> is <code>```3*2*1```=6</code>
+Example usage of recursive functions to calculate factorial. Let's say we want to calculate factorial of number <code>n</code>. If <code>n=3</code>, then factorial of <code>n</code> is <code>```3*2*1```=6</code>
 ```
 function factorial(n){
   if (n==1){
@@ -21,7 +21,7 @@ let number=factorial(3);
 // result: 3*2*1=6
 ```
 
-Example usage of recursive functions to calculate number to certain power. Imagine we want to calculate </ode>3</code> to the power of <code>2</code>. We would need to multiply <code>3*3=9</code>. Lets define that <code>x</code> is our number and <code>n</code> is the power.
+Example usage of recursive functions to calculate number to certain power. Imagine we want to calculate <code>3</code> to the power of <code>2</code>. We would need to multiply <code>```3*3=9```</code>. Let's define that <code>x</code> is our number and <code>n</code> is the power.
 ```
 function power(x, n){
   if (n==1){
