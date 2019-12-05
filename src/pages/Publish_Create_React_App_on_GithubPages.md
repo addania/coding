@@ -5,7 +5,7 @@ date: "2019-11-29"
 
 Step-By-Step Guide for Dummies on how to publish your create-react-app website on Github pages
 
-> Create empty GitHub repository, for example called monsteerFactory. It should be a public repository and do NOT initialize this repository with README
+> Create empty GitHub repository, for example called monsterFactory. It should be a public repository and do NOT initialize this repository with README
 
 > Start Ubuntu Command line
 
@@ -32,7 +32,7 @@ cd monster_factory
 ```
 npm install --save gh-pages
 ```
-> Open packagee.json and paste following code:
+> Open package.json and paste following code:
 ```
 "scripts": {
    "predeploy": "npm run build",
@@ -41,12 +41,26 @@ npm install --save gh-pages
    "build": "react-scripts build",
 ```
 
+> Initiate git repository
+```
+git init
+```
+> Add your username:
+```
+git config user.name "someone"
+```
+
+>Add your email:
+```
+git config user.email "someone@someplace.com"
+```
+
 > Create a **REMOTE** repository. Remote repository can be called anything, but convention is to call it origin
 ```
 git remote add origin git@github.com:addania/monsterFactory.git 
 ```
 
-> Then push our PRODUCTION files (compresseed publish-ready files) to remote by npm run deploy and publish it!! (We dont need to do git add . cause now we only want to publish the site!!! git add, commit, push is only if I want to upload my real code to github. )
+> Then push our PRODUCTION files (compressed publish-ready files) to remote by npm run deploy and publish it!! (We dont need to do git add . cause now we only want to publish the site!!! git add, commit, push is only if I want to upload my real code to github. )
 ```
 npm run deploy
 ```

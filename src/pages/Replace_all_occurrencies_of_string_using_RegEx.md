@@ -1,5 +1,5 @@
 ---
-title: "Replace all occureencies of a string with RegEx"
+title: "Replace all occurrencies of a string with RegEx"
 date: "2019-12-04"
 ---
 
@@ -13,7 +13,7 @@ console.log(sentence);
 // output is: "Todhay is a nice day"
 ```
 
-What happened here? Only the first occurance of the <code>"a"</code> was found. How can we replace all? We can usee regular expressions with <code>g</code> flag.
+What happened here? Only the first occurance of the <code>"a"</code> was found. How can we replace all? We can use regular expressions with <code>g</code> flag.
 
 ```
 let sentence="Today is a nice day".replace(/a/g, "ha");

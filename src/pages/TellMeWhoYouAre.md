@@ -1,9 +1,9 @@
 ---
-title: "Replace all occureencies of a string with RegEx"
+title: "Tell me who you are error"
 date: "2019-12-03"
 ---
 
-If you run into an error:
+If you run into an "tell me who you are" error:
 ```
 *** Please tell me who you are.
 
