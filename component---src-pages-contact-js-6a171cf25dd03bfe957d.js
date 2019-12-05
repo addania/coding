@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{212:function(a,e,n){"use strict";n.r(e),n.d(e,"query",(function(){return l}));var t=n(0),r=n.n(t),c=n(206);n(207);e.default=function(a){a.data;return r.a.createElement(c.a,null,r.a.createElement("h1",null,"I am a contact page!"),r.a.createElement("p",null,"What a world"),r.a.createElement("img",{src:"https://source.unsplash.com/random/400x200",alt:""}))};var l="3227303729"}}]);
-//# sourceMappingURL=component---src-pages-contact-js-6a171cf25dd03bfe957d.js.map
