@@ -32,7 +32,5 @@ google-chrome
 
 
 Reference:
+
 https://linuxize.com/post/how-to-install-google-chrome-web-browser-on-ubuntu-18-04/
-
-
-

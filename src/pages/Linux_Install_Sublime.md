@@ -8,11 +8,16 @@ How to install Sublime on Linux
 Sublime is a code editor.
 
 There are diffrent kinds of installs depending on Linux distributor:
-1/ apt - Ubuntu, Debian
-2/ pacman - Arch
-3/ yum - CentOS
-4/ dnf - Fedora
-5/ zypper - openSUSE
+
+**1/** apt - Ubuntu, Debian
+
+**2/** pacman - Arch
+
+**3/** yum - CentOS
+
+**4/** dnf - Fedora
+
+**5/** zypper - openSUSE
 
 Here we will check how apt works:
 
@@ -47,6 +52,7 @@ subl .
 ```
 
 Reference:
+
 https://www.sublimetext.com/docs/3/linux_repositories.html
 
 

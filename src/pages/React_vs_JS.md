@@ -8,7 +8,7 @@ Create a new file with .html extention. For example: site.html
 
 You can open this file in the browser (simply double-clicking on the file). Browser will open up a completely blank page.
 
-Now we can open it in editor (for example note++, etc) and add a div tag in it id of root:
+Now we can open it in editor (for example note++, etc) and add a <code>div</code> tag in it id of root:
 ```
 <div id="root">Hi</div>
 
@@ -330,7 +330,7 @@ ReactDOM.render(element, rootElement)
 ```
 
 Again we should get an error. But we only get one, even though we should get two errors.
-Reason is that properties are optional, therefore we need to add .isRequired:
+Reason is that properties are optional, therefore we need to add <code>.isRequired</code>code>:
 ```
 <div id="root"></div>
 <script src="https://unpkg.com/react@16.0.0-rc.3/umd/react.development.js" crossorigin></script>
@@ -359,7 +359,7 @@ ReactDOM.render(element, rootElement)
 </script>
 ```
 
-Above usage is for function components. For class componenets we use static property:
+Above usage is for function components. For class components we use static property:
 ```
 <div id="root"></div>
 <script src="https://unpkg.com/react@16.0.0-rc.3/umd/react.development.js" crossorigin></script>
@@ -395,7 +395,7 @@ ReactDOM.render(element, rootElement)
 </script>
 ```
 
-How to render a message "No Message" when we dont provide message to the component:
+How to render a message "No Message" when we don't provide message to the component:
 ```
 <div id="root"></div>
 <script src="https://unpkg.com/react@16.0.0-rc.3/umd/react.development.js" crossorigin></script>
@@ -435,7 +435,7 @@ ReactDOM.render( <Message message={null} />, rootElement)
  </script>
 ```
 
-If we want to wrap everything in a div compoenent we can will need to do interpolation:
+If we want to wrap everything in a div component we will need to do interpolation:
 ```
 <div id="root"></div>
 <script src="https://unpkg.com/react@16.0.0-rc.3/umd/react.development.js" crossorigin></script>
@@ -545,7 +545,7 @@ ReactDOM.render(element, rootElement)
  </script>
 ```
 
-We can also store className store in a variable:
+We can also store className in a variable:
 ```
 <div id="root"></div>
 <script src="https://unpkg.com/react@16.0.0-rc.3/umd/react.development.js" crossorigin></script>
@@ -579,7 +579,7 @@ ReactDOM.render(element, rootElement)
 ```
 
 
-How we can manually set the stae in React:
+How we can manually set the state in React:
 ```
 <div id="root"></div>
 <script src="https://unpkg.com/react@16.0.0-rc.3/umd/react.development.js" crossorigin></script>
