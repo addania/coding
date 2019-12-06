@@ -60,26 +60,33 @@ git config user.email "someone@someplace.com"
 git remote add origin git@github.com:addania/monsterFactory.git 
 ```
 
-> Then push our PRODUCTION files (compressed publish-ready files) to remote by npm run deploy and publish it!! (We dont need to do git add . cause now we only want to publish the site!!! git add, commit, push is only if I want to upload my real code to github. )
+> Then push our **PRODUCTION** files (compressed publish-ready files) to **REMOTE** by <code>npm run deploy</code> and publish it.
 ```
 npm run deploy
 ```
 
-> When I want to upload my working code to github (has nothing to do with publishing production files by npm run deploy), I can add your project files to **LOCAL** git
+Please note that we don't need to do <code>git add .</code> because now we only want to publish the site! git add, commit, push is only if I want to upload my real source code to Github.
+
+> When I want to upload and backup my <code>precious</code>working code to Github, it has nothing to do with **PUBLISHING** production files by <code>npm run deploy</code>. 
+
+To upload and backup my files, I add my project files to **LOCAL** git
 ```
 git add .
 ```
-> Commit your project files to **LOCAL** git
+> Then I commit my project files to **LOCAL** git
 ```
 git commit -m "first commit"
 ```
 
-> Push to **REMOTE** repository (you will be asked for you passphrase)
+> Then I push it to **REMOTE** repository:
 ```
 git push origin master
 ```
 
+> I will be asked for my passphrase
 
->Useful Sources:
+> My <code>precious</code> is stored securely
+
+Useful sources:
 
 https://create-react-app.dev/docs/deployment/#github-pages

@@ -14,13 +14,12 @@ Now we can open it in editor (for example note++, etc) and add a div tag in it i
 
 ```
 
-Refresh the browser and you wil see <code>Hi</code> displayed. But lets remove hard coded Hi and we will play wround how we can place other elements within the root div.
+Refresh the browser and you wil see <code>Hi</code> displayed. But lets remove hard coded <code>Hi</code> and we will play around how we can place other elements within the root div.
 
 In HTML in between of script tags, we can write regular javascript
 ```
 <div id="root"></div>
 <script type="text/javascript">
-
 </script>
 ```
 
@@ -81,19 +80,21 @@ Now we will use react to create our elements.
 <div id="root"></div>
 <script type="text/javascript">
 const rootElement = document.getElementById("root");
-
 </script>
 ```
 
 In order to create new element we will use React.createElement which has 3 paramenters:
+
 1/ which element it is - div
+
 2/ are ther eany atributes - className
+
 3/ and the text itself
 ```
 const element = React.createElement("div", {className: "container" }, "Yuhuu");
 ```
 
-In React.createElement, we can have any number of childeren like "Yuhuu" there:
+In <code>React.createElement</code>, we can have any number of childeren like "Yuhuu" there:
 ```
 const element = React.createElement("div", {className: "container" }, "Yuhuu", "Cool", "Hell yeah");
 ```
@@ -122,8 +123,10 @@ ReactDOM.render(element, rootElement)
 </script>
 ```
 
-Writing entire app with React.createElement is possible but not practical. It would be better if we could use regular html tags in the html. For example const element = <div>Hello world</div>
+Writing entire app with <code>React.createElement</code> is possible but not practical. It would be better if we could use regular html tags in the html. For example:
+``` const element = <div>Hello world</div>```
 
+We can do it like this:
 ```
 <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
@@ -135,10 +138,9 @@ ReactDOM.render(element, rootElement)
 </script>
 ```
 
-
 But if we run this, we will get a syntax error, where < is not a valid syntax.
 
-Such constract like <code>```<div>Hello world</div>```</code> is called JSX. And in order to be interpreted as React.createElement, it needs to be TRANSPILED and we can use Babbel to do it - Babbel is a transpiler, which takes JSX and converts it to regular Javascript.
+Such constract like <code>```<div>Hello world</div>```</code> is called JSX. And in order to be interpreted as <code>React.createElement</code>, it needs to be TRANSPILED and we can use Babbel to do it - Babbel is a transpiler, which takes JSX and converts it to regular Javascript.
 
 In order to use Babbel to transpile our JSX code to pure Javascript code, we need to import Babbel standalone using script
 ```
@@ -180,7 +182,7 @@ ReactDOM.render(element, rootElement);
 </script>
 ```
 
-<code>{greeting}</code> with curly brackets is called interpolation! Interpolation is injecting pure JS into the JSX. Interpolation is denoted by curly brackets.  Interpolation allows us to dive int land of Javascript from the land of JSX.
+<code>{greeting}</code> with curly brackets is called interpolation! Interpolation is injecting pure JS into the JSX. Interpolation is denoted by curly brackets.  Interpolation allows us to dive in land of Javascript from the land of JSX.
 
 In the interpolation, we can use anything that evaluates to an expression. It can as well be an anonymous function:
 ```
@@ -219,7 +221,7 @@ const element =(
 
 ```
 
-But this will unfortunatelly NOT run. Babbel will interpret message as undefined variable. We need to capitalize message. Capitalization tells dom that this is not a regular variable, rather it is a DOM element.
+But this will unfortunatelly NOT run. Babbel will interpret message as undefined variable. We need to capitalize message. Capitalization tells DOM that this is not a regular variable, rather it is a DOM element.
 
 ```
 <div id="root"></div>
@@ -254,7 +256,7 @@ function Message (props){
 }
 ```
 
-When we want to pass props to components we should make sure we will get correct types (string, number, etc). IN order to do so, we will be using <code>propTypes</code>.
+When we want to pass props to components we should make sure we will get correct types (string, number, etc). In order to do so, we will be using <code>propTypes</code>.
 
 Lets see how this is done:
 ```
@@ -297,7 +299,7 @@ ReactDOM.render(element, rootElement)
 
 Above is our own implementation of prop types. In console we should get error, because we are passing incorrect type. We pass boolean instead of string.
 
-Alternatively we can use one provided by react:
+Alternatively we can use prop types provided by React:
 ```
 <div id="root"></div>
 <script src="https://unpkg.com/react@16.0.0-rc.3/umd/react.development.js" crossorigin></script>

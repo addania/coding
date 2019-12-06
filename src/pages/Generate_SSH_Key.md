@@ -16,12 +16,14 @@ id_ecdsa.pub
 id_ed25519.pub
 ```
 
-> If you found no ssh keys, follow next steps
+> If you found no ssh keys, follow next steps:
 
-> Open command line and paste, where <code>your_email@example.com</code> is your email address :
+> Open command line and paste the following code. Please note that <code>your_email@example.com</code> is your email address :
+```
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
 
-> You will be prompted following message, then jsut press **ENTER**:
+> You will be prompted following message, then just press **ENTER**:
 ```
 Enter a file in which to save the key (/c/Users/you/.ssh/id_rsa):
 ```
@@ -40,7 +42,7 @@ Enter same passphrase again:
 
 > We need to tell our computer we want to use this key
 
-> Furst we start our ssh agent
+> First we start our ssh agent
 ```
 eval $(ssh-agent -s)
 ```
@@ -56,7 +58,7 @@ ssh-add ~/.ssh/id_rsa
 
 > The identity has been added
 
-> Now we need to copy the PUBLIC key to our clipboard, so that we can paste it into github.
+> Now we need to copy the **PUBLIC** key to our clipboard, so that we can paste it into Github.
 
 > To do it, we can find the file and open it. It will be in the /C/Users/Mia/.ssh/id_rsa.pub and we can copy it
 
@@ -66,14 +68,19 @@ clip < ~/.ssh/id_rsa.pub
 ```
 > Now it was copied to the clipboard
 
-> We can go to Github -> Click on Profile picture -> Settings -> SSH and GPG keys -> New SSH Key
+> We can go to our Github
+
+> Click on Profile picture -> Settings -> SSH and GPG keys -> New SSH Key
 
 > Give it a title like: "private pc" or "home desktop" or anything
 
 > Paste the SSH key to the Key box
 
-> Click <code>Add SSH Key</code>
+> Click the button <code>Add SSH Key</code>
+
+> We are **ONE** :)
 
 References:
+
 https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 https://www.youtube.com/watch?v=WgZIv5HI44o

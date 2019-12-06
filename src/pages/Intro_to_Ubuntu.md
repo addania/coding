@@ -56,3 +56,13 @@ touch global.css
 ```
 control-C
 ```
+
+> To delete a specific file, type <code>rm</code> for remove and then file name
+```
+rm unnecessaryFile.js
+```
+
+
+> Command line, how to delete a specific folder, type <code>rm</code> for remove, <code>-r</code> for recursive, then folder name
+```
+rm -r unnecessaryFile.js

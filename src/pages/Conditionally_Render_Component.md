@@ -3,43 +3,38 @@ title: "Conditionally render a component"
 date: "2019-12-04"
 ---
 
-Conditionally render an element
-
-We cannot use <code>if</code> statements within JSX like:
+How can we render an element under certain condition? Unfortunatlly, we cannot use <code>if</code> statements within JSX like:
 ```
-(
-  <h1>
-    {
-      if (purchase.complete) {
-        'Thank you for placing an order!'
-      }
+(<h1>
+  {
+    if (purchase.complete) {
+      'Thank you for placing an order!'
     }
-  </h1>
-)
-
+  }
+</h1>)
 ```
-It is due to compiling
+It is due to compiling.
 
-Alternative1:
+Alternative 1:
 ```
-LET MESSAGE;
+let message;
 
-IF (USER.AGE >= DRINKINGAGE) {
-  MESSAGE = (
-    <H1>
-      HEY, CHECK OUT THIS ALCOHOLIC BEVERAGE!
-    </H1>
+if (user.age >= 18) {
+  meessage= (
+    <h1>
+      Let´s go out!
+    </h1>
   );
-} ELSE {
-  MESSAGE = (
-    <H1>
-      HEY, CHECK OUT THESE EARRINGS I GOT AT CLAIRE'S!
-    </H1>
+} else {
+  message = (
+    <h1>
+      Let´s study
+    </h1>
   );
 }
 ```
 
-Alternative2:
+Alternative 2:
 ```
 const headline = (
   <h1>
@@ -48,7 +43,7 @@ const headline = (
 );
 ```
 
-Alternative3:
+Alternative 3:
 ```
 const lunch = (
   <ul>

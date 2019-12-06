@@ -3,19 +3,19 @@ title: "Npm"
 date: "2019-11-26"
 ---
 
-npm start will look into package.json in the script section under command START. and it will execute whatever is there. FOr applications created by create react app, there will be:
+<code>npm start</code> will look into package.json in the script section under command <code>start</code>. It will execute whatever is in there. For applications created by create-react-app, there will be:
 ```
 "start": "react-scripts start",
 ```
 
-> <code>react-scripts start</code> will start local host environment under port number: 3000
+><code>react-scripts start</code> will start local host environment under port number: 3000
 
 > If I have gatsby project, I can also write
 ```
 npm start
 ```
 
-> This will also execute whatever is in package.json, in scripts under <code>start</code>
+> <code>npm run develop</code> will also execute whatever is in package.json, in scripts under <code>start</code>
 ```
 "npm run develop",
 ```

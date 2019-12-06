@@ -3,8 +3,6 @@ title: "Loops"
 date: "2019-11-28"
 ---
 
-Loops in JS
-
 There are many loops in JS which we can use:
 
 **for** - looping through a block of code for a given number of times
@@ -19,27 +17,24 @@ There are many loops in JS which we can use:
 
 **for**
 ```
-let array=["hello", "universe", "!"]
+let array=["hello", "universe"]
 for (let item =0; item < array.length; item++){
   console.log (item);
 }
-
 // Output:
 //Hello
 //universe
-//!
 ```
 
 **for/in**
 ```
 function loop() {
-var person = {firstName:"Mia", lastName:"Schw", age:32};
-
-var text = "";
-var item;
-for (item in person) {
-  text += person[item] + " ";
-}
+  var person = {firstName:"Mia", lastName:"Schw", age:32};
+  var text = "";
+  var item;
+  for (item in person) {
+    text += person[item] + " ";
+  }
 }
 let identity=loop();
 // result: Mia Schw 32
@@ -49,7 +44,6 @@ let identity=loop();
 ```
 var sports = ['skiing', 'surfing', 'dancing'];
 var x;
-
 for (x of cars) {
   console.log(x + "<br >");
 }
@@ -58,11 +52,9 @@ for (x of cars) {
 **while**
 ```
 let check=true;
-
 while(check){
 console.log("Hi");
   check=false;
-  
 }
 //Output: Hi
 ```
@@ -80,7 +72,6 @@ function worker() {
   console.log(text);
 }
 worker();
-
 // The number is 0
 // The number is 1
 // The number is 2

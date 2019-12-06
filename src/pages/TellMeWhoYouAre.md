@@ -3,7 +3,7 @@ title: "Tell me who you are error"
 date: "2019-12-03"
 ---
 
-If you run into an "tell me who you are" error:
+If you run into an <code>Please tell me who you are.</code>error:
 ```
 *** Please tell me who you are.
 
@@ -29,4 +29,5 @@ You can solve it with following steps:
 ```
 
 Reference:
+
 https://stackoverflow.com/questions/11656761/git-please-tell-me-who-you-are-error
