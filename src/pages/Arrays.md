@@ -3,6 +3,8 @@ title: "Arrays"
 date: "2019-11-18"
 ---
 
+![Array](https://i.imgur.com/qmUjmQg.jpg "Photo by Pixabay from Pexels")
+
 Summary of useful array methods
 
 Creating new array (when we dont want to reference) of a given length of empty elements:
@@ -58,7 +60,7 @@ console.log(map1);
 // expected output: Array [2, 8, 18, 32]
 ```
 
-<code>array.concat</code> createes A NEW array which concatenates original array with another array. concat does NOT mutate origina array
+<code>array.concat</code> creates A NEW array which concatenates original array with another array. Concat does **NOT** mutate origina array
 ```
 let array = ["cat","tiger"]
 let newArray = array.concat("monster")
@@ -67,7 +69,7 @@ let newArray = array.concat("monster")
 // newArray is ["cat","tiger", "monster"]
 ```
 
-<code>array.push</code> MUTATES the existing array and adds new element!
+<code>array.push</code> **MUTATES** the existing array and adds new element!
 ```
 let array = ["cat","tiger" ]
 let length = array.push("monster")
@@ -96,3 +98,4 @@ console.log(beasts.indexOf('bison', 2));
 ```
 ```
 
+![Array](https://i.imgur.com/ui07Dbb.jpg "Photo by Genaro Servín from Pexels")

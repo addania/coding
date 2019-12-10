@@ -3,6 +3,8 @@ title: "Install LibreOffice on Linux"
 date: "2019-11-19"
 ---
 
+![Libre](https://i.imgur.com/t5FghyM.png "Sublime logo")
+
 > Open your terminal by: 
 ```
 Ctrl+Alt+T
@@ -13,19 +15,19 @@ Ctrl+Alt+T
 sudo add-apt-repository ppa:libreoffice/ppa
 ```
 
-> Hit entrer to proceed
+> Hit <code>Enter</code> to proceed
 
 > Update system
 ```
 sudo apt update
 ```
 
-> Install libreOffice
+> Install LibreOffice
 ```
 sudo apt install libreoffice
 ```
 
-> Press yes
+> Press <code>yes</code>
 
 > Reference: 
 

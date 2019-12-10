@@ -3,6 +3,8 @@ title: "Conditionally render a component"
 date: "2019-12-04"
 ---
 
+![Nothing](https://i.imgur.com/BRbkVil.jpg "Photo by Aleksandar Pasaric from Pexels")
+
 How can we render an element under certain condition? Unfortunatlly, we cannot use <code>if</code> statements within JSX like:
 ```
 (<h1>
@@ -15,7 +17,7 @@ How can we render an element under certain condition? Unfortunatlly, we cannot u
 ```
 It is due to compiling.
 
-Alternative 1:
+**Alternative 1:**
 ```
 let message;
 
@@ -34,7 +36,7 @@ if (user.age >= 18) {
 }
 ```
 
-Alternative 2:
+**Alternative 2:**
 ```
 const headline = (
   <h1>
@@ -43,7 +45,7 @@ const headline = (
 );
 ```
 
-Alternative 3:
+**Alternative 3:**
 ```
 const lunch = (
   <ul>
@@ -56,4 +58,4 @@ const lunch = (
 
 ```
 
-
+![Nothing](https://i.imgur.com/4YCrCOR.jpg "Photo by Mudassir Ali from Pexels")

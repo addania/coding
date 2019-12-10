@@ -1,10 +1,11 @@
 ---
-title: "NVM"
+title: "Node Version Manager - NVM"
 date: "2019-11-30"
 ---
-Node Version Manager
 
-This software allows us to switch between different versions of the node. Why to want to switch? Because some capabilities are not supported in certain versions of node. For example, you have a project which has some dependencies on different packages. If you want to <code>npm install</code> them, then you get errors. One of the reasons can be that you are using latest (not yet stable) version of node.
+![Version](https://i.imgur.com/GUDW6qM.jpg "Photo by Vitaly Vlasov from Pexels")
+
+This software allows us to switch between different versions of the node. Why to want to switch? Because some capabilities are not supported in certain versions of Node. For example, you have a project which has some dependencies on different packages. If you want to <code>npm install</code> them, then you get errors. One of the reasons can be that you are using latest (not yet stable) version of node.
 
 Node in general is installed globally for all projects. To be able to change versions we need to de-install it and only use NVM from now on to switch between versions. Each project can have different node version then. It is used a lot in professional dev life.
 
@@ -30,7 +31,7 @@ nvm
 nvm current
 ```
 
-> To install a specific version of the node GLOBALLY to be able to use it later on in the project:
+> To install a specific version of the node **GLOBALLY** to be able to use it later on in the project:
 ```
 nvm install 10.0.0
 ```
@@ -44,7 +45,7 @@ nvm install 10.0.0
 touch .nvmrc
 ```
 
-> Then you open that file and paste umber of version in it
+> Then you open that file and paste number of version in it
 ```
 10.0
 ```

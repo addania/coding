@@ -3,6 +3,8 @@ title: "Replace all occurrencies of a string with RegEx"
 date: "2019-12-05"
 ---
 
+![Occurence](https://i.imgur.com/8v0qmr4.jpg "Photo by Medhat Ayad from Pexels")
+
 Regular expressions allow to match certain patters.
 
 If we want to find char <code>"a"</code> in a string <code>"Today is a nice day"</code> and replace is with <code>"ha"</code>:
@@ -13,7 +15,7 @@ console.log(sentence);
 // output is: "Todhay is a nice day"
 ```
 
-What happened here? Only the first occurance of the <code>"a"</code> was found. How can we replace all? We can use regular expressions with <code>g</code> flag.
+What happened here? Only the first occurence of the <code>"a"</code> was found. How can we replace all? We can use regular expressions with <code>g</code> flag.
 
 ```
 let sentence="Today is a nice day".replace(/a/g, "ha");
@@ -58,3 +60,6 @@ let sentence="Today is a nice day".replace(re, "");
 console.log(sentence);
 // output is: "Toy is  nice y"
 ```
+
+
+![Occurence](https://i.imgur.com/E1iESVO.jpg "Photo by Ann Lee from Pexels")

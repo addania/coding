@@ -3,6 +3,8 @@ title: "Publish Create React App to Github Pages"
 date: "2019-11-29"
 ---
 
+![React](https://i.imgur.com/4tBPaPE.png "React logo")
+
 Step-By-Step Guide for Dummies on how to publish your create-react-app website on Github pages
 
 > Create empty GitHub repository, for example called monsterFactory. It should be a public repository and do NOT initialize this repository with README
@@ -65,11 +67,11 @@ git remote add origin git@github.com:addania/monsterFactory.git
 npm run deploy
 ```
 
-Please note that we don't need to do <code>git add .</code> because now we only want to publish the site! git add, commit, push is only if I want to upload my real source code to Github.
+Please note that we don't need to do <code>git add .</code> because now we only want to publish the site! <code>git add, commit, push</code>code>  is only if I want to upload my real source code to Github.
 
-> When I want to upload and backup my <code>precious</code>working code to Github, it has nothing to do with **PUBLISHING** production files by <code>npm run deploy</code>. 
+> When I want to upload and backup my <code>precious</code> working code to Github, it has nothing to do with **PUBLISHING** production files by <code>npm run deploy</code>. 
 
-To upload and backup my files, I add my project files to **LOCAL** git
+> To upload and backup my files, I add my project files to **LOCAL** git
 ```
 git add .
 ```

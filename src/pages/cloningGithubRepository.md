@@ -3,6 +3,8 @@ title: "Cloning Github Repository"
 date: "2019-11-29"
 ---
 
+![Sheep](https://i.imgur.com/yA5ouqS.jpg "Photo by Kat Jayne from Pexels")
+
 Cloning Github repository means creating a copy of **REMOTE** repo locally to your machine. How to do it? 
 
 > Go to repository root folder (top one)
@@ -28,7 +30,7 @@ How to clone repo from another branch (for example gh-pages)?
 
 > Go to repository and click on <code>clone/download</code> button (green)
 
->Then copy the repo link,. For example:
+>Then copy the repo link. For example:
 ```
 git@github.com:addania/coding.git
 ```
@@ -37,4 +39,6 @@ git@github.com:addania/coding.git
 ```
 git clone git@github.com:addania/coding.git -b gh-pages
 ```
->Our repository was successfully cloneed to **LOCAL**. Yay!
+>Our repository was successfully cloned to **LOCAL**. Yay!
+
+![Sheep](https://i.imgur.com/GmB70yE.jpg "Photo by Trinity Kubassek from Pexels")

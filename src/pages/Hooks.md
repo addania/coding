@@ -3,9 +3,11 @@ title: "Hooks"
 date: "2019-10-07"
 ---
 
+![Hook](https://i.imgur.com/4KvXTki.jpg "Photo by Johannes Plenio from Pexels")
+
 > Description
 
-Hooks allow function components to have states. It eliminates completely usage of classes. It is recommended to use function components with hooks rather than classes with state. Class componnets might be deprecated in future. Advantage of hooks is that we can create our own hooks and logic behind them. 
+Hooks allow function components to have states. It eliminates completely usage of classes. It is recommended to use function components with hooks rather than classes with state. Class components might be deprecated in future. Advantage of hooks is that we can create our own hooks and logic behind them. 
 
 >Examples of hooks:
 

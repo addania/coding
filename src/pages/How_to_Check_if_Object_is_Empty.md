@@ -1,7 +1,9 @@
 ---
-title: "How to check if objeect is empty"
+title: "How to check if object is empty"
 date: "2019-12-10"
 ---
+
+![Empty](https://i.imgur.com/6uOGygm.jpg "Photo by Pixabay from Pexels")
 
 If you want to put a condition which verifies if the object is empty, you can use following:
 
@@ -27,7 +29,6 @@ function isEmpty(obj) {
       return false;
     }
   }
-
   return JSON.stringify(obj) === JSON.stringify({});
 }
 ```
@@ -41,4 +42,5 @@ Reference:
 
 https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
 
+![Empty](https://i.imgur.com/v8eHezH.jpg "Photo by Sebastian Palomino from Pexels")
 

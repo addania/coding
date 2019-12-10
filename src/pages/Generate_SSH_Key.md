@@ -2,7 +2,10 @@
 title: "Generate SSH Key for GitHub"
 date: "2019-12-06"
 ---
-Generate SSH key and add to SSH agent
+
+![Key](https://i.imgur.com/wOgHAU7.jpg "Photo by Ylanite Koppens from Pexels")
+
+How to generate SSH key and add to SSH agent?
 
 > First check if you have existing ssh keys by pasting this to command line:
 ```
@@ -16,7 +19,7 @@ id_ecdsa.pub
 id_ed25519.pub
 ```
 
-> If you found no ssh keys, follow next steps:
+> If you found no SSH keys, follow next steps:
 
 > Open command line and paste the following code. Please note that <code>your_email@example.com</code> is your email address :
 ```
@@ -42,7 +45,7 @@ Enter same passphrase again:
 
 > We need to tell our computer we want to use this key
 
-> First we start our ssh agent
+> First we start our SSH agent
 ```
 eval $(ssh-agent -s)
 ```
@@ -78,9 +81,11 @@ clip < ~/.ssh/id_rsa.pub
 
 > Click the button <code>Add SSH Key</code>
 
-> We are **ONE** :)
+> We are **DONE** :)
 
 References:
 
 https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 https://www.youtube.com/watch?v=WgZIv5HI44o
+
+![Key](https://i.imgur.com/LyXt5ub.jpg "Photo by Pixabay from Pexels")

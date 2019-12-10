@@ -3,6 +3,9 @@ title: "Carousel in React"
 date: "2019-10-04"
 ---
 
+![Carousel](https://i.imgur.com/qlBACx0.jpg "Photo by Brett Sayles from Pexels")
+
+
 Just admit it, carousels are simply cool!  :) Sooo, how to make one? Example code to create carousel component with 3 images slideshow is provided below. 
 
 ``` 

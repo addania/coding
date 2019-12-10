@@ -3,10 +3,11 @@ title: "Recursion"
 date: "2019-11-27"
 ---
 
+![Return](https://i.imgur.com/kQUGRug.jpg "Photo by P C from Pexels")
 
 Recusion is a function that calls itself.
 
-Example usage of recursive functions is to calculate factorial of a given numbeer. Let's say we want to calculate factorial of number <code>n</code>. If <code>n=3</code>, then factorial of <code>n</code> is <code>```3*2*1```=6</code>
+Example usage of recursive functions is to calculate factorial of a given number. Let's say we want to calculate factorial of number <code>n</code>. If <code>n=3</code>, then factorial of <code>n</code> is <code>```3*2*1```=6</code>
 ```
 function factorial(n){
   if (n==1){
@@ -43,9 +44,7 @@ function sumTo(n){
   } else {
   return n+ sumTo(n-1);
   }
-
 }
-
 let result=sumTo(3);
 // result is: 6
 ```
@@ -57,7 +56,6 @@ let company={
   development: {
     onsite: [{name: "Peter", salary: 500}, {name: "Edita", salary: 1200} ],
     remote: [{name: "Lubo", salary: 3000}, {name: "Peta", salary: 800} ]
-
     }
 }
 ```
@@ -76,7 +74,6 @@ function salarySum(department){
     }
     return sum,
   }
-
 }
 ```
 

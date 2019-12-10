@@ -3,13 +3,16 @@ title: "Exports"
 date: "2019-12-01"
 ---
 
-Let's talk about exporting / importing / ... and ... smugglingg :)
+![Export](https://i.imgur.com/1S7qNP7.jpg "Photo by Pixabay from Pexels")
+
+
+Let's talk about exporting / importing / ... and ... smuggling :)
 
 
 There are 2 types of exports: **default** and **named** exports. And so are the imports.
 
 
-**Named exports** are exported with a given name of the component. We cant change the name of the exported component.
+**Named exports** are exported with a given name of the component. We can't change the name of the exported component.
 
 **Default exports** means we can change name of the exported component.
 
@@ -40,7 +43,7 @@ Importing named export:
 ```
 import { App } from "./app.js"
 ```
-Notice how we neeed to wrap the name of component into curly braces.
+Notice how we need to wrap the name of component into curly braces.
 
 In the above example we cannot change the name, unless I write as:
 ```
@@ -65,3 +68,5 @@ export {
   AnotherThing
 }
 ```
+
+![Export](https://i.imgur.com/FMsL26h.jpg "Photo by Pixabay from Pexels")

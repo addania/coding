@@ -3,6 +3,8 @@ title: "Loops"
 date: "2019-11-28"
 ---
 
+![Loop](https://i.imgur.com/VhAOIMg.jpg "Photo by Pixabay from Pexels")
+
 There are many loops in JS which we can use:
 
 **for** - looping through a block of code for a given number of times
@@ -17,7 +19,7 @@ There are many loops in JS which we can use:
 
 **for**
 ```
-let array=["hello", "universe"]
+let array=["Hello", "universe"]
 for (let item =0; item < array.length; item++){
   console.log (item);
 }
@@ -77,3 +79,5 @@ worker();
 // The number is 2
 
 ```
+
+![Loop](https://i.imgur.com/xM1q8Qz.jpg "Photo by Stas Knop from Pexels")

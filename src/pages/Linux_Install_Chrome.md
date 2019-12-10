@@ -3,6 +3,8 @@ title: "Install Chrome on Linux"
 date: "2019-11-21"
 ---
 
+![Chrome](https://i.imgur.com/jX7rNIv.jpg "Photo by PhotoMIX Ltd. from Pexels")
+
 Installing Chrome on Ubuntu:
 
 
@@ -21,7 +23,7 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 ```
 
-> Type your user password
+> Type your user and password
 
 > To start Chrome, you can type in terminal:
 ```
