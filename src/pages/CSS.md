@@ -3,11 +3,13 @@ title: "CSS"
 date: "2019-10-11"
 ---
 
+![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+
 **Selectors**
 
-Selectors enable to select certain html element(s) and apply CSS styles to it. Selectors are how we can select certain html elements. In CSS there are 3 ways how we can select elements
+Selectors enable to select certain HTML element(s) and apply CSS styles to it. Selectors are how we can select certain HTML elements. In CSS there are 3 ways how we can select elements
 
-**A) by tag name** - this scenario will style the teal colour to ALL p tags in the page
+**A) by tag name** - this scenario will style the teal colour to ALL <code>```<p>```</code> tags in the page
 
 HTML:
 ```
@@ -19,7 +21,7 @@ p {
  color: tile;
 }
 ```
-**B) by class name** - In case of class names we need to ad period in front of the class name. They are meant to be re-used over many elements.
+**B) by class name** - In case of class names we need to add period in front of the class name. They are meant to be re-used over many elements.
 
 HTML:
 ```
@@ -32,8 +34,7 @@ CSS:
 }
 ```
 
-**C) By id of an element** - Id is completely unique per site. We ned to add hashtag. An ID is meant to style only one element.
-
+**C) By id of an element** - ID is completely unique per site. We ned to add hashtag. An ID is meant to style only one element.
 
 HTML:
 ```
@@ -77,7 +78,7 @@ h1 {
 }
 ```
 
-> Chaining selectors: we are able to chain more selectors and make them even more specific. In the example below, CSS style will be applied to h1 tags but only those which have class name teal.
+> Chaining selectors: we are able to chain more selectors and make them even more specific. In the example below, CSS style will be applied to <code>```<h1>```</code> tags but only those which have class name teal.
 ```
 h1.teal {
 color: teal;
@@ -90,6 +91,7 @@ font-family: Arial;
 }
 ```
 > If we need to apply same style to multiple selectors, we can simply separate them by comma.
+
 Instead of:
 ```
 h1 {
@@ -110,9 +112,11 @@ font-family: Georgia;
 **Commands**
 
 > Font styles and families
-httpshttps://www.codecademy.com/learn/learn-css://www.w3.org/Style/Examples/007/fonts.en.html
+
+https://www.codecademy.com/learn/learn-css://www.w3.org/Style/Examples/007/fonts.en.html
 
 Examples:
+
 > Changing font:
 ```
 h1 {
@@ -179,7 +183,7 @@ h1{
 text-transform: uppercase;
 }
 ```
-> Transforming first leter to upper case
+> Transforming first leter to uppercase
 ```
 h3 {
 text-transform: capitalize;
@@ -220,14 +224,14 @@ p {
   border: 3px solid coral;
 }
 ```
-> border with rounded corners
+> Border with rounded corners
 ```
 div.container {
   border: 3px solid rgb(22, 77, 100);
   border-radius: 5px;
 }
 ```
-> perfect circle border - set the radius equal to height of the box or 100%
+> Perfect circle border - set the radius equal to height of the box or 100%
 ```
 div.container {
   height: 60px;
@@ -281,7 +285,7 @@ margin: 10px;
 margin: 10px 15px 20px 30px;
 ```
 
->Margin: If the top and bottom values for margin will equal each other, and the left and right values for padding will also equal each other, you can use the following shortcut. First value defines margin top and bottom to be 10px, margin left and right to be 15px.
+>Margin: If the top and bottom values for margin will equal each other, and the left and right values for margin will also equal each other, you can use the following shortcut. First value defines margin top and bottom to be 10px, margin left and right to be 15px.
 ```
 margin: 10px 15px;
 ```
@@ -291,7 +295,6 @@ margin: 10px 15px;
 **1/** top and bottom margin is defined and then followed by word auto, meaning right and left margin will be done automatically based on the width of the element and the container in which we want to center it
 
 **2/** width of the element needs to be defined and needs to be smaller than the width of the container where the element resides
-
 ```
 div {
 width: 200px
@@ -346,5 +349,7 @@ min-heigth: 30px;
 ```
 
 >References:
-Amazing CSS course for beginners
+
+Amazing CSS course for beginners:
+
 https://www.codecademy.com/courses/learn-css/

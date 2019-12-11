@@ -3,6 +3,8 @@ title: "Function declaration and call"
 date: "2019-10-20"
 ---
 
+![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+
 3 ways to define a function:
 ```
 function bla() {

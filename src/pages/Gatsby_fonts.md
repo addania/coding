@@ -3,6 +3,8 @@ title: "Gatsby fonts"
 date: "2019-10-08"
 ---
 
+![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+
 > In order to use custom fonts you need to install a package (plug in) and then restart the local host
 ```
 npm install --save gatsby-plugin-typography react-typography typography typography-theme-fairy-gates
@@ -23,7 +25,7 @@ module.exports = {
 
 > Create new folder under src called "utils"
 
-> Add a new js file called: typography.js
+> Add a new js file called: <code>typography.js</code>
 
 > Add this code to the file:
 ```

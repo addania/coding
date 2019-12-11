@@ -3,8 +3,9 @@ title: "Intro to Git"
 date: "2019-09-25"
 ---
 
-Git is a file versioning system. 
+![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
 
+Git is a file versioning system. 
 
 First things first - some Git definitions:
 
@@ -23,7 +24,9 @@ First we need to generate our LOCAL SSH key which we then paste to REMORE GitHub
 
 
 Imagine I work on my project addania.com which is my personal website. I created my project locally on my PC. In order to connect it to Git I first need to create a sub-folder called git with includes initial git setup.
+
 Some softwares like Gatsby create this folder automatically. I can add this folder manually using Ubuntu terminal and providing git init command which will create a subfolder git in my current project folder.
+
 Then I work on my project files and make changes to my website. Firstly I need to add those files manually to the git folder LOCALLY on my PC. Git is not tracking live all the changes done in project. I need to tell to
 Git that now is the time when I want to log the changes I made so far. Therefore all my LOCAL files need to be added to LOCAL git repository ( we are not talking about Github yet). In order to to this LOCAL workflow:
 ```
@@ -39,13 +42,17 @@ For example:
 ```
 git remote add origin git@github.com:addania/addania.com.git 
 ```
-To verify if our new remote was added we can check the git remote -v command. 
+To verify if our new remote was added we can check the:
+```
+git remote -v 
+```
+
 Then we are ready to puch our LOCAL git repository to the REMOTE Github repository:
 ```
 git push origin master
 ```
 
-> In order to install git we need to have apt-get updated. To update apt-get
+> In order to install Git we need to have apt-get updated. To update apt-get
 ```
 sudo apt-get update
 ```
@@ -63,7 +70,7 @@ git config --global user.name "addania"
 git config --global user.email "mirka.schw@gmail.com"
 ```
 
->Tto check status of my git in a project (if they are up-to-date with master branch or if I have any staging commits), first navigate to project folder by cd addania.com then executing:
+>To check status of my Git in a project (if they are up-to-date with master branch or if I have any staging commits), first navigate to project folder by cd addania.com then executing:
 ```
 git status
 ```

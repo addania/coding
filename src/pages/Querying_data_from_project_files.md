@@ -3,13 +3,15 @@ title: "Querying data from project files"
 date: "2019-10-10"
 ---
 
+![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+
 > We can query images, or content of the website (text) from files in our project folder.
 
-> Firstly open your command line in Ubuntu and install the gatsby package called source **filesystem** plugin. The filesystem source plugin lets you query data**ABOUT** files (note: but it does NOT allow you to query data inside files, for that we have another plugin called transform)
+> Firstly, open your command line in Ubuntu and install the Gatsby package called source **filesystem** plugin. The filesystem source plugin lets you query data**ABOUT** files (note: but it does NOT allow you to query data inside files, for that we have another plugin called transform)
 ```
 npm install --save gatsby-source-filesystem
 ```
-> Secondly open the gatsby-config.js and add this plugin there:
+> Secondly open the <code>gatsby-config.js</code> and add this plugin there:
 ```
 plugins: [
     {
@@ -20,7 +22,7 @@ plugins: [
       },
     },
 ```
-> Save and restart gatsby development environment
+> Save and restart Gatsby development environment
 ```
 gatsby develop
 ```
@@ -30,7 +32,7 @@ http://localhost:8000/___graphql
 ```
 > Select some items for our query. For example <code>base</code> is the name of the file, <code>prettySize</code> is the size of the file, <code>relativeDirectory</code> is a folder in which file resides, etc
 
-> Lets use this data and print it to console:
+> Let's use this data and print it to console:
 ```
 import React from "react"
 import { graphql } from "gatsby"
@@ -59,7 +61,7 @@ export const query = graphql`
 `
 ```
 
-> Lets make our data beautiful in a table:
+> Let's make our data beautiful in a table:
 ```
 import React from "react"
 import { graphql } from "gatsby"
@@ -243,7 +245,7 @@ export const query = graphql`
   }
 }
 ```
-Notice how <code>data.allFile.edges</code> returns an ARRAY of OBJECTS!! Which means we can use array method called map on it. Map works in a way that it iterated through every single element of the array and performs a certain function in it. It doesn't change original array, but creates a new array on which the function is performed.  One small example is here:
+Notice how <code>data.allFile.edges</code> returns an ARRAY of OBJECTS! Which means we can use array method called map on it. Map works in a way that it iterated through every single element of the array and performs a certain function in it. It doesn't change original array, but creates a new array on which the function is performed.  One small example is here:
 ```
 var array1 = [1, 4, 9, 16];
 // pass a function to map
@@ -265,42 +267,43 @@ var new_array = arr.map(function callback(currentValue[, index[, array]]) {
     // Return element for new_array
 }[, thisArg])
 ```
-> This means that when using .map method we can use the current object we are on, but also its index!! Which mean index 0,1,2, etc
+> This means that when using <code>.map</code> method we can use the current object we are on, but also its index! Which mean index 0,1,2, etc
 
-> In our .map method we have a function which takes 2 arguments:
+> In our <code>.map</code> method we have a function which takes 2 arguments:
 ```
 ({ node }, index)
 ```
-{ node } is an actual object which resides under data.allFile.edges
+<code>{ node }</code> is an actual object which resides under <code>data.allFile.edges</code>
+
 It should actually be called node, otherwise we will have an error.
-index is the index of the element in our array on which we are currently itterating.
+
+Index is the index of the element in our array on which we are currently itterating.
 
 > For each element in our array, we will create a ```<tr>``` tag which will have a unique property key which will be equal to the index of that element in the array
 ```<tr key={index}>
 ...
 </tr> 
 ```
-> Then this table row (tr) will create 4 columns ```<td>``` Each of ```<td>``` tags will access the element of array, which is in fact an object, where we retrieve values for example: node.base
+> Then this table row (tr) will create 4 columns ```<td>``` Each of ```<td>``` tags will access the element of array, which is in fact an object, where we retrieve values for example: <code>node.base</code>
 
 
 > In React each array element over which we will iterate needs a unique key property. 
 
-> Each time you iterate over an array you have to set the key prop to each of the resulting DOM element as React needs it to optimize the re-rendering. 
+> Each time you iterate over an array you have to set the key prop to each of the resulting DOM element as React needs it to optimize the re-rendering.
 
-> React for example will detect duplicates and only renders the first node with this key. Without key={index} there will be an error in console that each child in the list should have a unique key property. More reading:
+> React for example will detect duplicates and only renders the first node with this key. Without <code>key={index}</code> there will be an error in console that each child in the list should have a unique key property. More reading:
 ```
 https://stackoverflow.com/questions/28329382/understanding-unique-keys-for-array-children-in-react-js
 https://stackoverflow.com/questions/37651660/react-each-child-in-an-array-or-iterator-should-have-a-unique-key-prop?rq=1
 ```
-> The filesystem source plugin lets you query data ABOUT files but what if you want to query data INSIDE files? To make this possible, Gatsby supports transformer plugins which take raw content from source plugins and transform it into something more usable. Example: markdown files .md
+> The filesystem source plugin lets you query data ABOUT files but what if you want to query data INSIDE files? To make this possible, Gatsby supports transformer plugins which take raw content from source plugins and transform it into something more usable. Example: markdown files <code>.md</code>
 
-
-> create a new markdow file under your pages folder
+> Create a new markdow file under your pages folder
 ```
 blog_post.md
 ```
 
-> look at the GrphiQL and refresh the query, you will see the new .md file in there
+> Look at the GrphiQL and refresh the query, you will see the new <code>.md</code> file in there
 
 
 > First install transformer plugin
@@ -308,7 +311,7 @@ blog_post.md
 npm install --save gatsby-transformer-remark
 ```
 
-> Add plugin to gatsby config
+> Add plugin to Gatsby config
 ```
 module.exports = {
   siteMetadata: {
@@ -337,4 +340,4 @@ module.exports = {
 ```
 gatsby develop
 ```
-> In GraphiQL we will see the new item allMarkdownRemark
+> In GraphiQL we will see the new item <code>allMarkdownRemark</code>

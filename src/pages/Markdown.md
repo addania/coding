@@ -3,11 +3,13 @@ title: "Markdown"
 date: "2019-11-12"
 ---
 
+![Mark](https://i.imgur.com/VIj56ca.jpg "Photo by Spencer Selover from Pexels")
+
 **General information**
 
-Markdown files use extension .md They allow formatting text betteer then in the code itself between for example p tags. Gatsby also can interpret eeach md file a a sub-site and automate creation for example of blog posts, articles, etc.
+Markdown files use extension <code>.md</code>. They allow formatting text better then in the code itself between for example <code>```<p>```</code> tags. Gatsby also can interpret each md file a sub-site and automate creation for example of blog posts, articles, etc.
 
-MD files usually start with some metadata, such as title, date, etc, which can be retrieved and used to build the component which will display thee data:
+MD files usually start with some metadata, such as title, date, etc, which can be retreived and used to build components which will display the data:
 ```
 ---
 title: "JS"
@@ -33,10 +35,10 @@ use ``` before and after the block code
 
 >How to insert images to md files?
 ```
-![image alt atribute](image url or file path)
+![image alt atribute](url_or_file_path image_title)
 ```
 
->You can add text to image which will display when you mouseOver the image using Title
+>You can add text to image which will display when you <code>mouseOver</code> the image using Title
 ```
 ![image alt atribute](url "Title")
 ```

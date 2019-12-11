@@ -3,17 +3,19 @@ title: "Debugging"
 date: "2019-10-25"
 ---
 
+![Bug](https://i.imgur.com/7vkvSLF.jpg "Photo by Egor Kamelev from Pixabay")
+
 Imagine we add to our code a line like this:
 ```
 debugger;
 ```
 Then we are able to execute code only up until this line. 
 
-You need to go to your website and open the DEV TOOLS (without opening the dev tools you won't be able to see the debugger stopping at the given place).
+You need to go to your website and open the <code>DEV TOOLS</code> (without opening the dev tools you won't be able to see the debugger stopping at the given place).
 
 Automatical execution will stop and we will be able to use console to check for any value of our variable and hence check if all variables have correct values. 
 
-For example if we put debugger to onClick event handler, we can type in console:
+For example if we put debugger to <code>onClick</code> event handler, we can type in console:
 ```
 event
 ```
@@ -24,13 +26,13 @@ We can put
 event.target
 ```
 
-and see all the options we have that can be used as event.target. Target.event set is pre-defined and doesn't display any custom values, like prop names.
+and see all the options we have that can be used as <code>event.target</code>. <code>Event.target</code> set is pre-defined and doesn't display any custom values, like prop names.
 
 To read custom properties, we can use:
 ```
 event.target.attribute
 ```
-For example if we gave our button attribute <code>user</code>, then we can access it by
+For example, if we gave our button attribute <code>user</code>, then we can access it by
 ```
 event.target.attribute.user
 ```

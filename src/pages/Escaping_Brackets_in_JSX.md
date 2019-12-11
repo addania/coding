@@ -2,6 +2,9 @@
 title: "Escaping curly brackets in JSX"
 date: "2019-10-28"
 ---
+
+![Exit](https://i.imgur.com/Xp2icU5.jpg "Photo by Matthias Zomer from Pexels")
+
 Only one advice here:
 
 ```
@@ -12,11 +15,11 @@ RUUUUUUUUUUN
 
 Apart from that, imagine you want to display following text in a p tag :
 ```
-the way you use props is {props.name}
+The way you use props is {props.name}
 ```
 If you write the code like this:
 ```
-<p>the way you use props is {props.name}</p>
+<p>The way you use props is {props.name}</p>
 ```
 you will get an error that props.name is not defined
 

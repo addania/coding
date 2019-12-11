@@ -3,6 +3,8 @@ title: "Local Storage"
 date: "2019-10-15"
 ---
 
+![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+
 Sometimes we want to store some data in the local storage of the browser, so that we can use them on the next session. Command to set the local storage is:
 ```
 window.localStorage.setItem('myInput', value)
@@ -31,7 +33,7 @@ render () {
 }
 }
 ```
-> In order to retrieve item from the local storage we use code
+> In order to retreeive item from the local storage we use code
 ```
 window.localStorage.getItem('myInput')
 ```

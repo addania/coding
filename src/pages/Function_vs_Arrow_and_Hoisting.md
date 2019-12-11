@@ -3,6 +3,8 @@ title: "Function definition: Arrow vs Function, Hoising"
 date: "2019-10-18"
 ---
 
+![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+
 If we use function definition like this (using arrow functions):
 ```
 const Button = () => {

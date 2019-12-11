@@ -3,6 +3,8 @@ title: "Writing strings in JS and JSX"
 date: "2019-10-14"
 ---
 
+![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+
 **Template literal**
 
 In JSX land, we dont need to use any special character to write a string, all variables in between curly brackets will be interpreted as a string

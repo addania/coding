@@ -3,6 +3,8 @@ title: "Google Fonts in React"
 date: "2019-10-01"
 ---
 
+![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+
 And here is how to import Google fonts to React. Very good library of around 1000 fonts can be found on w3schools
 
 > Go to:
@@ -13,9 +15,9 @@ https://www.w3schools.com/howto/howto_google_fonts.asp
 
 > Click on button try it
 
-> Find url in the html document: https://fonts.googleapis.com/css?family=Mansalva
+> Find URL in the HTML document: https://fonts.googleapis.com/css?family=Mansalva
 
-> Create a new css file for example index.css
+> Create a new CSS file for example <code>index.css</code>
 
 > Populate the file with this code
 ```
@@ -27,15 +29,15 @@ body {
   font-family: 'Mansalva';
 }
 ```
-> Alternatively use className to define a style
+> Alternatively use <code>className</code> to define a style
 ```
 .fonts {
   font-family: 'Mansalva';
 }
 ```
-> Go to your index.js
+> Go to your <code>index.js</code>
 
-> Import your index.css please note that index.js and index.css need to be in the same folder
+> Import your index.css please note that <code>index.js</code> and <code>index.css</code> need to be in the same folder
 ```
 import "./index.css"
 ```

@@ -3,6 +3,8 @@ title: "How to center an image"
 date: "2019-10-03"
 ---
 
+![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+
 > It took me a while to figure out how to position an image tag or video tag. I was first playing around with divs only to realize there is an easy way how to position image or video tag directly
 ```
 img{

@@ -3,7 +3,9 @@ title: "Event Handlers"
 date: "2019-10-24"
 ---
 
-Event handlers like onClick will by default pass in some metadata, which we can use afterwards. For example: name and id of the element which triggered it or trigger type (onClick, onMouseOver, onChange, etc)
+![Event](https://i.imgur.com/Ac14aft.jpg "Photo by Wolfgang from Pexels")
+
+Event handlers like <code>onClick</code> will by default pass in some metadata to the event handler function, which we can use afterwards. For example: name and id of the element which triggered it or trigger type (onClick, onMouseOver, onChange, etc)
 
 We access them by:
 ```
@@ -17,7 +19,7 @@ But we can also access all our custom properties by:
 event.target.attribute.XXX
 ```
 
-where XXX is name of our custom property. Please note however, that this is not a reliable way to retrieve data. This way uses DOM and DOM does not keep this data longer than the moment when the event triggered. For that reason we might also need to include 
+where XXX is name of our custom property. Please note however, that this is not a reliable way to retreive data. This way uses DOM and DOM does not keep this data longer than the moment when the event was triggered. For that reason we might also need to include 
 ```
 event.persist()
 ```
@@ -37,10 +39,10 @@ function handleClick(event) {
 </button>
 ```
 
-> PLEASE NOTE: console.log("Event: ", event); will return the whole event OBJECT (on which we can click and see all nodes). If we wrote console.log("Event: " + event); event object would be stringyfied and we wont have opportunity to explore the OBJECT!!
+> PLEASE NOTE: <code>console.log("Event: ", event);</code> will return the whole event OBJECT (on which we can click and see all nodes). If we wrote <code>console.log("Event: " + event);</code> event object would be stringyfied and we wont have opportunity to explore the OBJECT!!
 
 
-We might need to get some info from the element which called our event handler. For example onClick. With the onClick, we can use the information provided in event object and retrieve data about our componenet which triggered the event from event object. But this approach is not good, becasue it retrieves data from the DOM. In React we dont want to rely on DOM because it is outside of the React world. 
+We might need to get some info from the element which called our event handler. For example <code>onClick</code>. With the onClick, we can use the information provided in event object and retreeive data about our componenet which triggered the event from event object. But this approach is not good, becasue it retrieves data from the DOM. In React we dont want to rely on DOM because it is outside of the React world. 
 
 ``` 
 function handleClick(event) {

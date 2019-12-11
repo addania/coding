@@ -3,6 +3,8 @@ title: "Context"
 date: "2019-10-16"
 ---
 
+![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+
 > Instead of passing down props through tree of nested child components (often as much as 20+ times from parent to the last child), there is a better way how components can receive props. The way is called **context** and you can think of it as something like a global variable.
 
 > Imagine component structure:
@@ -12,7 +14,7 @@ A -> D -> C
 
 > A has prop for theme ( value: "green") which needs to be passed to C. But only to C. Other component like D doesnt care about this prop.
 
-> Top level component PROVIDES context and child component CONSUMES the context. 
+> Top level component **PROVIDES** context and child component **CONSUMES** the context. 
 
 Provider example: component A.  
 
@@ -22,15 +24,14 @@ Consumer Example: componenet called D
 
 > C: consumes theme
 
-> First we create the cotext itself
-
+> First we create the context itself:
 ``` 
 // src/ThemeContext.js
 import React from 'react';
 const ThemeContext = React.createContext(null);
 export default ThemeContext;
 ```
-> React.createContext will give us access to Provider and Consumer components.
+> <code>React.createContext</code> will give us access to Provider and Consumer components.
 ```
 ThemeContext = React.createContext(null);
 ```
@@ -45,13 +46,11 @@ const A = () => (
   </ThemeContext.Provider>
 );
 ```
-> We need to include new components called ThemeContext.Provider
+> We need to include new components called <code>ThemeContext.Provider</code>
 
-> A doesnt pass any props to D component. It makes value green available to all child components. A summons D component.
+> A doesn't pass any props to D component. It makes value green available to all child components. A summons D component.
 
-> Lets look at C component. Now that A has made the value green available to all children, C can access that value:
-
-
+> Let's look at C component. Now that A has made the value green available to all children, C can access that value:
 ```
 // src/ComponentC.js
 import React from 'react';
@@ -125,7 +124,6 @@ const C = () => {
 ```
 
 > Complex example with classes where we still use provider because we also want to be able to update the team
-
 ```
 import React from 'react';
 import { render } from 'react-dom';

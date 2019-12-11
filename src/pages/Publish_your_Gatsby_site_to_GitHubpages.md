@@ -3,6 +3,8 @@ title: "Publish your Gatsby website to Github Pages"
 date: "2019-09-30"
 ---
 
+![Hook](https://i.imgur.com/4KvXTki.jpg "Photo by Johannes Plenio from Pexels")
+
 Step-By-Step Guide for Dummies on how to publish your Gatsby website on Github pages
 
 > Create empty GitHub repository, for example called test2. It should be a public repository and do NOT initialize this repository with README
@@ -22,7 +24,7 @@ gatsby new test2 https://github.com/gatsbyjs/gatsby-starter-hello-world
 ```
 cd test2
 ```
-> Install gh-pages. You need to do it for each single project. Dont get fooled like me that I thought I installed this package before. You need to be in your project folder and install it there. If the installation is successful you should get a message something like this "added 17 packages from 6 contributors and audited 19803 packages in 18.616s found 0 vulnerabilities"
+> Install gh-pages. You need to do it for each single project. Don't get fooled like me that I thought I installed this package before. You need to be in your project folder and install it there. If the installation is successful you should get a message something like this "added 17 packages from 6 contributors and audited 19803 packages in 18.616s found 0 vulnerabilities"
 ```
 npm install gh-pages --save-dev
 ```
@@ -48,13 +50,13 @@ git push origin master
     "deploy": "gatsby build && gh-pages -d public -b master",
   },
 ```
-> If you are publishing to your account url, for example: https://addania.github.io without any prefix, then skip this step. But if on GitHub pages your url will have a prefix, we also need to add this prefix to the Gatsby files. For example, github pages which use repository name as prefix:
+> If you are publishing to your account URL, for example: https://addania.github.io without any prefix, then skip this step. But if on GitHub pages your URL will have a prefix, we also need to add this prefix to the Gatsby files. For example, github pages which use repository name as prefix:
 ```
 https://addania.github.io/MyProject
 ```
 MyProject is name of repository and it comes AFTER  https://addania.github.io, therefore /MyProject is a prefix and Gatsby needs to build files, so that they add the prefix. If this is the case you also need to do next 2 steps:
 
-> 1/ Open <code>gatsby-config.js</code> and paste following (dont forget about the slash):
+> 1/ Open <code>gatsby-config.js</code> and paste following (don't forget about the slash):
 ```
 module.exports = {
 pathPrefix: "/MyProject",
@@ -89,7 +91,7 @@ git checkout -b gh-pages
 ```
 git push --set-upstream origin gh-pages
 ```
-> Run the npm deploy command. Zou will need to add your passphrase (twice). It should result in success and last word should be "Published"
+> Run the <code>npm deploy command</code>. You will need to add your passphrase (twice). It should result in success and last word should be "Published"
 ```
 npm run deploy
 ```
@@ -97,11 +99,11 @@ npm run deploy
 
 > Scroll down to Github pages and change Source to Master branch.
 
-> Click on your github pages link: in my case: https://addania.github.io/test2/. You should see your website. Please note that sometimes you need to wait for couple of minutes (around 5 minutes) to see your website, most likely you will only see Gatsby welcome page
+> Click on your Github pages link: in my case: https://addania.github.io/test2/. You should see your website. Please note that sometimes you need to wait for couple of minutes (around 5 minutes) to see your website, most likely you will only see Gatsby welcome page
 
 > PLEASE NOTE
 
-we will use gh-pages branch to upload / download our code and we will use master branch to publish the website
+We will use gh-pages branch to upload / download our code and we will use master branch to publish the website
 
 > If you want to make changes to your code then you need to push it to the gh-pages branch. This will upload new version of your code to gh-pages branch but it will still not be however reflected in your published page
 ```
@@ -113,7 +115,7 @@ npm run deploy
 ```
 > PLEASE NOTE
 
-In the Project folder called Pages you can only store pages to your website, if you put there some components which you import to your index.js it will break the npm run deploy with the error that for example header.js must be a valid react component. How to fix it? Remove all your components from pages folder and create a folder called components in the src folder. Put all your components there. Then import your heade.js to your index.js by importr { Header } from "../components/header.js". Then you are able to run npm run deploy
+In the Project folder called Pages you can only store pages to your website, if you put there some components which you import to your index.js it will break the npm run deploy with the error that for example <code>header.js</code> must be a valid react component. How to fix it? Remove all your components from pages folder and create a folder called components in the <code>src</code> folder. Put all your components there. Then import your heade.js to your <code>index.js</code> by importr { Header } from "../components/header.js". Then you are able to run npm run deploy
 
 > PLEASE NOTE
 
@@ -140,7 +142,7 @@ npm install --save gatsby-plugin-typography typography react-typography typograp
 npm install --save gatsby-plugin-typography typography react-typography typography-theme-moraga gatsby-plugin-emotion @emotion/core
 ```
 
-> Add typography to your package.json
+> Add typography to your <code>package.json</code>
 ```
 module.exports = {
   plugins: [
@@ -155,11 +157,11 @@ module.exports = {
 }
 ```
 
-> Under foldere src create a new folder utils
+> Under foldere <code>src</code> create a new folder utils
 
-> in src/utils folder create a new typography.js file
+> In <code>src/utils</code> folder create a new <code>typography.js</code> file
 
-> Input this code into the typography.js
+> Input this code into the <code>typography.js</code>
 ```
 import Typography from "typography"
 import fairyGateTheme from "typography-theme-fairy-gates"
@@ -182,7 +184,7 @@ export default typography
 npm install --save gatsby-source-filesystem
 ```
 
-> Add following code to gatsby-config.js
+> Add following code to <code>gatsby-config.js</code>
 ```
   plugins: [
     {
@@ -203,9 +205,9 @@ npm install --save gatsby-transformer-remark
 ```
 `gatsby-transformer-remark`,
 ```
-> Create gatbsy-node.js file in the same folder as gatsby-config
+> Create <code>gatbsy-node.js</code> file in the same folder as <code>gatsby-config</code>
 
-> add this code to gatsby node:
+> Add this code to gatsby node:
 ```
 const path= require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
@@ -249,12 +251,12 @@ const {createPage} = actions
   }
 ```
 
-> install manifest (if it throws error, then skip):
+> Install manifest (if it throws error, then skip):
 ```
 npm install --save gatsby-plugin-manifest
 ```
 
-> add manifest plugin to gatsby-config.js (this can throw error, then skip)
+> Add manifest plugin to <code>gatsby-config.js</code> (this can throw error, then skip)
 ```
 Copygatsby-config.js: copy code to clipboard
 {
@@ -282,7 +284,7 @@ Copygatsby-config.js: copy code to clipboard
 npm install --save gatsby-plugin-offline
 ```
 
-> Add offline support to gatsby-config to module export plugins:
+> Add offline support to <code>gatsby-config</code> to module export plugins:
 ```
 `gatsby-plugin-offline`,
 ```
@@ -292,13 +294,13 @@ npm install --save gatsby-plugin-offline
 npm install --save gatsby-plugin-react-helmet react-helmet
 ```
 
-> Add react helmet to gatsby-config:
+> Add react helmet to <code>gatsby-config</code>:
 
 ```
 `gatsby-plugin-react-helmet`,
 ```
 
-> plus site metadata should have author and description:
+> Plus site metadata should have author and description:
 ```
 module.exports = {
   siteMetadata: {
@@ -308,7 +310,7 @@ module.exports = {
   },
 ```
 
-> Install react bootstrap and bootstrap:
+> Install React Bootstrap and Bootstrap:
 ```
 npm install react-bootstrap bootstrap
 ```
