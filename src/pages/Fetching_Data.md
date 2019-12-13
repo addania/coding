@@ -87,4 +87,72 @@ It is important to understand that fetching is <code>asynchronous</code>. When w
 
 <code>Await</code> will make sure that anything after it will first wait until data are available and only trigger it when data are there. If we put our functions **OUSIDE** of the useEffect, all functions will run before the data actually are available and fail.
 
+Another way how we can fetch data:
+```
+import React, { useState, useEffect } from "react";
+export const FetchAPItest = () => {
+  const [person, setPerson] = useState(null);
+  useEffect(async () => {
+    const response = await fetch("https://api.randomuser.me/");
+    const data = await response.json();
+    const [item]=data.results;
+    setPerson(item);
+  }, []);
+  return (
+    <div>
+      {person && <p>{person.name.first}</p>}
+    </div>
+  )
+}
+```
+
+Please note: this will only work when you initially set the state to <code>null</code>!
+```
+const [person, setPerson] = useState(null);
+```
+
+If you set your state to empty:
+```
+const [person, setPerson] = useState();
+```
+
+you will get an error that undefined does not have property name.first
+
+Please also note, that we render our component conditionally when the person is there:
+```
+{person && <p>{person.name.first}</p>}
+```
+
+If we just do this:
+```
+<p>{person.name.first}</p>
+```
+we will again have error.
+
+Same data, fetched by the first method:
+```
+import React, { useState, useEffect } from "react";
+
+export const FetchAPItest2 = () => {
+  const [person, setPerson] = useState(null);
+
+  useEffect(() => {
+    async function fetchData(){
+      
+    const response = await fetch("https://api.randomuser.me/");
+    const data = await response.json();
+    const [item]=data.results;
+    setPerson(item);
+  }
+  fetchData();
+  }, []);
+
+  return (
+    <div>
+      {person && <p>{person.name.first}</p>}
+    </div>
+  )
+}
+```
+
 ![Fetching](https://i.imgur.com/Sb31C68.jpg "Photo by Jozef Fehér from Pexels")

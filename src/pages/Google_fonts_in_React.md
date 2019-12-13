@@ -3,7 +3,7 @@ title: "Google Fonts in React"
 date: "2019-10-01"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![Fonts](https://i.imgur.com/W5e4AEm.jpg "Photo by Pixabay from Pexels")
 
 And here is how to import Google fonts to React. Very good library of around 1000 fonts can be found on w3schools
 
