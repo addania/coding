@@ -3,7 +3,7 @@ title: "Format Text to Block"
 date: "2019-10-29"
 ---
 
-![Dates](https://i.imgur.com/Lm6vmDZ.jpg "Photo by Suzy Hazelwood from Pexels")
+![](https://i.imgur.com/Lm6vmDZ.jpg "Photo by Suzy Hazelwood from Pexels")
 
 Are you also one of those perfectionists (like me..) who like their text to be nicely formatted in a <code>BLOCK</code>, rather than having each text line of different length? If yes, then this article is for you!
 

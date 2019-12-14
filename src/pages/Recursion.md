@@ -3,7 +3,7 @@ title: "Recursion"
 date: "2019-11-27"
 ---
 
-![Return](https://i.imgur.com/kQUGRug.jpg "Photo by P C from Pexels")
+![](https://i.imgur.com/kQUGRug.jpg "Photo by P C from Pexels")
 
 Recusion is a function that calls itself.
 

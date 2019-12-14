@@ -3,7 +3,7 @@ title: "Install LibreOffice on Linux"
 date: "2019-11-19"
 ---
 
-![Libre](https://i.imgur.com/t5FghyM.png "Sublime logo")
+![](https://i.imgur.com/t5FghyM.png "Sublime logo")
 
 > Open your terminal by: 
 ```

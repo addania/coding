@@ -3,7 +3,7 @@ title: "JSPrettier"
 date: "2019-12-08"
 ---
 
-![Prettier](https://i.imgur.com/GNpxcbc.jpg "Photo by Anderson Guerra from Pexels")
+![](https://i.imgur.com/GNpxcbc.jpg "Photo by Anderson Guerra from Pexels")
 
 JSPrettier formats the code according to best practices.
 

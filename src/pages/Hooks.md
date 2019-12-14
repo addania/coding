@@ -3,7 +3,7 @@ title: "Hooks"
 date: "2019-10-07"
 ---
 
-![Hook](https://i.imgur.com/4KvXTki.jpg "Photo by Johannes Plenio from Pexels")
+![](https://i.imgur.com/4KvXTki.jpg "Photo by Johannes Plenio from Pexels")
 
 >Description
 

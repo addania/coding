@@ -3,7 +3,7 @@ title: "CSS"
 date: "2019-10-11"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![](https://i.imgur.com/0v7juum.jpg "Photo by Format from Pexels")
 
 **Selectors**
 
@@ -167,6 +167,10 @@ h1 {
   opacity: 0.5;
 }
 ```
+
+![](https://i.imgur.com/ZrJnm95.jpg "Photo by Daniel Frese from Pexels")
+
+
 > Adding image as a background to an element. URL can be link to exterenal site or file path within the project folder
 ```
 .main-banner {
@@ -353,3 +357,6 @@ min-heigth: 30px;
 Amazing CSS course for beginners:
 
 https://www.codecademy.com/courses/learn-css/
+
+
+![](https://i.imgur.com/Y25H36n.jpg "Photo by Lisa Fotios from Pexels")

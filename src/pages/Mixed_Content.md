@@ -3,7 +3,7 @@ title: "Mixed content error"
 date: "2019-12-13"
 ---
 
-![Mixed](https://i.imgur.com/ReyaN6N.jpg "Photo by Pixabay from Pexels")
+![](https://i.imgur.com/ReyaN6N.jpg "Photo by Pixabay from Pexels")
 
 For example if we want to publish our project on Github pages, it is done over HTTPS (secure HTTP). However, if we fetch some data (or upload an image) on it from not-secured HTTP, we will get an error:
 ```

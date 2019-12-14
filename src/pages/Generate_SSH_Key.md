@@ -3,7 +3,7 @@ title: "Generate SSH Key for GitHub"
 date: "2019-12-06"
 ---
 
-![Key](https://i.imgur.com/wOgHAU7.jpg "Photo by Ylanite Koppens from Pexels")
+![](https://i.imgur.com/wOgHAU7.jpg "Photo by Ylanite Koppens from Pexels")
 
 How to generate SSH key and add to SSH agent?
 
@@ -88,4 +88,4 @@ References:
 https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 https://www.youtube.com/watch?v=WgZIv5HI44o
 
-![Key](https://i.imgur.com/LyXt5ub.jpg "Photo by Pixabay from Pexels")
+![](https://i.imgur.com/LyXt5ub.jpg "Photo by Pixabay from Pexels")

@@ -3,7 +3,7 @@ title: "Event Handlers"
 date: "2019-10-24"
 ---
 
-![Event](https://i.imgur.com/Ac14aft.jpg "Photo by Wolfgang from Pexels")
+![](https://i.imgur.com/Ac14aft.jpg "Photo by Wolfgang from Pexels")
 
 Event handlers like <code>onClick</code> will by default pass in some metadata to the event handler function, which we can use afterwards. For example: name and id of the element which triggered it or trigger type (onClick, onMouseOver, onChange, etc)
 

@@ -3,7 +3,7 @@ title: "Querying data with GraphQL"
 date: "2019-10-09"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![](https://i.imgur.com/vfl9kPh.jpg "Photo by Vitaly Vlasov from Pexels")
 
 GraphQL is a technology for querying data and was developed by Facebook to allow React commponents to query data. QL means query language and is similar to SQL.
 

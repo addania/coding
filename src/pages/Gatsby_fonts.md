@@ -3,7 +3,7 @@ title: "Gatsby fonts"
 date: "2019-10-08"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![](https://i.imgur.com/BvSXI40.jpg "PPhoto by Dominika Roseclay from Pexels")
 
 > In order to use custom fonts you need to install a package (plug in) and then restart the local host
 ```

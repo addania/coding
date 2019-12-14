@@ -3,7 +3,7 @@ title: "React Bootstrap"
 date: "2019-10-12"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![](https://i.imgur.com/YRAOVo0.jpg "React Bootstrap Logo")
 
 At first let us take a look at what React Bootstrap is and how it differs from Bootstrap:
 

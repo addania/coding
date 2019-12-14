@@ -3,7 +3,7 @@ title: "NPM Packages"
 date: "2019-12-01"
 ---
 
-![Package](https://i.imgur.com/xa1x0Gq.jpg "Photo by Kim Stiver from Pexels")
+![](https://i.imgur.com/xa1x0Gq.jpg "Photo by Kim Stiver from Pexels")
 
 Let's talk about packages our app is depending on. These can be found in the package.json file. There 2 types of dependencies:
 

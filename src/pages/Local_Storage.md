@@ -3,7 +3,7 @@ title: "Local Storage"
 date: "2019-10-15"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![](https://i.imgur.com/zMFVLde.jpg "Photo by Dids from Pexels")
 
 Sometimes we want to store some data in the local storage of the browser, so that we can use them on the next session. Command to set the local storage is:
 ```

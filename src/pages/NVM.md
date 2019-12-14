@@ -3,7 +3,7 @@ title: "Node Version Manager - NVM"
 date: "2019-11-30"
 ---
 
-![Version](https://i.imgur.com/GUDW6qM.jpg "Photo by Vitaly Vlasov from Pexels")
+![](https://i.imgur.com/GUDW6qM.jpg "Photo by Vitaly Vlasov from Pexels")
 
 This software allows us to switch between different versions of the node. Why to want to switch? Because some capabilities are not supported in certain versions of Node. For example, you have a project which has some dependencies on different packages. If you want to <code>npm install</code> them, then you get errors. One of the reasons can be that you are using latest (not yet stable) version of node.
 

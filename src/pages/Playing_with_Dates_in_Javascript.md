@@ -3,7 +3,7 @@ title: "Playing with Dates in Javascript"
 date: "2019-11-16"
 ---
 
-![Dates](https://i.imgur.com/ooqUgWd.jpg "Photo by Wolfgang from Pexels")
+![](https://i.imgur.com/ooqUgWd.jpg "Photo by Wolfgang from Pexels")
 
 
 To create a new variable with the CURRENT date, we use <code>new Date()</code> with empty brackets:

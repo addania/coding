@@ -3,7 +3,7 @@ title: "Install Chrome on Linux"
 date: "2019-11-21"
 ---
 
-![Chrome](https://i.imgur.com/jX7rNIv.jpg "Photo by PhotoMIX Ltd. from Pexels")
+![](https://i.imgur.com/jX7rNIv.jpg "Photo by PhotoMIX Ltd. from Pexels")
 
 Installing Chrome on Ubuntu:
 

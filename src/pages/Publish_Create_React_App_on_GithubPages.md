@@ -3,7 +3,7 @@ title: "Publish Create React App to Github Pages"
 date: "2019-11-29"
 ---
 
-![React](https://i.imgur.com/4tBPaPE.png "React logo")
+![](https://i.imgur.com/4tBPaPE.png "React logo")
 
 Step-By-Step Guide for Dummies on how to publish your create-react-app website on Github pages
 

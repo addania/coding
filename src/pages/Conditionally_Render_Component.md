@@ -3,7 +3,7 @@ title: "Conditionally render a component"
 date: "2019-12-04"
 ---
 
-![Nothing](https://i.imgur.com/BRbkVil.jpg "Photo by Aleksandar Pasaric from Pexels")
+![](https://i.imgur.com/BRbkVil.jpg "Photo by Aleksandar Pasaric from Pexels")
 
 How can we render an element under certain condition? Unfortunatlly, we cannot use <code>if</code> statements within JSX like:
 ```
@@ -58,4 +58,4 @@ const lunch = (
 
 ```
 
-![Nothing](https://i.imgur.com/4YCrCOR.jpg "Photo by Mudassir Ali from Pexels")
+![](https://i.imgur.com/4YCrCOR.jpg "Photo by Mudassir Ali from Pexels")

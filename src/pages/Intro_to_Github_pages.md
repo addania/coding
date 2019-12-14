@@ -3,7 +3,7 @@ title: "Intro to Github Pages"
 date: "2019-09-27"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![](https://i.imgur.com/gUJE7Eu.png "Github Logo")
 
 Deploying Website to Github Pages:
 

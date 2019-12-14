@@ -3,7 +3,7 @@ title: "Markdown"
 date: "2019-11-12"
 ---
 
-![Mark](https://i.imgur.com/VIj56ca.jpg "Photo by Spencer Selover from Pexels")
+![](https://i.imgur.com/VIj56ca.jpg "Photo by Spencer Selover from Pexels")
 
 **General information**
 

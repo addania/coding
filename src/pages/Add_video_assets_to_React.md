@@ -3,7 +3,7 @@ title: "Add video assets to React"
 date: "2019-10-02"
 ---
 
-![Video](https://i.imgur.com/WSj6CoM.jpg "Photo by Donald Tong from Pexels")
+![](https://i.imgur.com/WSj6CoM.jpg "Photo by Donald Tong from Pexels")
 
 
 Being able to display videos in your website is very cool. Here is how you can easily do it.

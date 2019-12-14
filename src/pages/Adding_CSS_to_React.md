@@ -3,7 +3,7 @@ title: "Adding CSS to React"
 date: "2019-10-06"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![](https://i.imgur.com/cLbxIHe.jpg "Photo by Pixabay from Pexels")
 
 There are basically 2 ways to style the React:
 

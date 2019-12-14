@@ -3,7 +3,7 @@ title: "Install Sublime on Linux"
 date: "2019-11-20"
 ---
 
-![Sublime](https://i.imgur.com/13CjRhl.png "Sublime logo")
+![](https://i.imgur.com/13CjRhl.png "Sublime logo")
 
 How to install Sublime on Linux
 

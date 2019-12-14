@@ -3,7 +3,7 @@ title: "Intro to NodeJS"
 date: "2019-09-29"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![](https://i.imgur.com/Y2H1vQk.png "NodeJS logo")
 
 Advantages of Node.js
 

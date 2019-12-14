@@ -3,7 +3,7 @@ title: "Comment Me Out"
 date: "2019-10-13"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![](https://i.imgur.com/DnSKN89.jpg "Photo by Cristian Dina from Pexels")
 
 We can,t comment out JSX (because // or /* are only valid for Javascript). So if we wanted to comment out this:
 ``` 

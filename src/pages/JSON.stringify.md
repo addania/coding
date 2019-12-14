@@ -3,7 +3,7 @@ title: "JSON.stringify"
 date: "2019-10-17"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![](https://i.imgur.com/KX2u0f2.jpg "Photo by Dominika Roseclay from Pexels")
 
 Have you wondered how you can actually output an array in exactly the same form as you declare it?
 

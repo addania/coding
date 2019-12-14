@@ -3,7 +3,7 @@ title: "Querying data from project files"
 date: "2019-10-10"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![](https://i.imgur.com/Ms2Wa14.jpg "Photo by Logan Kirschner from Pexels")
 
 > We can query images, or content of the website (text) from files in our project folder.
 

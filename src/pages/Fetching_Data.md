@@ -3,7 +3,7 @@ title: "Fetching Data in React"
 date: "2019-12-11"
 ---
 
-![Fetching](https://i.imgur.com/MqWLXcO.jpg "Photo by Jozef Fehér from Pexels")
+![](https://i.imgur.com/MqWLXcO.jpg "Photo by Jozef Fehér from Pexels")
 
 Fetching data in REACT from a url or an API is not as straightforward as it might seem. It also has some catches to it.
 
@@ -155,4 +155,4 @@ export const FetchAPItest2 = () => {
 }
 ```
 
-![Fetching](https://i.imgur.com/Sb31C68.jpg "Photo by Jozef Fehér from Pexels")
+![](https://i.imgur.com/Sb31C68.jpg "Photo by Jozef Fehér from Pexels")

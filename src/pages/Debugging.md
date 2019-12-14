@@ -3,7 +3,7 @@ title: "Debugging"
 date: "2019-10-25"
 ---
 
-![Bug](https://i.imgur.com/7vkvSLF.jpg "Photo by Egor Kamelev from Pixabay")
+![](https://i.imgur.com/7vkvSLF.jpg "Photo by Egor Kamelev from Pixabay")
 
 Imagine we add to our code a line like this:
 ```

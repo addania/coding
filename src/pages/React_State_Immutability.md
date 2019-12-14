@@ -3,6 +3,8 @@ title: "React state immutability"
 date: "2019-11-14"
 ---
 
+![](https://i.imgur.com/OULUQRu.jpg "Photo by Chokniti Khongchum from Pexels")
+
 How to update an array state in React?
 
 States in React are declared with const and therefore immutable. It means we cant (or rather shouldnt) manipulate them directly.

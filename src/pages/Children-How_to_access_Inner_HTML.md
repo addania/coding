@@ -3,7 +3,7 @@ title: "Children - how to access inner HTML"
 date: "2019-10-23"
 ---
 
-![Event](https://i.imgur.com/YsPOiRH.jpg "Photo by Pixabay from Pexels")
+![](https://i.imgur.com/YsPOiRH.jpg "Photo by Pixabay from Pexels")
 
 Ever wodered how to access inner html of an element? Lets say we want to work with whatever is between closing and opening brackets of a button:
 ```

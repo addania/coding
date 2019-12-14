@@ -3,7 +3,7 @@ title: "Exports"
 date: "2019-12-01"
 ---
 
-![Export](https://i.imgur.com/1S7qNP7.jpg "Photo by Pixabay from Pexels")
+![](https://i.imgur.com/1S7qNP7.jpg "Photo by Pixabay from Pexels")
 
 
 Let's talk about exporting / importing / ... and ... smuggling :)
@@ -69,4 +69,4 @@ export {
 }
 ```
 
-![Export](https://i.imgur.com/FMsL26h.jpg "Photo by Pixabay from Pexels")
+![](https://i.imgur.com/FMsL26h.jpg "Photo by Pixabay from Pexels")

@@ -3,7 +3,7 @@ title: "Function definition: Arrow vs Function, Hoising"
 date: "2019-10-18"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![](https://i.imgur.com/WBmDMUv.jpg "Photo by Susanne Jutzeler from Pexels")
 
 If we use function definition like this (using arrow functions):
 ```
@@ -30,3 +30,5 @@ This allows you to  be able to call functions before you wrote them in your code
 > Reference:
 
 https://scotch.io/tutorials/understanding-hoisting-in-javascript
+
+![](https://i.imgur.com/UyFD8zE.jpg "Photo by Jens Johnsson from Pexels")

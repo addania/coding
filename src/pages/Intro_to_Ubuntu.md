@@ -3,25 +3,33 @@ title: "Intro to Ubuntu"
 date: "2019-09-23"
 ---
 
-General:
+![](https://i.imgur.com/9fMfBav.png "Ubuntu Logo")
 
-It is possible to have Ubuntu on Windows through feature called Windows Subsystem for Linux. Installation will result in having a completely new operational (sub)system (along side with Windows). When using this Windows Subsystem for Ubuntu, it only allows for command line, it doesnt have any user interface. Only interaction with the operational system is via command line (terminal). This system will be then used with Gatsby to create webpages and push my code to Github. Please note, upon first installation of Ubuntu subsystem, it is a completely blank software. It wont have access to my previously installed programms on Windows (like node.js, etc). Therefore we will need to install everything again.
+**General**:
+
+It is possible to have Ubuntu on Windows through feature called Windows Subsystem for Linux. Installation will result in having a completely new operational (sub)system (along side with Windows). When using this Windows Subsystem for Ubuntu, it only allows for command line, it doesnt have any user interface. Only interaction with the operational system is via command line (terminal). This system will be then used with Gatsby to create webpages and push my code to Github. 
+
+Please note, upon first installation of Ubuntu subsystem, it is a completely blank software. It won't have access to my previously installed programms on Windows (like node.js, etc). Therefore we will need to install everything again.
 
 Ubuntu directory on PC:
 ```
 \\wsl$\Ubuntu-18.04\home\addania
 ```
-Controls:
+**Controls**:
 
-Copy/Paste works differently in Ubuntu: ctrl+shift+c for copy, crtl+shift+v for paste
+Copy/Paste works differently in Ubuntu: 
+
+<code>ctrl+shift+c</code> for copy, 
+
+<code>crtl+shift+v</code> for paste
 
 Some commands will start with sudo which means to run as administrator
 
-j and k keys allows navigate up and down
+<code>j</code> and <code>k</code> keys allows navigate up and down
 
-h and l allow to navigate left and right
+<code>h</code> and <code>l</code> allow to navigate left and right
 
-Commands:
+**Commands**:
 
 > To show which directory I am currently in we use command pwd (print working directory)
 ```
@@ -66,3 +74,13 @@ rm unnecessaryFile.js
 > Command line, how to delete a specific folder, type <code>rm</code> for remove, <code>-r</code> for recursive, then folder name
 ```
 rm -r unnecessaryFile.js
+```
+>How to kill or stop a process, for example Chrome?
+```
+killall chrome
+```
+
+>How to see kill manual
+```
+man kill
+```

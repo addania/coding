@@ -3,7 +3,7 @@ title: "Higher Order Functions"
 date: "2019-10-27"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
 
 
 What are higher order functions? According to Wikipedia:

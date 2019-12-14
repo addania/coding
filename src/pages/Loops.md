@@ -3,7 +3,7 @@ title: "Loops"
 date: "2019-11-28"
 ---
 
-![Loop](https://i.imgur.com/VhAOIMg.jpg "Photo by Pixabay from Pexels")
+![](https://i.imgur.com/VhAOIMg.jpg "Photo by Pixabay from Pexels")
 
 There are many loops in JS which we can use:
 

@@ -3,7 +3,7 @@ title: "Arrays"
 date: "2019-11-18"
 ---
 
-![Array](https://i.imgur.com/qmUjmQg.jpg "Photo by Pixabay from Pexels")
+![](https://i.imgur.com/qmUjmQg.jpg "Photo by Pixabay from Pexels")
 
 Here you can find a small summary of the most useful array methods.d
 

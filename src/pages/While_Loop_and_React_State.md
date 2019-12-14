@@ -3,6 +3,8 @@ title: "While Loop and React State"
 date: "2019-11-15"
 ---
 
+![](https://i.imgur.com/8pjW3Uh.jpg "Photo by Edwin Soto from Pexels")
+
 Imagine to have a <code>while</code> look in which you are updating state:
 ```
 export const CodeAdvent20180102 = () => {
@@ -47,6 +49,6 @@ Updating state within while loop risks running into infinite loop especially if 
 
 Why??
 
-It is bcause the way state works in the React. For performance reasons, when we update the state and use that state info immediatelly afterwards, it is not guaranteed that it will be updated. State updated asynchronously and sometimes state updates are batched (grouped) for performance reasons! 
+It is beecause the way state works in the React. For performance reasons, when we update the state and use that state info immediatelly afterwards, it is not guaranteed that it will be updated. State updated asynchronously and sometimes state updates are batched (grouped) for performance reasons! 
 
 So dont rely on states too much!

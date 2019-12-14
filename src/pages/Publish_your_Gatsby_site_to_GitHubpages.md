@@ -3,7 +3,7 @@ title: "Publish your Gatsby website to Github Pages"
 date: "2019-09-30"
 ---
 
-![Hook](https://i.imgur.com/4KvXTki.jpg "Photo by Johannes Plenio from Pexels")
+![](https://i.imgur.com/NAMuzl3.jpg "Photo by Designecologist from Pexels")
 
 Step-By-Step Guide for Dummies on how to publish your Gatsby website on Github pages
 
@@ -50,7 +50,7 @@ git push origin master
     "deploy": "gatsby build && gh-pages -d public -b master",
   },
 ```
-> If you are publishing to your account URL, for example: https://addania.github.io without any prefix, then skip this step. But if on GitHub pages your URL will have a prefix, we also need to add this prefix to the Gatsby files. For example, github pages which use repository name as prefix:
+> If you are publishing to your account URL, for example: https://addania.github.io without any prefix, then skip this step. But if on GitHub pages your URL will have a prefix, we also need to add this prefix to the Gatsby files. For example, Github pages which use repository name as prefix:
 ```
 https://addania.github.io/MyProject
 ```
@@ -115,17 +115,24 @@ npm run deploy
 ```
 > PLEASE NOTE
 
-In the Project folder called Pages you can only store pages to your website, if you put there some components which you import to your index.js it will break the npm run deploy with the error that for example <code>header.js</code> must be a valid react component. How to fix it? Remove all your components from pages folder and create a folder called components in the <code>src</code> folder. Put all your components there. Then import your heade.js to your <code>index.js</code> by importr { Header } from "../components/header.js". Then you are able to run npm run deploy
+In the Project folder called Pages you can only store pages to your website, if you put there some components which you import to your index.js it will break the <code>npm run deploy</code> with the error that for example <code>header.js</code> must be a valid React component. How to fix it? Remove all your components from pages folder and create a folder called components in the <code>src</code> folder. Put all your components there. Then import your header.js to your <code>index.js</code> by 
+```
+import { Header } from "../components/header.js"
+```
+Then you are able to run:
+```
+npm run deploy
+```
 
 > PLEASE NOTE
 
-ALWAYS commit code to the repository and then nmp run deploy!! You will avoid lots of problems!! If push and npm run deploy are not in synch you probably will have lots of problems with the page.
+ALWAYS commit code to the repository and then nmp run deploy!! You will avoid lots of problems!! If push and <code>npm run deploy</code> are not in synch you probably will have lots of problems with the page.
 
 > PLEASE NOTE
 
 Actually the good practise is to use master branch for pushing my code and to use gh-pages branch for publishing. In this guide I made it vice versa
 
-> Additionally:
+**Additionally:**
 
 > Brose your typography in typography.js here:
 https://kyleamathews.github.io/typography.js/

@@ -3,7 +3,7 @@ title: "JS"
 date: "2019-11-10"
 ---
 
-![Script](https://i.imgur.com/a6lhpyl.jpg "Photo by Bich Tran from Pexels")
+![](https://i.imgur.com/a6lhpyl.jpg "Photo by Bich Tran from Pexels")
 
 **General definitions**
 

@@ -3,7 +3,7 @@ title: "Tell me who you are error"
 date: "2019-12-03"
 ---
 
-![You](https://i.imgur.com/J4QhoGt.jpg "Photo by 
+![](https://i.imgur.com/J4QhoGt.jpg "Photo by 
 Kristin De Soto from Pexels")
 
 If you run into an <code>Please tell me who you are.</code>error:

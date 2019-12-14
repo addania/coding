@@ -3,6 +3,9 @@ title: "Intro to Gatsby"
 date: "2019-09-26"
 ---
 
+
+![](https://i.imgur.com/rqXXcAi.png "Gatsby Logo")
+
 Software to help create static website using React. They provide starter templates, ability to create multiple pages in their pages folder or generating ReactDOM automatically
 
 > To install Gatsby

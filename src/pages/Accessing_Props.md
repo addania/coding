@@ -3,7 +3,7 @@ title: "Accessing Props"
 date: "2019-10-26"
 ---
 
-![Access](https://i.imgur.com/fEZTMxH.jpg "Photo by Gnist Design from Pexels")
+![](https://i.imgur.com/fEZTMxH.jpg "Photo by Gnist Design from Pexels")
 
 There are two ways how to access props passed to a component.
 

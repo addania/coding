@@ -3,7 +3,7 @@ title: "Intro to React"
 date: "2019-09-28"
 ---
 
-![React](https://i.imgur.com/4tBPaPE.png "React logo")
+![](https://i.imgur.com/4tBPaPE.png "React logo")
 
 React is a library/framework of Javascript developed by Facebook. Reach allows to build interactive websites using components and allowing having HTML, CSS and Javascript in one file. 
 

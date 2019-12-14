@@ -3,7 +3,7 @@ title: "Context"
 date: "2019-10-16"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![](https://i.imgur.com/uUsUaUJ.jpg "Photo by Suraphat Nuea-on from Pexels")
 
 > Instead of passing down props through tree of nested child components (often as much as 20+ times from parent to the last child), there is a better way how components can receive props. The way is called **context** and you can think of it as something like a global variable.
 

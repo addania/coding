@@ -3,7 +3,7 @@ title: "View Source"
 date: "2019-10-05"
 ---
 
-![High](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")
+![](https://i.imgur.com/3qgZSlV.jpg "Photo by Pixabay from Pexels")
 
 How to view the source code in browser?
 

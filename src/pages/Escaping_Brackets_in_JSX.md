@@ -3,7 +3,7 @@ title: "Escaping curly brackets in JSX"
 date: "2019-10-28"
 ---
 
-![Exit](https://i.imgur.com/Xp2icU5.jpg "Photo by Matthias Zomer from Pexels")
+![](https://i.imgur.com/Xp2icU5.jpg "Photo by Matthias Zomer from Pexels")
 
 Only one advice here:
 
