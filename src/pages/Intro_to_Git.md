@@ -144,6 +144,16 @@ git checkout -b [name_of_your_new_branch]
 git checkout -b Github1AddDay05Task02
 ```
 
+>To create a new branch taking MASTER as a base for the code (it could be any othr name of the branch):
+```
+git checkout -b Github1AddDay05Task02 master
+```
+
+>To create a new branch taking Github2AddDay06 as a base for the code (it could be any othr name of the branch):
+```
+git checkout -b Github1AddDay05Task02 Github2AddDay06
+```
+
 >This will switch from your current branch to the new branch.
 
 > You can always use <code>git status</code> to cheeck on which branch you currently work.

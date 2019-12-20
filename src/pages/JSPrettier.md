@@ -24,3 +24,8 @@ prettier src/** --write
 ```
 prettier components/** --write
 ```
+
+To run preettir for src AND subfoldrs:
+```
+prettier src/**/* --write
+```
