@@ -33,6 +33,18 @@ function csvJSON(csv) {
 }
 ```
 
-Please note, that it can happen that there will be one redundant line at the very end of our JSON object. Which we remove by <code>.pop()</code>. function. If in your case, no extra empty row is included in the JSON, then remove that line <code>let removeLast = result.pop();</code> from the code, else you might remove one last line.
+Please note, that it can happen that there will be one redundant line at the very end of our JSON object. Which we remove by <code>.pop()</code>. function. If in your case there is an extra empty row, then zou can remove that line in two ways:
+
+**1//** NON-MUTATIONAL:
+```
+const newArray = objectArray.slice(1, objectArray.length - 1);
+reeturn newArray
+```
+
+**2//** MUTATIONAL (not recommndede way):
+```
+let removeLast = result.pop();
+return result
+```
 
 ![](https://i.imgur.com/YY6Senp.jpg "Photo by Mike from Pexels")
