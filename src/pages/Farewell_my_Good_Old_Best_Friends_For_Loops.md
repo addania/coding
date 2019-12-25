@@ -33,6 +33,24 @@ console.log(map1);
 // expected output: Array [2, 8, 18, 32]
 ```
 
+Yet another way how to write this code:
+```
+const array1 = [1, 4, 9, 16];
+// pass a function to map
+const map1 = array1.map(function(x){ return x * 2});
+console.log(map1);
+// expected output: Array [2, 8, 18, 32]
+```
+
+Compare especially **EXPLICIT RETURN**:
+```
+const map1 = array1.map(function(x){ return x * 2});
+```
+with this **IMPLICIT RETURN**:
+```
+const map1 = array1.map(x => x * 2);
+```
+
 Here we can see more clearly that map receives a FUNCTION as input. This function can be either declared somewhere else (second example) or it can be anonymous function directly in between of the .map brackets (first example).
 
 It is also more clear that the body of the function can be literally anything, any calculation, but what matters is what is the return of that function. Because the return of the function will define what the new element of the new array will be.
@@ -205,6 +223,32 @@ export const formatDate = input => {
 };
 ```
 
+**FOR EACH**
+For each is very similar to map. It iterates through each item of and array and performs a function over it. BUT it DOES NOT returns a NEW array. The forEach() method doesn’t actually return anything (undefined). It simply calls a provided function on each element in your array. This callback is allowed to mutate the calling array.
+```
+const books = ["The Expanse", "Lord Of The Rings", "Harry Potter"];
+books.forEach(function(book, i){
+    console.log(book);
+});
+
+//output in console.log:
+The Expanse
+VM761:2 Lord Of The Rings
+VM761:2 Harry Potter
+```
+
+Notice how books.forEach is NOT assignd to ANY const.
+
+We can use forEach also to create a new array, but we would need to create it MANUALLY
+
+```
+const items = ['item1', 'item2', 'item3'];
+const copy = [];
+items.forEach(function(item){
+  copy.push(item);
+});
+```
+
 **FILTER**
 
 Filter iterates over each element of an array and ONLY returns those elements, which fulfill a condition which is given within the function.
@@ -311,5 +355,27 @@ export const calculateAggregates = array => {
 
 ```
 
+**FILTER AND MAP COMBO **
+Powerful way of combining filter and map to get for example a list of guys which are SINGLE :) :) :) very useful (muhahahahaaa)
+```
+const guys = [
+  {name: 'Danny', single: true},
+  {name: 'Calvin', single: true},
+  {name: 'Mike', single: true},
+  {name: 'Jeff', single: false}
+];
+
+const isSingle = person => person.single;
+const getName = person => person.name;
+const preys = guys.filter(isSingle).map(getName);
+console.log(preys) // ["Danny", "Calvin", "Mike"]
+
+```
+
+Reference:
+
+https://www.codereadability.com/coding-without-loops/
+
+https://kuanhsuh.github.io/JS-functional-programming.html
 
 ![](https://i.imgur.com/fIyDFmN.jpg "Photo by Pixabay from Pexels")
