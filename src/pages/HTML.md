@@ -5,8 +5,6 @@ date: "2019-12-27"
 
 ![](https://i.imgur.com/37IM7Po.jpg "Photo by Miguel Á. Padriñán from Pexels")
 
-Some basic HTML
-
 **Starter**
 
 HTML document starts with <code><!doctype html></code> to tell the browser which html version we are using,rather then letting the browser pick one. By the following code we actually say we want the latest version:

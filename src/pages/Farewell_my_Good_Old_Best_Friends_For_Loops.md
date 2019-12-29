@@ -1,6 +1,6 @@
 ---
 title: "Farewell my Good Old Best Buddies For Loops"
-date: "2019-12-25"
+date: "2019-12-26"
 ---
 
 ![](https://i.imgur.com/hw5qopR.jpg "Photo by Helena Lopes from Pexels")
