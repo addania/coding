@@ -14,24 +14,62 @@ HTML document starts with <code><!doctype html></code> to tell the browser which
 <!doctype html>
 ```
 
+Afterwards we use html tag and then head and body tags.
+```
+<!doctype html>
+<html>
+  <head>
+  </head>
+  <body>
+  </body>
+</html>
+```
+<code>head</code> tag includes information about the page itself. It can contain title which will display nam of the page in the tab. 
+```
+<!doctype html>
+<html>
+  <head>
+    <title>My website</title>
+  </head>
+  <body>
+  </body>
+</html>
+```
+
+It can contain style sheets imported to website via <code>link</code> tag or javascript imported via <code>script</code> tag:
+```
+<!doctype html>
+<html>
+  <head>
+    <title>My website</title>
+    <link rel="stylesheet" type="text/css" href="theme.css">
+    <script src="myscripts.js"></script>
+  </head>
+  <body>
+  </body>
+</html>
+```
+<code>body</code> tag includes content of the webpage
+
 **Empty tags**
 
 An empty tag is a one which does not need a closing tag. Examples:
 
-
-<code><br></code> tag is a page break and is an empty tag
+**1//**
+<code>```<br>```</code> tag is a page break and is an empty tag
 
 ```
 <br>
 ```
 
-
-<code><img></code> tag to display images
+**2//**
+<code>```<img>```</code> tag to display images
 ```
 <img src="myPhoto.jpg" alt="photo">
 ```
 
-<code><link></code> tag is an empty tag and allows to import different files to the HTML or create links to other URLs 
+**3//**
+<code>```<link```</code> tag is an empty tag and allows to import different files to the HTML or create links to other URLs 
 ```
 <link rel="stylesheet" type="text/css" href="theme.css">
 
@@ -41,18 +79,21 @@ An empty tag is a one which does not need a closing tag. Examples:
 
 We can use 3 different ways to add styles to our webpage:
 
-**1//** Add style individually in a tag
+**1//** Add style to individual tag
 ```
+<h1 style="color:blue;">This is a Blue Heading</h1>
 ```
 
-**2//**  Add style tags to head
+**2//**  Add style tags to <code>head</code> tag
 ```
-<style>
-p {
-	color: white;
-	background-color: black;
-}
-</style>
+<head>
+  <style>
+    p {
+	  color: white;
+	  background-color: black;
+    }
+  </style>
+</head>  
 ```
 
 **3//** Include stylesheets in the HTML in the head tag using link tag 
@@ -64,7 +105,8 @@ p {
 <code>href</code> says the path or URL where the file exists
 
 **Nested lists**
-We can create nsted list. An example is here:
+
+We can create nested list. An example is here:
 ```
 Drinks:
 <ul>
