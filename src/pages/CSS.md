@@ -5,7 +5,7 @@ date: "2019-10-11"
 
 ![](https://i.imgur.com/0v7juum.jpg "Photo by Format from Pexels")
 
-**Selectors**
+**SELECTORS**
 
 Selectors enable to select certain HTML element(s) and apply CSS styles to it. Selectors are how we can select certain HTML elements. In CSS there are 3 ways how we can select elements
 
@@ -33,6 +33,8 @@ CSS:
  font-family: Arial;
 }
 ```
+
+<code>Please note:</code> in pure HTML we use word "class" to define for example a class called title which we can then style by .title in CSS. However, in REACT word "class" is reserved to create class components. Therefore, in order to create regular names of classes, we need to use word "className".
 
 **C) By id of an element** - ID is completely unique per site. We ned to add hashtag. An ID is meant to style only one element.
 
@@ -109,7 +111,7 @@ font-family: Georgia;
 }
 ```
 
-**Commands**
+**FONTS**
 
 > Font styles and families
 
@@ -144,12 +146,17 @@ font-weight: bold;
 }
 ```
 
+**ALIGNING TEXT**
+
 > Aligning text to right, left or center
 ```
 h1 {
   text-align: right;
 }
 ```
+
+**COLORS**
+
 > Setting color of text can be done in two ways:
 
 **A) foreground colour**  for example colour of the text itself, property to do this is called <code>color</code>
@@ -170,6 +177,7 @@ h1 {
 
 ![](https://i.imgur.com/ZrJnm95.jpg "Photo by Daniel Frese from Pexels")
 
+**IMAGES**
 
 > Adding image as a background to an element. URL can be link to exterenal site or file path within the project folder
 ```
@@ -181,6 +189,9 @@ h1 {
   background-image: url("images/mountains.jpg");
 }
 ```
+
+**TEXT TRANSFORMATIONS**
+
 > Transforming whole text to uppercase
 ```
 h1{
@@ -199,6 +210,9 @@ text-transform: capitalize;
 font-family: cursive;
 }
 ```
+
+**BOX MODEL**
+
 > The Box model includes the content area’s size (width and height) and the element’s padding, border, and margin. The properties include:
 
 **Width and height** — specifies the width and height of the content area.
@@ -209,13 +223,40 @@ font-family: cursive;
 
 **Margin** — specifies the amount of space between the border and the outside edge of the element.
 
-> Width and height
+
+
+**WIDTH AND HEIGHT**
+
+> To set specific width and height of an element:
 ```
 p {
   height: 80px;
   width: 240px;
 }
 ```
+
+>Minimum width is minimum width the element will shrink to
+```
+min-width: 50px;
+```
+
+>Maximum width is maximum width the element will expand to
+```
+max-width: 50px;
+```
+
+>Minimum heigth is minimum heigth the element will shrink to
+```
+min-heigth: 30px;
+```
+
+>Maximum heigth is maximum heigth the element will expand to
+```
+>max-heigth: 30px;
+```
+
+**BORDER**
+
 > A border is a line what surrounds an element, like a frame around a painting. Borders can be set with a specific width, style, and color.
 
 **width** — The thickness of the border. A border’s thickness can be set in pixels or with one of the following keywords: thin, medium, or thick.
@@ -244,6 +285,38 @@ div.container {
   border-radius: 100%;
 }
 ```
+or equivalently:
+```
+div.container {
+  height: 60px;
+  width: 60px;
+  border: 3px solid rgb(22, 77, 100);
+  border-radius: 100%;
+}
+```
+
+> Border radius can be also defind by 4 values. The first one is the top left corner, the second value is top right corner, the third is the bottom right corner and finally the fourth value is the bottom left corner:
+```
+border-radius: 10px 10px 10px 10px;
+```
+> We can decide to only set 3 or less of the values for creative shapes:
+
+**Teardrop shape**
+```
+border-radius: 0px 10px 10px 10px;
+```
+
+**Palm leaf shape** where width of image is 100px
+```
+border-radius: 100px 0px 100px 0px;
+```
+
+**Quarter circle** where width and height of the image is 100px:
+```
+border-radius: 100px 0px 0px 0px;
+```
+
+**PADDING**
 
 >Padding: space between content and border. Can have properties:
 ```
@@ -271,6 +344,9 @@ padding: 10px 15px;
 >Padding: Top and Bottom paddings (vertical paddings) **DO NOT** collapse!
 
 >Padding: Left and Right paddings (horizontal paddings) **DO NOT** collapse! And are always added together.
+
+
+**MARGIN**
 
 >Margin: Space outside of the border. It has following values:
 ```
@@ -332,24 +408,26 @@ margin: 0px auto;
 }
 ```
 
->Minimum width is minimum width the element will shrink to
+**ROTATION**
+> The <code>t⁠r⁠a⁠n⁠s⁠f⁠o⁠r⁠m</code> property can rotate images and other elements. It accepts functions as values. To add a function that rotates an image, we type in <code>r⁠o⁠t⁠a⁠t⁠e⁠(⁠)</code>. We enter there number of degrees we want to rotate image.90deg means 90 degrees clickwise
 ```
-min-width: 50px;
-```
-
->Maximum width is maximum width the element will expand to
-```
-max-width: 50px;
+img {
+transform: rotate(90deg);
+}
 ```
 
->Minimum heigth is minimum heigth the element will shrink to
+> To rotate an image anti-clockwise we add minus sign -45deg
 ```
-min-heigth: 30px;
+img {
+transform: rotate(-45deg);
+}
 ```
 
->Maximum heigth is maximum heigth the element will expand to
+>We can rotate other elements, not only images. For example buttons
 ```
->max-heigth: 30px;
+button {
+transform: rotate(-90deg);
+}
 ```
 
 >References:
