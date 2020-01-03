@@ -32,6 +32,29 @@ function download(data, filename, type) {
 ```
 download(data, "fileName.txt", "text/plain")
 ```
+> **Tip:** imagine your <code>data</code> is array of strings, such as:
+```
+const input = [".#.","#.#",".#." ]
+```
+
+> If you just print out this file, it will concatenate the elements into one long string. 
+```
+".#.#.#.#."
+```
+
+>What if we wanted each element on a separate line, so that the result is:
+```
+".#."
+"#.#"
+".#."
+```
+>In order to do so we need to create a single string from array elements and this string will be sparated by NewLine character <code>\n</code>
+
+>We can use a function to create such a string:
+```
+const data=input.join("\n")
+```
+
 
 Reference:
 
