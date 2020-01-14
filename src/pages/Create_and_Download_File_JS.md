@@ -55,7 +55,6 @@ const input = [".#.","#.#",".#." ]
 const data=input.join("\n")
 ```
 
-
 Reference:
 
 https://stackoverflow.com/questions/13405129/javascript-create-and-save-file

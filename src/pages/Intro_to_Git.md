@@ -52,7 +52,7 @@ To verify if our new remote was added we can check the:
 git remote -v 
 ```
 
-Then we are ready to puch our LOCAL git repository to the REMOTE Github repository:
+Then we are ready to push our LOCAL git repository to the REMOTE Github repository:
 ```
 git push origin master
 ```
@@ -144,7 +144,7 @@ git checkout -b [name_of_your_new_branch]
 git checkout -b Github1AddDay05Task02
 ```
 
->To create a new branch taking MASTER as a base for the code (it could be any othr name of the branch):
+>To create a new branch taking MASTER as a base for the code (it could be any other name of the branch):
 ```
 git checkout -b Github1AddDay05Task02 master
 ```
@@ -156,7 +156,7 @@ git checkout -b Github1AddDay05Task02 Github2AddDay06
 
 >This will switch from your current branch to the new branch.
 
-> You can always use <code>git status</code> to cheeck on which branch you currently work.
+> You can always use <code>git status</code> to check on which branch you currently work.
 ```
 git status
 ```
@@ -294,7 +294,21 @@ git pull
 
 > <code>Git pull</code> will make <code>git fetch</code> plus it will also merge REMOTE changes with my LOCAL changes (which I made meanwhile but did not put on REMOTE). <code>Git fetch</code> will only fetch data, and will not merge in case I did some changes meanwhile on LOCAL which were not on REMOTE. Fetch will always work. Pull can fail if changes on my LOCAL are not compatible with changes on REMOTE.
 
-> It does not matter on which branch I make the pull or fetch, it will take all the data from all branches.
+> It does not matter on which branch I make the pull or fetch, it will take all the data from all branches. However, you might get an error:
+```
+There is no tracking information for the current branch.
+```
+
+It means that Git is not able to match LOCAL and REMOTE branch names automatically. Therefore you might neeed to use pull for a spcific branch instead, to get all the updates:
+```
+git pull origin master
+```
+
+or
+
+```
+git pull origin master Github1AddDay05Task02
+```
 
 > My branch Github1AddDay05Task02 still exists. If we want to delete this branch I can do following:
 
@@ -302,7 +316,7 @@ git pull
 
 or
 
-2// I can go to <code>Branches</code>nd click on the trash icon to delete it
+2// I can go to <code>Branches</code> and click on the trash icon to delete it
 
 > To delete this branch on REMOTE from terminal:
 ```
@@ -324,6 +338,23 @@ One is with <code>‘d’</code> and one with <code>‘D’</code>.
 1// The <code>-d</code> option stands for --delete, which would delete the local branch, only if you have already pushed and merged it with your remote branches.
 
 2// The <code>-D</code> option stands for --delete --force, which deletes the branch regardless of its push and merge status, so careful with this one!
+
+> We can merge branch into another one also in terminal. For example I want to merge my PR1 branch into master branch. First we run <code>git checkout master</code> to change the active branch back to master. 
+```
+git checkout master
+```
+> Then we run the command <code>git merge PR1</code> to merge the new feature into the master branch.
+```
+git merge PR1
+```
+> Note that <code>git merge</code> merges the specified branch into the <code>currently active</code> branch. So we need to be on the branch that we are merging into.
+
+> Note also that this only merged the branches LOCALLY. We still need to push changes to REMOTE.
+```
+git push origin master
+```
+
+> Performing this might not necessarily automatically close the PR on Github (if the PRs base was NOT master) but it can close it automatically (if the PRs base was master). Weird stuff, kinda.
 
 > Good visual Git software is called (it is paid however):
 ```

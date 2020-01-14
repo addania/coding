@@ -17,7 +17,7 @@ By default Jest uses exporting which is different from the ES6 (used in React).
 
 React uses either **NAMED EXPORT**:
 ```
-export functionX(){
+export const functionX = () => {
 	return 1;
 }
 ```
@@ -28,7 +28,7 @@ import {functionX} from "./functionX"
 
 or React uses **DEFAULT EXPORT**:
 ```
-functionX(){
+const functionX = () => {
 	return 1;
 }
 export default functionX;
@@ -43,7 +43,7 @@ However, what Jest uses are <code>MODULE EXPORTS</code>. These are different and
 
 **MODULE EXPORT**:
 ```
-functionX(){
+const functionX = () => {
 	return 1;
 }
 module.exports = functionX;
@@ -66,7 +66,7 @@ npm install --dev jest babel-jest @babel/preset-env @babel/preset-react react-te
 
 Afterwards you should easily be able to use import and export for your tests.
 
-Example function in <code>formatImpressions.js</code> which resides in <code>functions</code> folder:
+Example function called <code>formatImpressions.js</code> which resides in <code>functions</code> folder:
 ```
 export function formatImpressions(input) {
   // Receives an array of objects as inputs and substitutes empty or null impressions with 0.
