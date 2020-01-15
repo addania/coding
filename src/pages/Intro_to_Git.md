@@ -361,6 +361,31 @@ git push origin master
 git checkout src/functions/myFunction.js
 ```
 
+> Display number of rows of code for each file - code statistics:
+```
+git ls-files | xargs wc -l
+```
+
+> It will result in something like this:
+```
+38 src/App.css
+99 src/App.js
+36 src/components/Button.css
+23 src/components/Button.js
+24 src/components/Chart.js
+14 src/components/Filter.js
+27 src/components/Header.js
+```
+
+> Get statistics about users, number of changed files, how many insertions, how many deletions and net:
+```
+git log --shortstat --pretty="%cE" | sed 's/\(.*\)@.*/\1/' | grep -v "^$" | awk 'BEGIN { line=""; } !/^ / { if (line=="" || !match(line, $0)) {line = $0 "," line }} /^ / { print line " # " $0; line=""}' | sort | sed -E 's/# //;s/ files? changed,//;s/([0-9]+) ([0-9]+ deletion)/\1 0 insertions\(+\), \2/;s/\(\+\)$/\(\+\), 0 deletions\(-\)/;s/insertions?\(\+\), //;s/ deletions?\(-\)//' | awk 'BEGIN {name=""; files=0; insertions=0; deletions=0;} {if ($1 != name && name != "") { print name ": " files " files changed, " insertions " insertions(+), " deletions " deletions(-), " insertions-deletions " net"; files=0; insertions=0; deletions=0; name=$1; } name=$1; files+=$2; insertions+=$3; deletions+=$4} END {print name ": " files " files changed, " insertions " insertions(+), " deletions " deletions(-), " insertions-deletions " net";}'
+```
+> It will result it something likee this:
+```
+mirka.schw,: 311 files changed, 370168 insertions(+), 99040 deletions(-), 271128 net
+```
+
 > Good visual Git software is called (it is paid however):
 ```
 Smart Git
