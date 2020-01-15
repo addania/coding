@@ -356,6 +356,11 @@ git push origin master
 
 > Performing this might not necessarily automatically close the PR on Github (if the PRs base was NOT master) but it can close it automatically (if the PRs base was master). Weird stuff, kinda.
 
+> To undo changes in a specific file without staging them use git <code>checkout</code> and a file path to the file which we want to revert changes done:
+```
+git checkout src/functions/myFunction.js
+```
+
 > Good visual Git software is called (it is paid however):
 ```
 Smart Git
