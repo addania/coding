@@ -5,19 +5,43 @@ date: "2019-09-25"
 
 ![](https://i.imgur.com/ZVeInG0.png "Git Logo")
 
-Git is a file versioning system. 
+**GETTING STARTED**
 
-First things first - some Git definitions:
+Git is a file versioning system.
 
-**LOCAL**
+> In order to install Git we need to have apt-get updated. To update apt-get
+```
+sudo apt-get update
+```
+> To install Git
+```
+sudo apt-get install git
+```
+> To check version of Git
+```
+git --version
+```
+> To set up username and email
+```
+git config --global user.name "addania"
+git config --global user.email "mirka.schw@gmail.com"
+```
+
+**DEFINITIONS**
+
+![](https://i.imgur.com/ba3JFiY.jpg "Photo by Pixabay from Pexels")
+
+**Local**
 
 >When we talk about LOCAL we mean anything that is stored locally on your computer hard drive.
 
-**REMOTE**
+**Remote**
 
 >When we talk about REMOTE we mean anything that is stored and backed-up centrally on some 3rd party service, such as GitHub. Your REMOTE service will be accessible online at any time from any location by anyone who has access to it, meaning you or your colleague who is working on your project together with you.
 
-**General Git workflow**:
+**GIT WORKFLOW**:
+
+![](https://i.imgur.com/cHDGtUJ.jpg "Photo by Startup Stock Photos from Pexels")
 
 First we need to link our LOCAL and REMOTE repositories using SSH Key.
 
@@ -55,24 +79,6 @@ git remote -v
 Then we are ready to push our LOCAL git repository to the REMOTE Github repository:
 ```
 git push origin master
-```
-
-> In order to install Git we need to have apt-get updated. To update apt-get
-```
-sudo apt-get update
-```
-> To install Git
-```
-sudo apt-get install git
-```
-> To check version of Git
-```
-git --version
-```
-> To set up username and email
-```
-git config --global user.name "addania"
-git config --global user.email "mirka.schw@gmail.com"
 ```
 
 >To check status of my Git in a project (if they are up-to-date with master branch or if I have any staging commits), first navigate to project folder by cd addania.com then executing:
@@ -255,6 +261,10 @@ git push origin Github1AddDay05Task02
 ```
 > You can go to Github and see that our latest commit is present on branch: Github1AddDay05Task02 but is not present on other branches like the gh-pages branch.
 
+**MERGE**
+
+![](https://i.imgur.com/cZzbzhC.jpg "Photo by Pixabay from Pexels")
+
 > In order to merge this branch with the branch on which you have your main code (usually master, but in my case gh-pages branch), we can go to -> Pull Requests and click on <code>Create a new Pull Request</code>
 
 > Then it will show the <code>Compare changes</code> page
@@ -356,10 +366,109 @@ git push origin master
 
 > Performing this might not necessarily automatically close the PR on Github (if the PRs base was NOT master) but it can close it automatically (if the PRs base was master). Weird stuff, kinda.
 
+**RESOLVING CONFLICTS**
+
+![](https://i.imgur.com/EN9pOyE.jpg "Photo by Steve Johnson from Pexels")
+
+> Imagine you want to merge branch PR2 to your master branch. However, you notice on Github, that there are some conflicts and automatic merge cannot happen. In such cases you need to manually resolve the conflicts. How to do it? Basically we will first merge master to our PR2 branch (yes, exactly, it is vise versa of what you might have thought.. or was it just me? :) ). Then we resolve the conflicts on our PR2 branch, then we commit changes to PR2 and we are ready to merge PR2 to master. Detailled steps are described below:
+
+> First we go to our terminal.
+
+> We go to our PR2 branch using checkout command:
+```
+git checkout PR2
+```
+
+> As we are now on PR2 branch we can merge master to our PR2 by <code>git merge</code>.
+```
+git merge master
+```
+
+>Above command will merge master to our PR2 branch (our currently active branch on which we are now).
+
+> As you do the merge you will most likely get an error, that merge could not be done manually and you will get a conflicted file. Please note, that we are still on our PR2 branch, but partially it was merged already with code from master, except for the conflicts. Let's assume that conflicting file is <code>App.js</code>.
+
+> We need to go to the <code>App.js</code> and this file will contain weird characters, HEAD and master:
+```
+<<<<<<< HEAD
+code1
+=======
+code2
+>>>>>>> master
+```
+
+> This basically points you to what exactly the conflict is. 
+
+> <code>HEAD</code> means what is on your current branch (in our case branch PR2). This is basically **code1**, which is between
+```
+<<<<<<< HEAD
+```
+
+and 
+```
+=======
+```
+
+> Above **code1** is in conflict with its equivalnt **code2** on master branch. In file it will be code between:
+```
+=======
+```
+and 
+```
+>>>>>>> master
+```
+
+> At this point you need to decide if **code1** or **code2** is the correct one that should be kept.
+
+> In our case let's assume that **code1** is the correct one. Therefore, we will remove everything except for **code1**:
+```
+code1
+```
+> **code1** stays in our file
+
+> We need to remove everything else. Also HEAD and master and all other characters:
+
+```
+<<<<<<< HEAD
+=======
+code2
+>>>>>>> master
+```
+
+> Here I would recommend to double-check if our code is still working! Run your local server:
+```
+npm start
+```
+
+>and check if merge and conflict resolution was correct and your app is still working. In my case for example, there was an error that one function which should be deleted was still imported in my file. Therefore, I can assume it is always necessary to check the app and run your tests after merge:
+```
+npm run test
+```
+
+> Now it is time to commit and push the changes on PR2 branch from our LOCAL to REMOTE:
+```
+git add .
+```
+
+```
+git commit -m "merging master to PR2, resolving conflicts"
+```
+
+```
+git push origin PR2
+```
+
+> We can check Github now. PR2 should now contain all code from master and its updates (additions) to master. We should be good to go and merge PR2 to master without conflicts. Yay :)
+
+**UNDO CHANGES**
+
 > To undo changes in a specific file without staging them use git <code>checkout</code> and a file path to the file which we want to revert changes done:
 ```
 git checkout src/functions/myFunction.js
 ```
+**CODE STATISTICS**
+
+![](https://i.imgur.com/ydhaIIE.jpg "Photo by Timur Saglambilek from Pexels")
 
 > Display number of rows of code for each file - code statistics:
 ```
@@ -386,7 +495,10 @@ git log --shortstat --pretty="%cE" | sed 's/\(.*\)@.*/\1/' | grep -v "^$" | awk 
 mirka.schw,: 311 files changed, 370168 insertions(+), 99040 deletions(-), 271128 net
 ```
 
-> Good visual Git software is called (it is paid however):
+**VISUALS**
+
+![](https://i.imgur.com/qvRNfBN.png  "Smart Git logo")
+> Good visual Git software is called Smart Git(it is paid however):
 ```
 Smart Git
 ```
