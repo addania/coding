@@ -309,7 +309,7 @@ git pull
 There is no tracking information for the current branch.
 ```
 
-It means that Git is not able to match LOCAL and REMOTE branch names automatically. Therefore you might neeed to use pull for a spcific branch instead, to get all the updates:
+It means that Git is not able to match LOCAL and REMOTE branch names automatically. Therefore you might need to use pull for a specific branch instead, to get all the updates:
 ```
 git pull origin master
 ```
