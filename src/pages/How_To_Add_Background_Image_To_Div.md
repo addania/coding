@@ -34,4 +34,8 @@ And then style your CSS:
 }
 ```
 
+Further interesting resources:
+
+https://css-tricks.com/text-blocks-over-image/
+
 ![NewZealand](https://i.imgur.com/GUSKq9U.jpg "Photo by Tyler Lastovich from Pexels")
