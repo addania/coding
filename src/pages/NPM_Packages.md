@@ -162,6 +162,12 @@ npm install
 
 > Your project is now dependent only on relevant packages and up-to-date! Yay! :)
 
+
+> How to install new version of npm
+```
+npm install -g npm
+
+```
 Reference:
 
 https://stackoverflow.com/questions/21122342/how-to-clean-node-modules-folder-of-packages-that-are-not-in-package-json
