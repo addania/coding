@@ -11,3 +11,8 @@ Use parseInt:
 ```
 let integer = parseInt("1");
 ```
+
+There is another way and in my opinion neater way to convert a string to a number
+```
+let integer = +"1";
+```
