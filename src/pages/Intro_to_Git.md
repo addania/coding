@@ -500,6 +500,26 @@ mirka.schw,: 311 files changed, 370168 insertions(+), 99040 deletions(-), 271128
 npm install -g npm
 ```
 
+> Search content of all your commit messages:
+```
+git log --grep=´xxxx´
+```
+
+> Search content of all your code changes:
+```
+git log -S ´xxxx´
+```
+
+> Search where each line of code was last changed
+```
+git blame
+```
+
+See status of commits
+```
+git log --shortstat
+```
+
 **VISUALS**
 
 ![](https://i.imgur.com/qvRNfBN.png  "Smart Git logo")
