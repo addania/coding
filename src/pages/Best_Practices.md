@@ -20,7 +20,7 @@ Always make sure you have fixed all the ESLint warnings!
 
 > **Delete console.logs**
 
-In certainly does not look professional to leave unintnded console.logs which were part of your development or testing
+It certainly does not look professional to leave unintended console.logs which were part of your development or testing
 
 > **Delete all comments**
 
@@ -85,6 +85,7 @@ const getDimensions = (inputData, inputColumns) =>
 ```
 
 > **Avoid creating unnecessary variables**
+
 Instead of:
 ```
 const parseData = csvData => {
@@ -118,7 +119,7 @@ This is really <code>THE topic</code>! Each element should only do one thing. El
 
 > **Add tests for all functions**
 
-Each function should be tested properly. Thorough test suit will improve softwaree quality, make your life easier in long run and enable you to catch errors early. Especially before they go to production.
+Each function should be tested properly. Thorough test suit will improve software quality, make your life easier in long run and enable you to catch errors early. Especially before they go to production.
 
 > **Return objects rather then arrays**
 
@@ -145,7 +146,7 @@ const parseData = csvData => {
 
 > **Reduce lines of code**
 
-Always strive for efficiency - less lines of code, less reading, less maintaining
+Always strive for efficiency - less lines of code, less reading, less maintenance
 
 > **Do not define a function within a function**
 
@@ -157,7 +158,7 @@ Abstract anything into a function or a const, that would need to be repeated mul
 
 > **Remove legacy**
 
-Check if all your function, components, tests or dependencies are actually being used. It is often the case that we forget to remove a test after we have removed a function.
+Check if all your functions, components, tests or dependencies are actually being used. It is often the case that we forget to remove a test after we have removed a function.
 
 
 
