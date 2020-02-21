@@ -7,7 +7,7 @@ date: "2019-09-25"
 
 **GETTING STARTED**
 
-Git is a file versioning system.
+Git is a file versioning system (or in other words version control system).
 
 > In order to install Git we need to have apt-get updated. To update apt-get
 ```
@@ -515,10 +515,38 @@ git log -S ´xxxx´
 git blame
 ```
 
-See status of commits
+> See status of commits
 ```
 git log --shortstat
 ```
+
+> See all commit titles nicely as a one-liners
+```
+git log --pretty=oneline
+```
+
+> To move or delete files:
+```
+git mv
+```
+
+> Good practice is to first rename or move file, then commit! Only then do more changes to the file. Reason is, that if you rename or move file AND make changes to it, in the change history it will be shown as if entire file was removed and new on was added. You will not be able to track and compare changes within the file.
+
+```
+git mv oldfile newfile
+git commit -m "moved oldfile to newfile"
+```
+
+> To remove, reorder, edit, merge and split commits. You should review the development history and tell meaningful stories from it, rather than having a scatterplot of all commits
+```
+git rebase --interactive
+```
+
+> To change node version:
+```
+nvm use 8.10.0
+```
+
 
 **VISUALS**
 

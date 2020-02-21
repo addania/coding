@@ -168,6 +168,12 @@ npm install
 npm install -g npm
 
 ```
+
+>>> To change node version:
+```
+nvm use 8.10.0
+```
+
 Reference:
 
 https://stackoverflow.com/questions/21122342/how-to-clean-node-modules-folder-of-packages-that-are-not-in-package-json

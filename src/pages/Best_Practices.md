@@ -60,7 +60,7 @@ function sum(a, b) {
 }
 ```
 
-Use latest ES6 syntax:
+Use latest ES6 arrow function syntax:
 ```
 const sum = (a, b) => {
  return a+b
@@ -160,7 +160,165 @@ Abstract anything into a function or a const, that would need to be repeated mul
 
 Check if all your functions, components, tests or dependencies are actually being used. It is often the case that we forget to remove a test after we have removed a function.
 
+> **Do not use abbreviations**
 
+All names of variables, functions, components, etc. should be always full names, even if it is a common abbreviation
+
+- n => number
+- i => index
+- e => event
+- acc => accumulator
+- min => minumum or minus
+
+> **Use positive names**
+
+Avoid using negative names, because if you need to use them in negative conditions, we would have double negations. Which is unnecessary complication.
+
+Example:
+- notAvailable
+- nonUser
+
+Instead of:
+```
+if ( !notAvailable ) {}
+```
+
+we can use:
+```
+if ( available ) {}
+```
+
+> **Do not use types in names**
+
+Since Typescript is used, it is not necessary to name variables with types:
+
+- nameString
+- ListComponent
+- computeFunction
+
+Words like <code>string</code>, <code>component</code>, <code>function</code> are redundant
+
+> **Use named exports**
+
+Avoid default exports: 
+```
+export default App
+```
+
+Instead use named exports:
+```
+export const App = () => (...)
+
+```
+
+An interesting article about this topic is here:
+
+https://humanwhocodes.com/blog/2019/01/stop-using-default-exports-javascript-module/
+
+> **Keep relevant context**
+
+Sometimes modules which are imported from some other place are too general, like <code>refresh</code>. We still want to keep its context, that it is coming from api.
+
+Instead of:
+```
+import { refresh } from 'api'
+...
+refresh()
+```
+
+it is better to use:
+```
+import * as api from 'api'
+...
+api.refresh()
+}
+
+```
+
+Same goes for React. We want to know which elements are imported from React directly:
+```
+import * as React from 'react'
+```
+
+> **Use atomic commits**
+
+Each commit should only consist of one change. Therefore avoid needing word <code>and</code> in the commit message. Always think about what is the minimum viable commit - smallest useful change.
+
+> **Use commits to tell stories about the code**
+
+Good commit messages are very helpful to future you or to other developers to understand code changes and reason behind those changes. Good commit messages should always convey <code>INTENT</code>.
+
+Good commit message consists of:
+
+1// Commit title - a short one-liner
+
+2// At least one line break - this line break then allows to neatly list all commit titles with:
+```
+git log --pretty=oneline
+```
+
+3// Commit body - longer description of what the change does and an explanation why the change was done
+
+4// Contex - outline context or alternatives you considered
+
+Commit messages can contain link to bug tracking system or link to blog posts which explain the problem
+
+> **Rename or move, then commit**
+
+Good practice is to first rename or move file, then commit (without any further changes to the file)! Only after the commit you should do more changes to the file. Reason is, that if you rename or move file AND make changes to it, in the change history it will be shown as if entire file was removed and new one was added. You will not be able to track and compare changes within the file.
+
+```
+git mv oldfile newfile
+git commit -m "moved oldfile to newfile"
+```
+> **Review your commit history** 
+
+You should review the development history so that you can tell meaningful stories from it, rather than having a scatterplot of all commits. To remove, reorder, edit, merge and split commits use:
+```
+git rebase --interactive
+```
+
+> **Deconstruct all props**
+
+Do not simply use <code>(props)</code>
+
+Instead of:
+```
+export const Subheader = (props) => {}
+```
+
+deconstruct all props:
+```
+export const Subheader = ({ text, color, dimensions }) => {}
+```
+
+> **Object keys should be camelCased**
+
+Instead of:
+```
+const data={
+  Date: "2020-02-20",
+  Impressions: 152369
+}
+```
+
+we should implement camelCase:
+```
+const data={
+  date: "2020-02-20",
+  impressions: 152369
+}
+```
+
+> **Functions should not have React dependency**
+
+Basically use a component when we need to display HTML. Use functions without React dependency
+
+> **Use plural name if you generate more items**
+
+If you have a component within which you map through a list and then generate multiple items, then name of the component should be plural.
+
+Example: Filter => Filters
 
 ![](https://i.imgur.com/XREQjDp.jpg "Photo by Jeswin Thomas from Pexels")
 

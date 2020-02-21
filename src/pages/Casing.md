@@ -17,7 +17,7 @@ Name of each variable, function or component should be chosen with care. There a
 - kebab-case
 
 
-We could use <code>camelCase</code> for example for variables and functions.
+We could use <code>camelCase</code> for example for variables, functions or keys in the object.
 
 <code>PascalCase</code> is often usd for components and for types in Typescript.
 
