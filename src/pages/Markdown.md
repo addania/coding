@@ -38,7 +38,33 @@ use ``` before and after the block code
 ![image alt atribute](url_or_file_path image_title)
 ```
 
+>Url to image can also be from fil directory. Images should be saved under <code>/source/images/</code>
+```
+![image alt atribute](/images/path/to/folder/image.png)
+```
+
+>It can also be a link to onlin resource:
+```
+![image alt atribute](/images/path/to/folder/image.png)
+```
+
 >You can add text to image which will display when you <code>mouseOver</code> the image using Title
 ```
 ![image alt atribute](url "Title")
 ```
+
+>Add caption to you image:
+```
+![Image description](/images/path/to/folder/image.png)*My caption*
+```
+
+>Add option to click on the image:
+```
+[![Image description](/images/path/to/folder/image.png "Hello World")*My caption*](about.gitlab.com)
+```
+
+:monkey:
+
+🐒
+
+🌠
