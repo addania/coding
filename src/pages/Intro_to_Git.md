@@ -32,12 +32,11 @@ git config --global user.email "mirka.schw@gmail.com"
 ![](https://i.imgur.com/ba3JFiY.jpg "Photo by Pixabay from Pexels")
 
 **Local**
-
 >When we talk about LOCAL we mean anything that is stored locally on your computer hard drive.
 
 **Remote**
-
 >When we talk about REMOTE we mean anything that is stored and backed-up centrally on some 3rd party service, such as GitHub. Your REMOTE service will be accessible online at any time from any location by anyone who has access to it, meaning you or your colleague who is working on your project together with you.
+
 
 **GIT WORKFLOW**:
 
