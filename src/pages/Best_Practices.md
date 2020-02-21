@@ -320,6 +320,10 @@ If you have a component within which you map through a list and then generate mu
 
 Example: Filter => Filters
 
+> **Avoid using meaningless text in links**
+
+For example <code>in this article</code> or <code>here</code>
+
 ![](https://i.imgur.com/XREQjDp.jpg "Photo by Jeswin Thomas from Pexels")
 
 
