@@ -541,6 +541,20 @@ git commit -m "moved oldfile to newfile"
 git rebase --interactive
 ```
 
+> To rename a branch, first go to that branch:
+```
+git checkout <old_name>
+```
+
+> and then rename the branch
+```
+git branch -m <new_name>
+```
+> Example:
+```
+git checkout 20-colocation
+git branch -m 20p-colocation
+```
 > To change node version:
 ```
 nvm use 8.10.0
