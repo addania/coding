@@ -560,7 +560,6 @@ git branch -m 20p-colocation
 nvm use 8.10.0
 ```
 
-
 **VISUALS**
 
 ![](https://i.imgur.com/qvRNfBN.png  "Smart Git logo")
