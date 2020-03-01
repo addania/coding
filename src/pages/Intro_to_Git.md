@@ -560,6 +560,24 @@ git branch -m 20p-colocation
 nvm use 8.10.0
 ```
 
+> To install Typscript you need to have node.js installed:
+```
+nodejs.org/en/
+```
+
+> Node.js will also install NPM tool (node package Manager) which will allow us to intall Typsscript globally with <code>npm install</code> command
+
+> To install Typescript:
+```
+npm install -g typescript
+
+```
+
+> Maybe you need to add <code>sudo</code> in front of it:
+```
+sudo npm install -g typescript
+
+```
 
 **VISUALS**
 
