@@ -28,7 +28,7 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 
 > You will be prompted following message, then just press **ENTER**:
 ```
-Enter a file in which to save the key (/c/Users/you/.ssh/id_rsa):
+Enter a file in which to save the key (/Home/.ssh/id_rsa):
 ```
 
 > You will be asked to enter your passphrase:
@@ -63,7 +63,7 @@ ssh-add ~/.ssh/id_rsa
 
 > Now we need to copy the **PUBLIC** key to our clipboard, so that we can paste it into Github.
 
-> To do it, we can find the file and open it. It will be in the /C/Users/Mia/.ssh/id_rsa.pub and we can copy it
+> To do it, we can find the file and open it. It will be in the /Home/.ssh/id_rsa.pub and we can copy it
 
 > Alternatively you can use the command line to copy the ssh key to clipboard:
 ```

@@ -43,6 +43,12 @@ ls
 ```
 ls -a
 ```
+
+> If you are in the file manager, you can use the keyboard shortcut <code>Ctrl+H</code>  to display all the files including the hidden ones. Pressing Ctrl+H again will hide the files.
+```
+CTRL+H
+```
+
 > Change directory cd + name of the directory (ex: cd src will go to folder called src in your current folder), this is to go one directory down the tree
 ```
 cd src
@@ -51,13 +57,29 @@ cd src
 ```
 cd ..
 ```
-> To create a folder
+> To create a new folder
 ```
 mkdir
 ```
+
+> To create a new folder called <code>myNewFolder</code>
+```
+mkdir myNewFolder
+```
+
 > To create a new file called global.css
 ```
 touch global.css
+```
+
+> Navigate to root directory:
+```
+cd
+```
+or
+
+```
+cd ~
 ```
 
 > To cancel something running in the command line:
