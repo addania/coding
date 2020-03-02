@@ -28,6 +28,7 @@ Steps we will follow on our journey to new computer configuration with developme
 - Create React App
 - Gatsby
 - Github repo
+- Git Flow
 - Code editor
 - Prettier
 - Husky
@@ -228,7 +229,7 @@ ____
 
 So far we have only talked about our LOCAL environment, which is the one on our laptop. But how about we want to have a backup of our project also online somewhere REMOTE, accessible from any place by anyone? Github is a software development plaform which allows you to store, manage and publish your code. 
 
-![](https://i.imgur.com/lT3jdF1.jpg "Photo by panumas nikhomkhai from Pexels")<p style="font-size: 12px; text-align: right">*Photo by panumas nikhomkhai from Pexels*</p>
+![](https://i.imgur.com/TnLmNXz.jpg "Photo by Pixabay from Pexels")<p style="font-size: 12px; text-align: right">*Photo by Pixabay from Pexels*</p>
 
 > Firstly create your own Github account navigating to their official website:
 ```
@@ -239,21 +240,58 @@ https://github.com/
 
 ![](https://i.imgur.com/P5OEU2v.png "Photo by Addania")<p style="font-size: 12px; text-align: right"></p>
 
-> :
+> We will need to link our LOCAL with REMOTE repository by generating [SSH Key](https://addania.github.io/coding/Generate_SSH_Key/).
+
+As soon as you have successfully generated a SSH key, we are good to continue with projects.
+
+____
+
+<h2>Git Flow</h2>
+
+[Git flow](https://addania.github.io/coding/Git_Flow/) is an amazing concept how to manage branches. Make sure you read the [article](https://nvie.com/posts/a-successful-git-branching-model/) which explains it in detail. Git flow needs to be installed.
+
+Install Git flow using following command:
+```
+sudo apt-get install git-flow
+``` 
+
+For more reading refer to nvie [documentation](https://github.com/nvie/gitflow/wiki/Linux). However, you will need to add word <code>sudo</code> in fron the the command.
+
+____
+
+<h2>Code Editor</h2>
+
+We also need to download a good code editor. According to the [polls](https://2019.stateofjs.com/other-tools/) many developers use VCS (Visual Code Studio). Let's install that one then.
+
+![](https://i.imgur.com/SshAdpx.jpg "Photo by Negative Space from Pexels")<p style="font-size: 12px; text-align: right">*Photo by Negative Space from Pexels*</p>
+
+> You can visit their official [website](https://code.visualstudio.com/download) and download the code manually.
+
+> Alternatively you can search for it in the Ubuntu Software App.
+
+> Or use CLI to install it.
+
+> Let's first update the distribution and install dependencies:
+```
+sudo apt update
+sudo apt install software-properties-common apt-transport-https wget
+```
+
+
+> Now we need to import the Microsoft GPG key:
+```
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+```
+
+
+> Next we should enable Visual Code studio repository:
+```
+sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 ```
 
 ```
-
-
-> :
-```
-
-```
-
-
-> :
-```
-
+sudo apt update
+sudo apt install code
 ```
 
 ![](https://i.imgur.com/k7kjCMC.jpg "Photo by bongkarn thanyakij from Pexels")<p style="font-size: 12px; text-align: right">*Photo by bongkarn thanyakij from Pexels*</p>

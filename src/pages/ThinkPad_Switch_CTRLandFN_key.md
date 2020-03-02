@@ -35,4 +35,4 @@ Result? Totally professionally hacked computer :))
 
 I am a Monster, I know ;)
 
-![](https://i.imgur.com/ecoffoD.png "Viber Sticker")
+<img src="https://i.imgur.com/ecoffoD.png" alt="drawing" width="150"/>
