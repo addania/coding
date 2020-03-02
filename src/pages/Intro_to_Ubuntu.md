@@ -106,3 +106,32 @@ killall chrome
 ```
 man kill
 ```
+
+> How to clear terminal? Simply type <code>clear</code>
+```
+clear
+```
+
+> How to check your current Ubuntu version:
+```
+lsb_release -a
+```
+
+> Output should be something like:
+```
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 19.10
+Release:	19.10
+Codename:	eoan
+```
+
+> How to find a file which contains certain substring in the file name? In our case we will be searching for a substring <code>devil</code>
+```
+sudo find . -name "*devil*"
+```
+
+> Result should be something like where we see location and name of the file:
+```
+./Downloads/devil.png
+```
