@@ -64,35 +64,58 @@ export default ({ data }) => (
       <br />
       <hr></hr>
       <br />
+      <img
+        src="https://i.imgur.com/zcYbg1V.jpg"
+        alt="Photo by Gereth Davies from Pexels"
+      />
       Update: 02.03.2020
       <br />
       <blockquote>
-        The day to be remembered... My very <code>1st </code>
+        The day to be remembered... My very very <code>1st </code>
         day as a Front-End Developer... The day <code>0</code>, since obviously
         all acceptably decent indices shall start with zero.
       </blockquote>
-      <br />A day a bit choatic as I was settling in my new corner of the
+      <br />A day a bit chaotic as I was settling in my new corner of the
       office.
       <br />
       <br />
       But a day with a <code>MohnKuchen</code> which propheted an excellent day.
       After all, what can go wrong when you have a prospect of a delicious cake
-      and warm cup of tea to combat literally ANY challenge in life? They say{" "}
-      <code>piece of cake</code> for a reason, don't they? :)
+      and warm cup of tea from our CTO (Chief Tea Officer) to combat literally
+      ANY challenge in life? They say <code>piece of cake</code> for a reason,
+      don't they? :)
       <br />
+      <br />A day when I <i>actually</i> talked to <i>actual</i> developers. And
+      they
+      <i> actually</i> talked BACK :) Thank you <code>MohnKuchen</code> ;)
       <br />
-      A day deeply satisfying as I finally achieved my long desired goal. The
-      hard work for past months has finally paid off. Dream turning into reality
-      right in front of my eyes. It seems a bit surreal, it seems a bit... well
-      plain even, earthy maybe. But MINE.
+      <br />A day with <code>muscle tomcat</code>. Yes, yes, dear Austrians: ein
+      Tag mit Muskelkater :) from previous day(s) of intense training and ...
+      let's admit it... carrying that <code>MohnKuchen</code> all the way to the
+      office.
       <br />
-      <br />A day which finished with a small victory to setup my first dev
-      environment.
+      <br />A day deeply satisfying as I finally achieved my long desired goal.
+      The hard work for past months has finally paid off. Dream turning
+      inevitably into reality right in front of my eyes. It seems a bit surreal,
+      it seems a bit... well plain even, earthy maybe. But <code>MINE</code>.
       <br />
-      <br />A day with an after-work hangout which turned out to be more
-      pleasant than expected.
+      <br />A day with a small <code>victory</code> to setup my first
+      professional dev environment.
+      <br />
+      <br />A day which ended up with an intriguing <code>puzzle</code> to look
+      forward to solving the next day :)
+      <br />
+      <br />A day with an after-work <code>hangout</code> which turned out to be
+      more pleasant than expected.
       <br />
       <blockquote>Total score: The day freaking ROCKED :)</blockquote>
+      <br />
+      And yes, the <code>cake</code> was the most important part if it :)
+      <br />
+      <img
+        src="https://i.imgur.com/aRwy8mP.jpg"
+        alt="Photo by Antonio Quagliata from Pexels"
+      />
     </p>
   </Layout>
 )
