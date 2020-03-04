@@ -337,7 +337,12 @@ git push <remote_name> --delete <branch_name>
 git push origin --delete Github1AddDay05Task02
 ```
 
->To delete this branch on LOCAL we can do it by these 2 commands:
+>To delete this branch on LOCAL you first need to switch to a different branch:
+```
+git checkout master
+```
+
+> Then you can delete your branch for example: Github1AddDay05Task02. You can do it by these 2 commands:
 ```
 git branch -d branch_name
 git branch -D branch_name
@@ -347,6 +352,11 @@ One is with <code>‘d’</code> and one with <code>‘D’</code>.
 1// The <code>-d</code> option stands for --delete, which would delete the local branch, only if you have already pushed and merged it with your remote branches.
 
 2// The <code>-D</code> option stands for --delete --force, which deletes the branch regardless of its push and merge status, so careful with this one!
+
+> If you have the case that you delete a branch on your REMOTE, you delete it on your local and your local still remembers it even after <code>git pull origin</code> or <code>git fetch origin</code>, and your deleted branch still shows in your list of remote branches: <code>git branch -a</code>, you can then use prune:
+```
+git remote update origin --prune
+```
 
 > We can merge branch into another one also in terminal. For example I want to merge my PR1 branch into master branch. First we run <code>git checkout master</code> to change the active branch back to master. 
 ```

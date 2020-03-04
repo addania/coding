@@ -453,6 +453,20 @@ sudo apt-get install git-flow
 
 > For more reading refer to nvie [documentation](https://github.com/nvie/gitflow/wiki/Linux). Please note that you will need to add word <code>sudo</code> in front the the commands.
 
+**NOTES:**
+
+> Please note that later on in your repo you will need to initiate the git flow with:
+
+```
+git flow init
+```
+
+> And later on you will be creating branches with
+
+```
+git flow feature start <name-of-your-branch>
+```
+
 ---
 
 ##COMPANY SPECIFIC SETTINGS##
@@ -929,7 +943,7 @@ localhost:4567
 
 ---
 
-<h2>Handbook: Daily Routine</h2>
+<h2>Handbook: Daily Routine Start-up</h2>
 
 > Navigate to handbook folder
 
@@ -948,5 +962,162 @@ docker-compose up
 ```
 localhost:4567
 ```
+
+---
+
+<h2>Handbook: Daily Routine Branching and Commits</h2>
+
+> If you want to create a branch and then PR.
+
+> Go to the handbook folder
+
+```
+cd handbook
+```
+
+> Make sure you are on develop branch:
+
+```
+git status
+```
+
+> If not use:
+
+```
+git checkout develop
+```
+
+> Fetch and pull latest changes:
+
+```
+git fetch
+git pull
+```
+
+> Make sure you are on the develop branch:
+
+```
+git status
+```
+
+> Create a new feature branch from develop (we dont have hotfixes on handbook, everything is a feature), where <code>fix-typos</code> is a the name of the branch kebab-cased:
+
+```
+git flow feature start fix-typos
+```
+
+> Make sure you are on the the newly created branch:
+
+```
+git status
+```
+
+> Start the backend:
+
+```
+docker-compose up
+```
+
+> Code code code FTW
+
+> You cannot forget to do the changesets.
+
+> Navigate to root folder of the project and then to folder
+
+```
+.changesets
+```
+
+> There you will find a file called:.
+
+```
+changeset.md.template
+```
+
+> Rename it to your branch name (again kebab-cased)
+
+```
+fix-typos.md
+```
+
+> Open it. It will look like this:
+
+```
+---
+label: New|Updated|Removed
+---
+
+Add description here...
+```
+
+> Select a label and add a description
+
+```
+---
+label: Updated
+---
+
+Correcting minor spelling mistakes, fixing capitalization of names and beginnings of sentences, removing redundant words, adding missing repo
+
+```
+
+> Now you are ready to commit your changes and create a PR.
+
+> Add changes
+
+```
+git add .
+```
+
+> Commit changes:
+
+```
+git commit -m "fix typos in the text
+
+Correcting minor spelling mistakes, capitalization of names and beginnings of sentences"
+```
+
+> Push changes to the REMOTE:
+
+```
+git push origin feature/fix-typos
+```
+
+> Create Pull request
+
+> Announce on communicator that you request code reviews
+
+> Pray for not change requests
+
+> Merge
+
+**IMPORTANT GOOD PRACTICE TIPS**
+
+> If someone requests changes, `DO NOT` resolve the conversation. Requester should do it. Always change things on your local and then push to REMOTE so that all pre-commit hooks are applied. `DO NOT` commit changes directly in Github! When you commit changes also reply to the conversation with the commit link (hash)
+
+**PLEASE NOTE:**
+
+> Alternatively, if you forget the changesets, push on REMOTE and create PR, jenkins will complain and say it is not possible to merge
+
+![](https://i.imgur.com/1TOqFl6.png "Photo by Addania")
+
+> Then you will need to click on <code>Click here to add a changeset</code>
+
+![](https://i.imgur.com/TcETP39.png "Photo by Addania")
+
+> Select a label and add a description
+
+```
+---
+label: Updated
+---
+
+Correcting minor spelling mistakes, fixing capitalization of names and beginnings of sentences, removing redundant words, adding missing repo
+
+```
+
+> Then press C<code>ommit a new file</code>
+
+![](https://i.imgur.com/ertY3xG.png "Photo by Addania")
 
 ![](https://i.imgur.com/k7kjCMC.jpg "Photo by bongkarn thanyakij from Pexels")<p style="font-size: 12px; text-align: right">_Photo by bongkarn thanyakij from Pexels_</p>
