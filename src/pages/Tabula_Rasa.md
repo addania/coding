@@ -34,15 +34,21 @@ Steps we will follow on our journey to new computer configuration with developme
 - Code editor
 - Prettier
 - Flow
+- Other useful extensions
 - Husky
+- Git Flow
 
 **Company specific:**
 
-- Git Flow
-- Docker
-- Docker Compose
-- Starting the Back-End
-- Repo Dev Setup
+- Main App: Repo setup
+- Main App: Backend - Docker
+- Main App: Backend - Docker Compose
+- Main App: Backend - Config Overrides
+- Main App: Backend - Starting the Back-End
+- Main App: Front-End Config
+- Main App: Daily Routine
+- Handbook: Front-End Config
+- Handbook: Daily Routine
 
 ---
 
@@ -79,7 +85,7 @@ sudo apt-get install curl
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
 ```
 
-> Close and Open your terminal
+> Close and open your terminal
 
 > Make sure that the download ran successfully by checking the version of nvm:
 
@@ -124,7 +130,7 @@ sudo apt-get install git
 git --version
 ```
 
-> Configure your username and emai address:
+> Configure your username and email address:
 
 ```
 git config --global user.name "Emma Paris"
@@ -153,13 +159,15 @@ cd
 mkdir projects
 ```
 
-> Now enter this projects folder with <code>cd</code> (change directory)command:
+> Now enter this projects folder with <code>cd</code> (change directory) command:
 
 ```
 cd projects
 ```
 
 Yay, our most important folder is created :)
+
+---
 
 ---
 
@@ -292,7 +300,7 @@ As soon as you have successfully generated a SSH key, we are good to continue wi
 
 <h2>Code Editor</h2>
 
-We also need to download a good code editor. According to the [polls](https://2019.stateofjs.com/other-tools/) many developers use VCS (Visual Code Studio). Let's install that one then.
+We also need to download a good code editor. According to the [polls](https://2019.stateofjs.com/other-tools/) many developers use VSC (Visual Studio Code). Let's install that one then.
 
 ![](https://i.imgur.com/SshAdpx.jpg "Photo by Negative Space from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Negative Space from Pexels_</p>
 
@@ -300,7 +308,7 @@ We also need to download a good code editor. According to the [polls](https://20
 
 > Alternatively you can search for it in the Ubuntu Software App.
 
-> Or use CLI to install it.
+> Or use CLI to install it., as I will describe below:
 
 > Let's first update the distribution and install dependencies:
 
@@ -321,16 +329,18 @@ wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add
 sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 ```
 
+> Now we will install the Visual Studio Code:
+
 ```
 sudo apt update
 sudo apt install code
 ```
 
-> In Visual Code Studio you can install different extensions. From the left navigation bar you click on the last icon called Extensions:
+> In Visual Studio Code you can install different extensions. From the left navigation bar you click on the last icon called Extensions:
 
-![](https://i.imgur.com/SiyrHY6.png "Photo by bongkarn thanyakij from Pexels")<p style="font-size: 12px; text-align: right">_Photo by bongkarn thanyakij from Pexels_</p>
+![](https://i.imgur.com/SiyrHY6.png "Photo by bongkarn thanyakij from Pexels")
 
-> You can search there for any name of extension. Particularly useful one is Prettier
+> You can search there for any name of extension. Particularly useful one is Prettier (see section below)
 
 > You can also always display those extensions which are installed entering <code>@installed</code> to the search field:
 
@@ -338,11 +348,23 @@ sudo apt install code
 @installed
 ```
 
+> When you have some project opened in VSC you can use command <code>CTRL+SHIFT+F</code>. This will allow you to seach for a substring within content of ALL the files which are opened in the VSC (for example your project folder)
+
+```
+CTRL + SHIFT + F
+```
+
+> To search for the substring in the filename use:
+
+```
+CTRL + P
+```
+
 ---
 
 <h2>Prettier</h2>
 
-Prettier helps to format your code. We can add it as an extension to Visual Code Studio.
+Prettier helps format your code. We can add it as an extension to Visual Studio Code.
 
 > Open the VCS:
 
@@ -366,7 +388,7 @@ code .
 
 <h2>Flow Language Support</h2>
 
-Flow Language Support is alos another useful extension for the Visual Code Studio if your projects are using Flow (like Typescript) to define types.
+Flow Language Support is also another useful extension for the Visual Studio Code if your projects are using Flow (like Typescript) to define types.
 
 > Open the VCS:
 
@@ -382,11 +404,62 @@ code .
 
 ---
 
+<h2>Other useful extensions</h2>
+
+Here is a list of useful extensions for Visual Studio Code which you might consider:
+
+-     auto-rename-tag	- 	Automatically rename paired HTML/XML tag
+-     bracket-pair-colorizer	- 	Colorizes bracket pairs
+-     code-groovy	- 	Language support for Groovy
+-     setting Synch by Shan	- 	Store your VSC settings on Github and then always synch them when needed with other devices
+-     contextualduplicate	- 	Duplicates text based on the context. If text is selected, only the selected text will be duplicated.
+-     duplicateselection	-  Adds an action to VSCode to duplicate the current selection.
+-     EditorConfig	-  Overrides user/workspace settings with settings found in .editorconfig files.
+-     file-icons	- 	Array of icons for most languages and frameworks
+-     gitconfig	- 	Syntax highlighting for .gitconfig, .gitattributes, and .gitmodules files.
+-     gitlens	- 	Git capabilities built into Visual Studio Code. It helps you to visualize code authorship and Git blame annotations
+-     htmltagwrap	- 	Wraps your selection in HTML tags.
+-     npm-intellisense	- 	Autocompletes npm modules in import statements
+-     partial-diff	- 	Compare text in 2 visible editors
+-     path-intellisense	- 	Autocompletes filenames.
+-     csstools	- 	Adds support for modern and experimental CSS
+-     Prettier - Code formatter
+-     quitcontrol-vscode	- 	Stop mistyping keyboard shortctus that close/quit VSCode unintentionally
+-     rainbow-csv	- 	Highlight columns in comma (.csv), tab (.tsv), semicolon and pipe - separated files in different colors
+-     svg	- 	SVG Language Support Extension
+-     typescript-javascript-grammar	- 	Adds TypeScript grammar extension.
+-     vscode-docker	- 	Makes it easy to build, manage and deploy containerized applications
+-     vscode-eslint	- 	Integrates ESLint into VS Code.
+-     vscode-flow-ide	- 	Flowtype extension. Flowtype is a static type checker ment to find errors in Javascript programs.
+-     vscode-language-babel	- 	JavaScript syntax highlighting for ES201x, React JSX, Flow and GraphQL.
+-     vscode-npm-script	- Supports running npm scripts defined in the package.json file and validating the installed modules against the dependencies defined in the package.json.
+-     vscode-pigments	- 	Adds color previews to vscode instantly.
+
+---
+
+<h2>Husky</h2>
+
+---
+
+<h2>Git Flow</h2>
+
+[Git flow](https://addania.github.io/coding/Git_Flow/) is an amazing concept how to manage branches. Make sure you read the [article](https://nvie.com/posts/a-successful-git-branching-model/) which explains it in detail. Git flow needs to be installed.
+
+> Install Git flow using following command:
+
+```
+sudo apt-get install git-flow
+```
+
+> For more reading refer to nvie [documentation](https://github.com/nvie/gitflow/wiki/Linux). Please note that you will need to add word <code>sudo</code> in front the the commands.
+
+---
+
 ##COMPANY SPECIFIC SETTINGS##
 <br>
 <br>
 
-<h2>Repo Setup</h2>
+<h2>Main App: Repo setup</h2>
 
 > Clone the repo from the Github URL
 
@@ -396,9 +469,11 @@ git clone URL
 
 ---
 
-<h2>Docker</h2>
+---
 
-Docker will run back-end of our application. Docker is a tool that makes it easier to create, deploy & run applications by using containers. Containers allow to package up your code with all the required parts (like libraries or other dependencies) and deploy them all as a single package. Thanks to that we will make sure that our code will run on any machine regardless of custom settings which can be different from the machine that was originally used to writing or testing the application. Docker also acts like a virtual machine, provides performance boost and reduces the size of the app. For more info this is a nice [article](https://opensource.com/resources/what-docker) to read.
+<h2>Main App: Backend - Docker</h2>
+
+Docker will run backend of our application. Docker is a tool that makes it easier to create, deploy & run applications by using containers. Containers allow to package up your code with all the required parts (like libraries or other dependencies) and deploy them all as a single package. Thanks to that we will make sure that our code will run on any machine regardless of custom settings which can be different from the machine that was originally used to writing or testing the application. Docker also acts like a virtual machine, provides performance boost and reduces the size of the app. For more info this is a nice [article](https://opensource.com/resources/what-docker) to read.
 
 Let's now get our hands dirty with installation:
 
@@ -466,7 +541,7 @@ docker-ce | 5:19.03.6~3-0~ubuntu-bionic | https://download.docker.com/linux/ubun
 docker-ce | 5:19.03.5~3-0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
 ```
 
-> And pick the one you want (I would opt for latest one):
+> Pick the version you want (I would opt for latest one):
 
 ```
 5:19.03.6~3-0~ubuntu-eoan
@@ -484,7 +559,7 @@ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> c
 sudo apt-get install docker-ce=5:19.03.6~3-0~ubuntu-eoan docker-ce-cli=5:19.03.6~3-0~ubuntu-eoan containerd.io
 ```
 
-> Verify if installation was a success:
+> Verify if installation was success:
 
 ```
 sudo docker run hello-world
@@ -493,12 +568,6 @@ sudo docker run hello-world
 > If it was, you should get a message simialr to this one:
 
 ```
-Unable to find image 'hello-world:latest' locally
-latest: Pulling from library/hello-world
-1b930d010525: Pull complete
-Digest: sha256:fc6a51919cfeb2e6763f62b6d9e8815acbf7cd2e476ea353743570610737b752
-Status: Downloaded newer image for hello-world:latest
-
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
 
@@ -510,21 +579,11 @@ To generate this message, Docker took the following steps:
     executable that produces the output you are currently reading.
  4. The Docker daemon streamed that output to the Docker client, which sent it
     to your terminal.
-
-To try something more ambitious, you can run an Ubuntu container with:
- $ docker run -it ubuntu bash
-
-Share images, automate workflows, and more with a free Docker ID:
- https://hub.docker.com/
-
-For more examples and ideas, visit:
- https://docs.docker.com/get-started/
-
 ```
 
 Above installation steps of Docker can also be found in official [documentation](https://docs.docker.com/install/linux/docker-ce/ubuntu/) together with a small [hack](https://stackoverflow.com/questions/60274857/i-cant-install-docker-because-containerd-io-has-no-installation-candidate).
 
-In order to make our lives easier, we can continue [setting](https://docs.docker.com/install/linux/linux-postinstall/) up Docker, so that we do not need to use <code>sudo</code> every single time.
+In order to make our lives easier, we can continue [setting](https://docs.docker.com/install/linux/linux-postinstall/) up Docker, so that we do not need to use <code>sudo</code> every single time with managing Docker as a non-root user.
 
 > We will start with creating a Docker group:
 
@@ -538,7 +597,7 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 ```
 
-> Log in and Out from your profile
+> Log in and out from your profile (or restart your computer)
 
 > Verify if you can run Docker command without <code>sudo</code>
 
@@ -560,20 +619,11 @@ To generate this message, Docker took the following steps:
     executable that produces the output you are currently reading.
  4. The Docker daemon streamed that output to the Docker client, which sent it
     to your terminal.
-
-To try something more ambitious, you can run an Ubuntu container with:
- $ docker run -it ubuntu bash
-
-Share images, automate workflows, and more with a free Docker ID:
- https://hub.docker.com/
-
-For more examples and ideas, visit:
- https://docs.docker.com/get-started/
 ```
 
 ---
 
-<h2>Docker Compose</h2>
+<h2>Main App: Backend - Docker Compose</h2>
 
 > Download latest version of Docker compose:
 
@@ -599,11 +649,9 @@ docker-compose --version
 docker-compose version 1.25.4, build 1110ad01
 ```
 
-https://github.com/pmedianetwork/adverity/wiki/Backend:-Setup-for-frontend-engineers
-
 ---
 
-<h2>Config Overrides</h2>
+<h2>Main App: Backend - Config Overrides</h2>
 
 > These settings assume that you have already downloaded the repository from Github to your LOCAL machine. If you havent done so, clone the repo first with:
 
@@ -613,51 +661,43 @@ git clone <repo url>
 
 > Then go to your project root folder
 
-> Create a yml file called
+> Create a yml file called <code>adverity-user-overrides-config.yml</code>
 
 ```
 touch adverity-user-overrides-config.yml
 ```
 
-> Paste following config to it (where database ulr, access key id, secret access key and host name need to be requested):
+> Paste following config to it (where database ulr, username, password, access key id, secret access key need to be requested):
 
 ```
 dataSource:
   url: "<database url>"
 adverity:
   datalake:
+    datalakeType: "sftp"
+    sftp:
+      server: "localhost"
+      username: "<username>"
+      password: "<password>"
+      remoteBaseDir: "/data"
     s3:
-      accessKey: <access key id>
-      secretKey: <secret access key>
+      accessKey: "<access key id>"
+      secretKey: "<secret access key>"
 aws:
   s3:
-    accessKey: <access key id>
-    secretKey: <secret access key>
+    accessKey: "<access key id>"
+    secretKey: "<secret access key>"
 
 rabbitmq:
   connectionfactory:
-    hostname: '<host name>'
-```
-
-> We will also need to add a new configuration file called <code>shared-config.dev.json</code>
-
-> Go to your project folder <code>./grails-app/conf</code>
-
-> Create a new file there called <code>shared-config.dev.json</code>
-
-> Add this to the file:
-
-```
-{
-  "webpackHost": "172.20.0.1"
-}
+    hostname: "localhost"
 ```
 
 ---
 
-<h2>Starting the Back-End</h2>
+<h2>Main App: Backend - Starting the Backend</h2>
 
-Docker will be starting our back-end environment. In one tab of the terminal we will be always starting our back-end with Docker and in another tab we will be starting our front end local host.
+Docker will be starting our back-end environment. In one tab of the terminal we will always start our back-end and in another tab we will start our front end local host.
 
 > Upon the first start we will need to execute command from the root folder of the project:
 
@@ -669,15 +709,83 @@ Docker will be starting our back-end environment. In one tab of the terminal we 
 
 > We will need to run this command any time there is any change in the back-end!! For example, database migration or any update to backend.
 
-> To start the Docker local host we will use following command from the root folder of the project:
+> To start the Docker local host (backend infrastructure, like database, sftp datalake, import queues like rabbitMQ, etc.) we will use following command from the root folder of the project:
 
 ```
-docker-compose -f docker/docker-compose.yml up
+docker-compose -f docker/docker-compose-infrastructure.yml up -d
+```
+
+> If we use <code>-d</code> in this command this will result in the backend infrastructure to be running forever silently, even if I turn off and on the computer, it will be by default running. I could run it every time manually if I don't use -d:
+
+```
+docker-compose -f docker/docker-compose-infrastructure.yml up
+```
+
+> If it gets some error that some plugin failed to be downloaded, try to run it again! If it is stuck at 91%, it might be a visual bug, but it can be already running.
+
+> I can check if my Docker container (backend infrastrucure) is running with the command:
+
+```
+docker ps
+```
+
+> Now we need to start the back-end itself (by backend is meant the Java application which connects my frontend app with the backend infrastructure like data)
+
+> To do it, go to the root folder of the project (all backend stuff is done in root folder):
+
+```
+./gradlew bootRun
+```
+
+> <code>./gradlew bootRun</code> needs to be executed every day.
+
+> Now we will need to import some data to the application (becasue by default it will be empty). We will do this only once at the beginning, later on I do not need to do it. Run following command from root folder:
+
+```
+make importQ
+```
+
+> Now we are ready to start the front end. You can follow to the <code>Front-End Config</code> section.
+
+<br />
+
+**NOTES & ADDITIONAL COMMANDS FOR DOCKER BACKEND:**
+
+> When I restart the computer, I can check if my Docker container (backend infrastrucure) is running by default with the command:
+
+```
+docker ps
+```
+
+> Following 3 services should be running:
+
+```
+rabbitMQ
+sftp
+postgres
+```
+
+> To stop docker:
+
+```
+CTRL + C
+```
+
+and then
+
+```
+docker-compose -f docker/docker-compose-infrastructure.yml down
+```
+
+> I can also prune any cache if I want to:
+
+```
+docker system prune
 ```
 
 ---
 
-<h2>Front-End Config</h2>
+<h2>Main App: Front-End Config</h2>
 
 This assumes that you have already cloned the repository from the Github URL using <code>git clone URL</code>
 
@@ -689,45 +797,156 @@ npm install
 npm run bootstrap
 ```
 
-> To start the front-end, open a new tab in your terminal and follow these instructions:
+> To start the frontend, open a new tab in your terminal and follow these instructions:
 
 ```
 cd web-app
 npm start
 ```
 
----
-
-<h2>Git Flow</h2>
-
-[Git flow](https://addania.github.io/coding/Git_Flow/) is an amazing concept how to manage branches. Make sure you read the [article](https://nvie.com/posts/a-successful-git-branching-model/) which explains it in detail. Git flow needs to be installed.
-
-Install Git flow using following command:
+> You will need to open the browser. Where <code>appName</code> is the repo name. App will run under:
 
 ```
-sudo apt-get install git-flow
+http://localhost:8080/<appName>
 ```
 
-For more reading refer to nvie [documentation](https://github.com/nvie/gitflow/wiki/Linux). However, you will need to add word <code>sudo</code> in fron the the command.
+> You will need to login to the app. Login credentials can be found in <code>BootStrap.groovy</code> file in the <code>grails-app/init</code> folder
+
+> Then navigate to a Tenant <code>Big client</code>
+
+> Click on your Account -> Admin Pages -> Dev -> Bulk import Big csv files for client Big
+
+> This should load data, data will persist even if we restart the app.
 
 ---
+
+<h2>Main App: Daily Routine</h2>
+
+Shortcut to start up everything.
+
+> Backend daily routine:
+
+```
+cd projects/<appName>
+./gradlew bootRun
+```
+
+> Frontend daily routine:
+
+```
+cd projects/<appName>/web-app
+npm start
+```
+
+> Open browser:
+
+```
+http://localhost:8080/<appName>
+```
+
+> Login
+
+> You are ready to rock :)
+
+---
+
+<h2>Handbook: Front-End Config</h2>
+
+This assumes that you have already cloned the repository of the Handbook from the Github URL using <code>git clone URL</code>
+
+> Then you can navigate to project folder:
+
+```
+cd handbook
+```
+
+> Then initiate git flow
+
+```
+git flow init
+```
+
+> It will ask you couple of questions:
+
+![](https://i.imgur.com/QdOT2pp.png?1 "Photo by Addania")
+
+> Answer <code>master</code> to the first question and <code>develop</code> to the second question. Then hit enter to confirm all the rest of the questions.
+
+> Then check how your <code>config</code> file in <code>git</code> folder looks like. It should look like this:
+
+```
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = git@github.com:pmedianetwork/handbook.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "develop"]
+	remote = origin
+	merge = refs/heads/develop
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[gitflow "branch"]
+	master = master
+	develop = develop
+[gitflow "prefix"]
+	feature = feature/
+	bugfix = bugfix/
+	release = release/
+	hotfix = hotfix/
+	support = support/
+	versiontag =
+[gitflow "path"]
+	hooks = /home/addania/projects/handbook/.git/hooks
+```
+
+> Great!
+
+> Let's install some <code>prepare-commit-msg</code> git hook:
+
+```
+curl https://gist.githubusercontent.com/bartoszmajsak/1396344/raw/bff6973325b159254a3ba13c5cb9ac8fda8e382b/prepare-commit-msg.sh > .git/hooks/prepare-commit-msg && chmod u+x .git/hooks/prepare-commit-msg
+```
+
+> Now we can start the backend for the handbook. Pre-requisites are all the steps from the Docker and Docker Compose section including managing Docker as a non-root user (please see corresponding sections above).
+
+> If we have done everything as above, we can now start the backend simply with:
+
+```
+docker-compose up
+```
+
+> We should check the browser at the URL:
+
+```
+localhost:4567
+```
+
+> You are also ready to rock the handbook ;)
+
+---
+
+<h2>Handbook: Daily Routine</h2>
+
+> Navigate to handbook folder
+
+```
+cd projects/handbook
+```
+
+> Start the backend:
+
+```
+docker-compose up
+```
+
+> App is served at the URL:
+
+```
+localhost:4567
+```
 
 ![](https://i.imgur.com/k7kjCMC.jpg "Photo by bongkarn thanyakij from Pexels")<p style="font-size: 12px; text-align: right">_Photo by bongkarn thanyakij from Pexels_</p>
-
-> :
-
-```
-
-```
-
-> :
-
-```
-
-```
-
-> :
-
-```
-
-```

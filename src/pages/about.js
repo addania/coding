@@ -110,7 +110,7 @@ export default ({ data }) => (
       <br />
       <blockquote>Total score: The day freaking ROCKED :)</blockquote>
       <br />
-      And yes, the <code>cake</code> was the most important part if it :)
+      And yes, the <code>cake</code> was the most important part of it :)
       <br />
       <img
         src="https://i.imgur.com/aRwy8mP.jpg"

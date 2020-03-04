@@ -16,6 +16,7 @@ export default ({ data }) => (
         src="https://i.imgur.com/zcYbg1V.jpg"
         alt="Photo by Gereth Davies from Pexels"
       />
+      <br />
       <strong>Dev day 0: 02.03.2020</strong>
       <br />
       <blockquote>
@@ -58,12 +59,13 @@ export default ({ data }) => (
       <br />
       <blockquote>Total score: The day freaking ROCKED :)</blockquote>
       <br />
-      And yes, the <code>cake</code> was the most important part if it :)
+      And yes, the <code>cake</code> was the most important part of it :)
       <br />
       <img
         src="https://i.imgur.com/aRwy8mP.jpg"
         alt="Photo by Antonio Quagliata from Pexels"
       />
+      <br />
       <strong>Dev day 1: 03.03.2020</strong>
       <br />
       <blockquote>
@@ -80,6 +82,48 @@ export default ({ data }) => (
       <br />
       Tadaaa! Mission accomplished! Addania +1 Hacker Skills. It is only my
       second day and I am totally pro already :)) ...*cough cough*
+      <br />
+      <br />
+      Another achievement of the day: I made my very first{" "}
+      <code>code review</code> today B) It was extremely serious change request:
+      correct a typo, haha. One must always start somewhere :) Tough life of
+      beginners.
+      <br />
+      <br />
+      And I finally finished setup for the main app thanks to couple of (4)
+      people who helped me make it work after we realized that our internal wiki
+      is outdated and there are some backend issues.
+      <br />
+      <br />
+      And the highlight of the day was{" "}
+      <code>New Starters After-Work Pizza</code>. Technically I am not a new
+      starter in the company, however I am new starter in the dev team, so I
+      joined the event and it was hilarious to talk to my new team. They are
+      simply amazing and super funny. I love those dev jokes. I didn't want to
+      leave as I was having lots of fun, but the time was running short for my
+      Tuesday's Sports Group. It would suck if the teacher didn't arrive :)) So
+      I had to. And the yoga class was actually nice, relaxing, yet challenging.
+      Cause without a challenge it would be boring ;)
+      <br />
+      <img
+        src="https://i.imgur.com/aRwy8mP.jpg"
+        alt="Photo by Antonio Quagliata from Pexels"
+      />
+      <br />
+      <strong>Dev day 2: 04.03.2020</strong>
+      <br />
+      <blockquote>
+        Excellent, I got an Italian cooking Italian lunch for me today. Life
+        cannot be better :) I hope he uses enough of his <code>Pepper</code> to
+        make me giggle whole day. Cheers Giulio!
+      </blockquote>
+      <br />
+      Motto of the day: Feed developer, save the world.
+      <br />
+      const developer = "addania"
+      <br />
+      <br />
+      XXX
     </p>
   </Layout>
 )
