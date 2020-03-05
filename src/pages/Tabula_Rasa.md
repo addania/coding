@@ -169,8 +169,6 @@ Yay, our most important folder is created :)
 
 ---
 
----
-
 <h2>Create React App</h2>
 
 Create React App is an officially supported way to create single page React applications. We will create our very first React project using Create React App.
@@ -364,6 +362,8 @@ CTRL + P
 
 <h2>Prettier</h2>
 
+![](https://i.imgur.com/DEkKbQ1.jpg "Photo by Richi choraria from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Richi choraria from Pexels_</p>
+
 Prettier helps format your code. We can add it as an extension to Visual Studio Code.
 
 > Open the VCS:
@@ -406,6 +406,8 @@ code .
 
 <h2>Other useful extensions</h2>
 
+![](https://i.imgur.com/Ly5LiZx.jpg "Photo by Janko Ferlic from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Janko Ferlic from Pexels_</p>
+
 Here is a list of useful extensions for Visual Studio Code which you might consider:
 
 -     auto-rename-tag	- 	Automatically rename paired HTML/XML tag
@@ -439,9 +441,15 @@ Here is a list of useful extensions for Visual Studio Code which you might consi
 
 <h2>Husky</h2>
 
+Did someone say husky? :)
+
+![](https://i.imgur.com/DcFUuks.jpg?1 "Photo by Ian Turnell from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Ian Turnell from Pexels_</p>
+
 ---
 
 <h2>Git Flow</h2>
+
+![](https://i.imgur.com/nB7b3H4.jpg "Photo by Kateryna Babaieva from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Kateryna Babaieva from Pexels_</p>
 
 [Git flow](https://addania.github.io/coding/Git_Flow/) is an amazing concept how to manage branches. Make sure you read the [article](https://nvie.com/posts/a-successful-git-branching-model/) which explains it in detail. Git flow needs to be installed.
 
@@ -473,6 +481,8 @@ git flow feature start <name-of-your-branch>
 <br>
 <br>
 
+![](https://i.imgur.com/UdGibOh.jpg "Photo by Negative Space from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Negative Space from Pexels_</p>
+
 <h2>Main App: Repo setup</h2>
 
 > Clone the repo from the Github URL
@@ -483,9 +493,9 @@ git clone URL
 
 ---
 
----
-
 <h2>Main App: Backend - Docker</h2>
+
+![](https://i.imgur.com/iLSMcLv.jpg "Photo by Pixabay from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Pixabay from Pexels_</p>
 
 Docker will run backend of our application. Docker is a tool that makes it easier to create, deploy & run applications by using containers. Containers allow to package up your code with all the required parts (like libraries or other dependencies) and deploy them all as a single package. Thanks to that we will make sure that our code will run on any machine regardless of custom settings which can be different from the machine that was originally used to writing or testing the application. Docker also acts like a virtual machine, provides performance boost and reduces the size of the app. For more info this is a nice [article](https://opensource.com/resources/what-docker) to read.
 
@@ -639,6 +649,8 @@ To generate this message, Docker took the following steps:
 
 <h2>Main App: Backend - Docker Compose</h2>
 
+![](https://i.imgur.com/tu2hiV9.jpg "Photo by freestocks.org from Pexels")<p style="font-size: 12px; text-align: right">_Photo by freestocks.org from Pexels_</p>
+
 > Download latest version of Docker compose:
 
 ```
@@ -666,6 +678,8 @@ docker-compose version 1.25.4, build 1110ad01
 ---
 
 <h2>Main App: Backend - Config Overrides</h2>
+
+![](https://i.imgur.com/Q6MbuWu.jpg "Photo by Rodolfo Clix from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Rodolfo Clix from Pexels_</p>
 
 > These settings assume that you have already downloaded the repository from Github to your LOCAL machine. If you havent done so, clone the repo first with:
 
@@ -710,6 +724,8 @@ rabbitmq:
 ---
 
 <h2>Main App: Backend - Starting the Backend</h2>
+
+![](https://i.imgur.com/p7LQncr.jpg "Photo by Pixabay from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Pixabay from Pexels_</p>
 
 Docker will be starting our back-end environment. In one tab of the terminal we will always start our back-end and in another tab we will start our front end local host.
 
@@ -801,6 +817,8 @@ docker system prune
 
 <h2>Main App: Front-End Config</h2>
 
+![](https://i.imgur.com/894yf32.jpg?1 "Photo by Pixabay from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Pixabay from Pexels_</p>
+
 This assumes that you have already cloned the repository from the Github URL using <code>git clone URL</code>
 
 Then you can navigate to web-app folder:
@@ -836,6 +854,8 @@ http://localhost:8080/<appName>
 
 <h2>Main App: Daily Routine</h2>
 
+![](https://i.imgur.com/F6TX3fJ.jpg "Photo by Kaboompics.com from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Kaboompics.com from Pexels_</p>
+
 Shortcut to start up everything.
 
 > Backend daily routine:
@@ -865,6 +885,8 @@ http://localhost:8080/<appName>
 ---
 
 <h2>Handbook: Front-End Config</h2>
+
+![](https://i.imgur.com/qDy6nQF.jpg "Photo by Kaboompics .com from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Kaboompics .com from Pexels_</p>
 
 This assumes that you have already cloned the repository of the Handbook from the Github URL using <code>git clone URL</code>
 
@@ -945,6 +967,8 @@ localhost:4567
 
 <h2>Handbook: Daily Routine Start-up</h2>
 
+![](https://i.imgur.com/vck5NPy.jpg "Photo by Free Photos.cc from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Free Photos.cc from Pexels_</p>
+
 > Navigate to handbook folder
 
 ```
@@ -967,9 +991,9 @@ localhost:4567
 
 <h2>Handbook: Daily Routine Branching and Commits</h2>
 
-> If you want to create a branch and then PR.
+![](https://i.imgur.com/kRYW41f.jpg "Photo by Pixabay from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Pixabay from Pexels_</p>
 
-> Go to the handbook folder
+> If you want to create a branch and then PR, go to the handbook folder
 
 ```
 cd handbook
@@ -994,17 +1018,13 @@ git fetch
 git pull
 ```
 
-> Make sure you are on the develop branch:
-
-```
-git status
-```
-
-> Create a new feature branch from develop (we dont have hotfixes on handbook, everything is a feature), where <code>fix-typos</code> is a the name of the branch kebab-cased:
+> Create a new feature branch from develop using git flow:
 
 ```
 git flow feature start fix-typos
 ```
+
+> Please note that we don't have hotfixes on handbook, everything is a feature. IN above example <code>fix-typos</code> is a the name of the branch. Also notice that names of the branches should be kebab-cased:
 
 > Make sure you are on the the newly created branch:
 
@@ -1022,13 +1042,13 @@ docker-compose up
 
 > You cannot forget to do the changesets.
 
-> Navigate to root folder of the project and then to folder
+> Navigate to root folder of the project and then to folder called:
 
 ```
 .changesets
 ```
 
-> There you will find a file called:.
+> There you will find a file called
 
 ```
 changeset.md.template
@@ -1087,17 +1107,17 @@ git push origin feature/fix-typos
 
 > Announce on communicator that you request code reviews
 
-> Pray for not change requests
+> Pray for no change requests
 
-> Merge
+> Merge. Merging will also automatically deploy new version of the handbook, close the PR and delete the branch. It will also be announced on the communicator that new version was released.
 
 **IMPORTANT GOOD PRACTICE TIPS**
 
-> If someone requests changes, `DO NOT` resolve the conversation. Requester should do it. Always change things on your local and then push to REMOTE so that all pre-commit hooks are applied. `DO NOT` commit changes directly in Github! When you commit changes also reply to the conversation with the commit link (hash)
+> If someone requests changes, `DO NOT` resolve the conversation. Requester should do it. Always change things on your LOCAL and then push to REMOTE so that all pre-commit hooks are applied. `DO NOT` commit changes directly in Github (as it will automatically resolve the conversation without requester doing so and no pre-commit hooks will be applied)! When you commit changes also reply to the conversation with the commit link (hash)!!
 
 **PLEASE NOTE:**
 
-> Alternatively, if you forget the changesets, push on REMOTE and create PR, jenkins will complain and say it is not possible to merge
+> Alternatively, if you forget to add the changesets, push to REMOTE and create PR, jenkins will complain and say it is not possible to merge
 
 ![](https://i.imgur.com/1TOqFl6.png "Photo by Addania")
 
@@ -1116,7 +1136,7 @@ Correcting minor spelling mistakes, fixing capitalization of names and beginning
 
 ```
 
-> Then press C<code>ommit a new file</code>
+> Then press <code>Commit a new file</code>
 
 ![](https://i.imgur.com/ertY3xG.png "Photo by Addania")
 
