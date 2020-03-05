@@ -111,6 +111,7 @@ export default ({ data }) => (
       />
       <br />
       <strong>Dev day 2: 04.03.2020</strong>
+      [img]https://i.imgur.com/nWoxCBd.jpg?1[/img]
       <br />
       <blockquote>
         Excellent, I got an Italian cooking Italian lunch for me today. Life
@@ -123,7 +124,14 @@ export default ({ data }) => (
       const developer = "addania"
       <br />
       <br />
-      XXX
+      Plus as a bonus I got not only 1 (one) achievement, but actually 3 (THREE)
+      :) I managed to create my very first PR and as `all good things come in
+      threes` I also sumbitted second and third. All got approved and merged,
+      yay!
+      <br />
+      <br />
+      The evening was painfully funny. Or.. painful & funny? Or both at the same
+      time? Only I know... and him.
     </p>
   </Layout>
 )

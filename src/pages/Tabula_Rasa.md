@@ -629,7 +629,7 @@ sudo usermod -aG docker $USER
 docker run hello-world
 ```
 
-> You should get a message simialr to this:
+> You should get a message similar to this:
 
 ```
 Hello from Docker!
@@ -767,6 +767,12 @@ docker ps
 ./gradlew bootRun
 ```
 
+> Alternatively instead of `./gradlew bootRun` is to use:
+
+```
+make start
+```
+
 > <code>./gradlew bootRun</code> needs to be executed every day.
 
 > Now we will need to import some data to the application (becasue by default it will be empty). We will do this only once at the beginning, later on I do not need to do it. Run following command from root folder:
@@ -795,7 +801,7 @@ sftp
 postgres
 ```
 
-> To stop docker:
+> To stop Docker:
 
 ```
 CTRL + C
@@ -1018,6 +1024,8 @@ git fetch
 git pull
 ```
 
+> Please note that FETCH is a general command and will update local copies of all remote branches so this is always safe for your local branches. BUT: fetch will not update local branches (which track remote branches); if you want to update your local branches you still need to pull every branch.
+
 > Create a new feature branch from develop using git flow:
 
 ```
@@ -1035,6 +1043,13 @@ git status
 > Start the backend:
 
 ```
+docker-compose up
+```
+
+> Start the front end:
+
+```
+cd web-app
 docker-compose up
 ```
 
@@ -1139,5 +1154,45 @@ Correcting minor spelling mistakes, fixing capitalization of names and beginning
 > Then press <code>Commit a new file</code>
 
 ![](https://i.imgur.com/ertY3xG.png "Photo by Addania")
+
+**UPDATING YOUR BRANCH:**
+
+> It can happen that you create your amazing new branch for the latest version of develop only to realize next day it is already outdated compared to develop. In such scenario, we will start with fetch. Fetch is a general command which is not branch-related. It will update local copies of ALL remote branches so this is always safe for your local branches. Meaning also that you can do it from any branch.
+
+```
+git fetch
+```
+
+> Switch to develop branch
+
+```
+git checkout develop
+```
+
+> Pull the latest changes of develop from REMOTE to your LOCAL:
+
+```
+git pull
+```
+
+> Switch back to my new branch
+
+```
+git checkout myBeautifulNewBranch
+```
+
+> Merge develop to the new branch
+
+```
+git merge develop
+```
+
+> Then you can add, commit and push changes to REMOTE.
+
+```
+git add .
+git commit -m "updating my branch with latest develop"
+git push origin myBeautifulNewBranch
+```
 
 ![](https://i.imgur.com/k7kjCMC.jpg "Photo by bongkarn thanyakij from Pexels")<p style="font-size: 12px; text-align: right">_Photo by bongkarn thanyakij from Pexels_</p>
