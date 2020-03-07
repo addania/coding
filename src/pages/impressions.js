@@ -66,6 +66,20 @@ export default ({ data }) => (
         alt="Photo by Antonio Quagliata from Pexels"
       />
       <br />
+
+      <br />
+      <strong>Dev day 0.5: 02/03.03.2020 23:50</strong>
+      <br />
+      <blockquote>
+        I just had this philosophical and self-critical moment wondering if this diary had any added value (or speaking language of business: ROI increase) whatsoever. I do not know if for you dear reader(s) (assuming there are any readers... but according to my sophisticated calculations and AI based predictions, there should be precisely at least one: future me), but for me personally it certainly makes LOTS of fun. Especially at these most creative moments at 23:50 [like RIGHT NOW] when I should have been fast asleep like two hours ago and instead I am totally hyped with a waterfall of ideas :))
+      </blockquote>
+      Anyhow, one simple blog = one happier developer on Earth.
+      <br />
+      <img
+        src="https://i.imgur.com/tH7xZhk.jpg"
+        alt="Photo by Pixabay Pexels"
+      />
+      <br />
       <strong>Dev day 1: 03.03.2020</strong>
       <br />
       <blockquote>
@@ -106,12 +120,11 @@ export default ({ data }) => (
       Cause without a challenge it would be boring ;)
       <br />
       <img
-        src="https://i.imgur.com/aRwy8mP.jpg"
-        alt="Photo by Antonio Quagliata from Pexels"
+        src="https://i.imgur.com/6UF5Rk9.jpg"
+        alt="Photo by Creative Vix from Pexels"
       />
       <br />
       <strong>Dev day 2: 04.03.2020</strong>
-      [img]https://i.imgur.com/nWoxCBd.jpg?1[/img]
       <br />
       <blockquote>
         Excellent, I got an Italian cooking Italian lunch for me today. Life
@@ -125,13 +138,92 @@ export default ({ data }) => (
       <br />
       <br />
       Plus as a bonus I got not only 1 (one) achievement, but actually 3 (THREE)
-      :) I managed to create my very first PR and as `all good things come in
-      threes` I also sumbitted second and third. All got approved and merged,
+      :) I managed to create my very first PR and as <code> all good things come in
+      threes</code> I also sumbitted the second and the third. All got approved and merged,
       yay!
       <br />
       <br />
       The evening was painfully funny. Or.. painful & funny? Or both at the same
       time? Only I know... and him.
+      <br />
+      <img
+        src="https://i.imgur.com/aEMHKTi.jpg"
+        alt="Photo by Jackson David from Pexels"
+      />
+      <br />
+      <strong>Dev day 3: 05.03.2020</strong>
+      <br />
+      <blockquote>
+        To keep up with the <code>food</code> pattern from the past posts (because it makes total sense for a programming blog) I am meeting my former team for our AM / Dev Team lunch today. I miss my team especially because I hired most of them personally and <code>cherry</code>-picked almost each and every one of them :) Hmm, cherries... reminds me that I am hungry.
+      </blockquote>
+      <br />
+      Makes me wonder why I am actually writing a dev blog instead of a food blog? :) Yeah, because dunno.. why not? :D
+      <br />
+      <br />
+      Everyone tries to be cool and writes a dev blog and guess what? You find <code>dev</code> stuff for <code>dev</code> people in there.. <code>dev</code> boring.. ;) Buuut imagine a person who lures you into a programming blog only for you to find a <code>golden grail</code> full of chocolate and cake and food and did I mention chocolate? :) Surpriiise, you are in Heaven ! Haha, I am special (or differently talented).
+      <br />
+      <br />
+      So what is up in the dev world today? Did lots of <code>VIP</code> stuff (a.k.a. very important push). I wrote a major article about the initial Front-End settup for any future new starter in the company, such a charitable work :) I am literally a saint already.
+      <br />
+      <br />
+      And the <code>hallmark</code> of the day was plotting with colleagues how to take over the world using robots :D Oh yes, we founded a <code>secret</code> group of underground <code>hackers</code> called <a href="https://www.youtube.com/watch?v=X8Tj5BBW9tM">Team Alpha-Super-Awesome-Cool-Dynamite-Wolf-Squadron</a> who will be meeting up after work every week and plotting terrible things. The very first meeting was .. how to put it.. most interesting. We had.. hmm.. most interesting ideas which included gloves, VR and toilet sensors :D .. Told ya, most interesting.
+      <br />
+      <img
+        src="https://i.imgur.com/rDr9oY2.jpg"
+        alt="Photo by Jackson David from Pexels"
+      />
+      <br />
+      <strong>Dev day 4: 06.03.2020</strong>
+      <br />
+      <blockquote>
+        Emergency! There is:
+        <br />
+        - no cake
+        <br />
+        - no funny Italian cooking
+        <br />
+        - no team lunch
+        <br />
+        - no choxolate
+    </blockquote>
+      <br />
+      What is only going to happen?
+      <br />
+      <br />
+      Oh, wait! It is <code>Friday</code>! Nothing (else) matters as long as it is Friday :) It is a good day by <code>default</code>.
+      <br />
+      <br />
+      const [day, setDay] = useState("good");
+      <br />
+      <br />
+      And therefore this was a (good) day to finally make progress on improving my <code>challenge</code>. Even though it was tempting to still continue with the handbook, priorities (self-imposed and self-enforced) were clear: <code>"Challenge or nothing!"</code>. Althought Friday was whispering: "Pick nothing, pick nothing! Nothing is c-h-ool". But I manged some improvements which were IMMEDIATELY approved. Like really? Before I was waiting for feedback sometimes for 3 weeks. Now it took like 3 minutes. Power of Friday I guess :)
+      <br />
+      <br />
+      After-work afternoon and evening were <code>EPIC</code>:
+      <br />
+      <br />
+      - amazing company
+      <br />
+      - quality conversation
+      <br />
+      - Magic
+      <br />
+      - lots of fun while dancing because <code>Some like it Hot</code>
+      <br />
+      - fantastic dinner in the fairyland of Peter Pan
+	    <br />
+      <br />
+      What more to wish? Soles of my feet burnt from dancing: L.I.T.E.R.A.L.L.Y.
+	    <br />
+      <br />
+      This day was <code>LEGEN..wait for it..DARY</code>
+      <br />
+      <img
+        src="https://i.imgur.com/sxv0av1.jpg"
+        alt="Photo by https://estiloswing.es/wp-content/uploads/2018/08/tecnica-lindy-5.jpg"
+      />
+      <br />
+
     </p>
   </Layout>
 )
