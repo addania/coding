@@ -320,6 +320,185 @@ const role: [number, string] = [1, "cooking"]
 
 > This tells Typescript I want a special array which should have exactly two elements out of which first one is number and second one is string. Please note, `.push` will still work as push is exception and works on Tuples!
 
+## Enums
+
+Another data type which exists in Typescript and other languages but does not exist in JS. They are global variables that can have only limited number of options. For example for the role, we can have options: guildMaster, officer, guildee. These in code should be represented as numbers (starting from 0) but we also want to have human readable labels on top of them.
+
+Then imagine we then need to work with those values in the code. We could of course just have those as normal string values (not enums) but then we would need to remember if it was `guild-master` or `guild_master` or `guildMaster`.. Which can be cumbersome. 
+
+Another possibility would be to define 3 different global constants where each of role name would be a constant and hold a number:
+```
+const guildMaster = 0;
+const officer = 1;
+const guildee = 2;
+```
+and then work variable names in code:
+```
+if (officer){ console.log("Hi Officer!")}
+```
+
+But then again I needed global variables.
+
+Enums can help us in such cases.Enum is a `custom type` and are written in upper-case.
+
+How to create Enum:
+```
+enum Role { guildMaster, officer, guildee};
+```
+
+Behind the scenes guild-master receives number 0, office gets number 1 and guildee gets number 2.
+
+We can also start from any custom number:
+```
+enum Role { guildMaster = 5, officer, guildee};
+```
+
+The rest of them will pick up and have 6 for officer and 7 for guildee.
+
+Or we assign custom numbers to each of them:
+```
+enum Role { guildMaster = 5, officer = 100, guildee = 200};
+```
+
+We are also not restricted to use numbers, we can use text:
+```
+enum Role { guildMaster = "THE MASTER", officer = 100, guildee = 200};
+```
+
+Then we can access this values just like on an object:
+
+```
+enum Role { guildMaster = "THE MASTER", officer = 1, guildee = 0 }
+
+const hero = {
+  name: "Addania",
+  title: "The Horde Slayer",
+  mounts: ["Ashes of Al'ar", "Spectral Steed", "Blue Proto-Drake"],
+  skills: {
+    enchanting: 360,
+    jewelcrafting: 320
+  },
+  role: Role.guildMaster
+}
+```
+
+Now you are maybe asking how did I define the enum? At least for me this worked:
+```
+enum Role { guildMaster = "THE MASTER", officer = 1, guildee = 0 }
+
+const hero: {
+    name: string;
+    title: string;
+    mounts: string[];
+    skills: {
+        enchanting: number;
+        jewelcrafting: number;
+    };
+    role: Role;
+
+} = {
+    name: "Addania",
+    title: "The Horde Slayer",
+    mounts: ["Ashes of Al'ar", "Spectral Steed", "Blue Proto-Drake"],
+    skills: {
+        enchanting: 360,
+        jewelcrafting: 320
+    },
+    role: Role.guildMaster
+}
+```
+
+## Any
+
+Stores any value in there, typescrip will never yell at you.
+
+We can say:
+```
+let petName: any;
+```
+
+Or at least we can say ANY array:
+```
+let petList: any[];
+```
+
+We want to AVOID ANY!
+
+## Union type:
+
+Imagine I want to have a function which should work on both numbers AND string. It would either add 2 numbers or concatenate 2 strings:
+
+```
+const combine = (input1, input2) => {
+    const result = input1 + input2
+    return (result)
+};
+```
+
+Union type can help us in case we want to work with 2 or more types (can be multiple):
+
+```
+const combine = (input1: number | string, input2: number | string | boolean) => {
+    const result = input1 + input2
+    return (result)
+};
+```
+
+## Literal types
+
+Sometimes we might want to restrict value not only to string, number or boolean, but maybe we want to be even stricter. We can limit to only a specific value. For example for constants TS infers that the literal type is for example: 4.6
+```
+const myNum=4.6
+```
+
+>If my parameter can only have 2 values (for example output can only be either: "calculation result: " or "concatenation result: "), we can use union types together with literal types:
+```
+const combine = (input1: number | string, input2: number | string, output: "calculation result: " | "concatenation result: ") => {
+    let result;
+    if (typeof input1 === "number" && typeof input2 === "number") {
+        result = input1 + input2
+    } else {
+        result = input1.toString() + input2.toString()
+    }
+    return (output + result)
+};
+console.log(combine(1, 2, "calculation result: "));
+console.log(combine("A", "B", "concatenation result: "));
+```
+## Type aliases
+
+> Instead of writing our union types all the time:
+```
+input1: number | string;
+input2: number | string;
+```
+> You create them on top of your file with word `type` and provide name of your alias  or custom type. Please note that `type` is again only available in Typescript.
+
+```
+type Combinable = number | string;
+type OutputMessage = "calculation result: " | "concatenation result: ";
+const combine = (input1: Combinable, input2: Combinable, output: OutputMessage) => {
+    let result;
+    if (typeof input1 === "number" && typeof input2 === "number") {
+        result = input1 + input2
+    } else {
+        result = input1.toString() + input2.toString()
+    }
+    return (output + result)
+};
+console.log(combine(1, 2, "calculation result: "));
+console.log(combine("A", "B", "concatenation result: "));
+```
+
+> You can create type aliases not only for union types, but also for for example object types. This allows avoiding repetition and manage types centrally.
+
+```
+type Char = { name: string; level: number };
+const char1: Char = { name: "Addania", level: 255 };
+console.log(char1.name);
+```
+
+
 ## Syntax:
 
 ![](https://i.imgur.com/equqbFL.jpg "Photo by Miguel Constantin Montes from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Miguel Constantin Montes from Pexels_</p>
@@ -366,7 +545,7 @@ Jaaaa:
 type Direction = "up" | "down" | "left" | "right"
 ```
 
-> **Do not us wide types lik objct or any**
+> **Do not us wide types like object or any**
 
 Always try to find concrete types
 
