@@ -180,3 +180,34 @@ history | grep "sudo"
 ```
  CTRL + R
 ```
+> Delete file / Remove file. First navigate to the folder which contains it with `cd` and then execute:
+```
+rm daemon.json
+```
+
+> Use sudo if you dont have enough permissions for deleting file or removing file:#```
+```
+sudo rm daemon.json
+```
+
+> Delete folder / Remove folder. First navigate to the folder which contains folder you want to remove with `cd` and then execute:
+```
+rm -rf docker_data/
+```
+
+> Use sudo if you dont have enough permissions for deleting folder or removing folder:
+```
+sudo rm -rf docker_data/
+```
+> Check disc space. Df == disk free. It goes through all devices and partitions and prints out the overall disc usage of the device. a partition is kind of device and you have a lot of virtual devices, this is why the list is that long and -h means humanize, so you don't get the output in bytes but in MB or GB or what ever makes sense from the size of the device/directory:
+```
+df -h
+```
+> Check disc usage of directory "/" and its subdirectories and the subdirectories of the subdirectories (thats the max-depth=2)and the -x means that it only goes through the partition of "/" and skips all other partitions
+```
+sudo du -x -h --max-depth=2 /
+```
+> Remove cache:
+```
+sudo apt-get clean
+```

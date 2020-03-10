@@ -49,7 +49,8 @@ Steps we will follow on our journey to new computer configuration with developme
 - Main App: Daily Routine
 - Handbook: Front-End Config
 - Handbook: Daily Routine
-
+- Main Transformer: Front-End Config
+- Main Transformer: Daily Routine
 ---
 
 ##GENERAL SETTINGS##
@@ -1196,3 +1197,25 @@ git push origin myBeautifulNewBranch
 ```
 
 ![](https://i.imgur.com/k7kjCMC.jpg "Photo by bongkarn thanyakij from Pexels")<p style="font-size: 12px; text-align: right">_Photo by bongkarn thanyakij from Pexels_</p>
+
+
+---
+
+<h2>Main Transformer: Setup</h2>
+
+>Clone repo with:
+```
+git clone <ULR>
+```
+
+>Prerequisites:
+- docker
+- docker-compose
+- nvm
+
+> Go to the root folder of the project and create a .env file:
+```
+touch .env
+```
+
+> Content of the file should be

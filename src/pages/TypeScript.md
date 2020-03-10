@@ -446,6 +446,8 @@ const combine = (input1: number | string, input2: number | string | boolean) => 
 
 ## Literal types
 
+![](https://i.imgur.com/niHJjzd.jpg "Photo by Suzy Hazelwood from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Suzy Hazelwood from Pexels_</p>
+
 Sometimes we might want to restrict value not only to string, number or boolean, but maybe we want to be even stricter. We can limit to only a specific value. For example for constants TS infers that the literal type is for example: 4.6
 ```
 const myNum=4.6
@@ -466,6 +468,8 @@ console.log(combine(1, 2, "calculation result: "));
 console.log(combine("A", "B", "concatenation result: "));
 ```
 ## Type aliases
+
+![](https://i.imgur.com/30FPntX.jpg "Photo by sebastiaan stam from Pexels")<p style="font-size: 12px; text-align: right">_Photo by sebastiaan stam from Pexels_</p>
 
 > Instead of writing our union types all the time:
 ```
@@ -498,6 +502,95 @@ const char1: Char = { name: "Addania", level: 255 };
 console.log(char1.name);
 ```
 
+## Return type
+
+![](https://i.imgur.com/OfCWNEV.jpg "Photo by P C from Pexels")<p style="font-size: 12px; text-align: right">_Photo by P C from Pexels_</p>
+
+
+> In a simple function we can not only decide what types the parameters of function will be but also the return type. This is usually infered by typescript:
+
+
+> In a simple function like this, return from function will be of type number:
+```
+const add = (n1: number, n2: number) => {
+    return n1 + n2
+}
+```
+>When we hover over the add function, we will see following:
+```
+const add: (n1: number, n2: number) => number
+```
+> Typescript inferred that return will be number. But we can assign return type explicitly:
+```
+const add2 = (n1: number, n2: number): number => {
+    return n1 + n2
+}
+```
+>Imagine following function:
+```
+const add = (n1: number, n2: number) => {
+    return n1.toString() + n2.toString()
+}
+```
+
+>When we hover over the add function, we will see that return is a string:
+```
+const add: (n1: number, n2: number) => string
+```
+> Typescript inferred that return will be string. But we can assign return type explicitly:
+```
+const add2 = (n1: number, n2: number): string => {
+    return n1 + n2
+}
+```
+> Best practice is to let Typescript infer types
+
+## Void type:
+
+![](https://i.imgur.com/n51Q4mm.jpg "Photo by David Yu from Pexels")<p style="font-size: 12px; text-align: right">_Photo by David Yu from Pexels_</p>
+
+> Void type does not exist in Javascript, but we might know it from other languages.
+
+> WHAT on Earth void type is? Imagine you have a function which returns nothing and onyl prints some text:
+
+```
+const printResult=(n1: number)=> (
+    console.log("Result: " + n1)
+)
+```
+
+>If you then hover over printResult, you will see that Typescript infers that it returns VOID:
+```
+printResult: (n1: number) => void
+```
+
+>We could actually specify it explicitely (but this is not recommended):
+```
+const printResult=(n1: number):void => (
+    console.log("Result: " + n1)
+)
+
+printResult(2)
+```
+> So VOID means I do NOT have return statement in my function
+
+> Practically my function returns something though. Console.log the return of printResult would yield "undefined".
+```
+const printResult=(n1: number):void => (
+    console.log("Result: " + n1)
+)
+console.log(print(2))
+```
+> Undefined is a REAL value in Javascript!
+
+> There is another way (but VERY NOT recommended way) to specify that my function will return `undefined`, but this only works when your function HAS a return statement which is empty: 
+```
+const printResult=(n1: number):undefined => (
+    console.log("Result: " + n1)
+    return;
+)
+console.log(print(2))
+```
 
 ## Syntax:
 
@@ -511,6 +604,136 @@ const input1 = document.getElementById("num1")!;
 > <code>as HTMLInputElement</code> means TYPECASTING which says what kind of element it will be, in following case it will be an input element:
 ```
 const input1 = document.getElementById("num1")! as HTMLInputElement;
+```
+
+## Function type
+
+> We are able to tell to Typescrip that certain variable is expected to be a function.
+
+> Imagine a code like this:
+```
+const add = (n1: number, n2: number) => {
+    return n1 + n2
+}
+
+let newFunction;
+newFunction=add;
+console.log(newFunction(1,2))
+```
+> In order to tell explicitely to Typescript that newFunction will be a function, so that later on we cannot assign it just a number `newFunction=2`, we can define the function type:
+```
+let newFunction: Function;
+```
+> We can also use an arrow notation where we can define a return type:
+```
+let newFunction: () => number;
+```
+
+>We can also add types of parameters which we also need to enter:
+```
+let newFunction: (a: number, b: number) => number;
+```
+
+## Function types and callbacks
+
+> Imagine I have a function which will receive 2 numbers as paramenters and also a third parameter which will be another function (callback function):
+```
+const printResult = (n1: number): void => (
+    console.log("Result: " + n1)
+)
+const add = (n1: number, n2: number, callback): number => {
+    const result = n1 + n2
+    callback(result);
+    return result
+}
+const output = add(10, 20, printResult)
+
+```
+> Another way how we can do this using anonymous function (where I define the function righ in the place where I call it):
+```
+const add = (n1: number, n2: number, callback): number => {
+    const result = n1 + n2
+    callback(result);
+    return result
+}
+
+const output = add(10, 20, (result) => {
+  console.log("Result is: " + result)
+ }
+)
+```
+
+> How to now define the function type:
+```
+const add = (n1: number, n2: number, callback: (num: number) => void ): number => {
+    const result = n1 + n2
+    callback(result);
+    return result
+}
+```
+## Unknown type
+
+>Used if we do not know yet, if it is number or a string. We can store any numbers in there without getting errors:
+```
+let userInput: unknown;
+userInput = "mia"
+console.log(userInput)
+userInput = 5
+console.log(userInput)
+userInput = true
+console.log(userInput)
+```
+>This looks so far similar to ANY type. But it IS different. 
+
+>Type Unknown cannot be then assigned to other variable which is for example of a type string. typescript will throw an error.
+```
+let userInput: unknown;
+let userName: string;
+userInput = 5
+userInput = "mia"
+userName=userInput
+```
+>Whereas with any it will not throw an error:
+```
+let userInput: any;
+let userName: string;
+userInput = 5
+userInput = "mia"
+userName=userInput
+```
+>Unknown is a better choice to any
+
+## Never type
+> Functions which throw error cancel the script after the word throw, so that is NO possibility it will ever return anything.
+```
+const generateError = (message: string, code: number) => {
+    throw { message: message, errorCode: code }
+}
+generateError("Upsy", 500)
+```
+
+>So the type of such function is NOT void (cause void returns undefined. Type of such function is NEVER.
+```
+const generateError = (message: string, code: number): never => {
+    throw { message: message, errorCode: code }
+}
+generateError("Upsy", 500)
+```
+>We can also console log this:
+```
+const generateError = (message: string, code: number): never => {
+    throw { message: message, errorCode: code }
+}
+const something = generateError("Upsy", 500)
+console.log(something)
+```
+>Also another function which would NEVER rerutn anything is an infite loop function:
+```
+const generateError = (message: string, code: number): never => {
+    while (true){}
+}
+const something = generateError("Upsy", 500)
+console.log(something)
 ```
 
 ## Best practises tips:
