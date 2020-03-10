@@ -9,20 +9,20 @@ date: "2020-02-13"
 
 ## Intro
 
-This article is basically my notes following and amazing [Typescript course](https://www.udemy.com/course/understanding-typescript/) by Maximilian Schwarzmüller which I would recommend to everyone who wants to learn Typescript.
+This article is basically my notes following an amazing [Typescript course](https://www.udemy.com/course/understanding-typescript/) by Maximilian Schwarzmüller which I would recommend to everyone who wants to learn Typescript.
 
 > Typescript is a <code>superset</code> to Javascript which means it is a programming languages which builds on top of Javascript. It adds new features and advantages to Javascript. It allows to write cleaner, less error-prone and more powerful code.
 
-> Big disadavantage of Typescript is that it cannot be executed by Javascript environments like a browser. But good news is that Typescript is also a tool - it is also a `compiler` which we can run on our Typescript files and convert them to vanilla Javascript. Typescript brings new features which are then compiled to vanilla Javascript <code>workarounds</code>. Such features might be easier to write in Typescrip (or using nicer syntax) while it would be an aweful lot of complex code in Javascript.
+> Big disadavantage of Typescript is that it cannot be executed by Javascript environments like a browser. But good news is that Typescript is also a tool - it is also a `compiler` which we can run on our Typescript files and convert them to vanilla Javascript. Typescript brings new features which are then compiled to vanilla Javascript <code>workarounds</code>. Such features might be easier to write in Typescript (or using nicer syntax) while it would be an aweful lot of complex code in Javascript.
 
-> Most importantly Typescript enables defining and using `types`, which forces us to be more explicit how our code works, it catches unexpected and unnecerssary errors early. It also allows to use next-generation Javascript features which can be then compiled to be used on older browsers. It also adds non-Javascript features like `Interfaces` and `Generics` which cannot be comiled to JS (but they only help during development, they actually don't need to be compiled to vanilla JS). It adds meta-programming features like `Decorators`.
+> Most importantly Typescript enables defining and using `types`, which forces us to be more explicit how our code works, it catches unexpected and unnecessary errors early. It also allows to use next-generation Javascript features which can be then compiled to be used on older browsers. It also adds non-Javascript features like `Interfaces` and `Generics` which cannot be comiled to JS (but they only help during development, they actually don't need to be compiled to vanilla JS). It adds meta-programming features like `Decorators`.
 
 > To install Typscript you need to have `node.js` installed:
 ```
 nodejs.org/en/
 ```
 
-> Node.js will also install NPM tool (node package Manager) which will allow us to intall Typsscript globally with <code>npm install</code> command
+> Node.js will also install NPM tool (Node Package Manager) which will allow us to install Typescript globally with <code>npm install</code> command
 
 > To install Typescript:
 ```
@@ -40,7 +40,7 @@ sudo npm install -g typescript
 app.ts
 ```
 
-> To envoke TS compiler we will use command <code>tsc</code>
+> To envoke TS compiler we will use command <code>tsc</code> and then file name which we want to compile:
 ```
 tsc app.ts
 ```
@@ -65,16 +65,16 @@ tsc app.ts
 </body>
 </html>
 ```
->Especially important is the script tag which will envoke our `app.js` file and will execute is:
+>Especially important is the script tag which will envoke our `app.js` file and will execute it:
 ```
 <script src="app.js"  defer></script>
 ```
 
-> Then in the same folder add app.ts file
+> Then in the same folder add `app.ts` file
 ```
 touch app.ts
 ``` 
-> Add some console.log in there:
+> Add some `console.log` in there:
 ```
 console.log("Monsters for the win!")
 ```
@@ -84,9 +84,9 @@ console.log("Monsters for the win!")
 tsc app.ts
 ```
 
-> New file will be produces: `app.js`
+> New file will be produced: `app.js`
 
-> Now open the index.html in your broswer and <code>CTRL + i</code> to see the console. You should see the message you consoled.
+> Now open the `index.html` in your broswer and <code>CTRL + i</code> to see the console. You should see the message you consoled.
 
 >Problem is however, for now we will need to always save code, compile it, and manually refresh the browser. But we can automate the browser refresh by installing a tool.
 
@@ -101,7 +101,7 @@ npm init
 npm install --save-dev lite-server
 ```
 
-> Then go to `package.json` and add a `start` script after the `test` script (make sure you seprate them with comma):
+> Then go to `package.json` and add a `start` script after the `test` script (make sure you separate them with comma):
 ```
 "test": "echo \"Error: no test specified\" && exit 1",
 "start": "lite-server"
@@ -123,11 +123,11 @@ http://localhost:3000
 Core types are data types provided by Typescript/Javascript (but they are not exclusive, we can define our own).
 
 Core types are:
-- **number** - only one number type no difference between integers or floats (8, 8.6, -10)
+- **number** - there is only one number type, there is no difference between integers or floats (8, 8.6, -10)
 - **string** - text ("monster") - which can be denoted by double or single quotes or backticks:",' or `
 - **boolean** - true or false
 
-> We can define type in the code is with colon and word number or string, etc:
+> Defining type in the code is done with a colon and word `number`, `string` or `boolean` etc:
 
 ```
 const add = (n1: number, n2: number) => (n1 + n2);
@@ -139,7 +139,7 @@ const add = (n1: number, n2: number) => (n1 + n2);
 add('1', 2)
 ```
 
->Error will be seen when I compile the code with
+>Error will be seen when I compile the code with:
 ```
 tsc app.ts
 ```
@@ -151,19 +151,19 @@ error TS2345: Argument of type '"1"' is not assignable to parameter of type 'num
 
 > I will only get error during `compilation` (during development), not during runtime (because browsers do not have built-in Typescript support). It does not change Javascript to work differently. But it adds extra sanity check!
 
->Important is also to notice that even though compilation threw and error, by default the file was `still` compiled and served (but we can setup a blocker for that later).
+>Important is also to notice that even though compilation threw an error, by default the file was `still` compiled and served (but we can setup a blocker for that later).
 
 > Javascript uses `dynamic types` which are resolved at runtime. Typescript uses `static types` which are set during development, allowing us to catch errors early (before they go to production).
 
 >`Type inference` means that Typescript tries to detect type of data. 
 
-> If you initialize a `constant` with number 5, it will be of interred type 5 when you hover over the number1 in `.ts` file. It is because as for constants you cannot re-assign their value:
+> If you initialize a `constant` with number `5`, it will be of interred type 5 when you hover over the number1 in `.ts` file. It is because as for constants you cannot re-assign their value:
 ```
 const number1=5;
 // if you hover over number1 you will see: const number1: 5
 ```
 
-> If you initialize a `variable` with number 5, it will be of inferred type number (as for variables you can re-assign value):
+> If you initialize a `variable` with number 5, it will be of inferred type `number` (as for variables you can re-assign their value):
 ```
 let number2=5;
 let number2: number
@@ -197,24 +197,9 @@ const hero = {
 }
 console.log(hero.nickname);
 ```
-> It also reckognizes which key is of which type. Syntaxs below is an `object type` in Typescript:
-```
-const hero: {
-    name: string;
-    title: string;
-}
-```
 
->We can define `object type` explicitly in a very generic way (but not recommended, we prefer inference):
-```
-const hero: object = {
-    name: "Addania",
-    title: "The Horde Slayer"
-}
-```
 
-or
-
+> We can explicitly define that hero will be an  `object type`:
 ```
 const hero: {} = {
     name: "Addania",
@@ -222,16 +207,29 @@ const hero: {} = {
 }
 ```
 
->But we only gave info to Typescript that this should be an object but we did not define any keys and their type. So if we want to call `hero.name`, we will get Typescript complaining
-
-> Another way to provide Typescript info about the structure of an object looks like this(also not recommended, because we do prefer inference):
+or like this:
 
 ```
-const hero: {name: string; title: string } = {
+const hero: object = {
     name: "Addania",
     title: "The Horde Slayer"
 }
 ```
+
+>Above only says to Typescript that hero will be an object. If we want to be explicit of which type is which key, we can do it like this:
+```
+const hero: {
+    name: string;
+    title: string;
+} = {
+    name: "Addania",
+    title: "The Horde Slayer"
+}
+```
+
+> Notice the semi-colon `;` between curly brackets. Semicolon is a Typescript way to define types in an object. Javascript way of giving multiple keys in an object is using comma.
+
+> Anyway, it is not recommended to explicitly define types if Typescript can infer them.
 
 > We can also add types for nested objects. Example object:
 ```
@@ -247,11 +245,8 @@ const hero = {
 ```
 
 > This is how types would be defined:
-
 ```
-
-const hero:
-{
+const hero:{
     name: string;
     title: string;
     mounts: string[];
@@ -290,10 +285,15 @@ let pets: string[];
 let hordeKillsPerDay: number[];
 ```
 
-> To define type as mixed array (of numbers or strings)we say:
+> To define type as mixed array (of numbers or strings) we say:
 ```
 let mixedAchievements: any[];
 ```
+>You can also be more specific:
+```
+let mixedAchievements: (string | number)[];
+```
+
 ## Tuples
 
 ![](https://i.imgur.com/OTOEqWp.jpg "Photo by Gela Del Rosario from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Gela Del Rosario from Pexels_</p>
@@ -320,52 +320,52 @@ const role: [number, string] = [1, "cooking"]
 
 > This tells Typescript I want a special array which should have exactly two elements out of which first one is number and second one is string. Please note, `.push` will still work as push is exception and works on Tuples!
 
-## Enums
+## Enum type
 
-Another data type which exists in Typescript and other languages but does not exist in JS. They are global variables that can have only limited number of options. For example for the role, we can have options: guildMaster, officer, guildee. These in code should be represented as numbers (starting from 0) but we also want to have human readable labels on top of them.
+>Enum is another data type which exists in Typescript and other languages but does not exist in JS. Enums are global variables that can have only limited number of options. For example for the role, we can have options: guildMaster, officer, guildee. These in code should be represented as numbers (starting from 0) but we also want to have human readable labels on top of them.
 
-Then imagine we then need to work with those values in the code. We could of course just have those as normal string values (not enums) but then we would need to remember if it was `guild-master` or `guild_master` or `guildMaster`.. Which can be cumbersome. 
+>Imagine we then need to work with those values in the code. We could of course just have those as normal string values (not enums) but then we would need to remember if it was `guild-master` or `guild_master` or `guildMaster`.. Which can be cumbersome. 
 
-Another possibility would be to define 3 different global constants where each of role name would be a constant and hold a number:
+>Another possibility would be to define 3 different global constants where each of role name would be a constant and hold a number:
 ```
 const guildMaster = 0;
 const officer = 1;
 const guildee = 2;
 ```
-and then work variable names in code:
+>And then we can work variable names in code:
 ```
 if (officer){ console.log("Hi Officer!")}
 ```
 
-But then again I needed global variables.
+>But then again I needed 3 global variables.
 
-Enums can help us in such cases.Enum is a `custom type` and are written in upper-case.
+>Enums can help us in such cases.Enum is a `custom type` and are written in upper-case.
 
-How to create Enum:
+>How to create Enum:
 ```
 enum Role { guildMaster, officer, guildee};
 ```
 
-Behind the scenes guild-master receives number 0, office gets number 1 and guildee gets number 2.
+>Behind the scenes `guild-master` receives number 0 (poor life of guild masters), `officer` gets number 1 and `guildee` gets number 2.
 
-We can also start from any custom number:
+>We can also start from any custom number:
 ```
 enum Role { guildMaster = 5, officer, guildee};
 ```
 
-The rest of them will pick up and have 6 for officer and 7 for guildee.
+>The rest of them will pick up and have 6 for officer and 7 for guildee.
 
-Or we assign custom numbers to each of them:
+>Or we assign custom numbers to each of them:
 ```
 enum Role { guildMaster = 5, officer = 100, guildee = 200};
 ```
 
-We are also not restricted to use numbers, we can use text:
+>We are also not restricted to use numbers, we can use text:
 ```
 enum Role { guildMaster = "THE MASTER", officer = 100, guildee = 200};
 ```
 
-Then we can access this values just like on an object:
+>Then we can access this values just like on an object:
 
 ```
 enum Role { guildMaster = "THE MASTER", officer = 1, guildee = 0 }
@@ -382,7 +382,7 @@ const hero = {
 }
 ```
 
-Now you are maybe asking how did I define the enum? At least for me this worked:
+>Now you are maybe asking how did I define the enum? At least for me this worked:
 ```
 enum Role { guildMaster = "THE MASTER", officer = 1, guildee = 0 }
 
@@ -410,23 +410,23 @@ const hero: {
 
 ## Any
 
-Stores any value in there, typescrip will never yell at you.
+>Stores any value in there, Typescript will never yell at you.
 
-We can say:
+>We can say:
 ```
 let petName: any;
 ```
 
-Or at least we can say ANY array:
+>Or at least we can say `any` array:
 ```
 let petList: any[];
 ```
 
-We want to AVOID ANY!
+>However, good practice is that we AVOID `any`!
 
 ## Union type:
 
-Imagine I want to have a function which should work on both numbers AND string. It would either add 2 numbers or concatenate 2 strings:
+>Imagine I want to have a function which should work on both numbers AND string. It would either add 2 numbers or concatenate 2 strings:
 
 ```
 const combine = (input1, input2) => {
@@ -435,10 +435,10 @@ const combine = (input1, input2) => {
 };
 ```
 
-Union type can help us in case we want to work with 2 or more types (can be multiple):
+>Union type can help us in case we want to work with 2 or more types (can be multiple):
 
 ```
-const combine = (input1: number | string, input2: number | string | boolean) => {
+const combine = (input1: number | string, input2: number | string) => {
     const result = input1 + input2
     return (result)
 };
@@ -448,7 +448,7 @@ const combine = (input1: number | string, input2: number | string | boolean) => 
 
 ![](https://i.imgur.com/niHJjzd.jpg "Photo by Suzy Hazelwood from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Suzy Hazelwood from Pexels_</p>
 
-Sometimes we might want to restrict value not only to string, number or boolean, but maybe we want to be even stricter. We can limit to only a specific value. For example for constants TS infers that the literal type is for example: 4.6
+>Sometimes we might want to restrict value not only to string, number or boolean, but maybe we want to be even stricter. We can limit to only a specific value. For example for constants TS infers that the literal type is for example: 4.6
 ```
 const myNum=4.6
 ```
@@ -476,7 +476,7 @@ console.log(combine("A", "B", "concatenation result: "));
 input1: number | string;
 input2: number | string;
 ```
-> You create them on top of your file with word `type` and provide name of your alias  or custom type. Please note that `type` is again only available in Typescript.
+> you create them on top of your file with word `type` and provide name of your alias  or custom type. Please note that `type` is again only available in Typescript.
 
 ```
 type Combinable = number | string;
@@ -510,7 +510,7 @@ console.log(char1.name);
 > In a simple function we can not only decide what types the parameters of function will be but also the return type. This is usually infered by typescript:
 
 
-> In a simple function like this, return from function will be of type number:
+> In a simple function like this, return value from function will be of type number:
 ```
 const add = (n1: number, n2: number) => {
     return n1 + n2
@@ -520,7 +520,7 @@ const add = (n1: number, n2: number) => {
 ```
 const add: (n1: number, n2: number) => number
 ```
-> Typescript inferred that return will be number. But we can assign return type explicitly:
+> Typescript inferred that return value will be number. But we can assign return type explicitly:
 ```
 const add2 = (n1: number, n2: number): number => {
     return n1 + n2
@@ -543,7 +543,7 @@ const add2 = (n1: number, n2: number): string => {
     return n1 + n2
 }
 ```
-> Best practice is to let Typescript infer types
+> Best practice is to let Typescript infer types.
 
 ## Void type:
 
@@ -551,7 +551,7 @@ const add2 = (n1: number, n2: number): string => {
 
 > Void type does not exist in Javascript, but we might know it from other languages.
 
-> WHAT on Earth void type is? Imagine you have a function which returns nothing and onyl prints some text:
+> WHAT on Earth is the void type? Imagine you have a function which returns nothing and only prints some text:
 
 ```
 const printResult=(n1: number)=> (
@@ -559,12 +559,12 @@ const printResult=(n1: number)=> (
 )
 ```
 
->If you then hover over printResult, you will see that Typescript infers that it returns VOID:
+>If you then hover over `printResult`, you will see that Typescript infers that it returns `void`:
 ```
 printResult: (n1: number) => void
 ```
 
->We could actually specify it explicitely (but this is not recommended):
+>We could actually specify it explicitly (but this is not recommended):
 ```
 const printResult=(n1: number):void => (
     console.log("Result: " + n1)
@@ -572,16 +572,16 @@ const printResult=(n1: number):void => (
 
 printResult(2)
 ```
-> So VOID means I do NOT have return statement in my function
+> So `void` means I do not have return statement in my function.
 
-> Practically my function returns something though. Console.log the return of printResult would yield "undefined".
+> Practically my function returns something though. Console.log the return of `printResult` would yield `undefined`.
 ```
 const printResult=(n1: number):void => (
     console.log("Result: " + n1)
 )
 console.log(print(2))
 ```
-> Undefined is a REAL value in Javascript!
+> `Undefined` is a REAL value in Javascript!
 
 > There is another way (but VERY NOT recommended way) to specify that my function will return `undefined`, but this only works when your function HAS a return statement which is empty: 
 ```
@@ -592,35 +592,22 @@ const printResult=(n1: number):undefined => (
 console.log(print(2))
 ```
 
-## Syntax:
-
-![](https://i.imgur.com/equqbFL.jpg "Photo by Miguel Constantin Montes from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Miguel Constantin Montes from Pexels_</p>
-
-> <code>!</code> means I am sure my element with certain ID will always be there becasue I checked that id:
-```
-const input1 = document.getElementById("num1")!;
-```
-
-> <code>as HTMLInputElement</code> means TYPECASTING which says what kind of element it will be, in following case it will be an input element:
-```
-const input1 = document.getElementById("num1")! as HTMLInputElement;
-```
-
 ## Function type
 
-> We are able to tell to Typescrip that certain variable is expected to be a function.
+![](https://i.imgur.com/M2Zf5ER.jpg "Photo by Miguel Á. Padriñán from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Miguel Á. Padriñán from Pexels_</p>
+
+> We are able to tell to Typescript that certain variable is expected to be a function.
 
 > Imagine a code like this:
 ```
 const add = (n1: number, n2: number) => {
     return n1 + n2
 }
-
 let newFunction;
 newFunction=add;
 console.log(newFunction(1,2))
 ```
-> In order to tell explicitely to Typescript that newFunction will be a function, so that later on we cannot assign it just a number `newFunction=2`, we can define the function type:
+> In order to tell explicitly to Typescript that `newFunction` will be a function, so that later on we cannot assign it just a number `newFunction=2`, we can define the function type:
 ```
 let newFunction: Function;
 ```
@@ -636,6 +623,8 @@ let newFunction: (a: number, b: number) => number;
 
 ## Function types and callbacks
 
+![](https://i.imgur.com/tp0nHv2.jpg "Photo by Hassan OUAJBIR from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Hassan OUAJBIR from Pexels_</p>
+
 > Imagine I have a function which will receive 2 numbers as paramenters and also a third parameter which will be another function (callback function):
 ```
 const printResult = (n1: number): void => (
@@ -647,16 +636,14 @@ const add = (n1: number, n2: number, callback): number => {
     return result
 }
 const output = add(10, 20, printResult)
-
 ```
-> Another way how we can do this using anonymous function (where I define the function righ in the place where I call it):
+> Another way how we can do this using anonymous function (where I define the function right in the place where I call it):
 ```
 const add = (n1: number, n2: number, callback): number => {
     const result = n1 + n2
     callback(result);
     return result
 }
-
 const output = add(10, 20, (result) => {
   console.log("Result is: " + result)
  }
@@ -672,8 +659,9 @@ const add = (n1: number, n2: number, callback: (num: number) => void ): number =
 }
 ```
 ## Unknown type
+![](https://i.imgur.com/GPUfFFD.jpg "Photo by Kaique Rocha from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Kaique Rocha from Pexels_</p>
 
->Used if we do not know yet, if it is number or a string. We can store any numbers in there without getting errors:
+>Unknown is used if we do not know yet, if it is number or a string. We can store any numbers in there without getting errors:
 ```
 let userInput: unknown;
 userInput = "mia"
@@ -683,9 +671,9 @@ console.log(userInput)
 userInput = true
 console.log(userInput)
 ```
->This looks so far similar to ANY type. But it IS different. 
+>This looks similar to `any` type. But it IS different. 
 
->Type Unknown cannot be then assigned to other variable which is for example of a type string. typescript will throw an error.
+>Type `unknown` type cannot be then assigned to other variable which is for example of a type string. Typescript will throw an error.
 ```
 let userInput: unknown;
 let userName: string;
@@ -693,7 +681,7 @@ userInput = 5
 userInput = "mia"
 userName=userInput
 ```
->Whereas with any it will not throw an error:
+>Whereas with `any` it will not throw an error:
 ```
 let userInput: any;
 let userName: string;
@@ -701,10 +689,13 @@ userInput = 5
 userInput = "mia"
 userName=userInput
 ```
->Unknown is a better choice to any
+>`Unknown` is a better choice to any
 
 ## Never type
-> Functions which throw error cancel the script after the word throw, so that is NO possibility it will ever return anything.
+
+![](https://i.imgur.com/GrnyFyS.jpg "Photo by Elina Krima from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Elina Krima from Pexels_</p>
+
+> Functions which throw error cancel the script after the word throw, so that there is NO possibility it will ever return anything.
 ```
 const generateError = (message: string, code: number) => {
     throw { message: message, errorCode: code }
@@ -712,14 +703,14 @@ const generateError = (message: string, code: number) => {
 generateError("Upsy", 500)
 ```
 
->So the type of such function is NOT void (cause void returns undefined. Type of such function is NEVER.
+>So the type of such function is NOT `void` (because `void` returns `undefined`. Type of such function is `never`.
 ```
 const generateError = (message: string, code: number): never => {
     throw { message: message, errorCode: code }
 }
 generateError("Upsy", 500)
 ```
->We can also console log this:
+>We can also console log this and see there is NO console log:
 ```
 const generateError = (message: string, code: number): never => {
     throw { message: message, errorCode: code }
@@ -727,13 +718,28 @@ const generateError = (message: string, code: number): never => {
 const something = generateError("Upsy", 500)
 console.log(something)
 ```
->Also another function which would NEVER rerutn anything is an infite loop function:
+>Also another function which would NEVER return anything is an infite loop function:
 ```
 const generateError = (message: string, code: number): never => {
     while (true){}
 }
 const something = generateError("Upsy", 500)
 console.log(something)
+```
+
+
+## Syntax:
+
+![](https://i.imgur.com/equqbFL.jpg "Photo by Miguel Constantin Montes from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Miguel Constantin Montes from Pexels_</p>
+
+> <code>!</code> means I am sure my element with certain ID will always be there becasue I checked that id:
+```
+const input1 = document.getElementById("num1")!;
+```
+
+> <code>as HTMLInputElement</code> means TYPECASTING which says what kind of element it will be, in following case it will be an input element:
+```
+const input1 = document.getElementById("num1")! as HTMLInputElement;
 ```
 
 ## Best practises tips:
