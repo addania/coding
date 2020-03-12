@@ -727,6 +727,276 @@ const something = generateError("Upsy", 500)
 console.log(something)
 ```
 
+## Watchmode
+
+![](https://i.imgur.com/6tOCEK8.jpg "Photo by Jordan Benton from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Jordan Benton from Pexels_</p>
+
+>So far after each change of our file we needed to manually run tsc `app.ts`.
+
+>We can enter the watchmode and make sure that compilation watches for any change of the file and if it changes then it re-compiles automatically.
+
+>How to enter watchmode:
+```
+tsc app.ts --watch
+```
+
+>Or alternatively:
+```
+tsc app.ts -w
+```
+
+>You can then exit it with:
+```
+CTRL + C
+```
+
+>How about I have more files than one. Let's add another file called `analytics.ts` and this file will contain following command:
+```
+console.log("Sending...")
+```
+
+>In order to use this file in our project, we need to add it to the script tag of out `index.html`:
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typescript Course</title>
+    <script src="app.js" defer></script>
+    <script src="analytics.js" defer></script>
+</head>
+<body>
+</body>
+</html>
+```
+>Now imagine we want to compile automatically every time any of these two files changes.
+
+>For that we will need to do only once:
+```
+tsc --init
+```
+
+>It will initial the whole folder as a typescript project. It will also create `tsconfig.json` file.
+
+> Now we will be able to run just `tsc` in the terminal and it will compile all the .ts files in our project. 
+
+> We can combine it with watchmode!
+```
+tsc -w
+```
+or
+```
+tsc --watch
+```
+
+## Excluding and including files to compile
+
+>`tsconfig.json` file is a critical file which tells Typescript how to compile files!
+
+>It is possible to exclude certain files from compilation. In order to do that you need to add exclude command at the end of the `tsconfig.json` file. Make sure you add the command betwee two curly brackets and separate them by comma:
+```
+    /* Advanced Options */
+    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
+  },
+  "exclude": [
+    "analytics.ts"
+  ]
+}
+```
+>You will need to re-run the compilation with `tsc` command. Notice that file `analytics.js` is not created.
+
+
+>We can use it with regular expressions to check for any file ending with `dev.ts`
+```
+},
+  "exclude": [
+    "*dev.ts"
+  ]
+}
+```
+>We exclude a file ending with `dev.ts` in ANY folder
+```
+},
+  "exclude": [
+    "**/*dev.ts"
+  ]
+}
+```
+>Typically what we DO WANT to exclude are files in `node_modules` folder (which holds all dependencies):
+```
+},
+  "exclude": [
+    "node_modules"
+  ]
+}
+```
+
+>By default this folder will be excluded by Typescript (so we do not necessarily need to do it, but we can)
+
+>On the other hand we can explicitely say which files to INCLUDE in our compilation. Anything else will be ignored:
+```
+},
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+      "app.ts",
+      "analytics.ts"
+  ]
+}
+```
+
+> I can also include whole folder which I want to include in compilation. For example folder called "section1":
+```
+},
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+      "app.ts",
+      "analytics.ts",
+      "section1"
+  ]
+}
+```
+
+> If I have both exclude and include, Typescript will compile what is INCLUDED minus what is EXCLUDED
+
+> Command file is like include but only applies to files (I cannot use it on folders):
+```
+},
+  "exclude": [
+    "node_modules"
+  ],
+  "files": [
+      "app.ts",
+      "analytics.ts"
+  ]
+}
+```
+
+## tsconfig.json options
+
+### Target
+
+![](https://i.imgur.com/LIWQef6.jpg "Photo by vedanti from Pexels")<p style="font-size: 12px; text-align: right">_Photo by vedanti from Pexels_</p>
+
+>Target tells for which target Javascript version we want to compile our code and which runs in set of browsers. And you dedefine which browsers support the compiled code by setting the target. 
+```
+ "compilerOptions": {
+    /* Basic Options */
+    // "incremental": true,
+    "target": "es5",
+```
+
+>Default target is `es5`. And I can see it, because in my `.ts` files I use `const` and `let`, which if I open the `.js` file I will see `var` everywhere. Because in `es5` we do not have `let` and `const`!! `es5` makes sure that code will run in older browsers, but maybe I want to use `es6` and then I have other build tool which will transpile the Javascript code which can be then read by older browsers. Or maybe we want to ship code that ONLy works in modern browsers.
+
+>We can delete the es5 and press `CTRL+SPACE` it will give you all the possible options. You can set target to es6 which is equivalent to es2015. Or use even younger version: es2020
+
+### Libraries
+
+![](https://i.imgur.com/zZbnUAa.jpg "Photo by Skitterphoto from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Skitterphoto from Pexels_</p>
+
+>Allows to specify which default objects and features Typescript knows (for example working with the DOM). If "lib" is empty, defaults are assumed based on our target.
+
+>Add a button to the index.html file:
+```
+<body>
+    <button>Click Me!</button>
+</body>
+```
+>And then let us add event listener to the button, so that we console log a message when button is clicked. Add this to the .ts file:
+```
+const button = document.querySelector("button")!;
+button.addEventListener("click", () => {
+    console.log("Button Clicked!")
+})
+```
+
+> We needed to add ! after querySelector (to tell to Typescript that this button WILL exist).
+
+> Now we can add custom libraries to our tsconfig.json file which would overwrite defaults. For our Javascript project we would need:
+
+```
+     "lib": [
+       "DOM",
+       "ES6",
+       "DOM.Iterable",
+       "ScriptHost"
+     ],
+```
+>But above is equivalent if we leave it empty becasue then defaults are assumed based on our es6 target.
+
+```
+"lib": [],
+```
+### allowJS and checkJS
+
+>This option allows Javascript files to be compiled. AllowJS will compile .js files. CheckJS will still check syntax of .js files, but it will not compile them. But it does not make sense if you have both .ts and .js files becasue then it will leave to double-compilation. This could be however used in projects where we dont have Typescript at all, but we still want to check .js files.
+
+### sourceMap
+
+![](https://i.imgur.com/fNmTHCH.jpg "Photo by Pixabay from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Pixabay from Pexels_</p>
+
+>Source Map helps with debugging and development. You can see .js files from your project in the browser -> developer tools (or CTRL+SHIFT+i)->Sources
+
+> However, we only see the js files, not our ts files. Source map if set to true, will create new files in the project folder: `app.js.map` which in browser will be translated as app.ts file. Which can be practical especially if we use some easy nice syntax in ts which would then be very complicated in js.
+
+```
+"sourceMap": true,
+```
+
+> In the sources we will see our code and also we will be able to put cursor in a specific line of the code and stop then execution of the code there. Which is good for debuggin (like adding `debugger` in the code). But this is only done in browser and we are not polluting our code in reality.
+
+### outDir and rootDir
+
+> These help us in bigger projects to organize the folder structure. Usually we will not want to have all files laying around in the project root folder. A typical project will want to have a `src` and `dist` subfolders. `dist` usually holds all output files (like the javascript files) and `src` might hold all typescript files.
+
+> By default Typescript will compile the Typescript files into Javascript files and put them right next to Typescript files.
+
+> With `outDir` we can tell Typescript where output (Javascript) files will be stored, for example in `dist` folder:
+```
+"outDir": "./dist",
+```
+
+> While our .ts files might reside in `src` folder.
+
+> Please note that then you also nbeed to adpat .index.html file to point to the .js files in dist folder:
+```
+<script src="dist/app.js" defer></script>
+<script src="dist/analytics.js" defer></script>
+```
+
+> You will also need to adapt `tsconfig.json` file in case you have include and you will need to add new parth to the files:
+```
+"include": [
+    "src/app.ts",
+    "src/analytics.ts"
+]
+```
+> Also if we had subfolder structure in the `src` folder, this will be replicated in the `dist` folder.
+
+> With `rootDir` I can set Typescript to only read files from this folder. It is equivalent if we used `include`.
+```
+"rootDir": "./src",
+```
+>The difference however is that `rootDir` will also make sure that ou`tDir will replicate folder structure of the `rootDir`
+
+>Often we set both `outDir` and `rootDir`
+
+### removeComments
+
+>Any comments in the `.ts` file will be ignored in the `.js` file:
+```
+"removeComments": true,
+```
+
+### noEmit
+> This setting will make sure NO `.js` files are produced (for example if I only want to check my files)
+```
+"noEmit": true,   
+```
 
 ## Syntax:
 

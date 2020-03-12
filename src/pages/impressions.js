@@ -224,6 +224,25 @@ export default ({ data }) => (
       />
       <br />
 
+
+
+      <br />
+      <img
+        src="https://i.imgur.com/rDr9oY2.jpg"
+        alt="Photo by Jackson David from Pexels"
+      />
+      <br />
+      <strong>Dev day 5: 09.03.2020</strong>
+      <br />
+      <blockquote>
+        You know how those <code>lift conversations</code> go.. You have <code>30 seconds</code> to engage your fellow travellers (who happen to be your colleagues) in a very serious conversation about very serious topics like weather and stuff :) As I find weather topic boring,, I usually ask "how are you?" But not out of politeness as most people do who never expect or interest themselves in the actual answer. I usually am genuinly interested in the answer :) Especially after the weekend, I am eager to hear those weekend stories, how people spend their life outside of work. But as it happens to be a Monday, the answer to "how are you?" is however typically: "yeah, you know.. Monday". For most work-bound souls, Monday has become an adjective. Monday has become the the state of spirit.
+    </blockquote>
+      <br />
+      <br />
+    But when I ask people how they are, it is also for me a small retrospective moment to actually give a brief check on my own emotional state. And what I surprisingly found this particular Monday was that I was actually `looking forward` to go to job! Just like entire last week. And so unlike so many many weeks before. Tracing back to... years even. Wow, what a delightful plot twist. What a peaceful feeling that it `is` actually possible to like the job and to be (at least for a brief moment in life)... simply `content`.
+    <br />
+      <br />
+    The peaceful moment lasted.. for about that lift ride :) As afterwards I tried to make another repo work on my local, following very short guide (5 instructions) and failed on the very last one. Error message was quite clear: Low on discspace... What was not clear though was... how on EARTH I can run out of disc space after [one, ein, um, jeden] week of having brand new pc? Aaaanyhow, seems like issue with initial system installation. And... Dom is on holiday. Issue will have to wait till Wednesday. Time for progress on studying Typescript.
     </p>
   </Layout>
 )
