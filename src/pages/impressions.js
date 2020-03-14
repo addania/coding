@@ -223,9 +223,6 @@ export default ({ data }) => (
         alt="Photo by https://estiloswing.es/wp-content/uploads/2018/08/tecnica-lindy-5.jpg"
       />
       <br />
-
-
-
       <br />
       <img
         src="https://i.imgur.com/rDr9oY2.jpg"
@@ -234,15 +231,55 @@ export default ({ data }) => (
       <br />
       <strong>Dev day 5: 09.03.2020</strong>
       <br />
-      <blockquote>
-        You know how those <code>lift conversations</code> go.. You have <code>30 seconds</code> to engage your fellow travellers (who happen to be your colleagues) in a very serious conversation about very serious topics like weather and stuff :) As I find weather topic boring,, I usually ask "how are you?" But not out of politeness as most people do who never expect or interest themselves in the actual answer. I usually am genuinly interested in the answer :) Especially after the weekend, I am eager to hear those weekend stories, how people spend their life outside of work. But as it happens to be a Monday, the answer to "how are you?" is however typically: "yeah, you know.. Monday". For most work-bound souls, Monday has become an adjective. Monday has become the the state of spirit.
-    </blockquote>
+<br />
+
+        You know how those <code>lift conversations</code> go.. You have <code>30 seconds</code> to engage your fellow travellers (who happen to be your colleagues) in a very serious conversation about very serious topics like weather and stuff :) As I find weather topic boring, I usually ask <code>"how are you?"</code> But not out of politeness as most people do who never expect or interest themselves in the actual answer. I usually am genuinely interested in what they say :) Especially after the weekend, I am eager to hear those weekend stories, how people spend their life outside of work. But as it happens to be a Monday, the answer to <code>"how are you?"</code> is however typically: <code>"Yeah, you know.. Monday"</code>.
+   <blockquote>
+   For most work-bound souls, Monday has become an <code>adjective.</code> Monday has become the the <code>state</code> of spirit.
+   </blockquote>
       <br />
       <br />
-    But when I ask people how they are, it is also for me a small retrospective moment to actually give a brief check on my own emotional state. And what I surprisingly found this particular Monday was that I was actually `looking forward` to go to job! Just like entire last week. And so unlike so many many weeks before. Tracing back to... years even. Wow, what a delightful plot twist. What a peaceful feeling that it `is` actually possible to like the job and to be (at least for a brief moment in life)... simply `content`.
+    But when I ask people how they are, it is also for me a small retrospective moment to actually give a brief check on my own emotional state. And what I surprisingly found this particular Monday was that I was actually <code>looking forward</code> to go to job! Just like entire last week. And so unlike so many weeks before. Tracing back to... years even. Wow, what a delightful plot twist. What a peaceful feeling that it <code>is</code> actually possible to like the job and to be (at least for a brief moment in life)... simply <code>content</code>.
+    <br />
+    <br />
+    The peaceful moment lasted.. for about that lift ride :) As afterwards I tried to make another repo work on my local, following very short guide (5 instructions) and failed on the very last one. Error message was quite clear: <code>Low on disc space</code>.. What was not clear though was... how on EARTH I can run out of disc space after [one, ein, um, jeden] week of having brand new pc? Aaaanyhow, seems like issue with initial system installation. And... Dom is on holiday. Issue will have to wait till Wednesday. Time for progress on studying Typescript.
+    
     <br />
       <br />
-    The peaceful moment lasted.. for about that lift ride :) As afterwards I tried to make another repo work on my local, following very short guide (5 instructions) and failed on the very last one. Error message was quite clear: Low on discspace... What was not clear though was... how on EARTH I can run out of disc space after [one, ein, um, jeden] week of having brand new pc? Aaaanyhow, seems like issue with initial system installation. And... Dom is on holiday. Issue will have to wait till Wednesday. Time for progress on studying Typescript.
+      <img
+        src="https://i.imgur.com/rDr9oY2.jpg"
+        alt="Photo by Jackson David from Pexels"
+      />
+      <br />
+      <strong>Dev day 6: 10.03.2020</strong>
+      <br />
+      <blockquote>
+      It is happening.. I cannot believe it..The first real tangible impact of Corona on my life.. React Vienna meetup was <code>cancelled</code>!
+      </blockquote>
+      <br />
+      <br />
+
+      Was really looking forward to it as it was supposed to be my very first dev meetup. But it turned out that spontanoues alternative plan was just as amazing. 
+      <br />
+      <br />
+      Sometimes no matter where you are, what situation surrounds us, if we are with the right person, the world turns a better place for that brief moment :) So yeah, cinema, dinner and worthwhile conversation all dosed just in the perfect balance to flavor the end of the day just right.
+      <br />
+      <br />
+
+        <img
+        src="https://i.imgur.com/rDr9oY2.jpg"
+        alt="Photo by Jackson David from Pexels"
+      />
+      <br />
+      <strong>Dev day 7: 11.03.2020</strong>
+      <br />
+      <blockquote>
+      Great stuff is happening today! I got assigned to my very first <code>pod</code>, yay! Moreover, they already gave me the very first issue to look at.
+      </blockquote>
+      <br />
+      <br />
+      And that is not all :) ! Colleague and I finally re-partitioned the disc to have enough space for all the upcoming devilish projects. Docker beware, here I come again - full firepower this time! And this time I defeat you! And so did I... almost...technically... or at least in theory. Cause... <code>ANOTHER</code> error. So I summoned the Docker Wizard Jan :) and we spent entire afternoon figuring it out. Only it turned out it was not the Docker this time.  
+
     </p>
   </Layout>
 )

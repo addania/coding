@@ -993,10 +993,42 @@ button.addEventListener("click", () => {
 ```
 
 ### noEmit
-> This setting will make sure NO `.js` files are produced (for example if I only want to check my files)
+> `noEmit` setting will make sure NO `.js` files are produced (for example if I only want to check my files)
 ```
-"noEmit": true,   
+"noEmitOnError": true,   
 ```
+> There is another one `noEmitOnError` which makes sure no js file is produced if there was compilation error.
+
+```
+"noEmitOnError": true,   
+```
+
+### Strict
+
+>We can set strict to true, which will be equivalent to enabling all the rest of strict options to true:
+
+```
+"strict": true,  
+```
+>is the same as:
+```
+"noImplicitAny": true,
+"strictNullChecks": true,
+"strictFunctionTypes": true,
+"strictBindCallApply": true,
+"strictPropertyInitialization": true,
+"noImplicitThis": true,
+"alwaysStrict": true,
+```
+> `noImplicitAny` will always throw error if a parameter of a function is implied by Typescript to be of ANY type (which we should avoid). It forces us to be specific about what data we expect. For variables, it does not complain.
+```
+"strictNullChecks": true,   
+``` 
+
+> `strictNullChecks` is checking if the objects we try to access actually exist. SO for our button, we needed to add `!`after the querySelector, because otherwise Typescript would complain that it is not sure if that selector exists. It is because of this option. If it is true, it throws such errors to notify you maybe this does not exist.
+```
+"strictNullChecks": true,   
+``` 
 
 ## Syntax:
 

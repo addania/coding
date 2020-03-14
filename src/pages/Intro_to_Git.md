@@ -589,6 +589,21 @@ sudo npm install -g typescript
 
 ```
 
+> How to get all the history of your commands in terminal? Navigate to home/addania/ and there you will find a file called `.bash_history`
+
+>If you want to rename branch on your local only while pointed to any branch, do:
+```
+git branch -m <oldname> <newname>
+```
+
+>If you want to locally rename branch on which you are currently at, you can do:
+```
+git branch -m <newname>
+```
+
+>Renaming locally and remotely some branch, refer to [StackOverflow](https://stackoverflow.com/questions/1526794/rename-master-branch-for-both-local-and-remote-git-repositories?answertab=votes#tab-top)
+
+
 **VISUALS**
 
 ![](https://i.imgur.com/qvRNfBN.png  "Smart Git logo")
