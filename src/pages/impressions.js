@@ -71,16 +71,18 @@ export default ({ data }) => (
       <br />
       <blockquote>
         I just had this philosophical and self-critical moment wondering if this
-        diary had any added value (or speaking language of business: ROI
-        increase) whatsoever. I do not know if for you dear reader(s) (assuming
-        there are any readers... but according to my sophisticated calculations
-        and AI based predictions, there should be precisely at least one: future
-        me), but for me personally it certainly makes LOTS of fun. Especially at
-        these most creative moments at 23:50 [like RIGHT NOW] when I should have
-        been fast asleep like two hours ago and instead I am totally hyped with
-        a waterfall of ideas :))
+        diary had any added value whatsoever.
       </blockquote>
-      Anyhow, one simple blog = one happier developer on Earth.
+      <br />I do not know if for you dear reader(s) (assuming there are any
+      readers... but according to my sophisticated calculations and AI based
+      predictions, there should be precisely at least one: future me), so for me
+      personally it certainly makes <code>lots</code> of fun. Especially at
+      these most creative moments at 23:50 (like <code>right now</code>) when I
+      should have been fast asleep like two hours ago and instead I am totally
+      hyped with a waterfall of ideas :))
+      <br />
+      <br />
+      Anyhow, one simple blog = one (sleepless but) happier developer on Earth.
       <br />
       <img
         src="https://i.imgur.com/tH7xZhk.jpg"
@@ -150,8 +152,8 @@ export default ({ data }) => (
       and the third. All got approved and merged, yay!
       <br />
       <br />
-      The evening was painfully beautiful. Or.. painful & beautiful? Or both at the same
-      time? Only I know... and him.
+      The evening was painfully beautiful. Or.. painful & beautiful? Or both at
+      the same time? Only I know... and him.
       <br />
       <img
         src="https://i.imgur.com/aEMHKTi.jpg"
@@ -279,7 +281,6 @@ export default ({ data }) => (
         Monday has become the the <code>state</code> of spirit.
       </blockquote>
       <br />
-      <br />
       But when I ask people how they are, it is also for me a small
       retrospective moment to actually give a brief check on my own emotional
       state. And what I surprisingly found this particular Monday was that I was
@@ -292,18 +293,22 @@ export default ({ data }) => (
       <br />
       The peaceful moment lasted.. for about that lift ride :) As afterwards I
       tried to make another repo work on my local, following very short guide (5
-      instructions) and failed on the very last one - installing Docker.. I am cursed with this Docker, it keeps resisting my attempts to tame it. Error message was quite
-      clear: <code>Low on disc space</code>.. What was not clear though was...
-      how on EARTH I can run out of disc space after [one, ein, um, jeden] week
-      of having brand new pc? Aaaanyhow, seems like issue with initial system
-      installation. And... Dom is on holiday. Issue will have to wait till
-      Wednesday. Time for progress on studying Typescript.
+      instructions) and failed on the very last one - installing Docker.. I am
+      cursed with this Docker, it keeps resisting my attempts to tame it. Error
+      message was quite clear: <code>Low on disc space</code>.. What was not
+      clear though was... how on EARTH I can run out of disc space after ["one",
+      "ein", "um", "jeden"] week of having brand new pc? Aaaanyhow, seems like
+      issue with initial system installation. And... Dom is on holiday. Issue
+      will have to wait till Wednesday. Time for progress on studying
+      Typescript.
       <br />
       <br />
-      Mindvalley
+      Oh and evening was quite interesting. Signed up for a 1 hour meditation
+      workshop on Mindvalley. Was really pleasant to silence the thoughts and
+      enjoy some peace in my own head :)
       <img
-        src="https://i.imgur.com/rDr9oY2.jpg"
-        alt="Photo by Jackson David from Pexels"
+        src="https://i.imgur.com/ZJgxiKI.jpg"
+        alt="Photo by Tina Nord from Pexels"
       />
       <br />
       <strong>Dev day 6: 10.03.2020</strong>
@@ -313,34 +318,29 @@ export default ({ data }) => (
         Corona on my life.. React Vienna meetup was <code>cancelled</code>!
       </blockquote>
       <br />
-      <br />
       Was really looking forward to it as it was supposed to be my very first
       dev meetup. But it turned out that spontanoues alternative plan was just
       as amazing.
       <br />
       <br />
-      Sometimes no matter where you are, what situation surrounds you, if we are
-      with the right person, the world turns a better place for that brief
+      Sometimes no matter where you are, what situation surrounds you, if you
+      are with the right person, the world turns a better place for that brief
       moment :) So yeah, cinema, dinner and worthwhile conversation all dosed
       just in the perfect balance to flavor the end of the day just right.
       <br />
       <br />
-      <img
-        src="[img]https://i.imgur.com/F6DRegE.jpg"
-        alt="Photo by Jackson David from Pexels"
-      />
+      <img src="https://i.imgur.com/naD9SDf.jpg" alt="Photo from vapiano.com" />
       <br />
       <strong>Dev day 7: 11.03.2020</strong>
       <br />
       <blockquote>
         Great stuff is happening today! I got assigned to my very first{" "}
         <code>pod</code>, yay! Moreover, they already gave me the very first
-        issue to look at.
+        <code> issue</code> to look at.
       </blockquote>
       <br />
-      <br />
       And that is not all :) ! Colleague and I finally re-partitioned the disc
-      to have enough space for all the upcoming devilish projects and ... Docker
+      to have enough space for all upcoming devilish projects and for.. Docker
       (gosh why I keep mistyping the Docker with <code>i</code>). Docker beware!
       Here I come again! Full firepower this time! And this time I defeat you!
       And so did I... almost...technically... or at least in theory. Cause...{" "}
@@ -350,30 +350,54 @@ export default ({ data }) => (
       <br />
       <br />
       It turned out the <code>npm start</code> was completely broken for entire
-      frontend team. Then I am thinking ... why NOBODY screamed?? I guess the
-      dev world was waiting for a hero to save them.. cough* cough* (oh no...
-      hero with Corona?)!
+      frontend team. Then I am thinking ... why NOBODY screamed before? I guess
+      the dev world was waiting for a <code>hero</code> to save them.. :) cough*
+      cough* (oh no... hero with Corona?)!
       <br />
       <br />
-      setuuuuuuuuuuuup
+      And yes, today was a big day when I finalized my pro master hipster setup:
+      <br />
+      <img src="https://i.imgur.com/ZHI8A86.jpg" alt="Photo by Addania" />
+      <br />
+      Finally 2 huge screens plus the one from laptop. No more compromises with
+      1 tiny little screen where I try to cramp 6 small windows next to each
+      other. It is time to live in the lap of luxury, where each window has its
+      dedicated section! No more <code>alt-tabing</code> endlessly in the{" "}
+      <code>inception</code> of windows. Dream of every programmer has become
+      real*
+      <br />
+      <br />
+      ____________________________________
+      <br />
+      <i style={{ fontSize: "10px" }}>
+        *Foot note in very tiny font: "Yes.. in practice.. I only use the middle
+        one. The rest two are decorations" :){" "}
+      </i>
+      <br />
+      <br />
+      Worth mentioning is also my pro master hipster{" "}
+      <code>water-->tea-->coffee</code> setup (from left to right). Just in case
+      you haven't noticed :)
+      <br />
+      <br />
       <img
-        src="https://i.imgur.com/rDr9oY2.jpg"
-        alt="Photo by Jackson David from Pexels"
+        src="https://i.imgur.com/XssOb7u.jpg?1"
+        alt="Photo by Ekrulila from Pexels"
       />
-      <br />
       <strong>Dev day 8: 12.03.2020</strong>
       <blockquote>Today I am dangerous.</blockquote>
       <br />
-      <br />
       All boxes are checked:
       <br />
-      <input type="checkbox" checked></input> dangerous sunglasses (as real as imaginary) are on
+      <input type="checkbox" checked></input> dangerous sunglasses (as real as
+      imaginary) are on
       <br />
       <input type="checkbox" checked></input> dangerous{" "}
       <a href="https://www.youtube.com/watch?v=QRQwZDWz1Pw">track</a> is on
       <br />
-      <input type="checkbox" checked></input> I (dangerously) stir in my chair to find that perfect subtle (and
-      dangerous) alignment for my dangerous .. <s>butt</s>.. spine!!
+      <input type="checkbox" checked></input> I (dangerously) stir in my chair
+      to find that perfect subtle (and dangerous) alignment for my dangerous ..{" "}
+      <s>butt</s>.. spine!!
       <br />
       <br />
       Today I will work on my very first issue and I will solve it, crack it,
@@ -381,18 +405,16 @@ export default ({ data }) => (
       the universe.. At least that is the plan.. What can possible stop me? :))
       Hmm, maybe I should take a look at that issue first, maybe :))
       <br />
-      <br />
-      2 hours later....
+      <br />2 hours later....
       <blockquote>
         "Doors and corners. That's where they get you"
         <br />
         Det. Josephus Miller (The Expanse)
       </blockquote>
-
       <img
-      src="https://i.imgur.com/QxcOEsn.jpg"
-      alt="Photo from https://www.ctvscifi.ca"
-    />
+        src="https://i.imgur.com/QxcOEsn.jpg"
+        alt="Photo from https://www.ctvscifi.ca"
+      />
       <br />
       Ok, let's not talk about it, just NOT! Hahaha :))
       <br />
@@ -401,52 +423,130 @@ export default ({ data }) => (
       <a href="https://addania.github.io/coding/Template_Literal/">here</a>).
       Today my head literally exploded with info. I learned more in one day than
       in previous 1.5 weeks. Wohaa. And I was such a good apprentice, so bright
-      and fast-learner and uncomplicated, that my mentor totally did NOT HAVE
-      TO take his laptop and move to a table right next to me, so that he
-      doesn't need to walk all way to my place every few seconds when I had
-      another thousand of questions :) Hey, at least I had a neighbour!
+      and fast-learner and uncomplicated, that my mentor totally did NOT HAVE TO
+      take his laptop and move to a table right next to me, so that he doesn't
+      need to walk all way to my place every few seconds when I had another
+      thousand of questions :) Hey, at least I had a neighbour!
       <br />
       <br />
-      anyway today i felt generous...
-      ...
+      And as all my new colleagues are so nice to me and help me out, I decided
+      to purchase a special treat for them.
+      <br />
+      <img src="https://i.imgur.com/al6QpWq.jpg" alt="Photo by Addania" />I
+      called it a <s>bribe</s>.. thank-you package :)
+      <br />
+      - the 1st one for the 1st colleagues
+      <br />- the 2nd one for <s>the 2nd coll</s>.. ok, for ME.
+      <br />
+      - the rest of them, yes, for ME as well :)
+      <br />
+      One of them was already missing in the picture (that was the first one..)
       <br />
       <br />
-      Side note:
+      The afternoon was rather confusing. I really wanted to concentrate on
+      coding, but as my Slovak colleague was bombarding me with latest
+      announcements from Slovak government that they are closing borders with
+      Austria and everyone coming to the country from abroad will be kept in
+      quaranteen, I was slowly starting to be nervous about being even able to
+      come home today.
+      <br />
+      <br />I completely forgot about the German course and we also cancelled
+      the{" "}
+      <a href="https://www.youtube.com/watch?v=X8Tj5BBW9tM">
+        Team Alpha-Super-Awesome-Cool-Dynamite-Wolf-Squadron
+      </a>{" "}
+      after-work hangout and soon I was rushing to the train station hoping that
+      the trains to Slovakia would not be cancelled yet (as some trains to Italy
+      and Switzerland had been already for couple of days). And as the company
+      announced yesterday that we all would be taking home office from next
+      Monday on and after agreement with my own boss to be able to already start
+      my home office tomorrow, I was packed with my laptop, with a huge bag with
+      all my stuff from the fridge. And seeing all other people also rushing to
+      the Bratislava train with also huge bags and some of them even with their{" "}
+      <code>monitors</code>... it totally felt like an...{" "}
+      <code>evacuation</code>. Which I guess it actually <strong>was</strong>.
       <br />
       <br />
-      And today I finally got my bath robe back from ... someone. Yeah, because
-      it is perfectly fine to have people safe-keeping (and because you can
-      never be sure) and/or wearing your bath robes :) Anyhow, it was my
-      favourite bath robe (because it was the only one) and for almost a year
-      it was... away. So now I finally got it back and brought this treasure home.
-      Only I brought it with an uninvited guest. It turned out to be a host of
-      a... <code>Motte</code>!! So annoying, having <code>Motte</code> in my
-      home sweet home, my pristine castle, my holy sanctuary??
+      Brrr... spooky train ride back home. There was such a heavy and somber
+      atmosphere hanging (even stuck) in the air. Or was it just me?
+      <br />
+      <br />
+      __________________________
+      <br />
+      <i>(on the bright) Side (Note):</i>
+      <br />
+      <br />
+      Today I finally got my bath robe back from ... someone. Yeah, because it
+      is perfectly fine to have people safe-keeping (and because you can never
+      be sure) and/or wearing your bath robes :) Anyhow, it was my favourite
+      bath robe (because it was the only one) and for almost a year it was...
+      away. So now I finally got it back and brought this treasure home. Only I
+      brought it with an uninvited guest. It turned out to be a host of a...{" "}
+      <code>Motte</code>!! So annoying, having <code>Motte</code> in my home
+      sweet home, my pristine castle, my holy sanctuary??
       <br />
       <br />
       ...Fast-forward to Saturday...
       <br />
       <br />
-      Captain's log, stardate 20200314.18:07: 
-      <pre style={{color: "white"}}>"After two days of hunting and 10
-      Mottenfallen: <br />Human versus Motte: <br />1:0"
+      Captain's log, stardate 20200314.18:07:
+      <pre style={{ color: "white" }}>
+        "After two days of hunting and 10 Mottenfallen: <br />
+        Human versus Motte: <br />
+        1:0"
       </pre>
-
       <img
-      src="https://i.imgur.com/kwERdM2.jpg"
-      alt="Photo from https://www.wired.com"
-    />
-    <br />
-    <strong>Dev day 9: 13.03.2020</strong>
-    <br />
-    <blockquote>
-      It starts to be creepy
-    </blockquote>
-    <br />
-    <br />
-    No concentration
-    QA testing
-    Travel dilemma.
+        src="https://i.imgur.com/kwERdM2.jpg"
+        alt="Photo from https://www.wired.com"
+      />
+      <br />
+      <strong>Dev day 9: 13.03.2020</strong>
+      <br />
+      <blockquote>It starts to be creepy</blockquote>
+      <br />
+      I mean the whole Corona situation. I try to focus on my job, but it just
+      feels strange. Kind of out of this space. 
+      <br />
+      <br />
+      Ok, decision has been made,
+      emergency shopping (just to be on the safe side and prepared for any
+      eventuality [of an apocalypse]):
+      <br />
+      <img src="https://i.imgur.com/F3JevVz.jpg" alt="Photo by Addania" />
+      Now whatever happens, I will be fine (dose of chocolate solves every
+      problem in the world, does it not?).
+      <br />
+      <br />
+      And I made a tough decision today. I was considering to travel to my
+      family in the evening or not. As tempting as it was (even having a
+      colleague who would give me a ride), I decided against it. After all I
+      have been in Vienna for past weeks where situation is much more severe
+      than in Slovakia and where I have been exposed to lots and lots of people
+      in trains, U-bahn, job, outside of job.. Which increases probability of
+      potential danger even if I do not have any symptoms. So it would not be
+      wise and responsible now to pose the same risk to my family. As much as I
+      miss them, they and their health are much more important to me than my
+      loneliness.
+      <br />
+      <br />
+      Anyway, today I did some QA testing for the issue implemented by my
+      colleague and then I literally spent entire day (until midnight) browsing
+      the code, playing around, testing some of my hypothesis and trying to
+      figure things out. You can tell that it was very interesting that it kept me awake
+      for so long. And I think to invest some of my private time now into
+      discovering things on my own could make a difference in long run. And
+      especially when it actually makes <code>fun</code> :)
+      <br />
+      <br />
+      And here is my <code>home office</code> setup:
+      <br />
+      <img src="https://i.imgur.com/LE1F5XE.jpg" alt="Photo by Addania" />
+
+      <br />
+      <strong>Dev day 10: 16.03.2020</strong>
+      <br />
+      <blockquote>...</blockquote>
+      <br />
     </p>
   </Layout>
 )
