@@ -4,7 +4,7 @@ date: "2020-03-14"
 ---
 ![](https://i.imgur.com/ETtwNWY.jpg "Photo from wallpapersafari.com")<p style="font-size: 12px; text-align: right">_Photo from wallpapersafari.com_</p>
 
-> Some things in life are obvious. Like when you want to concatenate two strings for example <code>"For the" </code> and <code>"Alliance!"</code> everyone knows that there are **maximum** of two (reasonable) ways:
+> Some things in life are obvious. Like when you want to concatenate two strings for example <code>"For the " </code> and <code>"Alliance!"</code> everyone knows that there are **maximum** of two (reasonable) ways:
 
 > One: The most straight-forward, simple and elegant way is using a `plus` sign:
 ```
