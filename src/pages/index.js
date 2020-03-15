@@ -71,5 +71,5 @@ query {
   }
   ` 
   const removeImageTextFromExcerpt = (string) => {
-    return string.replace(/(Photo by .+ from Pexels)|(Photo from \b(\w*.com\w*)\b)|(Photo from \w+)/, "")
+    return string.replace(/(Photo by .+ from Pexels)|(Photo by .+ from Pixabay)|(Photo from \b(\w*.com\w*)\b)|(Photo from \w+)/, "")
   }

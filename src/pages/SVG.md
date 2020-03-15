@@ -2,9 +2,9 @@
 title: "SVG"
 date: "2020-03-10"
 ---
-![](https://i.imgur.com/InGK3Iv.jpg "Photo by Pixabay from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Pixabay from Pexels_</p>
+![](https://i.imgur.com/hqzszg6.jpg "Photo by  S. Hermann & F. Richter from Pixabay")<p style="font-size: 12px; text-align: right">_Photo by  S. Hermann & F. Richter from Pixabay_</p>
 
->I got assigned an issue to replace some icons with new ones. And I was trying to figure out from where they are imported (as pictures obviously). And then when after one hour browsing the code I still couldn't find it, my attention was cought by a new tag I haven't seen before: `svg` and `path` tag.
+>I got assigned to an issue to replace some icons with new ones. And I was trying to figure out from where they are imported (as pictures obviously). And then when after one hour browsing the code I still couldn't find it, my attention was cought by a new tag I haven't seen before: `svg` and `path` tag.
 
 > I took the tags, pasted it to an empty `.html` file:
 
@@ -82,3 +82,5 @@ RIP Addania
 >Now let's get to work:
 
 ![](https://i.imgur.com/ftG4IMt.jpg "Photo by Ann H from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Ann H from Pexels_</p>
+
+>Kiwi art by [Chris Coyier](https://css-tricks.com/using-svg/)

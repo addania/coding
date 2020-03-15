@@ -4,7 +4,7 @@ date: "2020-03-15"
 ---
 
 
-[![pic](https://i.imgur.com/4CmQr4y.jpg)](https://i.imgur.com/4CmQr4y.jpg)<p style="font-size: 12px; text-align: right">_Photo by Kirill Belotserkovsky from Pexels_</p>
+[![](https://i.imgur.com/4CmQr4y.jpg)](https://i.imgur.com/4CmQr4y.jpg)<p style="font-size: 12px; text-align: right">_Photo by Kirill Belotserkovsky from Pexels_</p>
 
 
 > All cool images should be clickable. Because when you cannot click on somethign it does <code>not exist</code> :)
@@ -113,20 +113,37 @@ max-width: 760px;
     />
 </div>
 
+>Downside is that you really need to hold the click... Well, that is weird, isn't it?
 
+> Now let's try a small hack with input, button and label and see it we can make it work. Paste following code:
+```
+<style>
+#btnControl {
+    display: none;
+}
+#btnControl:checked + label > img {
+   max-width: 760px;
+}
+</style>
+<input type="checkbox" id="btnControl"/>
+<label class="btn" for="btnControl" style="width:200px; padding: 0" ><img  src="https://i.imgur.com/N56WE3x.jpg" id="btnLeft"  /></label>
+```
+
+>Result will be a nice clickable image:
+
+<br/>
 
 <style>
-.imageContainer3 > img:onclick {
-max-width: 760px;
+#btnControl {
+    display: none;
+}
+
+#btnControl:checked + label > img {
+   max-width: 760px;
 }
 </style>
 
-<div class="imageContainer3" style="width: 200px">
-    <img
-        src="https://i.imgur.com/48E34Uh.jpg"
-        alt="Photo by Quang Nguyen Vinh from Pexels"
-    />
-</div>
+<input type="checkbox" id="btnControl"/>
+<label class="btn" for="btnControl" style="width:200px; padding: 0" ><img  src="https://i.imgur.com/N56WE3x.jpg" id="btnLeft"  /></label>
 
-
->Downside is that you really need to hold the click... Well, that is weird, isn't it?
+>Yay! We have done this!
