@@ -126,7 +126,7 @@ max-width: 760px;
 }
 </style>
 <input type="checkbox" id="btnControl"/>
-<label class="btn" for="btnControl" style="width:200px; padding: 0" ><img  src="https://i.imgur.com/N56WE3x.jpg" id="btnLeft"  /></label>
+<label class="btn" for="btnControl" style="width:200px; padding: 0" ><img  src="https://i.imgur.com/N56WE3x.jpg" id="btnLeft" alt="Photo by R.Fera from Pexels" /></label>
 ```
 
 >Result will be a nice clickable image:
@@ -144,7 +144,7 @@ max-width: 760px;
 </style>
 
 <input type="checkbox" id="btnControl"/>
-<label class="btn" for="btnControl" style="width:200px; padding: 0" ><img  src="https://i.imgur.com/N56WE3x.jpg" id="btnLeft"  /></label>
+<label class="btn" for="btnControl" style="width:200px; padding: 0" ><img  src="https://i.imgur.com/N56WE3x.jpg" id="btnLeft" alt="Photo by R.Fera from Pexels"  /></label>
 
 >Yay! We have done this!
 
@@ -189,15 +189,12 @@ max-width: 760px;
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
-
 #myImg {
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
 }
-
 #myImg:hover {opacity: 0.7;}
-
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -212,7 +209,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
 }
-
 /* Modal Content (image) */
 .modal-content {
   margin: auto;
@@ -220,7 +216,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
   width: 80%;
   max-width: 700px;
 }
-
 /* Caption of Modal Image */
 #caption {
   margin: auto;
@@ -232,7 +227,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
   padding: 10px 0;
   height: 150px;
 }
-
 /* Add Animation */
 .modal-content, #caption {  
   -webkit-animation-name: zoom;
@@ -240,17 +234,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
   animation-name: zoom;
   animation-duration: 0.6s;
 }
-
 @-webkit-keyframes zoom {
   from {-webkit-transform:scale(0)} 
   to {-webkit-transform:scale(1)}
 }
-
 @keyframes zoom {
   from {transform:scale(0)} 
   to {transform:scale(1)}
 }
-
 /* The Close Button */
 .close {
   position: absolute;
@@ -261,14 +252,12 @@ body {font-family: Arial, Helvetica, sans-serif;}
   font-weight: bold;
   transition: 0.3s;
 }
-
 .close:hover,
 .close:focus {
   color: #bbb;
   text-decoration: none;
   cursor: pointer;
 }
-
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px){
   .modal-content {
@@ -278,24 +267,19 @@ body {font-family: Arial, Helvetica, sans-serif;}
 </style>
 </head>
 <body>
-
 <h2>Image Modal</h2>
 <p>In this example, we use CSS to create a modal (dialog box) that is hidden by default.</p>
 <p>We use JavaScript to trigger the modal and to display the current image inside the modal when it is clicked on. Also note that we use the value from the image's "alt" attribute as an image caption text inside the modal.</p>
-
-<img id="myImg" src="img_snow.jpg" alt="Snow" style="width:100%;max-width:300px">
-
+<img id="myImg" src="https://i.imgur.com/fZibGvE.jpg" alt="Photo by Roberto Shumski from Pexels" style="width:100%;max-width:300px">
 <!-- The Modal -->
 <div id="myModal" class="modal">
   <span class="close">&times;</span>
   <img class="modal-content" id="img01">
   <div id="caption"></div>
 </div>
-
 <script>
 // Get the modal
 var modal = document.getElementById("myModal");
-
 // Get the image and insert it inside the modal - use its "alt" text as a caption
 var img = document.getElementById("myImg");
 var modalImg = document.getElementById("img01");
@@ -305,17 +289,14 @@ img.onclick = function(){
   modalImg.src = this.src;
   captionText.innerHTML = this.alt;
 }
-
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
-
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() { 
   modal.style.display = "none";
 }
 </script>
-
 </body>
 </html>
-
 ```
+[![](https://i.imgur.com/fZibGvE.jpg)](https://i.imgur.com/fZibGvE.jpg)<p style="font-size: 12px; text-align: right">_Photo by Roberto Shumski from Pexels_</p>
