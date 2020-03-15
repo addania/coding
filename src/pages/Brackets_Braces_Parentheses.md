@@ -10,7 +10,7 @@ date: "2020-03-13"
 
 > **Parentheses** are smooth: `()` and we love them!
 
-> **Brackets** are actually square brackets: `[]` and are a bit more difficult to type on the (German or Slovak) keyboard, but at least they are still close enough to each other.
+> **Brackets** are actually square brackets: `[]` and are a bit more difficult to type on the (German) keyboard, but at least they are still close enough to each other.
 
 > **Braces** are actually curly braces: `{}` and are more difficult to type and more distant from each other. They look cool but you need finger acrobatics to actually type em :)
 

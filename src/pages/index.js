@@ -35,7 +35,7 @@ return (
                 <Link to={node.fields.slug}>
                 <td style={{color: "teal"}}>{node.frontmatter.title}</td>
                 </Link>
-                <td>{node.excerpt}</td>
+                <td>{removeImageTextFromExcerpt(node.excerpt)}</td>
                 
               </tr>
             ))}
@@ -70,4 +70,18 @@ query {
   }
   }
   ` 
-  
+/*  
+  const removeImageTextFromExcerpt = (string) => {
+    const removePart=new RegExp(Photo by .+ from Pexels)
+    console.log("removing part:", removePart)
+    return string.replace("Photo", "")
+  }
+*/
+
+  const removeImageTextFromExcerpt = (string) => {
+    return string.replace(/(Photo by .+ from Pexels)|(Photo from \b(\w*.com\w*)\b)|(Photo from \w+)/, "")
+  }
+
+  console.log(removeImageTextFromExcerpt("Photo by Mia XXX from Pexels sth sth"))
+  console.log(removeImageTextFromExcerpt("Photo from Pexels sth2 sth2"))
+  console.log(removeImageTextFromExcerpt("Photo from Pexels.com sth3 sth3"))
