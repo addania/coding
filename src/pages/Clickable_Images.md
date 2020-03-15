@@ -147,3 +147,5 @@ max-width: 760px;
 <label class="btn" for="btnControl" style="width:200px; padding: 0" ><img  src="https://i.imgur.com/N56WE3x.jpg" id="btnLeft"  /></label>
 
 >Yay! We have done this!
+
+>Some more interesting thing can be found on [StackOverflow](https://stackoverflow.com/questions/13630229/can-i-have-an-onclick-effect-in-css/32721572)
