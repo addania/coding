@@ -4,6 +4,7 @@ import Header from "../components/header.js"
 import { graphql } from "gatsby"
 import SEO from "../components/seo.js"
 import { Carousel } from "../components/carousel.js"
+import "./imageCss.css"
 
 export default ({ data }) => (
   <Layout>
@@ -126,10 +127,12 @@ export default ({ data }) => (
       I had to. And the yoga class was actually nice, relaxing, yet challenging.
       Cause without a challenge it would be boring ;)
       <br />
+      <div className="imageContainer">
       <img
         src="https://i.imgur.com/6UF5Rk9.jpg"
         alt="Photo by Creative Vix from Pexels"
       />
+      </div>
       <br />
       <strong>Dev day 2: 04.03.2020</strong>
       <br />

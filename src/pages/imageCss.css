@@ -1,0 +1,5 @@
+.imageContainer > img:target {
+
+width: 800px;
+height: 800px;
+}
