@@ -476,6 +476,11 @@ git flow init
 git flow feature start <name-of-your-branch>
 ```
 
+>Create a new branch based on another branch:
+```
+git flow feature start 11153s-redesign-dashboard-header-action-buttons feature/11117-redesign-Dashboard-Menu
+```
+
 ---
 
 ##COMPANY SPECIFIC SETTINGS##

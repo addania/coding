@@ -505,12 +505,11 @@ export default ({ data }) => (
       <blockquote>It starts to be creepy</blockquote>
       <br />
       I mean the whole Corona situation. I try to focus on my job, but it just
-      feels strange. Kind of out of this space. 
+      feels strange. Kind of out of this space.
       <br />
       <br />
-      Ok, decision has been made,
-      emergency shopping (just to be on the safe side and prepared for any
-      eventuality [of an apocalypse]):
+      Ok, decision has been made, emergency shopping (just to be on the safe
+      side and prepared for any eventuality [of an apocalypse]):
       <br />
       <img src="https://i.imgur.com/F3JevVz.jpg" alt="Photo by Addania" />
       Now whatever happens, I will be fine (dose of chocolate solves every
@@ -532,21 +531,150 @@ export default ({ data }) => (
       Anyway, today I did some QA testing for the issue implemented by my
       colleague and then I literally spent entire day (until midnight) browsing
       the code, playing around, testing some of my hypothesis and trying to
-      figure things out. You can tell that it was very interesting that it kept me awake
-      for so long. And I think to invest some of my private time now into
-      discovering things on my own could make a difference in long run. And
+      figure things out. You can tell that it was very interesting that it kept
+      me awake for so long. And I think to invest some of my private time now
+      into discovering things on my own could make a difference in long run. And
       especially when it actually makes <code>fun</code> :)
       <br />
       <br />
       And here is my <code>home office</code> setup:
       <br />
       <img src="https://i.imgur.com/LE1F5XE.jpg" alt="Photo by Addania" />
-
       <br />
       <strong>Dev day 10: 16.03.2020</strong>
       <br />
+      Feels weird when you know that entire crew is working from home office
+      today (and who knows how long) due to the emergency situation with the
+      Corona virus. Everyone is worried and starts to take the quarantine
+      seriously. You find it difficult to actually think about work as at the
+      back of your head the whole situation (which feel absurd) plays on repeat.
+      And you feel so remote, so alone, so detached from everything and
+      everyone. And then suddenly you receive a slack message from a colleague:
+      <blockquote>
+        "Good morning! Just don't want to lose the habits of the normal life"{" "}
+      </blockquote>
+      <br />
+      <br />
+      Yes, one must love their colleagues :)
+      <br />
+      <br />
+      Apart from everything, today I was really motivated to make some{" "}
+      <code>serious</code> progress on my <code>very first </code> 
+      issue. Especially because I had been planning to work on it during the
+      weekend, which... somehow... not sure how... actually did <code>not</code> happen :) So
+      I decided to make up for it today! And.. I failed.. miserably.
+      <br />
+      <br />
+      I kinda knew there will be times which will be tough and when I will feel
+      stuck. But.. did they have to come, like.. <code>already</code>? Do they need to come
+      like.. <code>every 10 minutes</code>? :)
+      <br />
+      <br />
+      Luckily my mentor is a very patient man. But even him after 50 minutes
+      call trying to actually explain to me what is expected from me in the
+      issue, even he pointed out that he hopes that now I understand since he
+      already spent 50 minutes on me :) Yes, well... hmm... felt humbling, but
+      come on, I need to understand what I should do before I can even start,
+      right? RIGHT?
+      <br />
+      <br />
+      The evening was very pleasant! Spent it playing Age of Empires II online with
+      a friend! And of course we won! :) It could not have been any other way, we are pros!   And at least for a brief moment it did
+      not feel so lonely in this apartment. It alomst felt.... normal again.
+      <br />
+      <br />
+      Afterwards I decided to still browse some code, explore things on my own,
+      so that I do not feel so dumb all the time. And yes, there was a second
+      reason which I did not want to admit to myself that actually was any
+      reason... I was kind of nervous about the whole situation and that I was
+      adviced by a friend to think about making some small stock of food for
+      myself...you know.. just in case. I <code>DO NOT</code> want to admit that
+      I might need stuff for <code>just in case</code>. Because then it really
+      starts to be scary... But at the same time it is rational! But I better do
+      it tomorrow morning right when they open up (which is 6am...gosh). And
+      yes, being nervous is a <code>no-go</code> to sleep for me. So I was awake
+      till 1 am pretending to be working, while just in reality trying to make
+      myself exhausted so that I would fall asleep.
+      <br />
+      <br />
+      Which I did!
+      <br />
+      <img src="https://i.imgur.com/LE1F5XE.jpg" alt="Photo by Addania" />
+      <br />
+      <strong>Dev day 11: 17.03.2020</strong>
+      <br />
       <blockquote>...</blockquote>
       <br />
+      <br />
+      Waking up early 5:50 to do some shopping for stocks, going to pharmacy and
+      obtaining a white TREASUE (no no, IM not talking about the toilet paper )
+      Im talking about the face mask! Hell yeah, priorities change in times of
+      crisis. 
+      Virtual lunch
+      Video tea and cake hangout 
+      Moral of the story, I shouldnt have been so ambitious and work till 1am yesterday, it
+      totally wasnt worth the migrene :/
+      <img src="https://i.imgur.com/LE1F5XE.jpg" alt="Photo by Addania" />
+      <br />
+      <strong>Dev day 12: 18.03.2020</strong>
+      <br />
+      <blockquote>
+        When you wake up and the first thing your consciousness reckognizes is
+        that your head is exploding like fireworks, even after a full night
+        sleep, you know that this is going to be one very very VERY
+        looooooooooong and an utterly miserable day for you...
+      </blockquote>
+      <br />
+      And the only thing you actually wish for right away is the day to be over.
+      But guess what... you <code>need</code> to work and you have wonderful 8
+      hours ahead of you where you are expected to deliver and perform! Yay! :)
+      What is more, being a developer means that those 8 hours will be well
+      spent staring at the computer screen (which for a migrene is the worst
+      thing imaginable) and trying to make your <code>brain</code> work. Which
+      already refuses even to think about having the eyes opened. Will be fun
+      times today.
+      <br />
+      <br />
+      Usually nothing helps me for the migrane, apart from suffering for 2-3
+      days and sleeping a lot. Nevertheless, I still gave it a try with 2
+      anti-migrene pills, the strongest ones I currently had in possession.
+      Those ones in particular were the best ones I could obtain in London
+      pharmacy months back when I was in similar migrene emergecy.
+      <br />
+      <br />
+      Today was the time to test them again. And guess what? A miracle happened!
+      The migrene stopped in around 2 hours and I was actually able to enjoy the
+      day and code until 20:40 pm :) And actually, I must say this day was
+      awesome! Because I was so happy with my performance. I did a lot of
+      progress on my issue, then also on change requests other team mates made.
+      Plus I even did a code review of an article a colleague wrote. I am
+      usually shy to do code reviews, cause... let's be honest how much relevant
+      input a Junior like me can contribute especially to code of people who are
+      10+ years experienced? Well, as this was an article about a setup I did
+      myself last week, I had some tips, omg, I actually had something to <code>say</code> :)
+      Feels like a queen..ehm, forget queen.. <code>goddess</code>!
+      <br />
+      <br />
+      So yes, today I was satisfied with my work and plenty of things which I
+      accomplished especially on my (first <code>real</code>) issue. It is really a rewarding
+      feeling when you are heading towards the finishing line and you see the
+      possibility (far away in the distance still hazy, but yet...) of a{" "}
+      <code>merge</code> :) Yes, ok, after the QA testing ofc. But I already see
+      myself on the winner platform, hugging the imaginary <code>trophy</code>{" "}
+      :)
+      <br />
+      <br />
+      Speaking of trophies, time to reward myselff aaand ZOCKEN ZOCKEN
+      ZOCKEN :)) Hell yes, 2 days ago there was an Ubisoft sale on Steam and I
+      finally bought Heroes of Might and Magic 5. I had been hunting for this
+      sales for months now :) Yes, yes, why to pay 10€, when you can only pay
+      2,5€? I totally made a saving on this one :)
+      <br />
+      <br />
+      So bye bye guys, you won't see me in the next couple of hourZ... ok, ok,
+      actually (due to quarantine) in the next couple of months but at least
+      there is Internet and there are games :) Time to kill loneliness by being
+      <code>totally</code> (un)productive ;)
     </p>
   </Layout>
 )
