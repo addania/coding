@@ -559,15 +559,17 @@ export default ({ data }) => (
       <br />
       <br />
       Apart from everything, today I was really motivated to make some{" "}
-      <code>serious</code> progress on my <code>very first </code> 
+      <code>serious</code> progress on my <code>very first </code>
       issue. Especially because I had been planning to work on it during the
-      weekend, which... somehow... not sure how... actually did <code>not</code> happen :) So
-      I decided to make up for it today! And.. I failed.. miserably.
+      weekend, which... somehow... not sure how... actually did <code>
+        not
+      </code>{" "}
+      happen :) So I decided to make up for it today! And.. I failed..
+      miserably.
       <br />
-      <br />
-      I kinda knew there will be times which will be tough and when I will feel
-      stuck. But.. did they have to come, like.. <code>already</code>? Do they need to come
-      like.. <code>every 10 minutes</code>? :)
+      <br />I kinda knew there will be times which will be tough and when I will
+      feel stuck. But.. did they have to come, like.. <code>already</code>? Do
+      they need to come like.. <code>every 10 minutes</code>? :)
       <br />
       <br />
       Luckily my mentor is a very patient man. But even him after 50 minutes
@@ -578,9 +580,10 @@ export default ({ data }) => (
       right? RIGHT?
       <br />
       <br />
-      The evening was very pleasant! Spent it playing Age of Empires II online with
-      a friend! And of course we won! :) It could not have been any other way, we are pros!   And at least for a brief moment it did
-      not feel so lonely in this apartment. It alomst felt.... normal again.
+      The evening was very pleasant! Spent it playing Age of Empires II online
+      with a friend! And of course we won! :) It could not have been any other
+      way, we are pros! And at least for a brief moment it did not feel so
+      lonely in this apartment. It alomst felt.... normal again.
       <br />
       <br />
       Afterwards I decided to still browse some code, explore things on my own,
@@ -603,17 +606,80 @@ export default ({ data }) => (
       <br />
       <strong>Dev day 11: 17.03.2020</strong>
       <br />
-      <blockquote>...</blockquote>
+      <blockquote>
+        This was a weird day. Since unforgiving alarm clock woke me up at 5:50
+        and I actually maybe had fallen asleep after 1 am, the rest of the day
+        and the world around me felt like in a haze.{" "}
+      </blockquote>
       <br />
       <br />
-      Waking up early 5:50 to do some shopping for stocks, going to pharmacy and
-      obtaining a white TREASUE (no no, IM not talking about the toilet paper )
-      Im talking about the face mask! Hell yeah, priorities change in times of
-      crisis. 
-      Virtual lunch
-      Video tea and cake hangout 
-      Moral of the story, I shouldnt have been so ambitious and work till 1am yesterday, it
-      totally wasnt worth the migrene :/
+      The reason for the early-(dammit)-bird was to go to shop when they open to
+      be able to buy groceries and make some small personal storage.. just in
+      case.. Just thinking about it was freaking me out and actually doing it
+      was really strange.. Especially, it was my first time when I decided that
+      I should actually use at least a scarf around my face (because obviously I
+      did not have any face mask, because where would I even get one??) and that
+      turned out to be actually a good decision... Everyone in the streets were
+      using them (am I still living in Slovakia?).. and there were even warnings
+      on the shop doors and windows that it is prohibited to enter the store
+      without a face mask. Wow, world <code>is</code> going crazy. This stuff is
+      real! I guess I am not misplaced doing huge shopping for "bad" times. And
+      I guess I should really start to look around to get myself a normal mask..
+      But how when even on the pharmacy door they had thousand posters: "We do
+      NOT have masks"... But I went there nevertheless... at least to ask when
+      they might have some for ordinary mortals... And when the woman saw me in
+      that huge scarf clumsily wrapped around my mouth and nose.. she actually
+      said nothing, just went to the backroom and brought one mask for me. She
+      said there was one last mask left, so that I don't suffocate behind that
+      scarf... Wow, I was so stunned that I actually got the mask when all my
+      hopes were gone... Certainly treasure loot of the day <code>is</code> the
+      mask. Funny how our rank of precious items changes under different
+      circumstances. A luxury good - a rare epic turns out nowadays to be a
+      simple small piece of white cloth and 2 strings...
+      <br />
+      <br />
+      Later on I could not really identify my emotional state. <br />
+      <br />
+      <code>Nervous </code>
+      from the emergency shopping.
+      <br />
+      <br />
+      <code>In awe</code> from the luck I had with the mask.
+      <br />
+      <br />
+      <code>Rage</code> that the pharmacy shop actually <code>lied</code> about
+      not having masks, even though apparently that <code>did</code> have some!
+      And also the way they are now in the position to decide who gets one and
+      who doesn't. Maybe I should not analyze, becasue I got one.. but still..
+      if the pharmacist did not feel generous, I could have gone home with empty
+      hands. And that bothers me...
+      <br />
+      <br />
+      The rest of the day was very busy with working on my issue. The
+      nervousness and haziness did not leave me though. Highlight certainly was
+      a virtual lunch with my colleague. It was nice to see a familiar face from
+      a fairy tale long time ago...
+      <br />
+      <br />
+      Around afternoon I started to be very <code>very</code> tired. As my
+      mentor pointed out.. I should not have been coding till midnight and I
+      should have rather rested in the evenings. That was actually true because
+      I was starting to feel a headache somewhere attthe back of my
+      consciousness, which did not prophet anything good. If this turns into
+      migrene, life will be very painful...
+      <br />
+      <br />
+      In the evening I tried to distract myself with a nice conversation with a
+      friend. We agreed on a tea-and-cake hangout on Whatsapp. It was actually
+      very nice (even without and actual cake), but unfortunatelly my headache
+      was intensifying and soon I found myself struggling. So I had to stop the
+      ever-interesting call and head to bed... I am screwed...
+      <br />
+      <br />
+      Moral of the story [for my future self]: Adda, gotdammit, seriously, do
+      not be so over-ambitious and do <code>not</code> work till 1 am unless you
+      really have to. It is not worth a migrene..
+      <br />
       <img src="https://i.imgur.com/LE1F5XE.jpg" alt="Photo by Addania" />
       <br />
       <strong>Dev day 12: 18.03.2020</strong>
@@ -651,30 +717,204 @@ export default ({ data }) => (
       usually shy to do code reviews, cause... let's be honest how much relevant
       input a Junior like me can contribute especially to code of people who are
       10+ years experienced? Well, as this was an article about a setup I did
-      myself last week, I had some tips, omg, I actually had something to <code>say</code> :)
-      Feels like a queen..ehm, forget queen.. <code>goddess</code>!
+      myself last week, I had some tips, omg, I actually had something to{" "}
+      <code>say</code> :) Feels like a queen..ehm, forget queen..{" "}
+      <code>goddess</code>!
       <br />
       <br />
       So yes, today I was satisfied with my work and plenty of things which I
-      accomplished especially on my (first <code>real</code>) issue. It is really a rewarding
-      feeling when you are heading towards the finishing line and you see the
-      possibility (far away in the distance still hazy, but yet...) of a{" "}
-      <code>merge</code> :) Yes, ok, after the QA testing ofc. But I already see
-      myself on the winner platform, hugging the imaginary <code>trophy</code>{" "}
-      :)
+      accomplished especially on my (first <code>real</code>) issue. It is
+      really a rewarding feeling when you are heading towards the finishing line
+      and you see the possibility (far away in the distance still hazy, but
+      yet...) of a <code>merge</code> :) Yes, ok, after the QA testing ofc. But
+      I already see myself on the winner platform, hugging the imaginary{" "}
+      <code>trophy</code> :)
       <br />
       <br />
-      Speaking of trophies, time to reward myselff aaand ZOCKEN ZOCKEN
-      ZOCKEN :)) Hell yes, 2 days ago there was an Ubisoft sale on Steam and I
-      finally bought Heroes of Might and Magic 5. I had been hunting for this
-      sales for months now :) Yes, yes, why to pay 10€, when you can only pay
-      2,5€? I totally made a saving on this one :)
+      Speaking of trophies, time to reward myself aaand ZOCKEN ZOCKEN ZOCKEN :))
+      Hell yes, 2 days ago there was an Ubisoft sale on Steam and I finally
+      bought Heroes of Might and Magic 5. I had been hunting for this sales for
+      months now :) Yes, yes, why to pay 10€, when you can only pay 2,5€? I
+      totally made a saving on this one :)
       <br />
       <br />
       So bye bye guys, you won't see me in the next couple of hourZ... ok, ok,
       actually (due to quarantine) in the next couple of months but at least
       there is Internet and there are games :) Time to kill loneliness by being
       <code>totally</code> (un)productive ;)
+      <br />
+      <strong>Dev day 13: 19.03.2020</strong>
+      <br />
+      <blockquote>
+        There <code>is</code> hope! I see the light at the end of the tunnel
+      </blockquote>
+      <br />I worked relentlessly on all the change request <code>torture</code>{" "}
+      from my mentor and my colleagues. I integrated everything they wanted. And
+      now, the big time has come to move my issue to QA testing! I am soooo
+      close to having it merge to the main branch.
+      <br />
+      <br />
+      And then it happened... an unforgettable conversation between me and my
+      mentor, so deep and full of love, support, understandting, where he
+      expressed his undying trust in me and in my work...
+      <br />
+      <br />
+      Mentor: "I will now test your PR 😄 Be prepared 😄"
+      <br />
+      Addania: "I DARE YOU 😄"
+      <br />
+      Addnia: "but you only are allowed to test it the way I described in the{" "}
+      <code>How to test</code> section 😉"
+      <br />
+      Addania: "which will purposedly skip all the necessary steps"
+      <br />
+      Mentor: "the <code>how to test</code> is only a guildeline, i will test
+      every file you touched, directly or indirectly 😛"
+      <br />
+      Addania: "now I am panicking"
+      <br />
+      Addania: "who cares about Corona, real danger is QA testing!"
+      <br />
+      Mentor:
+      <br />
+      <img src="https://i.imgur.com/E9NHDjW.gif" alt="Photo from giphy.com" />
+      <br />
+      Addania: "by the way, the word from thy Emperor:""
+      <blockquote>
+        Addania: "one question, how extensive should QA testing reports be?"
+        <br />
+        Emperor: "not too detailed, as we are doing extensive tests later on.
+        the <code>how to test</code> section is usually a good guideline. for
+        such an issue, 5 minutes max"
+      </blockquote>
+      <br />
+      Addania: "there you GO Master! You will have 5 minutes for it, have fun
+      😄"
+      <br />
+      Mentor: "i won't need more anyway 😄"
+      <br />
+      Addania:
+      <br />
+      <img src="https://i.imgur.com/RRCauMf.jpg" alt="Photo from imgflip.com" />
+      <br />
+      One minute later... (when I already thought I got away with it...)
+      <br />
+      <br />
+      Mentor: "aaand I found something"
+      <br />
+      Addania: "I'm crying already"
+      <br />
+      <br />
+      So yeah, that was my day in a nutshell :)
+      <br />
+      <br />
+      What was interesting as well, was the evening. My sports group decided
+      that <code>nothing shall stop us</code> (not even a wold-wide pandemic,
+      governmental order for total quarantine, social distancing, closure of
+      borders.. and other fun stuff) and they organized a virtual training,
+      haha. Was really great and it felt almost... normal :) Great when the
+      technology is really enabling people in such difficult times (of [virus]
+      oppression).
+      <br />
+      <br />
+      And later on... was simply... and to the deepest sense of it...
+      B.E.A.U.T.I.F.U.L :) Had a wonderful conversation with a friend. Nothing
+      feels better than spending some quality time with quality people
+      discussing intriguing things.
+      <br />
+      <br />
+      <strong>Dev day 14: 20.03.2020</strong>
+      <br />
+      <br />
+      Drumroll... Drumroll... Drumroll...
+      <br />
+      <br />
+      Buidling up some tension...
+      <br />
+      <br />
+      Still... :)
+      <br />
+      <br />I can hear crowds cheering (from safe government-approved quarantine
+      distance)...
+      <blockquote>
+        My very first <code>real</code> PR got merged! Time to celebrate! Time
+        for fireworks! Time for wild <code>(LAN)</code> parties! I did it! I
+        hacked the dev universe! Now my signature is in <code>there</code>. My
+        spirit will remain in <code>code</code>.
+      </blockquote>
+      <br />
+      <br />
+      Parties and celebrations lasted for maybe half an hour until I began to
+      work on a new issue. Which started great, because it seemed as a very
+      similar task to the previous one and I was already starting to feel a bit
+      more comfy and tiny fraction more confident, that I actually start to
+      understand at least a bit of it.
+      <br />
+      <br />
+      And then I realized what the issue actually <code>is</code> about and how
+      extensive my code re-design is supposed to be. I took a break to cry, eat
+      (whatever) (...ok all of the) sweets I had at home (which by the way was
+      an entire stock of rations for a month time of apocalypse...), then I
+      cried a bit again and afterwards on the recommendation of my mentor I took
+      the first and the second look at it... and even a <code>bonus</code> third
+      one... It still looked the same... so I wrapped the working day up and
+      hoped that something magical will happen over the weekend, that on Monday
+      I will wake up and everything will be crystal clear and I simply do it...
+      Let's see...
+      <br />
+      <br />
+      As a rebellion to that I decided to make progress on meaningful stuff in
+      my life... and played Heroes of Might and Magic 5 until 2 am :) And then I
+      remembered that some time ago someone mentioned to me that humans should
+      actually engage themselves in something called sleep. Fair enough, I
+      should give it a try (from time to time). But before I went I randomly
+      opened an old chat with my skiing group only to find (completely random)
+      meme:
+      <br />
+      <br />
+      <img
+        src="https://i.imgur.com/wZABOiR.png"
+        alt="Photo by Phabulu1 from Imgur"
+        border="5px"
+      />
+      <br />
+      Those coincidences sometimes are <code>epic</code>. If only they knew :)
+      <br />
+      <strong>Dev day 14: 20.03.2020</strong>
+      <br />
+      <br />
+      <blockquote>
+        Nope! Did not happen... No magical enlightment, no Nirvana. I did not
+        reach higher consciousness over the weekend.
+      </blockquote>
+      <br />
+      <br />I feel as dumb as I did on Friday (maybe even dumber, as I do not
+      even remember what I was doing in the code on Friday). Jupiii, will be
+      hell of a day. Literally ;) Maybe my soul will burn, and <code>
+        then
+      </code>{" "}
+      I get enlightened! It would prove that I actually have soul.. now that
+      would be <code>interesting</code>... :)
+      <br />
+      <br />
+      Anyhow I had to reach out to wisdoms of my mentor to guide me to the point
+      from where I could at least start. The starting point was.... to delete around 10 complex files and do
+      everything from scratch.. I shed a tear and then made some very nice
+      progress with the design itself. Who care that all the functionality is
+      missing :) The looks is important, no? Nevertheless, it was fun coding today.
+      Would be a perfect day, if only I did not have to do some annoying <code>manual</code> work
+      for my ex-boss from my previous team. Who does not like filling out a 1000th spreadsheet manually, even
+      though we have the same information spread across 5 different softwares...? Well
+      in year 2020 manual work FTW... (or not)...
+      <br />
+      <br />
+      I decided that rather then raging over it, I wrap it up for today and the I had a great after-work training with my sports group. Love
+      to get sweaty! 
+      <br />
+      <br />
+      And now time fooooor gaming :) Another online multiplayer
+      appointment is awaiting for me, therefore I better get to it. I do not
+      want to get my sweet civilization in year 2070 wait for their ruler :)
     </p>
   </Layout>
 )
