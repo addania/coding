@@ -880,7 +880,7 @@ export default ({ data }) => (
       <br />
       Those coincidences sometimes are <code>epic</code>. If only they knew :)
       <br />
-      <strong>Dev day 14: 20.03.2020</strong>
+      <strong>Dev day 15: 23.03.2020</strong>
       <br />
       <br />
       <blockquote>
@@ -898,23 +898,77 @@ export default ({ data }) => (
       <br />
       <br />
       Anyhow I had to reach out to wisdoms of my mentor to guide me to the point
-      from where I could at least start. The starting point was.... to delete around 10 complex files and do
-      everything from scratch.. I shed a tear and then made some very nice
-      progress with the design itself. Who care that all the functionality is
-      missing :) The looks is important, no? Nevertheless, it was fun coding today.
-      Would be a perfect day, if only I did not have to do some annoying <code>manual</code> work
-      for my ex-boss from my previous team. Who does not like filling out a 1000th spreadsheet manually, even
-      though we have the same information spread across 5 different softwares...? Well
-      in year 2020 manual work FTW... (or not)...
+      from where I could at least start. The starting point was.... to delete
+      around 10 complex files and do everything from scratch.. I shed a tear and
+      then made some very nice progress with the design itself. Who care that
+      all the functionality is missing :) The looks is important, no?
+      Nevertheless, it was fun coding today. Would be a perfect day, if only I
+      did not have to do some annoying <code>manual</code> work for my ex-boss
+      from my previous team. Who does not like filling out a 1000th spreadsheet
+      manually, even though we have the same information spread across 5
+      different softwares...? Well in year 2020 manual work FTW... (or not)...
       <br />
       <br />
-      I decided that rather then raging over it, I wrap it up for today and the I had a great after-work training with my sports group. Love
-      to get sweaty! 
+      I decided that rather then raging over it, I wrap it up for today and then
+      I had a great after-work training with my sports group. Love to get
+      sweaty!
       <br />
       <br />
-      And now time fooooor gaming :) Another online multiplayer
-      appointment is awaiting for me, therefore I better get to it. I do not
-      want to get my sweet civilization in year 2070 wait for their ruler :)
+      And now time fooooor... wait for it.... gaming :) Another online
+      multiplayer appointment is awaiting for me, therefore I better get to it.
+      I do not want to get my sweet civilization in year 2070 wait for their
+      ruler :)
+      <br />
+      <strong>Dev day 16: 24.03.2020</strong>
+      <br />
+      <br />
+      <blockquote>
+        When initial shock from pandemics subsides, you begin to live your
+        ordinary life. Under new circumstanes of course, with new routine,
+        with some adjustments and workarounds. But it soon becomes the new
+        usual. Which is good. Which means you stopped panicking and start
+        adapting. Because all emotions even panic has an expiry date when your
+        body runs into emotional exhaustion and that is the breakpoint when you
+        embrace your new situation and start acting to the best of your given
+        circumstance.
+      </blockquote>
+      <br />
+      <br />
+      So yes, days start to pass in a very similar rythm. I certainly do not miss
+      travelling 3 hours a day for job. I can sleep longer and still start my
+      working day earlier than before. Which feels much more productive. Which
+      is certainly great. Also the isolation does not YET feel that horrible.
+      Because with modern technology I do feel connected to people whom I want
+      to be in contact with. This will probably change very soon, because 1,5
+      week alone is still nothing compared to maybe months... or who knows how
+      long this situation is going to take. Prognosis do not look good at all.
+      <br />
+      <br />
+      Back to coding. Speaking of general productivity, yes, I certainly work
+      more and more efficient. Today my boss re-prioritized my tasks and I had
+      to start a new issue, which I was able to also finish today. But the rest
+      of the day was very scattered as I still needed to finish some manual work
+      for my ex department and some clients decided that TODAY is the perfect
+      day to snow me under with emails. So deving was not as good as I wanted it to
+      be. But as I am still in dual position, torn apart between two
+      departnemnts, I need to grinch my teeth and simply do it. Soon, very soon,
+      I can hand over all my clients and focus 101% on programming, yay!!
+      <br />
+      <br />
+      And today I also started to learn about redux, so that I can make progress
+      on my issue. Wow, found a great tutorial from the author of redux, great
+      stuff... not that great English accent :) I really cannot make myself not
+      mentioning it, hahahaha, as I found it so difficult to understand him from
+      time to time, but overall the tutorial is absolutely awesome, very
+      educative, very insightful! :) So google it, go for it! In case you are
+      interested.
+      <br />
+      <br />
+      And evening was really great! Had an upper body training with my friend.
+      My legs are still crying from the leg training with him on Sunday. Was
+      time to destroy my arms as well. So that the Addania is fisnished off
+      completely :) Now that I am thinking about it, I wonder now what his
+      intentions are.. and I even allow him to destroy me.. dammit :)
     </p>
   </Layout>
 )
