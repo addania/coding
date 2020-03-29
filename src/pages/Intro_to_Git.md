@@ -603,6 +603,27 @@ git branch -m <newname>
 
 >Renaming locally and remotely some branch, refer to [StackOverflow](https://stackoverflow.com/questions/1526794/rename-master-branch-for-both-local-and-remote-git-repositories?answertab=votes#tab-top)
 
+> To see history of all your commits (or if you need to see commit hash):
+```
+git log
+```
+>Then if you need to see the code what you did in one specific commit, to see it historically, you can visit that commit with:
+```
+git checkout 30acb3ba5ca523928e8c349f7b3303e24c
+```
+
+> Where 30acb3ba5ca523928e8c349f7b3303e24c is your commit hash
+
+> Please note that if you do this, you will detach the HEAD - which means a pointer where you currently are. So in order to go back to your branch and your latest commit, then you simply do:
+```
+git checkout feature/name-of-my-branch
+```
+
+> Then if you want to see what you did exactly in a speciffic commit, you can do:
+
+```
+git checkout 
+```
 
 **VISUALS**
 

@@ -924,24 +924,25 @@ export default ({ data }) => (
       <br />
       <blockquote>
         When initial shock from pandemics subsides, you begin to live your
-        ordinary life. Under new circumstanes of course, with new routine,
-        with some adjustments and workarounds. But it soon becomes the new
-        usual. Which is good. Which means you stopped panicking and start
-        adapting. Because all emotions even panic has an expiry date when your
-        body runs into emotional exhaustion and that is the breakpoint when you
-        embrace your new situation and start acting to the best of your given
+        ordinary life. Under new circumstanes of course, with new routine, with
+        some adjustments and workarounds. But it soon becomes the new usual.
+        Which is good. Which means you stopped panicking and start adapting.
+        Because all emotions even panic has an expiry date when your body runs
+        into emotional exhaustion and that is the breakpoint when you embrace
+        your new situation and start acting to the best of your given
         circumstance.
       </blockquote>
       <br />
       <br />
-      So yes, days start to pass in a very similar rythm. I certainly do not miss
-      travelling 3 hours a day for job. I can sleep longer and still start my
-      working day earlier than before. Which feels much more productive. Which
-      is certainly great. Also the isolation does not YET feel that horrible.
-      Because with modern technology I do feel connected to people whom I want
-      to be in contact with. This will probably change very soon, because 1,5
-      week alone is still nothing compared to maybe months... or who knows how
-      long this situation is going to take. Prognosis do not look good at all.
+      So yes, days start to pass in a very similar rythm. I certainly do not
+      miss travelling 3 hours a day for job. I can sleep longer and still start
+      my working day earlier than before. Which feels much more productive.
+      Which is certainly great. Also the isolation does not YET feel that
+      horrible. Because with modern technology I do feel connected to people
+      whom I want to be in contact with. This will probably change very soon,
+      because 1,5 week alone is still nothing compared to maybe months... or who
+      knows how long this situation is going to take. Prognosis do not look good
+      at all.
       <br />
       <br />
       Back to coding. Speaking of general productivity, yes, I certainly work
@@ -949,8 +950,8 @@ export default ({ data }) => (
       to start a new issue, which I was able to also finish today. But the rest
       of the day was very scattered as I still needed to finish some manual work
       for my ex department and some clients decided that TODAY is the perfect
-      day to snow me under with emails. So deving was not as good as I wanted it to
-      be. But as I am still in dual position, torn apart between two
+      day to snow me under with emails. So deving was not as good as I wanted it
+      to be. But as I am still in dual position, torn apart between two
       departnemnts, I need to grinch my teeth and simply do it. Soon, very soon,
       I can hand over all my clients and focus 101% on programming, yay!!
       <br />
@@ -966,9 +967,180 @@ export default ({ data }) => (
       <br />
       And evening was really great! Had an upper body training with my friend.
       My legs are still crying from the leg training with him on Sunday. Was
-      time to destroy my arms as well. So that the Addania is fisnished off
+      time to destroy my arms as well. So that the Addania is finished off
       completely :) Now that I am thinking about it, I wonder now what his
       intentions are.. and I even allow him to destroy me.. dammit :)
+      <br />
+      <strong>Dev day 17: 25.03.2020 - Wednesday</strong>
+      <br />
+      <br />
+      <blockquote>Holy Mother of All Code!!</blockquote>
+      <br />
+      <br />
+      I made it work! The modal - the curse of my life! I made it work! How? No
+      clue (ok, maybe a slight clue, or couple of clueS from my mentor)!
+      <br />
+      <br />
+      Just.. don't ask me to do this again.. like <code>never</code> again! Who
+      needs modals.. anyway? Everyone hates modals.. anyway. Or at least me
+      since 2 days :) And a small victory will not distract me from the path of
+      hatred laid out so clearly in front of me :)
+      <br />
+      <br />
+      Anyhow, I implemented one, exactly <code>one</code> tiny lil innocent hack
+      to the code. Tiny lil spy, my personal Addania touch, my signature code..
+      <br />
+      <br />
+      They discovered..
+      <br />
+      <br />
+      They didn't approve..
+      <br />
+      <br />
+      They removed it..
+      <br />
+      <br />
+      Horrendous crime!
+      <br />
+      <br />
+      What was it? Glad you <code>asked</code> :) I implemented this:{" "}
+      <code>+</code> Yes, you see it right: a plus!
+     
+      <br />
+      <br />
+      Why? Glad you <code>asked</code> again :) I needed to convert an index
+      which was a string to a number. And I did it in suuuuuch an incredibly
+      clever way.. (self-pat on the shoulder): <code>+index</code>
+      <br />
+      <br />
+      It was sooo clever that even my mentor did not know it and he was asking
+      me: "What is that plus sign doing there?" My pride shone from the Earth to
+      the end of the Universe and then back again.. and then 1 second later he asked me to remove
+      it.. Pffff! He asked me to use Number(index).. How lame, how mainstream!
+      So there goes my signature. But I will not give up, I will smuggle it
+      there one day, when nobody is watching 😈 muhahahaha
+      <br />
+      <br />
+      <strong>Dev day 18: 26.03.2020 - Thursday</strong>
+      <br />
+      <br />
+      <blockquote>
+        Now we are talking! A colleague announced a company-wide push-up
+        challenge!
+      </blockquote>
+      <br />
+      <br />
+      Ow, yes baby. Let's do this! Rules? Post one video a day of yourself doing
+      push-ups, each push-up equals one point. At the end we see score-board of
+      who is winning.
+      <br />
+      <br />
+      Nice, challenge accepted! And of course as everyone was doing either
+      normal push-ups or ladies push-ups, I decided to be a black sheep and I
+      did narrow ones :) I did 21, just to beat the guy who announced the
+      competition 😈 Was fun!
+      <br />
+      <br />
+      Apart from that, today evening was supposed to be an official deployment
+      of the new UI and my PR was still not ready! I mean it would have been
+      finished from my side, only if it wasn't for my lovely colleageus, who
+      requested 1 billion of changes.. even at 9 pm at night.. Well, as I was so
+      dedicated to really make it on time today, I worked till 11 or 12 pm to
+      make it happen..
+      <br />
+      <br />
+      It did not happen.. as I still needed some feedback from colleagues, final
+      approval and QA testing. There goes my beaituful PR being part of the
+      first major deployment.. at least since I'm in dev team - which means since 2,5 weeks
+      :)
+      <br />
+      <br />
+      Ok, so I decided that the <code>next</code> deployment will be the <code>major</code>and the <code>most importnat </code> deployment. And I will make it to <code>that</code> one :)
+      <br />
+      <strong>Dev day 19: 27.03.2020 - Friday</strong>
+      <br />
+      <br />
+      The day started with a colleague posting his 29 push-ups today. Which was
+      already +3 to his company best from yesterday. Challenge accepted Daniel!
+      <br />
+      <br />
+      Thinking it through I decided to go for regular push-ups in order to be
+      able to compete with the others (the narrow ones are too tiresome). So in
+      order to beat Daniel I needed 34 of em. Hmm, fine, FINE! Let's see what I
+      have got!
+      <br />
+      <br />
+      Ok, was not as difficult as I thought! Now, bring it on guys!! 40 push-ups
+      here! 😎 +21 from yesterday which means 61 points altogether... :) Who is
+      winning now?
+      <br />
+      <br />
+      <blockquote>
+      I mean provided my friend and occassional trainer does not join the competition, haha. Then we are all screwed!
+      </blockquote>
+      <br />
+      <br />
+      Back to coding - the very last step to finish my PR were final checks.
+      <blockquote>
+        So I prayed for the successful and merciful PR checks.
+      </blockquote>
+      <br />
+      <br />
+      They failed again... and again.. and couple of times more. Dammit! Those
+      storyshots.. Why do we even have storyshots? Why not to delete them
+      completely? I mean, it makes complete sense. No storyshots, no failed PR
+      checks. It's a win-win situation :)
+      <br />
+      <br />
+      Phew, finally I somehow patched it together and got rid of this PR... I
+      mean... said a loving farewell to this <s>cursed</s> lovely PR..
+      <br />
+      <br />
+      Time for the new issue! Yay! And this time on a different product.
+      Perfect! So let's make it start. I made sure and double-checked 2 weeks ago, that everything
+      is set and done on my computer for this product, I tamed the Docker, I
+      resolved all its issues, and now it shall bow to me and obey my orders unless...
+      <br />
+      <br />
+      Unless you try to start the Docker again.. Or even better, it DID start..
+      but then I could not login to the platform! I mean really? I set my
+      credentials myself, they were in the .env file. Just how difficult is it
+      to copy paste creds from one file to the app? Incredible, it did NOT work.
+      How can it not work? Seriously Docker? Time to screw me up again?
+      <br />
+      <br />
+      So happy times.. spent 3/4 of the day solving Docker issues again.. This
+      Docker - such a drama queen. I start to really think it is a female :)
+      Just look at the evidence:
+      <li>has its moods</li>
+      <li>is unpredictable</li>
+      <li> never does what you want it to do</li>
+      <li>
+        and I secretly even think it is vengeful (I mistyped it with "i" couple
+        of times)
+      </li>
+      <br />
+      <br />
+      So what I needed to do is to stop all the Docker, remove all containers,
+      wipe all the volumes, boot it clean all up again.. and of course pray to
+      the Almight Docker God.. Now I see that being a programmer will apparently
+      convert me to a believer! I already prayed more today than in my entire
+      life :)
+      <br />
+      <br />
+
+      <br />
+      <strong>Dev day 20: 30.03.2020 - Monday</strong>
+      <br />
+      <br />
+      <blockquote>
+      They brought it on
+      </blockquote>
+
+      Interesting how everyone was postin 20
+      something push-ups before. But after I posted my 40, people started suddenly posting 50 or
+      even 60 push-ups.. Pff, those lazy bastards needed some real <code>push</code>, hahaha :)
+
     </p>
   </Layout>
 )
