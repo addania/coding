@@ -823,6 +823,8 @@ export default ({ data }) => (
       discussing intriguing things.
       <br />
       <br />
+      <img src="  https://i.imgur.com/rbEzohu.jpg" alt="Photo from swapwire.com" />
+      <br />
       <strong>Dev day 14: 20.03.2020</strong>
       <br />
       <br />
@@ -1055,7 +1057,12 @@ export default ({ data }) => (
       :)
       <br />
       <br />
-      Ok, so I decided that the <code>next</code> deployment will be the <code>major</code>and the <code>most importnat </code> deployment. And I will make it to <code>that</code> one :)
+      Ok, so I decided that the <code>next</code> deployment will be the <code>major</code> and the <code>most important </code> deployment. And I will make it to <code>that</code> one :)
+     
+      <br />
+      <br />
+      <img src="https://i.imgur.com/aNIKTsL.jpg" alt="Photo by Karl Solano from Pexels" />
+
       <br />
       <strong>Dev day 19: 27.03.2020 - Friday</strong>
       <br />
@@ -1128,19 +1135,30 @@ export default ({ data }) => (
       life :)
       <br />
       <br />
-
+      <img src="https://i.imgur.com/xtsndFy.jpg?1" alt="Photo by Sam Kolder from Pexels" />
       <br />
       <strong>Dev day 20: 30.03.2020 - Monday</strong>
       <br />
-      <br />
       <blockquote>
-      They brought it on
+      They brought it on, hahaha :)
       </blockquote>
+      <br />
+      Interesting how everyone was posting 20
+      something push-ups before. But after I posted my 40, people started suddenly posting 50,
+      60 or <code>even</code> 70 push-ups.. Pff, those lazy bastards needed some real <code>push</code>, hahaha :)
+      <br />
+      <br />
+      Codewise, today was an <code>epic</code> day! I did not only finish my new PR, I actually finished whole 3 of them. Yes, you hear it, THREE! :) Plus I created I think 6 issues and even reviewed one of my colleague. I was totally on fire today! Careful, else you get burt :)
+      <br />
+      <br />
+      And continuing the fire theme of the day, my friend, his brother and I set some villages on fire :) 
 
-      Interesting how everyone was postin 20
-      something push-ups before. But after I posted my 40, people started suddenly posting 50 or
-      even 60 push-ups.. Pff, those lazy bastards needed some real <code>push</code>, hahaha :)
-
+      <br />
+      <br />
+      In Age of Empires II :) Was a really great day, satisfying, funny, oh and the bonus was a great progress on my handstand!
+      <br />
+      
+      <img src="https://i.imgur.com/5CxYLaE.jpg" alt="Photo by Skitterphoto from Pexels" />
     </p>
   </Layout>
 )
