@@ -667,14 +667,14 @@ export default ({ data }) => (
       Around afternoon I started to be very <code>very</code> tired. As my
       mentor pointed out.. I should not have been coding till midnight and I
       should have rather rested in the evenings. That was actually true because
-      I was starting to feel a headache somewhere attthe back of my
+      I was starting to feel a headache somewhere at the back of my
       consciousness, which did not prophet anything good. If this turns into
       migrene, life will be very painful...
       <br />
       <br />
       In the evening I tried to distract myself with a nice conversation with a
       friend. We agreed on a tea-and-cake hangout on Whatsapp. It was actually
-      very nice (even without and actual cake), but unfortunatelly my headache
+      very nice (even without actual tea or cake), but unfortunatelly my headache
       was intensifying and soon I found myself struggling. So I had to stop the
       ever-interesting call and head to bed... I am screwed...
       <br />
@@ -683,7 +683,7 @@ export default ({ data }) => (
       not be so over-ambitious and do <code>not</code> work till 1 am unless you
       really have to. It is not worth a migrene..
       <br />
-      <img src="https://i.imgur.com/LE1F5XE.jpg" alt="Photo by Addania" />
+      <img src="https://i.imgur.com/NLIHuc0.jpg" alt="Photo from telegraph.co.uk" />
       <br />
       <strong>Dev day 12: 18.03.2020</strong>
       <br />
@@ -760,7 +760,7 @@ export default ({ data }) => (
       <br />I worked relentlessly on all the change request <code>torture</code>{" "}
       from my mentor and my colleagues. I integrated everything they wanted. And
       now, the big time has come to move my issue to QA testing! I am soooo
-      close to having it merge to the main branch.
+      close to having it merged to the main branch.
       <br />
       <br />
       And then it happened... an unforgettable conversation between me and my
@@ -870,11 +870,10 @@ export default ({ data }) => (
       (whatever) (...ok all of the) sweets I had at home (which by the way was
       an entire stock of rations for a month time of apocalypse...), then I
       cried a bit again and afterwards on the recommendation of my mentor I took
-      the first and the second look at it... and even a <code>bonus</code> third
-      one... It still looked the same... so I wrapped the working day up and
-      hoped that something magical will happen over the weekend, that on Monday
-      I will wake up and everything will be crystal clear and I simply do it...
-      Let's see...
+      the second look at it... and even a <code>bonus</code> third one... It
+      still looked the same... so I wrapped the working day up and hoped that
+      something magical will happen over the weekend, that on Monday I will wake
+      up and everything will be crystal clear and I simply do it... Let's see...
       <br />
       <br />
       As a rebellion to that I decided to make progress on meaningful stuff in
@@ -919,27 +918,22 @@ export default ({ data }) => (
       <br />
       Anyhow I had to reach out to wisdoms of my mentor to guide me to the point
       from where I could at least start. The starting point was.... to delete
-      around 10 complex files and do everything from scratch.. 
-      <br /><br />
+      around 10 complex files and do everything from scratch..
+      <br />
+      <br />
       Quoting my mentor:
       <br />
-      <blockquote>
-        Yes, remove all custom styles.
-      </blockquote>
-      <img
-        src="https://i.imgur.com/bTIkniG.gif"
-        alt=""
-      />
-     <br />
-     <br />
-      I shed a tear and
-      then made some very nice progress with the design itself. Who care that
-      all the functionality is missing :) The looks is important, no?
-      Nevertheless, it was fun coding today. Would be a perfect day, if only I
-      did not have to do some annoying <code>manual</code> work for my ex-boss
-      from my previous team. Who does not like filling out a 1000th spreadsheet
-      manually, even though we have the same information spread across 5
-      different softwares...? Well in year 2020 manual work FTW... (or not)...
+      <blockquote>Yes, remove all custom styles.</blockquote>
+      <img src="https://i.imgur.com/bTIkniG.gif" alt="" />
+      <br />
+      <br />I shed a tear and then made some very nice progress with the design
+      itself. Who care that all the functionality is missing :) The looks is
+      important, no? Nevertheless, it was fun coding today. Would be a perfect
+      day, if only I did not have to do some annoying <code>manual</code> work
+      for my ex-boss from my previous team. Who does not like filling out a
+      1000th spreadsheet manually, even though we have the same information
+      spread across 5 different softwares...? Well in year 2020 manual work
+      FTW... (or not)...
       <br />
       <br />
       I decided that rather then raging over it, I wrap it up for today and then
@@ -1218,7 +1212,9 @@ export default ({ data }) => (
       />
       <br />
       <br />
-      <strong>Dev day 20: 31.03.2020 -Tesday</strong>
+      <strong>
+        Dev day 21: 31.03.2020 -Tesday (because who needs "u"? 😃 )
+      </strong>
       <br />
       <blockquote>People has gone crazy..</blockquote>
       <br />
@@ -1250,16 +1246,17 @@ export default ({ data }) => (
       <br />
       Coding part of the day was really interesting I learnt more about css,
       borders and outlines... out..the WHAT?? What the hell is outline?? Do you
-      mean THE BORDER around stuff like when you focus on something tabing like crazy? It is a border,
-      right? Looks like a border, smells like a border, feels like a
-      border. Then it must be a border! No?
+      mean THE BORDER around stuff like when you focus on something tabing like
+      crazy? It is a border, right? Looks like a border, smells like a border,
+      feels like a border. Then it must be a border! No?
       <br />
       <br />
-      Well.. it turns out that not all borders are borders, some borders are outlines
-      and all outlines are not borders.. 🤯 Dammit..
+      Well.. it turns out that not all borders are borders, some borders are
+      outlines and all outlines are not borders.. 🤯 Dammit..
       <br />
       <br />
-      Message to the future generations: "Don't trust anything that shines like a border... maybe it is just an... outline..." ;)
+      Message to the future generations: "Don't trust anything that shines like
+      a border... maybe it is just an... outline..." ;)
       <br />
       <img
         src="https://i.imgur.com/8eO9lir.png"
