@@ -602,7 +602,10 @@ export default ({ data }) => (
       <br />
       Which I did!
       <br />
-      <img src="https://i.imgur.com/LE1F5XE.jpg" alt="Photo by Addania" />
+      <img
+        src="https://i.imgur.com/FgPQNGV.jpg"
+        alt="Photo by Marina Shatskih from Pexels"
+      />
       <br />
       <strong>Dev day 11: 17.03.2020</strong>
       <br />
@@ -743,6 +746,12 @@ export default ({ data }) => (
       there is Internet and there are games :) Time to kill loneliness by being
       <code>totally</code> (un)productive ;)
       <br />
+      <br />
+      <img
+        src="https://i.imgur.com/BuwcGWS.jpg"
+        alt="Photo from wallpaperstock.net"
+      />
+      <br />
       <strong>Dev day 13: 19.03.2020</strong>
       <br />
       <blockquote>
@@ -823,7 +832,10 @@ export default ({ data }) => (
       discussing intriguing things.
       <br />
       <br />
-      <img src="  https://i.imgur.com/rbEzohu.jpg" alt="Photo from swapwire.com" />
+      <img
+        src="  https://i.imgur.com/rbEzohu.jpg"
+        alt="Photo from swapwire.com"
+      />
       <br />
       <strong>Dev day 14: 20.03.2020</strong>
       <br />
@@ -882,6 +894,12 @@ export default ({ data }) => (
       <br />
       Those coincidences sometimes are <code>epic</code>. If only they knew :)
       <br />
+      <br />
+      <img
+        src="https://i.imgur.com/wqDGkcD.jpg"
+        alt="Photo from wallpaperstock.net"
+      />
+      <br />
       <strong>Dev day 15: 23.03.2020</strong>
       <br />
       <br />
@@ -901,7 +919,20 @@ export default ({ data }) => (
       <br />
       Anyhow I had to reach out to wisdoms of my mentor to guide me to the point
       from where I could at least start. The starting point was.... to delete
-      around 10 complex files and do everything from scratch.. I shed a tear and
+      around 10 complex files and do everything from scratch.. 
+      <br /><br />
+      Quoting my mentor:
+      <br />
+      <blockquote>
+        Yes, remove all custom styles.
+      </blockquote>
+      <img
+        src="https://i.imgur.com/bTIkniG.gif"
+        alt=""
+      />
+     <br />
+     <br />
+      I shed a tear and
       then made some very nice progress with the design itself. Who care that
       all the functionality is missing :) The looks is important, no?
       Nevertheless, it was fun coding today. Would be a perfect day, if only I
@@ -920,6 +951,9 @@ export default ({ data }) => (
       multiplayer appointment is awaiting for me, therefore I better get to it.
       I do not want to get my sweet civilization in year 2070 wait for their
       ruler :)
+      <br />
+      <br />
+      <img src="https://i.imgur.com/dKS2IBs.jpg" alt="Photo from moddb.com" />
       <br />
       <strong>Dev day 16: 24.03.2020</strong>
       <br />
@@ -973,6 +1007,12 @@ export default ({ data }) => (
       completely :) Now that I am thinking about it, I wonder now what his
       intentions are.. and I even allow him to destroy me.. dammit :)
       <br />
+      <br />
+      <img
+        src="https://i.imgur.com/eLZBYsE.jpg"
+        alt="Photo by Polina Tankilevitch from Pexels"
+      />
+      <br />
       <strong>Dev day 17: 25.03.2020 - Wednesday</strong>
       <br />
       <br />
@@ -1007,7 +1047,6 @@ export default ({ data }) => (
       <br />
       What was it? Glad you <code>asked</code> :) I implemented this:{" "}
       <code>+</code> Yes, you see it right: a plus!
-     
       <br />
       <br />
       Why? Glad you <code>asked</code> again :) I needed to convert an index
@@ -1017,11 +1056,16 @@ export default ({ data }) => (
       <br />
       It was sooo clever that even my mentor did not know it and he was asking
       me: "What is that plus sign doing there?" My pride shone from the Earth to
-      the end of the Universe and then back again.. and then 1 second later he asked me to remove
-      it.. Pffff! He asked me to use Number(index).. How lame, how mainstream!
-      So there goes my signature. But I will not give up, I will smuggle it
-      there one day, when nobody is watching 😈 muhahahaha
+      the end of the Universe and then back again.. and then 1 second later he
+      asked me to remove it.. Pffff! He asked me to use Number(index).. How
+      lame, how mainstream! So there goes my signature. But I will not give up,
+      I will smuggle it there one day, when nobody is watching 😈 muhahahaha
       <br />
+      <br />
+      <img
+        src="https://i.imgur.com/WmemWdA.jpg"
+        alt="Photo by Negative Space from Pexels"
+      />
       <br />
       <strong>Dev day 18: 26.03.2020 - Thursday</strong>
       <br />
@@ -1053,16 +1097,19 @@ export default ({ data }) => (
       <br />
       It did not happen.. as I still needed some feedback from colleagues, final
       approval and QA testing. There goes my beaituful PR being part of the
-      first major deployment.. at least since I'm in dev team - which means since 2,5 weeks
-      :)
+      first major deployment.. at least since I'm in dev team - which means
+      since 2,5 weeks :)
       <br />
       <br />
-      Ok, so I decided that the <code>next</code> deployment will be the <code>major</code> and the <code>most important </code> deployment. And I will make it to <code>that</code> one :)
-     
+      Ok, so I decided that the <code>next</code> deployment will be the{" "}
+      <code>major</code> and the <code>most important </code> deployment. And I
+      will make it to <code>that</code> one :)
       <br />
       <br />
-      <img src="https://i.imgur.com/aNIKTsL.jpg" alt="Photo by Karl Solano from Pexels" />
-
+      <img
+        src="https://i.imgur.com/aNIKTsL.jpg"
+        alt="Photo by Karl Solano from Pexels"
+      />
       <br />
       <strong>Dev day 19: 27.03.2020 - Friday</strong>
       <br />
@@ -1083,7 +1130,8 @@ export default ({ data }) => (
       <br />
       <br />
       <blockquote>
-      I mean provided my friend and occassional trainer does not join the competition, haha. Then we are all screwed!
+        I mean provided my friend and occassional trainer does not join the
+        competition, haha. Then we are all screwed!
       </blockquote>
       <br />
       <br />
@@ -1104,9 +1152,10 @@ export default ({ data }) => (
       <br />
       <br />
       Time for the new issue! Yay! And this time on a different product.
-      Perfect! So let's make it start. I made sure and double-checked 2 weeks ago, that everything
-      is set and done on my computer for this product, I tamed the Docker, I
-      resolved all its issues, and now it shall bow to me and obey my orders unless...
+      Perfect! So let's make it start. I made sure and double-checked 2 weeks
+      ago, that everything is set and done on my computer for this product, I
+      tamed the Docker, I resolved all its issues, and now it shall bow to me
+      and obey my orders unless...
       <br />
       <br />
       Unless you try to start the Docker again.. Or even better, it DID start..
@@ -1135,30 +1184,87 @@ export default ({ data }) => (
       life :)
       <br />
       <br />
-      <img src="https://i.imgur.com/xtsndFy.jpg?1" alt="Photo by Sam Kolder from Pexels" />
+      <img
+        src="https://i.imgur.com/xtsndFy.jpg?1"
+        alt="Photo by Sam Kolder from Pexels"
+      />
       <br />
       <strong>Dev day 20: 30.03.2020 - Monday</strong>
       <br />
-      <blockquote>
-      They brought it on, hahaha :)
-      </blockquote>
+      <blockquote>They brought it on, hahaha :)</blockquote>
       <br />
-      Interesting how everyone was posting 20
-      something push-ups before. But after I posted my 40, people started suddenly posting 50,
-      60 or <code>even</code> 70 push-ups.. Pff, those lazy bastards needed some real <code>push</code>, hahaha :)
-      <br />
-      <br />
-      Codewise, today was an <code>epic</code> day! I did not only finish my new PR, I actually finished whole 3 of them. Yes, you hear it, THREE! :) Plus I created I think 6 issues and even reviewed one of my colleague. I was totally on fire today! Careful, else you get burt :)
+      Interesting how everyone was posting 20 something push-ups before. But
+      after I posted my 40, people started suddenly posting 50, 60 or{" "}
+      <code>even</code> 70 push-ups.. Pff, those lazy bastards needed some real{" "}
+      <code>push</code>, hahaha :)
       <br />
       <br />
-      And continuing the fire theme of the day, my friend, his brother and I set some villages on fire :) 
-
+      Codewise, today was an <code>epic</code> day! I did not only finish my new
+      PR, I actually finished whole 3 of them. Yes, you hear it, THREE! :) Plus
+      I created I think 6 issues and even reviewed one of my colleague's. I was
+      totally on fire today! Careful, else you get burnt :)
       <br />
       <br />
-      In Age of Empires II :) Was a really great day, satisfying, funny, oh and the bonus was a great progress on my handstand!
+      And continuing the fire theme of the day, my friend, his brother and I set
+      some villages on fire :)
       <br />
-      
-      <img src="https://i.imgur.com/5CxYLaE.jpg" alt="Photo by Skitterphoto from Pexels" />
+      <br />
+      In Age of Empires II :) Was a really great day, satisfying, funny, oh and
+      the bonus was a great progress on my handstand! And of course the bonfire.
+      <br />
+      <img
+        src="https://i.imgur.com/5CxYLaE.jpg"
+        alt="Photo by Skitterphoto from Pexels"
+      />
+      <br />
+      <br />
+      <strong>Dev day 20: 31.03.2020 -Tesday</strong>
+      <br />
+      <blockquote>People has gone crazy..</blockquote>
+      <br />
+      ..with push-up variations:
+      <br />
+      <br />
+      - push-ups suited up with a tie,
+      <br />
+      - push-ups on 3 fingers,
+      <br />
+      - push-ups with a clap...
+      <br />
+      <br />
+      I am really impressed! Makes me wonder, what interesting should I come up
+      with?
+      <br />
+      <br />
+      Ok, to kill em all, I would need my trainer to show them{" "}
+      <code>THE ULTIMATE FINAL JUDGEMENT</code>: handstand push-up. But I can't
+      even do a proper handstand yet, so hmm... 😈 hmmmmmmmmmm 😈😈😈 push-up
+      with one hand!!! Back in times in my sports aerobics club I could make a
+      few.. Let's see if I still remem... IM SCREWED!! So totally SCREWED :D
+      hahahaaaa, was a sincere attempt, but unfortunatelly it failed miserably,
+      pitifully, or let's just pretend nothing has happened. The footage is
+      burnt, destroyed, deleted, burried and and and anihiliated. Nobody knows..
+      Nobody <code>will</code> know.. Nothing happened here.. whistle whistle
+      whistle .. maybe let's just go back to normal push-ups.
+      <br />
+      <br />
+      Coding part of the day was really interesting I learnt more about css,
+      borders and outlines... out..the WHAT?? What the hell is outline?? Do you
+      mean THE BORDER around stuff like when you focus on something tabing like crazy? It is a border,
+      right? Looks like a border, smells like a border, feels like a
+      border. Then it must be a border! No?
+      <br />
+      <br />
+      Well.. it turns out that not all borders are borders, some borders are outlines
+      and all outlines are not borders.. 🤯 Dammit..
+      <br />
+      <br />
+      Message to the future generations: "Don't trust anything that shines like a border... maybe it is just an... outline..." ;)
+      <br />
+      <img
+        src="https://i.imgur.com/8eO9lir.png"
+        alt="Photo by Artistic-Addania"
+      />
     </p>
   </Layout>
 )
