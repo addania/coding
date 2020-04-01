@@ -2,8 +2,7 @@ import React from "react"
 import Layout from "../components/layout.js"
 import Header from "../components/header.js"
 import { graphql } from "gatsby"
-import SEO from "../components/seo.js"
-import { Carousel } from "../components/carousel.js"
+import cricket from "./cricket.mp3";
 
 export default ({ data }) => (
   <Layout>
@@ -674,16 +673,19 @@ export default ({ data }) => (
       <br />
       In the evening I tried to distract myself with a nice conversation with a
       friend. We agreed on a tea-and-cake hangout on Whatsapp. It was actually
-      very nice (even without actual tea or cake), but unfortunatelly my headache
-      was intensifying and soon I found myself struggling. So I had to stop the
-      ever-interesting call and head to bed... I am screwed...
+      very nice (even without actual tea or cake), but unfortunatelly my
+      headache was intensifying and soon I found myself struggling. So I had to
+      stop the ever-interesting call and head to bed... I am screwed...
       <br />
       <br />
       Moral of the story [for my future self]: Adda, gotdammit, seriously, do
       not be so over-ambitious and do <code>not</code> work till 1 am unless you
       really have to. It is not worth a migrene..
       <br />
-      <img src="https://i.imgur.com/NLIHuc0.jpg" alt="Photo from telegraph.co.uk" />
+      <img
+        src="https://i.imgur.com/NLIHuc0.jpg"
+        alt="Photo from telegraph.co.uk"
+      />
       <br />
       <strong>Dev day 12: 18.03.2020</strong>
       <br />
@@ -1236,12 +1238,20 @@ export default ({ data }) => (
       <code>THE ULTIMATE FINAL JUDGEMENT</code>: handstand push-up. But I can't
       even do a proper handstand yet, so hmm... 😈 hmmmmmmmmmm 😈😈😈 push-up
       with one hand!!! Back in times in my sports aerobics club I could make a
-      few.. Let's see if I still remem... IM SCREWED!! So totally SCREWED :D
-      hahahaaaa, was a sincere attempt, but unfortunatelly it failed miserably,
-      pitifully, or let's just pretend nothing has happened. The footage is
-      burnt, destroyed, deleted, burried and and and anihiliated. Nobody knows..
-      Nobody <code>will</code> know.. Nothing happened here.. whistle whistle
-      whistle .. maybe let's just go back to normal push-ups.
+      few.. Let's see if I still remem... I'M SCREWED!! So totally SCREWED :D
+      hahahaaaa, was a sincere attempt, but unfortunatelly it failed pitifully,
+      or let's just pretend this has never happened. The footage is burnt,
+      destroyed, deleted, burried, anihiliated. Nobody knows.. Nobody{" "}
+      <code>will</code> know..
+      <br />
+      <br />
+      <img
+        src="https://i.imgur.com/3EFBOJG.jpg"
+        alt="Photo from makeameme.org"
+      />
+      <br />
+      <br />
+      Whistle whistle whistle .. maybe let's just go back to normal push-ups.
       <br />
       <br />
       Coding part of the day was really interesting I learnt more about css,
@@ -1262,6 +1272,56 @@ export default ({ data }) => (
         src="https://i.imgur.com/8eO9lir.png"
         alt="Photo by Artistic-Addania"
       />
+      <br />
+      <br />
+      <strong>Dev day 22: 01.04.2020 - Wednesday</strong>
+      <br />
+      <blockquote>
+        I am a proud developer today. I totally nailed it with thorough
+        investigation and in-depth analysis of two issue, wrote extensive task
+        lists, prepared really sophisticated solutions. Took me most of the day,
+        but totally worth it...
+      </blockquote>
+      <br />
+      <br />
+      ...only both issues got <code>cancelled</code>. What do you mean
+      cancelled? Like we are not going to make them? Like when they are almost
+      finished? Like really? Really? After I invested so much effort into this?
+      And seriously <code>both</code> of them? Pffff. 
+      <br />
+      <br />
+      No, I don't accept this, I
+      will merge it, let me meeeeeerg..
+      <br />
+      <br />
+      <audio controls>
+  <source src={cricket} type="audio/ogg"/>
+  <source src={cricket} type="audio/mpeg"/>
+Your browser does not support the audio element.
+</audio>
+      <img
+        src="https://i.imgur.com/XyZsaJt.jpg"
+        alt="Photo from smithsonianmag.com"
+      />
+      <br />
+      <br />
+      Noone has ever heard of Addania ever again.. :)
+      <br />
+      <br />
+      OK, rewind. Maybe I don't merge it. I still like my job.
+      <br />
+      <br />
+      But the evening was great, had an upper body training with two friends of
+      mine followed by a very nice conversation :) Yay!
+      <br />
+      <br />
+      <img
+        src="https://i.imgur.com/TZihF9E.jpg"
+        alt="Photo by Jonathan Borba from Pexels"
+      />
+
+
+
     </p>
   </Layout>
 )
