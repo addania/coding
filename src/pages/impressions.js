@@ -1274,41 +1274,41 @@ export default ({ data }) => (
       />
       <br />
       <br />
-      
       <strong>Dev day 22: 01.04.2020 - Wednesday</strong>
       <br />
       <br />
-      A typical lazy morning, when you wake up before your alarm clock and
-      you let yourself indulge a bit more, enjoying time in bed.. 
+      A typical lazy morning, when you wake up before your alarm clock, letting
+      yourself indulge a bit more snuggled up in the blankets, enjoying time in
+      bed..
       <br />
       <img
         src="https://i.imgur.com/aI13s7z.jpg"
         alt="Photo by Burst from Pexels"
       />
-     <br />
-      ...half asleep
-      grabbing the phone to check the time.. and then you jump out of your bed
-      and out of your skin, when seeing blurily words on Slack from your BOSS
-      saying something like: 
+      <br />
+      ...half asleep grabbing the phone to check the time.. and then you jump
+      out of your bed and out of your skin, when seeing blurily words on Slack
+      from your BOSS saying something like:
       <br />
       <br />
-      <blockquote>bug.. critical issue.. urgent.. introduced in your
-      PR... @addania & @mentor take a look </blockquote>
+      <blockquote>
+        bug.. critical issue.. urgent.. introduced in your PR... @addania &
+        @mentor take a look{" "}
+      </blockquote>
       <br />
       <br />
-      🤯🤯🤯😱😱😱 
-      
+      🤯🤯🤯😱😱😱
       <br />
-      <br />I am there only for a
-      few weeks, only made couple of PR contributions and I already managed to
-      break the whole app? 😬 Nightmare of every developer has come to haunt me.
+      <br />I am there only for a few weeks, only made couple of PR
+      contributions and I already managed to break the whole app? 😬 Nightmare
+      of every developer has come to haunt me.
       <br />
       <br />
       Wow, what an exercise to start the day with a heart attack... only for you
       to realized it was NOT your PR and actually NOT even the PR of your
       mentor. That actually the Big Boss introduced a regression himself while
-      merging our pressious PRs to the main code or whatever
-      black magic he was doing with the code. Phew, that was a close one! I shall live another day!
+      merging our pressious PRs to the main code or whatever black magic he was
+      doing with the code. Phew, that was a close one! I shall live another day!
       <br />
       <br />
       AaaanywayZ
@@ -1393,6 +1393,43 @@ export default ({ data }) => (
       <img
         src="https://i.imgur.com/TZihF9E.jpg"
         alt="Photo by Jonathan Borba from Pexels"
+      />
+      <br />
+      <br />
+      <strong>Dev day 23: 02.04.2020 - Thursday</strong>
+      <br />
+      <br />
+      To be, or not to be (a url), that is the question:
+      <br />
+      <br />
+      or maybe the question: Where the hell can I get that <code>url</code>from?
+      made me busy entire morning. And not only me, cause obviously I asked
+      everyone who I dared to bother :) And it was not really an easy one. And
+      the answer is, OF COURSE it was hiding where I was ALREADY looking couple
+      of times, but becasue of my eyes I did not see it. And because of course,
+      why would we call things with their proper names? That would be too easy.. It
+      is way more adventurous to call stuff in puzzles, riddles, poems so that
+      nobody shall understand.
+      <br />
+      <br />O <code>Stack</code>, <code>Stack</code> wherefore art thou{" "}
+      <code>Stack</code>? 
+      <br />Deny thy father and refuse thy name. 
+      <br />Or if thou wilt
+      not, be but sworn my love <br />And I’ll no longer be a <code>Workspace</code>.
+      <br />‘Tis but thy name that is my enemy: <br />Thou art thyself, though not an{" "}
+      <code>Organization</code>. <br />What’s <code>Organization</code>? It is nor
+      hand nor foot <br />Nor arm nor face nor any other part <br />Belonging to a man. O be
+      some other <code>name</code>!!!
+      <br />
+      <br />
+      And the rest of the day I spent testing. Most importantly I tested an issue of my
+      friend, which made it special and fun. And then we spend entire evening talking about it
+      :) Was very nice. And right before going to bed I did some midnight push-ups,
+      just to keep my score ;)
+
+      <img
+        src="https://i.imgur.com/jCYh6AG.jpg"
+        alt="Photo from dong.world"
       />
     </p>
   </Layout>
