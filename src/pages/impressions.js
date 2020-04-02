@@ -1399,31 +1399,35 @@ export default ({ data }) => (
       <strong>Dev day 23: 02.04.2020 - Thursday</strong>
       <br />
       <br />
-      To be, or not to be (a url), that is the question:
+      <blockquote>
+      To be, or not to be (<code>a url</code>), that is the question:
+      </blockquote>
       <br />
       <br />
-      or maybe the question: Where the hell can I get that <code>url</code>from?
-      made me busy entire morning. And not only me, cause obviously I asked
+      or maybe the question: <i>"Where the hell can I get that <code>url</code> from?" </i>
+       made me busy entire morning. And not only me, because obviously I asked
       everyone who I dared to bother :) And it was not really an easy one. And
-      the answer is, OF COURSE it was hiding where I was ALREADY looking couple
-      of times, but becasue of my eyes I did not see it. And because of course,
+      the answer was, <code>of course</code> it was hiding where I was <code>already</code> looking couple
+      of times, but because of my eyes I did not see it. And because of course,
       why would we call things with their proper names? That would be too easy.. It
-      is way more adventurous to call stuff in puzzles, riddles, poems so that
-      nobody shall understand.
+      is way more adventurous to call stuff in puzzles, riddles, foreign languages and poems so that
+      nobody understands..
       <br />
-      <br />O <code>Stack</code>, <code>Stack</code> wherefore art thou{" "}
+      <br />
+      <blockquote>O <code>Stack</code>, <code>Stack</code> wherefore art thou{" "}
       <code>Stack</code>? 
-      <br />Deny thy father and refuse thy name. 
+      <br />Deny thy father and refuse thy <code>name</code>. 
       <br />Or if thou wilt
       not, be but sworn my love <br />And I’ll no longer be a <code>Workspace</code>.
       <br />‘Tis but thy name that is my enemy: <br />Thou art thyself, though not an{" "}
       <code>Organization</code>. <br />What’s <code>Organization</code>? It is nor
       hand nor foot <br />Nor arm nor face nor any other part <br />Belonging to a man. O be
       some other <code>name</code>!!!
+      </blockquote>
       <br />
       <br />
       And the rest of the day I spent testing. Most importantly I tested an issue of my
-      friend, which made it special and fun. And then we spend entire evening talking about it
+      friend, which made it special and fun. And then we spent entire evening talking about it
       :) Was very nice. And right before going to bed I did some midnight push-ups,
       just to keep my score ;)
 
