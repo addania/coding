@@ -746,7 +746,7 @@ export default ({ data }) => (
       So bye bye guys, you won't see me in the next couple of hourZ... ok, ok,
       actually (due to quarantine) in the next couple of months but at least
       there is Internet and there are games :) Time to kill loneliness by being
-      <code>totally</code> (un)productive ;)
+      <code> totally</code> (un)productive ;)
       <br />
       <br />
       <img
@@ -958,11 +958,11 @@ export default ({ data }) => (
         When initial shock from pandemics subsides, you begin to live your
         ordinary life. Under new circumstanes of course, with new routine, with
         some adjustments and workarounds. But it soon becomes the new usual.
-        Which is good. Which means you stopped panicking and start adapting.
+        Which is good. Which means you stopped panicking and started adapting.
         Because all emotions even panic has an expiry date when your body runs
         into emotional exhaustion and that is the breakpoint when you embrace
         your new situation and start acting to the best of your given
-        circumstance.
+        circumstances.
       </blockquote>
       <br />
       <br />
@@ -1000,7 +1000,7 @@ export default ({ data }) => (
       And evening was really great! Had an upper body training with my friend.
       My legs are still crying from the leg training with him on Sunday. Was
       time to destroy my arms as well. So that the Addania is finished off
-      completely :) Now that I am thinking about it, I wonder now what his
+      completely :) Now that I am thinking about it, I wonder what his
       intentions are.. and I even allow him to destroy me.. dammit :)
       <br />
       <br />
@@ -1092,7 +1092,7 @@ export default ({ data }) => (
       <br />
       <br />
       It did not happen.. as I still needed some feedback from colleagues, final
-      approval and QA testing. There goes my beaituful PR being part of the
+      approval and QA testing. There goes my beautiful PR being part of the
       first major deployment.. at least since I'm in dev team - which means
       since 2,5 weeks :)
       <br />
@@ -1400,41 +1400,113 @@ export default ({ data }) => (
       <br />
       <br />
       <blockquote>
-      To be, or not to be (<code>a url</code>), that is the question:
+        To be, or not to be (<code>a url</code>), that is the question:
       </blockquote>
       <br />
       <br />
-      or maybe the question: <i>"Where the hell can I get that <code>url</code> from?" </i>
-       made me busy entire morning. And not only me, because obviously I asked
+      or maybe the question:{" "}
+      <i>
+        "Where the hell can I get that <code>url</code> from?"{" "}
+      </i>
+      made me busy entire morning. And not only me, because obviously I asked
       everyone who I dared to bother :) And it was not really an easy one. And
-      the answer was, <code>of course</code> it was hiding where I was <code>already</code> looking couple
-      of times, but because of my eyes I did not see it. And because of course,
-      why would we call things with their proper names? That would be too easy.. It
-      is way more adventurous to call stuff in puzzles, riddles, foreign languages and poems so that
-      nobody understands..
+      the answer was, <code>of course</code> it was hiding where I was{" "}
+      <code>already</code> looking couple of times, but because of my eyes I did
+      not see it. And because of course, why would we call things with their
+      proper names? That would be too easy.. It is way more adventurous to call
+      stuff in puzzles, riddles, foreign languages and poems so that nobody
+      understands..
       <br />
       <br />
-      <blockquote>O <code>Stack</code>, <code>Stack</code> wherefore art thou{" "}
-      <code>Stack</code>? 
-      <br />Deny thy father and refuse thy <code>name</code>. 
-      <br />Or if thou wilt
-      not, be but sworn my love <br />And I’ll no longer be a <code>Workspace</code>.
-      <br />‘Tis but thy name that is my enemy: <br />Thou art thyself, though not an{" "}
-      <code>Organization</code>. <br />What’s <code>Organization</code>? It is nor
-      hand nor foot <br />Nor arm nor face nor any other part <br />Belonging to a man. O be
-      some other <code>name</code>!!!
+      <blockquote>
+        O <code>Stack</code>, <code>Stack</code> wherefore art thou{" "}
+        <code>Stack</code>?
+        <br />
+        Deny thy father and refuse thy <code>name</code>.
+        <br />
+        Or if thou wilt not, be but sworn my love <br />
+        And I’ll no longer be a <code>Workspace</code>.
+        <br />
+        ‘Tis but thy name that is my enemy: <br />
+        Thou art thyself, though not an <code>Organization</code>. <br />
+        What’s <code>Organization</code>? It is nor hand nor foot <br />
+        Nor arm nor face nor any other part <br />
+        Belonging to a man. O be some other <code>name</code>!!!
       </blockquote>
       <br />
       <br />
-      And the rest of the day I spent testing. Most importantly I tested an issue of my
-      friend, which made it special and fun. And then we spent entire evening talking about it
-      :) Was very nice. And right before going to bed I did some midnight push-ups,
-      just to keep my score ;)
+      And the rest of the day I spent testing. Most importantly I tested an
+      issue of my friend, which made it special and fun. And then we spent
+      entire evening talking about it :) Was very nice. And right before going
+      to bed I did some midnight push-ups, just to keep my score ;)
+      <img src="https://i.imgur.com/jCYh6AG.jpg" alt="Photo from dong.world" />
+      <br />
+      <br />
+      <strong>Dev day 24: 03.04.2020 - Friday</strong>
+      <br />
+      <br />
+      Today I learned something new (the hard-way):
+      <blockquote>Ya shall nat juse component inception bro!</blockquote>
+      <br />
+      <br />
+      Well, it looked innocent when I defined a component within a component.
+      And my boss even approved the code and I was so happy that this issue I
+      did completely on my own... But then there are always people that put us
+      down from the momentary victory, back to earth, back to dirt :D :D :D
+      <br />
+      <br />
+      So yeah, component inception is apparently not allowed in React, but in my
+      opinion, it looked cool. A colleague even said: "I have never seen this
+      before". See? I am unique with my ideas! I defy the contraints of the
+      system! I think outside of the box, I use unusable! I break all the rules
+      and ... break the app, potentially :) But still I am a rebel, a black
+      sheep of the React. So...
+      <br />
+      <br />
+      Me: "Can we keep it?
+      <br />
+      <br />
+      <img
+        src="https://i.imgur.com/AmDekqY.jpg"
+        alt="Photo from pinterest.com"
+      />
+      <br />
+      They: "How about..."
+      <br />
+      <img
+        src="https://i.imgur.com/DIyWu8O.jpg"
+        alt="Photo from www.christianforums.com"
+      />
+      <br />
+      Me: "But..."
+      <br />
+      <br />
+      They:
+      <br />
+      <img
+        src="https://i.imgur.com/cSmvi8b.jpg?1"
+        alt="Photo from cdn.shopify.com"
+      />
+
+      <br />
+      Me: "Mmmkaaay..."
+      <br />
+      <br />
 
       <img
-        src="https://i.imgur.com/jCYh6AG.jpg"
-        alt="Photo from dong.world"
+        src="https://i.imgur.com/s3kpZB8.jpg?1"
+        alt="Photo from cdn.shopify.com"
       />
+
+<br />
+      <br />
+      <strong>Dev day 25: 06.04.2020 - Monday</strong>
+      <br />
+      <br />
+      Today I learned something new (the hard-way):
+      <blockquote>Ya shall nat juse component inception bro!</blockquote>
+      <br />
+      <br />
     </p>
   </Layout>
 )
