@@ -1,6 +1,7 @@
 ---
 title: "Tell me who you are error"
 date: "2019-12-03"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/J4QhoGt.jpg "Photo by 

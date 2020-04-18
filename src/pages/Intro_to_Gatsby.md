@@ -1,6 +1,7 @@
 ---
 title: "Intro to Gatsby"
 date: "2019-09-26"
+category: "knowledge-base"
 ---
 
 

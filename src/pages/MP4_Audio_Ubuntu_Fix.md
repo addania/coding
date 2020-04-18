@@ -1,6 +1,7 @@
 ---
 title: "How to fix Audio on MP4 on Ubuntu"
 date: "2020-03-01"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/k7kjCMC.jpg "Photo by bongkarn thanyakij from Pexels")<p style="font-size: 12px; text-align: right">_Photo by bongkarn thanyakij from Pexels_</p>

@@ -1,6 +1,7 @@
 ---
 title: "Concurrency"
 date: "2020-04-11"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/xdi5UzW.png "Photo by Pixabay from Pexels")

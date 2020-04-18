@@ -1,6 +1,7 @@
 ---
 title: "Intro to Git"
 date: "2019-09-25"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/ZVeInG0.png "Git Logo")

@@ -1,6 +1,7 @@
 ---
 title: "Conditionally render a component"
 date: "2019-12-04"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/BRbkVil.jpg "Photo by Aleksandar Pasaric from Pexels")

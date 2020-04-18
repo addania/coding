@@ -1,6 +1,7 @@
 ---
 title: "Fetching Data in React"
 date: "2019-12-11"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/MqWLXcO.jpg "Photo by Jozef Fehér from Pexels")

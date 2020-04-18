@@ -1,6 +1,7 @@
 ---
 title: "Create and download file in Javascript"
 date: "2020-01-03"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/o5VQqra.jpg "Photo by Dominika Roseclay from Pexels")

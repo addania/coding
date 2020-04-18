@@ -1,6 +1,7 @@
 ---
 title: "Install Notepad++ on Linux"
 date: "2019-12-28"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/LVjRiAO.png "Notepad++ logo")

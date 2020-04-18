@@ -1,6 +1,7 @@
 ---
 title: "Relative and Absolute imports"
 date: "2020-02-14"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/xVQKAQS.jpg "Photo by Pixabay")

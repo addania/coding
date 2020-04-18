@@ -1,6 +1,7 @@
 ---
 title: "Brackets, Braces and Parentheses"
 date: "2020-03-13"
+category: "knowledge-base"
 ---
 ![](https://i.imgur.com/ppveEdb.jpg "Photo by Kaboompics .com from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Kaboompics .com from Pexels_</p>
 

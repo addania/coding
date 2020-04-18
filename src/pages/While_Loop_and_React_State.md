@@ -1,6 +1,7 @@
 ---
 title: "While Loop and React State"
 date: "2019-11-15"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/8pjW3Uh.jpg "Photo by Edwin Soto from Pexels")

@@ -1,6 +1,7 @@
 ---
 title: "Background image in div"
 date: "2019-11-15"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/M6Q6Fay.jpg "Photo by Aneta Foubíková from Pexels")

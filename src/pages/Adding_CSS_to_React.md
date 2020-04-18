@@ -1,6 +1,7 @@
 ---
 title: "Adding CSS to React"
 date: "2019-10-06"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/cLbxIHe.jpg "Photo by Pixabay from Pexels")

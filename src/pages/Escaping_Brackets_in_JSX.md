@@ -1,6 +1,7 @@
 ---
 title: "Escaping curly brackets in JSX"
 date: "2019-10-28"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/Xp2icU5.jpg "Photo by Matthias Zomer from Pexels")

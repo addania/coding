@@ -1,6 +1,7 @@
 ---
 title: "Intro to React"
 date: "2019-09-28"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/4tBPaPE.png "React logo")

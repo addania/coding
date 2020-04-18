@@ -1,6 +1,7 @@
 ---
 title: "Publish Create React App to Github Pages"
 date: "2019-11-29"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/4tBPaPE.png "React logo")

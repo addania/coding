@@ -1,6 +1,7 @@
 ---
 title: "Hooks"
 date: "2019-10-07"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/4KvXTki.jpg "Photo by Johannes Plenio from Pexels")

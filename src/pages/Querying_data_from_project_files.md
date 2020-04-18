@@ -1,6 +1,7 @@
 ---
 title: "Querying data from project files"
 date: "2019-10-10"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/Ms2Wa14.jpg "Photo by Logan Kirschner from Pexels")

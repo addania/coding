@@ -1,6 +1,7 @@
 ---
 title: "Visual Code Studio"
 date: "2020-03-02"
+category: "knowledge-base"
 ---
 
 As every good programmer we will need to download a good code editor. According to the [polls](https://2019.stateofjs.com/other-tools/) many developers use VCS (Visual Code Studio). Let's install that one then.

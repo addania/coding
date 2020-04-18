@@ -1,6 +1,7 @@
 ---
 title: "Generate SSH Key for GitHub"
 date: "2019-12-06"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/wOgHAU7.jpg "Photo by Ylanite Koppens from Pexels")

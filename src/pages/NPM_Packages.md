@@ -1,6 +1,7 @@
 ---
 title: "NPM Packages"
 date: "2019-12-01"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/xa1x0Gq.jpg "Photo by Kim Stiver from Pexels")

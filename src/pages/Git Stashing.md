@@ -1,6 +1,7 @@
 ---
 title: "Git Stashing"
 date: "2020-03-27"
+category: "knowledge-base"
 ---
 
 [![](https://i.imgur.com/8ErnL8l.jpg)](https://i.imgur.com/8ErnL8l.jpg)<p style="font-size: 12px; text-align: right">_Photo by Picography from Pexels_</p>

@@ -1,6 +1,7 @@
 ---
 title: "Exports"
 date: "2019-12-01"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/1S7qNP7.jpg "Photo by Pixabay from Pexels")

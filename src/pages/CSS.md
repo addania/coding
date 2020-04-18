@@ -1,6 +1,7 @@
 ---
 title: "CSS"
 date: "2019-10-11"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/0v7juum.jpg "Photo by Format from Pexels")

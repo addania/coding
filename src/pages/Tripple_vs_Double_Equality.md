@@ -1,6 +1,7 @@
 ---
 title: "Tripple vs Double Equality"
 date: "2019-12-25"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/hPA457A.jpg "Photo by Ivan Bertolazzi from Pexels")

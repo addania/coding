@@ -1,6 +1,7 @@
 ---
 title: "Gatsby fonts"
 date: "2019-10-08"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/BvSXI40.jpg "PPhoto by Dominika Roseclay from Pexels")

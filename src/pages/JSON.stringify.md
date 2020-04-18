@@ -1,6 +1,7 @@
 ---
 title: "JSON.stringify"
 date: "2019-10-17"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/KX2u0f2.jpg "Photo by Dominika Roseclay from Pexels")

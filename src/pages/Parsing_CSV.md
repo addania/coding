@@ -1,6 +1,7 @@
 ---
 title: "Parsing CSV"
 date: "2019-12-12"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/crZSR9A.jpg "Photo by Mike from Pexels")

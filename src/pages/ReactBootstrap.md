@@ -1,6 +1,7 @@
 ---
 title: "React Bootstrap"
 date: "2019-10-12"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/YRAOVo0.jpg "React Bootstrap Logo")

@@ -1,6 +1,7 @@
 ---
 title: "Carousel in React"
 date: "2019-10-04"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/qlBACx0.jpg "Photo by Brett Sayles from Pexels")

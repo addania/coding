@@ -1,6 +1,7 @@
 ---
 title: "Colocation"
 date: "2020-02-20"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/xI4DXv7.jpg "Photo by ELEVATE from Pexels")

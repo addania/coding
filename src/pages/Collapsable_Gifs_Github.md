@@ -1,6 +1,7 @@
 ---
 title: "Collapsable gifs in Github"
 date: "2020-03-29"
+category: "knowledge-base"
 ---
 
 [![](https://i.imgur.com/9CkwiRc.jpg)](https://i.imgur.com/9CkwiRc.jpg)<p style="font-size: 12px; text-align: right">_Photo by Quang Nguyen Vinh from Pexels_</p>

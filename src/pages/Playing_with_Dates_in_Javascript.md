@@ -1,6 +1,7 @@
 ---
 title: "Playing with Dates in Javascript"
 date: "2019-11-16"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/ooqUgWd.jpg "Photo by Wolfgang from Pexels")

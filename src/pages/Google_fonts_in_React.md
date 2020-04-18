@@ -1,6 +1,7 @@
 ---
 title: "Google Fonts in React"
 date: "2019-10-01"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/W5e4AEm.jpg "Photo by Pixabay from Pexels")

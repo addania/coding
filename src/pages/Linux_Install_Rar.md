@@ -1,6 +1,7 @@
 ---
 title: "Install rar on Linux"
 date: "2019-12-29"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/qlTfidI.jpg "Photo by Miray Bostancı from Pexels")

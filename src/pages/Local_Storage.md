@@ -1,6 +1,7 @@
 ---
 title: "Local Storage"
 date: "2019-10-15"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/zMFVLde.jpg "Photo by Dids from Pexels")

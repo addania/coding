@@ -1,6 +1,7 @@
 ---
 title: "Tabula Rasa"
 date: "2020-02-29"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/1GXsIyS.jpg "Photo by picjumbo.com from Pexels")<p style="font-size: 12px; text-align: right">_Photo by picjumbo.com from Pexels_</p>

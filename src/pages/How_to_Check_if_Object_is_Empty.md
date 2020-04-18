@@ -1,6 +1,7 @@
 ---
 title: "How to check if object is empty"
 date: "2019-12-10"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/6uOGygm.jpg "Photo by Pixabay from Pexels")

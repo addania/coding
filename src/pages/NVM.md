@@ -1,6 +1,7 @@
 ---
 title: "Node Version Manager - NVM"
 date: "2019-11-30"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/GUDW6qM.jpg "Photo by Vitaly Vlasov from Pexels")

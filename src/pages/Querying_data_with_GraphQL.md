@@ -1,6 +1,7 @@
 ---
 title: "Querying data with GraphQL"
 date: "2019-10-09"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/vfl9kPh.jpg "Photo by Vitaly Vlasov from Pexels")

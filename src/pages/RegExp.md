@@ -1,6 +1,7 @@
 ---
 title: "Using RegExp"
 date: "2020-03-12"
+category: "knowledge-base"
 ---
 ![](https://i.imgur.com/HaPRiVv.jpg "Photo from destructoid.com")<p style="font-size: 12px; text-align: right">_Photo from destructoid.com_</p>
 

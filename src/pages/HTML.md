@@ -1,6 +1,7 @@
 ---
 title: "HTML"
 date: "2019-12-27"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/37IM7Po.jpg "Photo by Miguel Á. Padriñán from Pexels")

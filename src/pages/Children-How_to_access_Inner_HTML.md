@@ -1,6 +1,7 @@
 ---
 title: "Children - how to access inner HTML"
 date: "2019-10-23"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/YsPOiRH.jpg "Photo by Pixabay from Pexels")

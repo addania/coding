@@ -1,6 +1,7 @@
 ---
 title: "SVG"
 date: "2020-03-10"
+category: "knowledge-base"
 ---
 ![](https://i.imgur.com/hqzszg6.jpg "Photo by  S. Hermann & F. Richter from Pixabay")<p style="font-size: 12px; text-align: right">_Photo by  S. Hermann & F. Richter from Pixabay_</p>
 

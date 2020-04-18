@@ -1,6 +1,7 @@
 ---
 title: "Install Chrome on Linux"
 date: "2019-11-21"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/jX7rNIv.jpg "Photo by PhotoMIX Ltd. from Pexels")

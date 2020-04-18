@@ -1,6 +1,7 @@
 ---
 title: "Install Sublime on Linux"
 date: "2019-11-20"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/13CjRhl.png "Sublime logo")

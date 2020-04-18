@@ -1,6 +1,7 @@
 ---
 title: "Writing strings in JS and JSX"
 date: "2019-10-14"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/wPtcgBh.jpg "Photo by Elina Krima from Pexels")

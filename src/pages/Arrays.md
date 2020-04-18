@@ -1,6 +1,7 @@
 ---
 title: "Arrays"
 date: "2019-11-18"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/qmUjmQg.jpg "Photo by Pixabay from Pexels")

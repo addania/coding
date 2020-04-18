@@ -1,6 +1,7 @@
 ---
 title: "Intro to Github Pages"
 date: "2019-09-27"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/gUJE7Eu.png "Github Logo")

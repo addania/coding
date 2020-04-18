@@ -1,6 +1,7 @@
 ---
 title: "Recursion"
 date: "2019-11-27"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/kQUGRug.jpg "Photo by P C from Pexels")

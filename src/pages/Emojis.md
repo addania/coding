@@ -1,6 +1,7 @@
 ---
 title: "Emojis"
 date: "2020-03-11"
+category: "knowledge-base"
 ---
 ![](https://i.imgur.com/Lp2TItm.jpg "Photo by Miguel Á. Padriñán from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Miguel Á. Padriñán from Pexels_</p>
 

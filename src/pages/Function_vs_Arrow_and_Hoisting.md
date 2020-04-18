@@ -1,6 +1,7 @@
 ---
 title: "Function definition: Arrow vs Function, Hoising"
 date: "2019-10-18"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/WBmDMUv.jpg "Photo by Susanne Jutzeler from Pexels")

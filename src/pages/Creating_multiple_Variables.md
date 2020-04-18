@@ -1,6 +1,7 @@
 ---
 title: "How to create multiple variables"
 date: "2019-12-09"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/elDgUVi.jpg "Photo by Süleyman Şahan from Pexels")

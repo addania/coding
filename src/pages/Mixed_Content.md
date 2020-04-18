@@ -1,6 +1,7 @@
 ---
 title: "Mixed content error"
 date: "2019-12-13"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/ReyaN6N.jpg "Photo by Pixabay from Pexels")

@@ -1,6 +1,7 @@
 ---
 title: "Install LibreOffice on Linux"
 date: "2019-11-19"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/t5FghyM.png "Sublime logo")

@@ -1,6 +1,7 @@
 ---
 title: "TypeScript"
 date: "2020-02-13"
+category: "knowledge-base"
 ---
 
 

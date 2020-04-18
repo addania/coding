@@ -1,6 +1,7 @@
 ---
 title: "Template Literal"
 date: "2020-03-14"
+category: "knowledge-base"
 ---
 ![](https://i.imgur.com/ETtwNWY.jpg "Photo from wallpapersafari.com")<p style="font-size: 12px; text-align: right">_Photo from wallpapersafari.com_</p>
 

@@ -1,6 +1,7 @@
 ---
 title: "Casing"
 date: "2020-02-17"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/Vv2NHVt.jpg "Photo by Pixabay from Pexels")

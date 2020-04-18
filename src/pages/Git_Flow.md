@@ -1,6 +1,7 @@
 ---
 title: "Git Flow"
 date: "2020-02-19"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/uOGLcr9.png "Photo by Vincent Driessen from https://nvie.com/")

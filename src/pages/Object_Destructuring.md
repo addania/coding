@@ -1,6 +1,7 @@
 ---
 title: "Object Destructuring"
 date: "2020-02-16"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/vPArtow.jpg "Photo by Grimbeorn the Old from https://steamcommunity.com/sharedfiles/filedetails/?id=1139259633")

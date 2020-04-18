@@ -1,6 +1,7 @@
 ---
 title: "Event Handlers"
 date: "2019-10-24"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/Ac14aft.jpg "Photo by Wolfgang from Pexels")

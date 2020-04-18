@@ -1,6 +1,7 @@
 ---
 title: "Intro to Ubuntu"
 date: "2019-09-23"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/9fMfBav.png "Ubuntu Logo")

@@ -1,6 +1,7 @@
 ---
 title: "Semantic Versioning"
 date: "2020-02-18"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/xdi5UzW.png "Photo by Pixabay from Pexels")

@@ -1,6 +1,7 @@
 ---
 title: "Gaming on Linux"
 date: "2020-01-18"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/jy1aFWj.jpg "Photo by Lucie Liz from Pexels")

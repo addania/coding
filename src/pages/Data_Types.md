@@ -1,6 +1,7 @@
 ---
 title: "How to check data types"
 date: "2019-12-22"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/STxfgmb.jpg "Photo by João Jesus from Pexels")

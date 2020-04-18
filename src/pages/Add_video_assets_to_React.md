@@ -1,6 +1,7 @@
 ---
 title: "Add video assets to React"
 date: "2019-10-02"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/WSj6CoM.jpg "Photo by Donald Tong from Pexels")

@@ -1,6 +1,7 @@
 ---
 title: "Accessing Props"
 date: "2019-10-26"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/fEZTMxH.jpg "Photo by Gnist Design from Pexels")

@@ -1,6 +1,7 @@
 ---
 title: "Throwing errors in Javascript"
 date: "2020-02-27"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/eusnq5M.jpg "Photo from Gratisography from Pexels")

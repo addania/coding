@@ -1,6 +1,7 @@
 ---
 title: "Format Text to Block"
 date: "2019-10-29"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/Lm6vmDZ.jpg "Photo by Suzy Hazelwood from Pexels")

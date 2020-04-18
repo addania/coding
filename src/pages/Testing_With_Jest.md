@@ -1,6 +1,7 @@
 ---
 title: "Testing with Jest"
 date: "2019-12-21"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/cbhYcg2.jpg "Photo by Chokniti Khongchum from Pexels")

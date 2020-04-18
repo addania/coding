@@ -1,6 +1,7 @@
 ---
 title: "Publish your Gatsby website to Github Pages"
 date: "2019-09-30"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/NAMuzl3.jpg "Photo by Designecologist from Pexels")

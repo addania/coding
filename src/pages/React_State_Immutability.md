@@ -1,6 +1,7 @@
 ---
 title: "React state immutability"
 date: "2019-11-14"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/OULUQRu.jpg "Photo by Chokniti Khongchum from Pexels")

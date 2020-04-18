@@ -49,7 +49,7 @@ return (
 
 export const query = graphql` 
 query {
-  allMarkdownRemark (sort: {fields:[frontmatter___date], order:DESC}) {
+  allMarkdownRemark (sort: {fields:[frontmatter___date], order:DESC},filter: {frontmatter: {category: {eq: "knowledge-base"}}}) {
     edges {
       node {
         id
@@ -58,6 +58,7 @@ query {
         frontmatter {
           date
           title
+          category
         }
         fields {
           slug

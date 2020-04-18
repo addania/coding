@@ -1,6 +1,7 @@
 ---
 title: "Loops"
 date: "2019-11-28"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/VhAOIMg.jpg "Photo by Pixabay from Pexels")

@@ -1,6 +1,7 @@
 ---
 title: "Clickable Images"
 date: "2020-03-15"
+category: "knowledge-base"
 ---
 
 

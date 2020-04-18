@@ -1,6 +1,7 @@
 ---
 title: "Cloning Github Repository"
 date: "2019-11-29"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/GmB70yE.jpg "Photo by Trinity Kubassek from Pexels")

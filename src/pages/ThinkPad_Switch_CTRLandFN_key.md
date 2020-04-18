@@ -1,6 +1,7 @@
 ---
 title: "ThinkPad Switch CTRL and FN key"
 date: "2020-02-28"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/86RXy1V.jpg "Photo from https://commons.wikimedia.org/wiki/File:Lenovo_ThinkPad_Logo.jpg")

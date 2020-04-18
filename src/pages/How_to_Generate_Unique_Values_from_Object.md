@@ -1,6 +1,7 @@
 ---
 title: "How to generate Unique values from an object"
 date: "2019-12-23"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/STxfgmb.jpg "Photo by João Jesus from Pexels")

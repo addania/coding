@@ -1,6 +1,7 @@
 ---
 title: "Best Practices"
 date: "2020-02-21"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/gyWBniE.jpg "Photo by Pixabay from Pexels")

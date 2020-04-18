@@ -1,6 +1,7 @@
 ---
 title: "Convert string to integer"
 date: "2019-11-14"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/6UBU54T.jpg "Photo by Daria Shevtsova from Pexels")

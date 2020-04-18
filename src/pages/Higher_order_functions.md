@@ -1,6 +1,7 @@
 ---
 title: "Higher Order Functions"
 date: "2019-10-27"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/o8RCUlW.jpg "Photo by Cameron Casey from Pexels")

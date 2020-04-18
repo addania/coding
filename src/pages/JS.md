@@ -1,6 +1,7 @@
 ---
 title: "JS"
 date: "2019-11-10"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/a6lhpyl.jpg "Photo by Bich Tran from Pexels")

@@ -1,6 +1,7 @@
 ---
 title: "Function declaration and call"
 date: "2019-10-20"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/dGu7Oa8.jpg "Photo by Rodolfo Clix from Pexels")

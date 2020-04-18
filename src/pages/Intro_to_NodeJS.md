@@ -1,6 +1,7 @@
 ---
 title: "Intro to NodeJS"
 date: "2019-09-29"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/Y2H1vQk.png "NodeJS logo")

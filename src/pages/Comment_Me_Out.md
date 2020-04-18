@@ -1,6 +1,7 @@
 ---
 title: "Comment Me Out"
 date: "2019-10-13"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/DnSKN89.jpg "Photo by Cristian Dina from Pexels")

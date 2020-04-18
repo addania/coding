@@ -1,6 +1,7 @@
 ---
 title: "How to center an image"
 date: "2019-10-03"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/Iy5iZXG.jpg "Photo by Nathan Cowley from Pexels")

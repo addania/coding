@@ -1,6 +1,7 @@
 ---
 title: "Javascript Regular expressions"
 date: "2020-04-04"
+category: "knowledge-base"
 ---
 ![](https://i.imgur.com/ETtwNWY.jpg "Photo from wallpapersafari.com")<p style="font-size: 12px; text-align: right">_Photo from wallpapersafari.com_</p>
 

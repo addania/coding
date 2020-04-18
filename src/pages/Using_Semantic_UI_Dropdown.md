@@ -1,6 +1,7 @@
 ---
 title: "Semantic UI Dropdown"
 date: "2019-12-24"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/HkbIUiu.png "Semantic UI React logo")

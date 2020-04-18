@@ -1,6 +1,7 @@
 ---
 title: "Intro to HomeBrew"
 date: "2019-09-24"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/omFnC3A.png "Homebrew Logo")

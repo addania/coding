@@ -1,6 +1,7 @@
 ---
 title: "JSPrettier"
 date: "2019-12-08"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/GNpxcbc.jpg "Photo by Anderson Guerra from Pexels")

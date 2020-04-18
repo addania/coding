@@ -1,6 +1,7 @@
 ---
 title: "Context"
 date: "2019-10-16"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/uUsUaUJ.jpg "Photo by Suraphat Nuea-on from Pexels")

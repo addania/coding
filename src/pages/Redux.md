@@ -1,6 +1,7 @@
 ---
 title: "Redux"
 date: "2020-02-15"
+category: "knowledge-base"
 ---
 
 ![](https://i.imgur.com/DzveM7R.png "Photo by Traversy Media
