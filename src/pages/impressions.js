@@ -1487,24 +1487,296 @@ export default ({ data }) => (
         src="https://i.imgur.com/cSmvi8b.jpg?1"
         alt="Photo from cdn.shopify.com"
       />
-
       <br />
       Me: "Mmmkaaay..."
       <br />
       <br />
-
       <img
         src="https://i.imgur.com/s3kpZB8.jpg?1"
         alt="Photo from cdn.shopify.com"
       />
-
-<br />
+      <br />
       <br />
       <strong>Dev day 25: 06.04.2020 - Monday</strong>
       <br />
       <br />
-      Today I learned something new (the hard-way):
-      <blockquote>Ya shall nat juse component inception bro!</blockquote>
+      So let me get this straight. We have already around 100 ways to define a
+      function - with word function, with const, arrow functions, functions with
+      return statement, arrows with explicit return, bla bla. Then we also have
+      one trillion itterators. For loops, for in loops, for of loops, foreach,
+      for WHAT NOT? Not to mention all the maps, filters, reducers, and other
+      ugly creatures living their own independent and higly unsettling life...
+      :) Poor developers who need to understand their complicated habits, feed
+      them and nurture them. And especially poor ME...
+      <br />
+      <br />
+      Now guess what? Generators.. YOu hear it, generators .. another damn way
+      to define another damn function which is kind of a damn interator except
+      it is not :) Your head is already steaming? So is mine.
+      <br />
+      <br />
+      So yes, this is a new thing I learned today in my programming course. And
+      this is probably another thing I will forget tomorrow :) Luckily my head
+      is forgetful enough to actually do some natural DROP TABLE
+      brain_memories_of_useless_stuff_and_useless_people :) :) Thank you brain!
+      :)
+      <br />
+      Brain: "Welcome!"
+      <br /> Haha, this is literally the first time, I let my brain write
+      something! Or I am just crazy and should go to sleep as it is again almost
+      midnight and my main inspiration is coming at around this time. Cause, why
+      not, brain? :) <br />
+      Brain: "Muhahahahaaaaaaaaaaa"
+      <br />
+      <br />
+      <img
+        src="https://i.imgur.com/jYUH9gn.jpg"
+        alt="Photo by Mike from Pexels"
+      />
+      <strong>Dev day 26: 07.04.2020 - (second) Monday, yes yes </strong>
+      <br />
+      <br />
+      Today was a confusing day as I was working on webcomponets. Because why
+      not to assign a JUNIOR (let's emphasize JUNIOR) FRONTEND (let's emphasize
+      FRONTEND) developr (if I can even call myself that way already) to a
+      partly backend issue? CCC.
+      <br />
+      <br />
+      So, I tucked my sleeves and I made some research on my own. And you know
+      how it is, when investigating completely on your own something you have no
+      clue about. It feels like on an entirely new planet full of dangerous
+      carnivorous and most importantly hungry animals, where every step is a
+      mine-field. And then soon it can really become quite frustrating when
+      after 3-4 hours you are still at the beginning but having at least some
+      kind of a really vague idea of ... well, stuff.
+      <br />
+      <br />
+      But then had a call with my boss. It turned out that I had been on a very
+      good way to solving the issue, I had identified almost every file and part
+      which I needed to amend. And why it was not entirely working was only
+      because I needed to run npm start again to see the changes. Wow, that is
+      cool. That means I did lots on my own. And then he explained many things
+      and I could made a great progress afterwards!
+      <br />
+      <br />
+      Evening was great, had an upper body trainign with friends where I was
+      giving my 120% (because I was feeling guilty after eating SO MUCH
+      chocolate today - you remember those carnivorous hungry animals, I
+      mentioned earlier?... they are to blame... they like chocolate too, they
+      MADE ME!). Then I played some nice board game session with my mum. And
+      afterwards my friend (kind of) challenged me to make some progress on the
+      "executeprogram" course boasting with his 70% progress on some courses.
+      Ok, fine! Challenge accepted. Sorry, no time for writing anything more,
+      need to catch up with him :)
+      <br />
+      <br />
+      <img
+        src="https://i.imgur.com/b9sU97f.jpg"
+        alt="Photo by Susanne Jutzeler from Pexels"
+      />
+      <strong>Dev day 27: 08.04.2020 - Wednesday </strong>
+      <br />
+      <br />
+      <blockquote>XXX</blockquote>
+      when days start to pass in similar manner and the pattern starts to be
+      monotonous, I am not as motivated to write my brilliant ideas down. But
+      then I think again and I trully believe that we can always find something
+      beautiful in each day. And if I fail to find it, it feels like I kind of
+      dont deserve this gift that was give to me called life. Sooo as obviously
+      I DO deserve it, then let me find something amazing about this day! Hmm,
+      hmm, what makes it unique? Oh, hell yes, today, I did not eat sweets! You
+      dont believe it, I know, I dont believe myself either (cause actually I
+      just realized that I had like 3 pieces of 99% chocolate, damn, and I
+      almost got this one. BUT look, achivement of this day is that my mum came
+      to me while I was working and wanted to cheer me up and offered me a
+      regular chocolate. And I RESISTED the temptation, which means Im literally
+      an emobiment of a will of steel! :D :D :D I can control my mind, my body,
+      Im an Ironman, I mean Iron woman! SPARTAAAA /Flex flex Now thinking about
+      flexing, I have sore muscles from yesterdays upper body work out which I
+      enjoy. Having slight pain means I DID work out well enough, so I am
+      satisfied. Plus today I did unexpected HIIT training with a friend. It was
+      great because it was SPONTANEOUS and I like spontaneous, especially when
+      days seem to differ very slightly for menowadays. Work-wise I handed over
+      half of my remaining clients to a new starter. Wee, that definitely is an
+      achievement, as I'm slowly making progress to full dev position. Plus I
+      did some testing where I discovered I think 3-4 bugs or improvement
+      possibilites of the app. Nothing can escape my eagle eye!! Nobody needs to
+      know that those were completely unrelated to the PRs which I was suppose
+      to test and that I wasted probably 1 hours instead of 15 minutes doing the
+      tests. :D And my PR which I worked on, I did some nice progress and solved
+      many issues on my own. Ok, still some are remaining, but that is for
+      another day - another ME :) See, actually when you starts to really give
+      it an effort and think about your actual day and mini schievements, you
+      can always find some and sometimes many! It is not that hard, it is just a
+      mindset. Great, now I am happy with myself. Can go to sleep :) After
+      finishing my (5) programming courses (of course only because i want to win
+      an unofficial competition with my friend). I dont even know honestly what
+      the competition is about - maybe who finishes it first? haaha, no clue,
+      but the challenge is on. And he doesnt even know about it, hahahahaa, Or
+      he maybe suspects something.
+      <br />
+      <br />
+      <strong>Dev day 28: 09.04.2020 - Thursday </strong>
+      <br />
+      <br />
+      Yeeeeees! Totally VIP release, dediceted to me! ONLY me! NObody else! Only
+      my issue was released, completely separately! Because I am special 😎😎😎
+      <br />
+      <br />
+      <img src="https://i.imgur.com/zQR9oI5.png" alt="Photo by Addania" />
+      <br />
+      <br />
+      <strong>Dev day 29: 10.04.2020 - Friday </strong>
+      <br />
+      <br />
+      A miracle happened today!!!
+      <br />
+      <br />
+      <img src="https://i.imgur.com/sud3RAf.png" alt="Photo by Addania" />
+      <br />
+      <br />
+      Without any CHANGE requests! I thought I will never live long enough for
+      this day to come that Dodo would APPROVE anything I write without ANY
+      change request, comment or criticism! Today is my day :) Sweet victory!
+      <br />
+      <br />
+      <img
+        src="https://i.imgur.com/Um8DPKM.jpg"
+        alt="Photo by Artem Beliaikin from Pexels"
+      />
+      <strong>Dev day 30: 14.04.2020 - Tuesday </strong>
+      <br />
+      <br />
+      Today I cried. No joking this time. It was a day when I said farewell to
+      many of my clients oficially. And many of them told me some heart-catching
+      words of which I am extremely proud of but at the same time, it made me
+      feel sentimental. At such moments I really understand what I have been
+      building during those more than 4 years - bonds. Which can be tough
+      sometimes but strong and beautfiul at the same time! Here are some of the
+      words my clients told me. And I will miss all of them:
+      <blockquote>
+        Dear Addania, thanks a lot for the call today, it was really useful
+        because I think it will still take some time to find everything you
+        need. Congratulations for your new career opportunities, that sounds
+        great. It was also real pleasure working with you, thank you for
+        everything, the collaboration with you was really great and we will miss
+        you as our account manager. Wish you all the best and good luck for your
+        new position. Best, Mona
+      </blockquote>
+      <blockquote>
+        Hi Addania, Thanks for your contribution and helping us. XXX is not a
+        perfect tool (and I think perfect tool doesn’t exist), however you did a
+        brilliant job during your time of engagement. You was able to provide
+        guidance to resolve the issues, escalate when we had needed urgent help,
+        to provide the right direction to help us to update our process,
+        schedule some calls to ensure to all going good from our side, and get
+        the best of Adverity. You told me during the call to send you any
+        feedback or suggestion that I can give you about Adverity. I saw that
+        there is a Ticket system when customer have a problem, but I cannot see
+        any section related to recommendation/satisfaction expected after
+        Tickets. I think it will be good to have it. Like this I will be able to
+        put all of above on it 😊. I wish you the best for you on your new
+        challenge. The world is small, maybe we will have the opportunity to
+        rework together. If it happens, it will be a pleasure. Take care and
+        have a nice day ! Thanks again !!! Amine
+      </blockquote>
+      <blockquote>
+        Hi Addania, Thank you for presentation today. It was really useful. It
+        has been great working with you and best of luck with your job in the
+        company! Tanja
+      </blockquote>
+      <blockquote>
+        This is the first time I see on the video and now you are saying goodbye
+        to me? Amine
+      </blockquote>
+      <blockquote>
+        Hallo Addania, bin jetzt mal so frei und antworte auf Deutsch. Das sind
+        aber schlechte Nachrichten für uns, auch wenn es tolle Nachrichten für
+        dich sind. Glückwunsch zu einem weiteren Schritt auf deinem Weg. Danke,
+        Andreas
+      </blockquote>
+      Dear Addnia.Many thanks for your always friendly and competent support and
+      your patience with us. Wish you all the best in your new role! Best
+      Antonius
+      <blockquote></blockquote>
+      <blockquote>
+        So is this the last time we hear each other? Marti
+      </blockquote>
+      <br />
+      <br />
+      Yes Marti, it is the last time :(
+      <br />
+      <img
+        src="https://i.imgur.com/6COEA4h.jpg"
+        alt="Photo by Helena Lopes from Pexels"
+      />
+      <strong>Dev day 31: 15.04.2020 - Wednesday </strong>
+      <br />
+      <br />
+      Every day I learn fascinating, mind-blowing things like...
+      <blockquote>Rubber Duck!</blockquote>
+      <br />
+      <br />
+      It does exist! And now I know the most underground knowledge of entire dev
+      universe! Finally, I am part of the gang, I passed the initiation, I am
+      one of them. And now I know about their secret weapon!
+      <br />
+      <br />
+      You want to know what it is, right? But this knowledge is so sacred, that
+      it can only be passed from Master to the Apprentice after a long and
+      terrifying probe period full of hard work and dedication and ofc things
+      which I swear do not work and then when I show it someone it miraculously
+      works!
+      <br />
+      <br />
+      Therefore, only priviledged people have access to this knowledge and I
+      will share it one day with my Apprentice. One day, long long time in
+      future :))
+      <br />
+      <br />
+      Have fun googling ;)
+      <br />
+      <br />
+      <img
+        src="https://i.imgur.com/jIEaoET.jpg"
+        alt="Photo by Lisa Fotios from Pexels"
+      />
+      <br />
+      <br />
+      <strong>Dev day 32: 16.04.2020 - Thursday </strong>
+      <br />
+      <br />
+      Today (and yesterday), I totally monopolized the QA lane!!! It belongs to
+      me now! No other soul shall ever move their issues with their PRs there!
+      Or at least not without MY permission:)
+      <br />
+      <br />
+      And as my friend said:
+      <blockquote>You are becoming ever present 😉 </blockquote>
+      😈😈😈
+      <br />
+      <br />
+      <img
+        src="https://i.imgur.com/D2nygQy.png"
+        alt="Photo by Lisa Fotios from Pexels"
+        width="200px"
+      />
+      <br />
+      <br />
+      And today I gave goodbye to my very last two clients. Now I am free :)
+      Full dev focus! ANnd right away started to work on a bigger project for my
+      boss - complete rehaul of admin pages. 
+      <br />
+      <br /> And I went runiiiiiing to the forest by the
+      sunset after so many months :) Felt incredible! The nature here is magical! I love my secret trails.
+      <br />
+      <br />
+      <strong>Dev day 32: 17.04.2020 - Friday </strong>
+      <br />
+      <br />
+      Dog bit me today... Seriously... or wait, no no. I fought a ferocious
+      fight against a wild bear and of course I WON! I am a strong girl. Sounds better :) I go with that
+      story.
       <br />
       <br />
     </p>
