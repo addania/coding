@@ -1993,3 +1993,324 @@ YOURS:
 The new version of visit fixes the race condition bug while being simpler than the original. There's no conditional in the JavaScript, and we've replaced a trio of SELECT/INSERT/UPDATE statements with a single INSERT ... ON CONFLICT statement.
 
 The new version is also more efficient. Our original version had to retrieve the visits count from the database, then make a decision, then go back to the database again to create or update the visits row. The new version is a single statement that hits the database only once.
+
+SQL: Join performance
+In a previous lesson, we used JOIN to list all pairs of people and their cats. We could have done that by looping in JavaScript, querying to find each person's cats. In this lesson, we'll see why we chose to write a JOIN instead of using JavaScript.
+
+(In this lesson, our database will always be set up with a people table and a cats table. The cats table has an owner_id, which is a foreign key to a person. Amir has a cat named Ms. Fluff, and Betty has a cat named Keanu. You'll see this in the setup for each example, but it's always the same, so you can skip reading it.)
+
+First, let's get every person-and-cat pair using JavaScript.
+
+Here's a code problem for you to complete:
+
+Finish the function peopleAndCats() so that it creates a list of each pair of cat and person. For every cat, call results.push({person: person.name, cat: cat.name}) to build up a list of results.
+
+> 
+exec(`
+  CREATE TABLE people (
+    id INTEGER PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL
+  );
+  CREATE TABLE cats (
+    owner_id INTEGER REFERENCES people(id) NOT NULL,
+    name TEXT NOT NULL
+  );
+
+  INSERT INTO people (id, name) VALUES (100, 'Amir');
+  INSERT INTO cats (owner_id, name) VALUES (100, 'Ms. Fluff');
+  INSERT INTO people (id, name) VALUES (200, 'Betty');
+  INSERT INTO cats (owner_id, name) VALUES (200, 'Keanu');
+`)
+
+function peopleAndCats() {
+  const results = []
+  const people = exec(`SELECT * FROM people`)
+  for (const person of people) {
+    const catsOwnedByPerson = exec(`
+      SELECT * FROM cats WHERE cats.owner_id = ?
+    `, [person.id])
+    for (const cat of catsOwnedByPerson) {
+       results.push({person: person.name, cat: cat.name})}
+
+
+  }
+  return results
+}
+peopleAndCats()
+GOAL:	
+[{cat: 'Ms. Fluff', person: 'Amir'}, {cat: 'Keanu', person: 'Betty'}]
+YOURS:	
+[{cat: 'Ms. Fluff', person: 'Amir'}, {cat: 'Keanu', person: 'Betty'}] 
+This is correct, in the sense that it will return the right results. But it has a big problem: its performance is terrible!
+
+What happens if we have 10,000 people? Our outer loop for (const person of people) will run 10,000 times! We'll do a total of 10,001 queries: one query to find all of the people, then a separate cat query for each of the 10,000 people.
+
+This is a very common problem when querying any kind of database, SQL or otherwise. It's called an "N+1 problem": we do 1 person query, then N (10,000) cat queries. That's too many queries; we can't afford to put that much load on the database for a single pageview on our site.
+
+We'll fix this in stages. First, let's reduce the number of queries. We'll get all of the people, then get all of the cats. Then we'll write a nested loop:
+
+For each person:
+For each cat:
+If this person is this cat's owner:
+Add the cat to the results.
+Here's a code problem for you to complete:
+
+Add an entry to the results array for each person and cat where cat.owner_id equals person.id. (You can use results.push({person: person.name, cat: cat.name}) to add an entry to the results.) You won't need to add any more database queries.
+
+> 
+exec(`
+  CREATE TABLE people (
+    id INTEGER PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL
+  );
+  CREATE TABLE cats (
+    owner_id INTEGER REFERENCES people(id) NOT NULL,
+    name TEXT NOT NULL
+  );
+  
+  INSERT INTO people (id, name) VALUES (100, 'Amir');
+  INSERT INTO cats (owner_id, name) VALUES (100, 'Ms. Fluff');
+  INSERT INTO people (id, name) VALUES (200, 'Betty');
+  INSERT INTO cats (owner_id, name) VALUES (200, 'Keanu');
+`)
+
+function peopleAndCats() {
+  const results = []
+  const people = exec(`SELECT * FROM people`)
+  const cats = exec(`SELECT * FROM cats`)
+  for (const person of people) {
+    for (const cat of cats) {
+      if (cat.owner_id === person.id){
+        results.push({person: person.name, cat: cat.name})}
+
+
+    }
+  }
+  return results
+}
+peopleAndCats()
+GOAL:	
+[{cat: 'Ms. Fluff', person: 'Amir'}, {cat: 'Keanu', person: 'Betty'}]
+YOURS:	
+[{cat: 'Ms. Fluff', person: 'Amir'}, {cat: 'Keanu', person: 'Betty'}] 
+We reduced the number of queries to 2!
+
+But this still has a performance problem. What if we have 10,000 people and 10,000 cats, but we only want to retrieve Amir and his cat Ms. Fluff? We could do it by calling our peopleAndCats function, then filtering its results. But we'll end up retrieving a total of 20,000 rows from the database even though we only need 2.
+
+Also, even though we've reduced the number of queries, we've made our JavaScript very slow. The inner loop that looks at each cat runs 10,000 times for every iteration of the outer loop. With 10,000 people and 10,000 cats, the comparison of owner_id to person.id will run a total of 100,000,000 times (10,000 * 10,000). All of that just to find out that Amir owns Ms. Fluff. This method does not work in real systems.
+
+Here's where relational databases show their usefulness. We can use a JOIN to get the same result.
+
+Here's a code problem for you to complete:
+
+Write a SELECT ... FROM ... JOIN ... ON ... query to get a list of all cats and people. Remember to select people.name AS person, cats.name AS cat to get the right column names.
+
+> 
+exec(`
+  CREATE TABLE people (
+    id INTEGER PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL
+  );
+  CREATE TABLE cats (
+    owner_id INTEGER REFERENCES people(id) NOT NULL,
+    name TEXT NOT NULL
+  );
+
+  INSERT INTO people (id, name) VALUES (100, 'Amir');
+  INSERT INTO cats (owner_id, name) VALUES (100, 'Ms. Fluff');
+  INSERT INTO people (id, name) VALUES (200, 'Betty');
+  INSERT INTO cats (owner_id, name) VALUES (200, 'Keanu');
+`)
+exec(`
+  SELECT 
+    cats.name AS cat, people.name AS person FROM people JOIN cats ON cats.owner_id = people.id
+
+
+
+
+
+`)
+GOAL:	
+[{cat: 'Ms. Fluff', person: 'Amir'}, {cat: 'Keanu', person: 'Betty'}]
+YOURS:	
+[{cat: 'Ms. Fluff', person: 'Amir'}, {cat: 'Keanu', person: 'Betty'}] 
+We got the same result in a single database query! This fixes the two performance problems we've talked about so far: it requires only one query, and it doesn't have any nested loops.
+
+What's really going on in the JOIN, though? So far, we've been thinking about JOINs as nested loops, similar to the ones that we wrote in JavaScript above. Aren't we just asking the database to do 100,000,000 (10,000 * 10,000) iterations, which will be slow?
+
+Fortunately, no! Nested loops are a perfect mental model for how JOIN works, but they're only a mental model. In reality, the database will optimize the query, rebuilding it to be more efficient while still giving the same results.
+
+Here's a concrete example. (Your answer here should be identical to the one above, with an extra WHERE added.)
+
+Here's a code problem for you to complete:
+
+Write a JOIN query to find all cats that are owned by a person with a name of "Amir".
+
+> 
+exec(`
+  CREATE TABLE people (
+    id INTEGER PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL
+  );
+  CREATE TABLE cats (
+    owner_id INTEGER REFERENCES people(id) NOT NULL,
+    name TEXT NOT NULL
+  );
+
+  INSERT INTO people (id, name) VALUES (100, 'Amir');
+  INSERT INTO cats (owner_id, name) VALUES (100, 'Ms. Fluff');
+  INSERT INTO people (id, name) VALUES (200, 'Betty');
+  INSERT INTO cats (owner_id, name) VALUES (200, 'Keanu');
+`)
+exec(`
+  SELECT people.name AS person, cats.name AS cat FROM people JOIN cats ON cats.owner_id = people.id WHERE people.name = 'Amir'
+
+
+
+
+
+
+
+`)
+GOAL:	
+[{cat: 'Ms. Fluff', person: 'Amir'}]
+YOURS:	
+[{cat: 'Ms. Fluff', person: 'Amir'}] 
+In the example above, WHERE people.name = ... tells the database that only one person matters. Then ON people.id = cats.owner_id tells it that it only needs to consider cats owned by that person. By understanding both of those limitations, the database can execute the query more intelligently. It will do something similar to exec(`SELECT * FROM cats WHERE owner_id = ?`, [amir.id]), selecting only the cats that are relevant.
+
+This is impressive, but it's still a simple example. The bigger the query gets, the harder it is for a human to optimize manually. But the database has no such limitation; it will happily optimize any query that we come up with.
+
+Imagine that we we're joining across 8 different tables instead of just 2. (That's not extremely common, but it does happen.)
+
+Each table has 10,000 records. With 8 nested loops, we'd require 10,000,000,000,000,000,000,000,000,000,0000 iterations (10,000 to the 8th power). That would take something like 3,170,979,198,376,458,752 years.
+
+If our database is set up properly, an 8-table join with a WHERE that matches only one row will execute in less than a millisecond. That lets us have our cake while eating it! We get to think about joins using a simple conceptual model: nested loops with an if inside. But the query actually executes in a much more intelligent way.
+
+(Full disclosure: database optimizers aren't perfect. In real databases, we give them certain kinds of manual hints that we'll learn about in later lessons. In rare cases, the optimizer does a bad job and we have to change our queries significantly to work around it. But in 99.9% of cases, the optimizer will do what you want!)
+
+
+SQL: Left and right joins
+In an earlier lesson, we saw an example where users can register with discount codes. The discount codes were optional: some users register with a code, so they have a foreign key to the discount. Other users register without a code, so the foreign key is null.
+
+Suppose that we want to produce a report listing our users and what discount codes they used. The report should include all users, whether they used a discount code or not.
+
+We could write a loop in JavaScript: loop over each user, selecting any discounts for that user. That would cause an N+1 query problem: we'd query all of the users, followed by N individual queries to get each user's discount, if any. (Imagine that N is 10,000,000, to see why this is a problem: too many queries!)
+
+As usual, SQL has an answer. In this case, it's a join. However, the type of join that we've seen so far doesn't help us. If we select from users JOIN discounts ON users.id = discounts.user_id, we'll only get results for users who have corresponding discounts. (The users.id = discounts.user_id will never be true for a user who has no corresponding discount row.)
+
+That doesn't solve our problem because we want to include all users, even if they have no discount. Here's an example of that solution, even though it doesn't solve our problem:
+
+> 
+exec(`
+  CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    discount_id INTEGER REFERENCES discounts(id) NULL UNIQUE
+  );
+  CREATE TABLE discounts (id INTEGER PRIMARY KEY, discount_code TEXT NOT NULL);
+
+  -- Amir registered with a discount (both Amir and the discount get ID 1).
+  INSERT INTO discounts (discount_code) VALUES ('free-month');
+  INSERT INTO users (name, discount_id) VALUES ('Amir', 1);
+
+  -- Betty registered with no discount.
+  INSERT INTO users (name, discount_id) VALUES ('Betty', NULL);
+
+  SELECT
+    users.name AS name,
+    discounts.discount_code AS discount_code
+  FROM users JOIN discounts
+    ON users.discount_id = discounts.id
+`)
+[{discount_code: 'free-month', name: 'Amir'}] 
+Betty existed, but she wasn't in our query's results. To fix that, we can tell the database to include users in the report even when there's no matching discount. This is called a left join: users LEFT JOIN discounts. The "left" means "include rows from the left table (users), even if there's no corresponding row from the right table (discounts).
+
+With a LEFT JOIN, both Amir and Betty will show up in the results. Amir will have his discount_code, but Betty's discount_code will be NULL (which will be represented as JavaScript's null).
+
+> 
+exec(`
+  CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    discount_id INTEGER REFERENCES discounts(id) NULL UNIQUE
+  );
+  CREATE TABLE discounts (id INTEGER PRIMARY KEY, discount_code TEXT NOT NULL);
+
+  -- Amir registered with a discount (both Amir and the discount get ID 1).
+  INSERT INTO discounts (discount_code) VALUES ('free-month');
+  INSERT INTO users (name, discount_id) VALUES ('Amir', 1);
+
+  -- Betty registered with no discount.
+  INSERT INTO users (name, discount_id) VALUES ('Betty', NULL);
+
+  SELECT
+    users.name AS name,
+    discounts.discount_code AS discount_code
+  FROM users LEFT JOIN discounts
+    ON users.discount_id = discounts.id
+`)
+[{discount_code: 'free-month', name: 'Amir'}, {discount_code: null, name: 'Betty'}] 
+LEFT JOIN adds one small tweak to our mental model of joins. Inner joins (the simple kind that we've seen without LEFT) still work in the same way. But here's how the database executes a left join (the new part is the "If no discounts matched this user" section):
+
+For each user:
+For each discount:
+If this user's discount_id matches this discount's id:
+Return a row with all of the user's columns and all of the discount's columns.
+If no discounts matched this user:
+Return a row with all of the user's columns, and NULLs in all of the missing discount's columns.
+As usual, this is only a mental model, but it's a correct one. In reality, the database will use a more efficient method that gives exactly the same result.
+
+You might wonder whether LEFT JOIN implies that there's also a RIGHT JOIN. There is! In a RIGHT JOIN, rows from the right table are always included, even if there's no corresponding row from the left table.
+
+Left and right joins are much less common than the basic inner joins that we've seen before, where every row must exactly match the ON. But when you need a left or right join, you'll be glad that it's available. They're useful when you want a list of records (like users) along with other corresponding records (like discounts) that may or may not exist.
+
+(As is often the case, SQLite is a bit weird here. It supports left joins, but not right joins. Fortunately, we can convert right joins into left joins by flipping the order of the tables.)
+
+Like with basic inner joins, left and right joins will produce any combination of rows that match. For example, suppose that we select from users LEFT JOIN comments ON users.id = comments.user_id.
+
+Every comment in the database will show up in the results. If Amir has written 100 comments, he'll show up 100 times: once with each of his comments. But because it's a LEFT JOIN, every user is guaranteed to show up at least once. Betty will show up even if she's never written a comment.
+
+Here's a code problem for you to complete:
+
+Use a join to get a list of usernames and comment texts for every comment in the system. Make it a left join so that it also includes users who have never written a comment. (They'll have a null comment text.) Select only the name and comment_text columns.
+
+> 
+exec(`
+  CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+  );
+  CREATE TABLE comments (
+    user_id REFERENCES users(id) NOT NULL,
+    comment_text TEXT NOT NULL
+  );
+
+  -- Amir has written two comments.
+  INSERT INTO users (name) VALUES ('Amir');
+  INSERT INTO comments (
+    user_id,
+    comment_text
+  ) VALUES (1, 'Ms. Fluff needs a bath!');
+  INSERT INTO comments (
+    user_id,
+    comment_text
+  ) VALUES (1, 'Ms. Fluff strongly dislikes water.');
+
+  -- Betty has written no comments.
+  INSERT INTO users (name) VALUES ('Betty');
+  SELECT users.name, comments.comment_text FROM users LEFT JOIN comments ON users.id = comments.user_id
+
+
+
+
+
+`)
+GOAL:	
+[{comment_text: 'Ms. Fluff needs a bath!', name: 'Amir'}, {comment_text: 'Ms. Fluff strongly dislikes water.', name: 'Amir'}, {comment_text: null, name: 'Betty'}]
+YOURS:	
+[{comment_text: 'Ms. Fluff needs a bath!', name: 'Amir'}, {comment_text: 'Ms. Fluff strongly dislikes water.', name: 'Amir'}, {comment_text: null, name: 'Betty'}] 
+You'll sometimes see left and right joins called LEFT OUTER JOINs and RIGHT OUTER JOINs. Fortunately, "outer" doesn't change the meaning; it's just a more precise name for the same idea.
+
+In this course, we only address inner ("simple") joins and left joins. However, there's a surprising array of additional join types. For 99% of your practical work, inner joins will be sufficient. Left joins will probably get you through the final 1%.
+
+We don't recommend focusing on other join types until you've spent a lot of time using SQL databases on projects. However, if you'd like a taste of how deep the join rabbit hole goes, we think that this article is thorough and understandable without belaboring the point.

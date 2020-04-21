@@ -1,0 +1,16 @@
+---
+title: "Dev day 35"
+date: "2020-04-21"
+category: "impressions"
+---
+
+**21.04.2020 - Tuesday**
+
+Today I woke up perfectly 10 minutes before my alarm clock: 8:35 am, as usual nowadays. I proudly can say that my body is already in a perfect regime, works like a Swiss watch. Hundred and ten percent of reliability. Such a good feeling that I have a comfy schedule and my body plays along.
+
+So as usually I woke up, made a hot and beautifully scented tea, prepared my breakfast and ate them while my computer was starting up. There was a small problem which I was testing and wanted to write to my boss that something is not possible. He was still offline, weird... he is always online before me. But it gave me time to think before I hit the send button to unleash the message. So I tried it once again and I SOLVED it! I made it work! Omg, I totally rock today, only 15 minutes into work and I am already solving the impossible :) 
+
+As proud as I was, I had another sip of my tea and looked at my phone which announced 7:00 am... Wait a minute... What the...???
+
+
+
