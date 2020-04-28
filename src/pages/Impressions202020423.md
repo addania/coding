@@ -32,7 +32,7 @@ ACTION
 
 And panorama as a bonus:
 
-<iframe width="760" height="430" src="https://www.youtube.com/embed/u6eGG4jBqj4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="760" height="430" src="https://www.youtube.com/embed/qOcYuwMGxEI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 
