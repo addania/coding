@@ -2314,3 +2314,275 @@ You'll sometimes see left and right joins called LEFT OUTER JOINs and RIGHT OUTE
 In this course, we only address inner ("simple") joins and left joins. However, there's a surprising array of additional join types. For 99% of your practical work, inner joins will be sufficient. Left joins will probably get you through the final 1%.
 
 We don't recommend focusing on other join types until you've spent a lot of time using SQL databases on projects. However, if you'd like a taste of how deep the join rabbit hole goes, we think that this article is thorough and understandable without belaboring the point.
+
+
+SQL: Join mistakes
+Let's examine some subtle mistakes that we might make with SQL joins. First, what happens if we forget to add the ON condition to an inner join?
+
+With no ON, an inner join returns every combination of the left table's rows with the right table's rows. If the left table has N rows and the right table has M rows, then the join will have N*M total rows.
+
+However, we won't notice that mistake if we only test with simple cases! For example, imagine that we're joining users with their comments, but we forget the ON. If we only test with one user and one comment, then the results will look correct.
+
+> 
+exec(`
+  CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+  );
+  CREATE TABLE comments (
+    user_id REFERENCES users(id) NOT NULL,
+    comment_text TEXT NOT NULL
+  );
+
+  -- Amir has written a comment.
+  INSERT INTO users (name) VALUES ('Amir');
+  INSERT INTO comments (
+    user_id,
+    comment_text
+  ) VALUES (1, 'Ms. Fluff needs a bath!');
+
+  -- "Test" our JOIN by querying all of the users and comments.
+  SELECT
+    users.name AS name,
+    comments.comment_text AS comment_text
+  FROM users JOIN comments;
+`)
+[{comment_text: 'Ms. Fluff needs a bath!', name: 'Amir'}] 
+The ON is missing, but our test doesn't notice! There's a great rule of thumb in testing that goes something like: "If you're testing code that deals with arrays, write separate tests for 0 elements, 1 element, and many elements." We can imagine a similar process for testing joins. When joining tables, it's a good idea to test multiple cases, like:
+
+There are no rows at all.
+Only the left table has rows.
+Only the right table has rows.
+Both tables have multiple rows.
+(Sometimes you'll want to add even more cases: "what happens if the left table has multiple rows that match one row on the right?" Etc. As usual, the amount of testing should match your confidence in the code.)
+
+Testing is deep and subtle, but there's a baseline rule that you should always use when writing a join: never test a join by inserting only one row into each table. That "test" is too loose, like the one above. Almost any join will pass it, even if it's the wrong join!
+
+That rule will catch other mistakes as well. For example, what happens if we accidentally flip the order of the tables in a LEFT JOIN?
+
+In the next example, we meant to select from users LEFT JOIN comments. However, we mixed up left and right joins, so we accidentally selected from comments LEFT JOIN users. (It's common to mix up the different join types, so this is a realistic mistake.)
+
+We only test the join with one user and one comment. It could be a LEFT JOIN, a RIGHT JOIN, an INNER JOIN, or an OUTER JOIN. They're all the same for that test case, but only one is correct!
+
+> 
+exec(`
+  CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+  );
+  CREATE TABLE comments (
+    user_id REFERENCES users(id) NOT NULL,
+    comment_text TEXT NOT NULL
+  );
+
+  -- Amir has written a comment.
+  -- This is a bad test case: it won't notice if we switch the tables!
+  INSERT INTO users (name) VALUES ('Amir');
+  INSERT INTO comments (
+    user_id,
+    comment_text
+  ) VALUES (1, 'Ms. Fluff needs a bath!');
+
+  -- This join contains an error: the table order is flipped.
+  -- But our test can't tell!
+  SELECT
+    users.name AS name,
+    comments.comment_text AS comment_text
+  FROM comments LEFT JOIN users
+    ON users.id = comments.user_id
+`)
+[{comment_text: 'Ms. Fluff needs a bath!', name: 'Amir'}] 
+One final type of join mistake. So far, all of our examples have used foreign keys in the ON. Usually, that's a good idea. Joining on foreign keys means that we don't have to worry about cases where the join condition column has a value, but it doesn't match any value in the other table.
+
+However, the database will let us write any ON that we want. It doesn't care whether there's a foreign key or not. For example, it will let us join against the wrong table's ID.
+
+(Be careful with this example. It will successfully produce one joined row of "user" with comment, but the "user"'s name will be Ms. Fluff, not Amir!)
+
+> 
+exec(`
+  CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+  );
+  CREATE TABLE cats (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+  );
+  CREATE TABLE comments (
+    user_id REFERENCES users(id) NOT NULL,
+    comment_text TEXT NOT NULL
+  );
+
+  -- Ms. Fluff is a cat (with ID 1).
+  INSERT INTO cats (name) VALUES ('Ms. Fluff');
+
+  -- Amir (user ID 1) has written a comment.
+  INSERT INTO users (name) VALUES ('Amir');
+  INSERT INTO comments (
+    user_id,
+    comment_text
+  ) VALUES (1, 'Ms. Fluff needs a bath!');
+
+  -- Select all of the comments joined with "users".
+  -- But we accidentally join against cats' IDs instead of users' IDs.
+  -- The database won't stop us!
+  -- It will happily match up comments' "user_id"s with cats' "id"s.
+  SELECT
+    name,
+    comment_text
+  FROM cats JOIN comments
+    ON id = comments.user_id;
+`)
+[{comment_text: 'Ms. Fluff needs a bath!', name: 'Ms. Fluff'}] 
+We can tell that this is wrong because no cat who has ever existed would say that they need a bath!
+
+Like our previous examples, more thorough testing will highlight this kind of mistake.
+
+There's another method to spot it as well. In past lessons, we've recommended listing the columns in a SELECT on separate lines, like we did in this example. For joins, we've also recommended explicitly naming those columns' tables, like SELECT users.name. However, we intentionally didn't follow that advice above: we selected only the names of the columns without specifying which tables they came from.
+
+Qualifying the column names with their tables makes it easier to spot this kind of mistake. In order for this mistake to happen, we'd have to write SELECT cats.name. Just seeing the table name a second time gives us a chance to notice the mistake.
+
+Hopefully, we type the correct table name the second time: users.name. If we do that while selecting from a join that doesn't include users, we'll get an error. (You can type "error" to indicate an error.")
+
+> 
+exec(`
+  CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+  );
+  CREATE TABLE cats (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+  );
+  CREATE TABLE comments (
+    user_id REFERENCES users(id) NOT NULL,
+    comment_text TEXT NOT NULL
+  );
+
+  -- Ms. Fluff is a cat (with ID 1).
+  INSERT INTO cats (name) VALUES ('Ms. Fluff');
+
+  -- Amir (user ID 1) has written a comment.
+  INSERT INTO users (name) VALUES ('Amir');
+  INSERT INTO comments (
+    user_id,
+    comment_text
+  ) VALUES (1, 'Ms. Fluff needs a bath!');
+
+  -- Select all of the comments joined with "users".
+  -- But we accidentally join against cats' IDs instead of users' IDs.
+  -- The database won't stop us!
+  -- It will happily match up comments' "user_id"s with cats' "id"s.
+  --
+  -- Naming the tables explicitly gives us a second chance to notice.
+  SELECT
+    users.name,
+    comments.comment_text
+  FROM cats JOIN comments
+    ON id = comments.user_id;
+`)
+Error: no such column: users.name 
+SQL is quite good at preventing mistakes. That's what all of its constraint types are for. However, it can't save us from every mistake. Hopefully this lesson helps you to catch some mistakes earlier. We can reduce the advice here into two minimal rules:
+
+When testing a join, use more than one row in each table.
+When selecting from a join, qualify your selects with table names (like SELECT users.name) to make sure that you're selecting the right things.
+
+SQL: ON vs WHERE
+For this lesson, our goal is: find the pairs of cats and owners where the person's name is the same as the cat's name.
+
+(All of the examples in this lesson will use this database, but it will always be empty at the beginning of each example.)
+
+> 
+exec(`
+  CREATE TABLE people (
+    id INTEGER PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL
+  );
+  CREATE TABLE cats (
+    id INTEGER PRIMARY KEY NOT NULL,
+    owner_id INTEGER NOT NULL REFERENCES people(id),
+    name TEXT NOT NULL
+  );
+
+  -- Wilford has a cat named Wilford.
+  INSERT INTO people (id, name) VALUES (300, 'Wilford');
+  INSERT INTO cats (owner_id, name) VALUES (300, 'Wilford');
+
+  -- Cindy has no cats.
+  INSERT INTO people (id, name) VALUES (200, 'Cindy');
+`)
+[] 
+First, we'll do the query in a straightforward way, using both an ON and a WHERE. We use the ON to match people and cats using the owner_id foreign key. We use the WHERE to select only the person-cat pairs where the owner's name is the same as the cat's name. (Note the AS column aliases.)
+
+> 
+exec(`
+  SELECT
+    people.name AS person_name,
+    cats.name AS cat_name
+  FROM people
+  INNER JOIN cats
+    ON people.id = cats.owner_id
+  WHERE people.name = cats.name
+`)
+[{cat_name: 'Wilford', person_name: 'Wilford'}] 
+If we like, we can move the people.name = cats.name check into the ON, eliminating the WHERE.
+
+> 
+exec(`
+  SELECT
+    people.name AS person_name,
+    cats.name AS cat_name
+  FROM people
+  INNER JOIN cats
+    ON people.id = cats.owner_id
+    AND people.name = cats.name
+`)
+[{cat_name: 'Wilford', person_name: 'Wilford'}] 
+The cat's name isn't a foreign key to the person's name, but that's OK; we can still compare those columns in the ON. Databases don't limit what we put in an ON, just like they don't limit what we put in a WHERE. If the columns exist, the database will let us join on them.
+
+We can also convert the entire ON into a WHERE.
+
+> 
+exec(`
+  SELECT
+    people.name AS person_name,
+    cats.name AS cat_name
+  FROM people
+  INNER JOIN cats
+  WHERE people.id = cats.owner_id
+  AND people.name = cats.name
+`)
+[{cat_name: 'Wilford', person_name: 'Wilford'}] 
+Conceptually, this version is computing every combination of person and cat, then filtering that giant list:
+
+For each person:
+For each cat:
+Produce a new temporary row that contains this person's columns with this cat's columns.
+For each of those combinations of every person with every cat:
+If the cat's owner_id matches the person's id:
+And the cat's name matches the person's name:
+Include this combination of person and cat in the final results.
+As always, the mental model above is correct, but the database will intelligently optimize the query to make it faster. (If we have 10,000 people and 10,000 cats, the database will NOT produce a temporary list of 100,000,000 rows.)
+
+All three of the queries above are truly equivalent: an ON mixed with a WHERE; an ON only; and a WHERE only. So why bother with ON at all? Why not always use WHERE? Let's analyze that question along three dimensions: performance, correctness, and clarity for human readers.
+
+First: performance. Modern databases are very good at optimizing ON and WHERE. You're unlikely to encounter a performance problem that's fixed by converting an ON to a WHERE or vice-versa. So performance isn't a reason to choose one or the other.
+
+Second: correctness. For inner joins (the common type of "simple" joins that we're using here), ON and WHERE are interchangeable. Your query will never be wrong if you convert one to the other. However, ON and WHERE are NOT interchangeable for any other type of join. In LEFT, RIGHT, and other more rare types that we don't cover in this course, like OUTER, converting an ON to a WHERE can change the results.
+
+Third: clarity for human readers. An ON should specify which rows from the left table go with which rows from the right table. Here are some examples of good ONs. They concern the relationship between the two tables being joined.
+
+Matching the left table's foreign key against the column that it references in the right table.
+Matching email addresses in an invitations_sent table against email addresses in our users table to find out what percentage of invited users eventually register (assuming that there's no proper foreign key between the tables).
+Here are some examples of conditions that are better in a WHERE than an ON. They're not about the two tables' relationships.
+
+Selecting a range of rows (like WHERE created_at > /* some date here */).
+Selecting a specific row (like WHERE user_id = ? or WHERE cats.name = 'Ms. Fluff').
+Separating ON conditions from WHERE conditions helps with both correctness and clarity. It makes mistakes with rare types of joins less likely, where converting an ON to a WHERE will give different results. It also gives readers a hint about whether the condition concerns combinations of left and right rows.
+
+There's no hard-and-fast rule about when to use ON vs. WHERE. The example that we started with lives in a gray area where either choice makes sense. Putting the people.name = cats.name condition in the ON is probably slightly better, but neither is "wrong".
+
+You'll do fine as long as you ask yourself "is this condition about how the left table relates to the right table, or is it about something else?"
+
+Finish Lesson
+Brag…
