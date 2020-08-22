@@ -1,11 +1,11 @@
 pre code {
-  color: white;
+  /*color: white;*/
   font-size: 15px;
 }
 
 pre {
   /*background-color: rgb(2, 59, 92);*/
-  background-color:#748499;
+  /*background-color:#748499;*/
 }
 
 body {
@@ -27,7 +27,7 @@ tr {
 }
 
 code {
-  color:#c504cd;
+ /* color:#c504cd;*/
 }
 
 ul {

@@ -37,7 +37,7 @@ CSS:
 
 <code>Please note:</code> in pure HTML we use word "class" to define for example a class called title which we can then style by .title in CSS. However, in REACT word "class" is reserved to create class components. Therefore, in order to create regular names of classes, we need to use word "className".
 
-**C) By id of an element** - ID is completely unique per site. We ned to add hashtag. An ID is meant to style only one element.
+**C) By id of an element** - ID is completely unique per site. We need to add hashtag. An ID is meant to style only one element.
 
 HTML:
 ```
@@ -47,6 +47,13 @@ CSS:
 ```
 #large-title {
  font-size: 50px;
+}
+```
+
+> There is a universal selector `*` which selects all elements on the website
+```
+* {
+    font-size: 12px;
 }
 ```
 > Precedence of selectors: General rule is that more specific selector will be applied compared to more generic selector. ID selector > Class selector > Tag selector. If we have example below, the red colour will be applied because .header (class selector) is more specific than tag selector. From the above 3 selectors, most specific selector is ID selector.
@@ -65,7 +72,7 @@ color: blue;
 color: red;
 }
 ```
-> There is only one way how to over-ride ID selector and namely by <code>!important</code> syntax. This can overrride any CSS styling and should be only used as a last resort (because this one is very hard to override). In the example below, the colour of header will be blue.
+> There is only one way how to over-ride ID selector and namely by <code>!important</code> syntax. This can override any CSS styling and should be only used as a last resort (because this one is very hard to override). In the example below, the colour of header will be blue.
 HTML:
 ```
 <h1 class="headere">Hi</h1>
@@ -81,35 +88,111 @@ h1 {
 }
 ```
 
-> Chaining selectors: we are able to chain more selectors and make them even more specific. In the example below, CSS style will be applied to <code>```<h1>```</code> tags but only those which have class name teal.
+> Chaining selectors: we are able to chain more selectors and make them even more specific.
+
+>  In the example below, CSS style will be applied to <code>```<h1>```</code> tags but only those which have class name teal.
+HTML:
+```
+<h1 class="teal">Hello 
+    <span class="purple">stranger</span>
+</h1>
+```
+CSS:
 ```
 h1.teal {
+  color: teal;
+}
+```
+![](https://i.imgur.com/dDjN9MR.png "Photo by Addania")
+
+> Chaining selectors can be also with space, but it selects different thing. It selects all elements with class teal which are descendents of h1 tag
+HTML:
+```
+<h1 class="teal">Hello 
+    <span class="purple">stranger</span>
+</h1>
+```
+CSS:
+```
+h1 .teal {
 color: teal;
 }
-```
-> Chaining selectors can be also this way:
-```
-.main p {
-font-family: Arial;
-}
-```
-> If we need to apply same style to multiple selectors, we can simply separate them by comma.
 
-Instead of:
-```
-h1 {
-  font-family: Georgia;
+h1 .purple {
+  color: purple;
 }
 
-.menu {
-  font-family: Georgia;
+```
+
+![](https://i.imgur.com/fgfKOTN.png "Photo by Addania")
+
+> If we need to apply same style to multiple selectors, we can simply separate them by comma. Imagine html like this:
+
+HTML
+```
+<h1 class="teal">Hello 
+    <span class="purple">stranger</span>
+</h1>
+
+<h3 class="plum">Nice meeting you
+    <span class="steel">out here</span>
+</h3>
+```
+>Which is styled like this:
+
+CSS
+```
+h1.teal {
+  color: teal;
+}
+
+h1 .purple {
+  color: purple;
+}
+
+h3.plum {
+  color:plum;
+}
+
+h3 .steel {
+  color: steelBlue;
 }
 ```
-We can write:
+
+
+![](https://i.imgur.com/o7XWx5c.png "Photo by Addania")
+
+
+> Imagine you want to style `stranger` and `out here` with the same style. You can do it like this:
+CSS
 ```
-h1, .menu {
-font-family: Georgia;
+h1 .purple {
+  color: lightblue;
 }
+
+h3 .steel {
+  color: lightblue;
+}
+```
+> Or you can shorten it to:
+CSS
+```
+h1 .purple, h3 .steel {
+  color: lightblue;
+}
+
+```
+![](https://i.imgur.com/WiFdSmL.png "Photo by Addania")
+
+>Another way to style `stranger` and `out here` would be nesting selectors:
+CSS
+```
+h1, h3 {
+    span {
+        color: deepSkyBlue;
+    }
+}
+
 ```
 
 **FONTS**
@@ -128,7 +211,7 @@ font-family: Garamond;
 ```
 > General rules about font-families:
 
-The font specified in a stylesheet must be installed on a user’s computer in order for that font to display when a user visits the web page. The default typeface for all HTML elements is Times New Roman. It’s a good practice to limit the number of fonts used on a web page to 2 or 3. This helps the page load faster in some cases and is usually a good design decision. When the name of a font consists of more than one word, it’s a best practice to enclose the font’s name in quotes. Example:
+>The font specified in a stylesheet must be installed on a user’s computer in order for that font to display when a user visits the web page. The default typeface for all HTML elements is Times New Roman. It’s a good practice to limit the number of fonts used on a web page to 2 or 3. This helps the page load faster in some cases and is usually a good design decision. When the name of a font consists of more than one word, it’s a best practice to enclose the font’s name in quotes. Example:
 ```
 h1 {
   font-family: "Courier New";
@@ -228,7 +311,7 @@ font-family: cursive;
 
 **WIDTH AND HEIGHT**
 
-> To set specific width and height of an element:
+> To set specific width and height of an element. It can be set in pixels or in percentages:
 ```
 p {
   height: 80px;
@@ -283,7 +366,7 @@ div.container {
   height: 60px;
   width: 60px;
   border: 3px solid rgb(22, 77, 100);
-  border-radius: 100%;
+  border-radius: 60px;
 }
 ```
 or equivalently:
@@ -408,6 +491,571 @@ margin: 0px auto;
   margin-left: 10px;
 }
 ```
+
+
+
+**OVERFLOW**
+>The overflow property controls what happens to content which is larger than its container (box). In order words content that spills, or overflows, outside its box. The parent container can be set to:
+
+- hidden - any content that overflows will be hidden from view
+- scroll - a scrollbar is added to the element’s box so that the rest of the content can be viewed by scrolling.
+- visible - the overflow content will be displayed outside of the containing element. This is the default value.
+
+**DEFAULT VALUES**
+> Each browser has its own default styles. It is in case we do not define styles for a certain element. These browser styles are called: `user agent styles`. User agent means browser.
+
+>Among default browser styles are margin and padding. In order to reset the completely and start with clean slate, we can set:
+```
+* {
+  margin: 0;
+  padding: 0;
+}
+```
+**VISIBILITY**
+> Visibility is a property which decides if an element is `hidden` or `visible`.
+- hidden - element with not be visible
+- visible - element will be visible
+
+>Even if we set element to hidden, the website will still reserve space for it. So we are only hiding element, but the space where is will be generated will be visible.
+
+HTML:
+```
+<ul>
+  <li>LOOK AT ME</li>
+  <li class="incognito">YOU CANNOT SEE ME :)</li>
+  <li>I AM HERE</li>
+<ul>
+```
+
+CSS:
+```
+.incognito {
+  visibility: hidden;
+}
+```
+
+![](https://i.imgur.com/h28WH9G.png "Photo by Addania")
+
+>If we want to hide an element completely, we set:
+
+CSS:
+```
+.incognito {
+  display:none;
+}
+```
+![](https://i.imgur.com/jxNsMVj.png "Photo by Addania")
+
+
+**BOX MODEL**
+>The classical box model works in a way that:
+
+```
+actual rendered width of elemen`s box
+= width + padding+ border 
+```
+
+![](https://i.imgur.com/xLqkYbN.png "Photo by codecademy.com")
+
+
+>This is also controlled by porperty called `box-sizing`which has as a default value in browsers: `content-box`
+
+>This can create problems to work with boxe sizes and positioning elements
+
+>Another value of `box-sizing` can be `border-box`
+
+>To reset the `content-box` and use `border-box`, we can use:
+```
+* {
+  box-sizing: border-box;
+}
+```
+> In this box model, if we specify width, it will equal to the actual rendered width of the box. Padding will be `inside` of the width and content width will be calculated automatically:
+
+![](https://i.imgur.com/oVtrdTh.png "Photo by codecademy.com")
+
+
+**POSITIONINIG**
+
+>HTML pages are rendered from left to right, from top to bottom.
+
+>Following attributes define positioning of these elements:
+
+- position
+- display
+- z-index
+- float
+- clear
+
+>Let`s create 2 divs within another div and color them:
+HTML:
+```
+<div class="parent-block">
+    <div class="box1"></div>
+    <div class="box2"></div>
+</div>
+```
+
+CSS:
+```
+.parent-block {
+    width: 400px;
+    height: 400px;
+    background-color: rgba(173, 27, 218, 0.2)
+}
+.box1{
+    width: 100px;
+    height: 100px;
+    background-color: purple ;
+}
+.box2{
+    width: 100px;
+    height: 100px;
+    background-color: orchid;
+}
+```
+> By browser default, they will be displayed as block:
+
+![](https://i.imgur.com/ESLu9iC.png "Photo by Addania")
+
+>User agent styles means browser default. Box will look like this:
+
+
+![](https://i.imgur.com/K0Ponuc.png "Photo by Addania")
+
+>Child divs are generated beneath each other. Each child div takes up whole width of the parent container.
+
+>If we wanted to position the boxes next to each other, we would need to apply display: inline-block to the boxes:
+
+```
+.box1{
+    display: inline-block;
+}
+.box2{
+    display: inline-block;
+}
+```
+![](https://i.imgur.com/kLgULXj.png "Photo by Addania")
+
+**POSITION**
+>Postion is a property that positions an element.
+
+>Possible values:
+- static- default value, elements render in order, as they appear in the document flow	
+- absolute- the element is positioned relative to its first positioned (not static) ancestor element	
+- fixed - the element is positioned relative to the browser viewport (visible screen)	
+- relative - the element is positioned relative to its normal (static) position, so "left:20px" adds 20 pixels to the element's LEFT position	
+- sticky- the element is positioned based on the user's scroll position
+- initial- sets this property to its default value. Read about initial	
+- inherit - inherits this property from its parent element
+
+> If not specified, position will be static. It does not need to be written explicitly.
+
+> With position we can also define four offset properties:
+
+- top - moves the element down.
+- bottom - moves the element up.
+- left - moves the element right.
+- right - moves the element left.
+
+**POSITION RELATIVE**
+>Our starting positioning of elements will be `display: block` and will look like this:
+
+HTML:
+```
+<div class="parent-block">
+    <div class="box1"></div>
+    <div class="box2"></div>
+</div>
+```
+CSS:
+```
+.parent-block {
+    width: 400px;
+    height: 400px;
+    background-color: rgba(173, 27, 218, 0.2);
+}
+.box1{
+    width: 100px;
+    height: 100px;
+    background-color: purple ;
+    display: block;
+}
+.box2{
+    width: 100px;
+    height: 100px;
+    background-color: orchid;
+    display: block;
+}
+
+```
+
+![](https://i.imgur.com/K0Ponuc.png "Photo by Addania")
+
+> Please note we do not need to specify `display: block` explicitly, because it is browser default (user agent styles), but we can. Notice that the box 2 is rendered beneath box 1.
+
+>We can then position our box 2 with `position: relative`. Relative means in this case relative to its `position: static` which is the default where browser would render it. Considering we use `display: block` then `position: static` means beneath the box 1.
+
+>There will be no visible change to our starting point unless we add some offset positioning. For example offset 10px from top and offset of 30px from right:
+
+```
+.box2{
+    display: block;
+    position: relative;
+    top: 10px;
+    left: 30px;
+}
+```
+
+>Resulting change will look like this.
+
+![](https://i.imgur.com/s3PQ6ES.png "Photo by Addania")
+
+
+**POSITION FIXED**
+>Our starting positioning of elements will be `display: block` and will look like this:
+
+HTML:
+```
+<div class="header"></div>
+<div class="parent-block">
+    <div class="box1"></div>
+    <div class="box2"></div>
+</div>
+```
+CSS:
+```
+.header {
+    width: 400px;
+    height: 120px;
+    background-color: turquoise;
+} 
+.parent-block {
+    width: 400px;
+    height: 400px;
+    background-color: rgba(173, 27, 218, 0.2);
+}
+.box1{
+    width: 100px;
+    height: 100px;
+    background-color: purple ;
+    display: block;
+}
+.box2{
+    width: 100px;
+    height: 100px;
+    background-color: orchid;
+    display: block;
+}
+```
+
+![](https://i.imgur.com/RNCpJBn.png "Photo by Addania")
+
+> Please note we do not need to specify `display: block` explicitly, because it is browser default (user agent styles), but we can. Notice that the box 2 is rendered beneath box 1.
+
+>We can then position our box 2 with `position: fixed`. Fixed means in this case relative to to the viewport (visible browser window).
+
+>There will be no visible change to our starting point unless we add some offset positioning. For example offset 0px from top and offset of 60px from right:
+
+```
+.box2{
+    display: block;
+    position: fixed;
+    top: 0px;
+    left: 60px;
+}
+```
+
+>Resulting change will look like this.
+
+![](https://i.imgur.com/79Z8GSK.png "Photo by Addania")
+
+> Worth pointing out is also how elements with fixed position behave while scrolling. They would not be scrolled away from the viewport. They will remain in the visible screen.
+
+![](https://i.imgur.com/bMA0qDA.gif "Photo by Addania")
+
+> Navigation bars are often set with the position fixed and then the next element below them is set to relative with offset top: xx px.
+
+**POSITION ABSOLUTE**
+>Our starting positioning of elements will be `display: block` and will look like this:
+
+HTML:
+```
+<div class="header"></div>
+<div class="parent-block">
+    <div class="box1"></div>
+    <div class="box2"></div>
+</div>
+```
+CSS:
+```
+.header {
+    width: 400px;
+    height: 120px;
+    background-color: turquoise;
+} 
+.parent-block {
+    width: 400px;
+    height: 400px;
+    background-color: rgba(173, 27, 218, 0.2);
+    position: absolute;
+}
+.box1{
+    width: 100px;
+    height: 100px;
+    background-color: purple ;
+    display: block;
+}
+.box2{
+    width: 100px;
+    height: 100px;
+    background-color: orchid;
+    display: block;
+}
+```
+
+![](https://i.imgur.com/RNCpJBn.png "Photo by Addania")
+
+> Please note we do not need to specify `display: block` explicitly, because it is browser default (user agent styles), but we can. Notice that the box 2 is rendered beneath box 1.
+
+>We can then position our box 2 with `position: absolute`. Absolute means in this case relative to to the `next parent which has either position: relative or position: absolute`.
+
+>There will be no visible change to our starting point unless we add some offset positioning. For example offset 10px from top and offset of 30px from right:
+
+```
+.box2{
+    display: block;
+    position: absolute;
+    top: 5px;
+    left:60px;
+}
+```
+
+>Resulting change will look like this.
+
+![](https://i.imgur.com/vHZBhRW.png "Photo by Addania")
+
+>Please note, that it is critical, that the next parent component (in our case `.parent-block`) has `position: absolute` or `position: relative`. If it didn`t, it would find next parent component with such position. In our case the only next parent would be the html tag itself. So it would be position in respect to it.
+CSS:
+```
+.header {
+    width: 400px;
+    height: 120px;
+    background-color: turquoise;
+} 
+.parent-block {
+    width: 400px;
+    height: 400px;
+    background-color: rgba(173, 27, 218, 0.2);
+}
+.box1{
+    width: 100px;
+    height: 100px;
+    background-color: purple ;
+    display: block;
+}
+.box2{
+    width: 100px;
+    height: 100px;
+    background-color: orchid;
+    display: block;
+    position: absolute;
+    top: 5px;
+    left:60px;
+}
+```
+
+![](https://i.imgur.com/4r6W7ZQ.png "Photo by Addania")
+
+>Important about position: absolute is that when an element’s position is set to absolute all other elements on the page will ignore the element and act like it is not present on the page.
+
+HTML:
+```
+<div class="header"></div>
+<div class="parent-block">
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+</div>
+```
+
+CSS:
+```
+.header {
+    width: 400px;
+    height: 120px;
+    background-color: turquoise;
+    display: block;
+} 
+
+.parent-block {
+    width: 400px;
+    height: 400px;
+    background-color: rgba(173, 27, 218, 0.2);
+    position: relative;
+}
+
+.box1{
+    width: 100px;
+    height: 100px;
+    background-color: purple ;
+    display: block;
+}
+
+.box2{
+    width: 100px;
+    height: 100px;
+    background-color: orchid;
+    display: block;
+    position: absolute;
+    top: 5px;
+    left:60px;
+}
+
+.box3{
+    width: 100px;
+    height: 100px;
+    background-color: blueviolet;
+    display: block;
+}
+```
+
+![](https://i.imgur.com/QLxSgFG.png "Photo by Addania")
+
+> Notice how new box 3 (violet) completely ignores the box2 and is positioned directly beneath the box 1
+
+> Worth pointing out is also how elements with absolute position behave while scrolling. They would be scrolled away from the viewport
+
+![](https://i.imgur.com/sNPRZZX.gif "Photo by Addania")
+
+**Z INDEX**
+> When there are multiple elements on page which overlap we can control with Z index which element is infront or behind another. The z-index property controls how far “back” or how far “forward” an element should appear on the web page when elements overlap. This can be thought of the depth of elements, with deeper elements appearing behind shallower elements. The higher the z index, the more in front element is. So element with z index 2 will be in front of element with z index 1
+
+>Imagine code like this:
+HTML
+```
+<div class="header"></div>
+<div class="parent-block">
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+</div>
+```
+CSS
+```
+.header {
+    width: 400px;
+    height: 120px;
+    background-color: turquoise;
+    display: block;
+} 
+
+.parent-block {
+    width: 400px;
+    height: 400px;
+    background-color: rgba(173, 27, 218, 0.2);
+    position: relative;
+}
+
+.box1{
+    width: 100px;
+    height: 100px;
+    background-color: purple ;
+    display: block;
+}
+
+.box2{
+    width: 100px;
+    height: 100px;
+    background-color: orchid;
+    display: block;
+    position: absolute;
+    top: 20px;
+    left:40px;
+}
+
+.box3{
+    width: 100px;
+    height: 100px;
+    background-color: blueviolet;
+    display: block;
+}
+```
+![](https://i.imgur.com/HJIzgk1.png "Photo by Addania")
+
+>What if we want the second box appear behind the box 1 and 3? We can set their z-indices
+CSS
+```
+.box1{
+    width: 100px;
+    height: 100px;
+    background-color: purple ;
+    display: block;
+    position: relative;
+    z-index: 2;
+}
+
+.box2{
+    width: 100px;
+    height: 100px;
+    background-color: orchid;
+    display: block;
+    position: absolute;
+    top: 20px;
+    left:40px;
+    z-index: 1;
+}
+
+.box3{
+    width: 100px;
+    height: 100px;
+    background-color: blueviolet;
+    display: block;
+    position: relative;
+    z-index: 2;
+}
+```
+> Please not it is super important that we st box 1 and 3 to position: relative, because z index does not work on static objects (position:static is default if we do not set any position). Result will look like this
+
+![](https://i.imgur.com/5VM9sZV.png "Photo by Addania")
+
+
+**DISPLAY**
+>Each HTML element has a default display value that determines if it can share horizontal space with other elements or not. Some elements fill the entire browser width from left to right regardless of the size of their content. But other elements only take up as much horizontal space as their content needs and can be directly next to other elements.
+
+**INLINE DISPLAY**
+>Default display of some tags, for example `<em>`, `<strong>`, `<button>` or `<a>`, is called `inline`. Inline elements have a box that wraps tightly around their content, only taking up amount of space which is necessary to display their content and not requiring a new line after every new element. 
+
+>Height and width of such elements cannot be specified in the CSS document. For example, the text of `<a>` tag will, by default, be displayed on the same line as the surrounding text, and it will only be as wide as necessary to contain its content. 
+
+>Inline elements cannot be altered in size with height or width CSS properties.
+
+HTML:
+```
+<button>Click me!</button><button>Me too, please?</button>
+```
+
+![](https://i.imgur.com/NKk2d26.png "Photo by Addania")
+
+>Some elements by default have property display: block, which renderes them beneath each other. For example heading tags or divs
+HTML:
+```
+<button>Click me!</button><button>Me too, please?</button>
+<h3>Hello</h3>
+<h3> Universe!</h3>
+```
+![](https://i.imgur.com/ybaY2aS.png  "Photo by Addania")
+
+>Display property provides the ability to make any element an inline element, also elements that are not inline by default such as paragraphs, divs or headings.
+CSS:
+```
+h3 {
+  display: inline;
+}
+```
+![](https://i.imgur.com/gIVa8dd.png"Photo by Addania")
+
+The CSS in the example above will change the display of all <h1> elements to inline. The browser will render <h1> elements on the same line as other inline elements immediately before or after them (if there are any).
 
 **ROTATION**
 > The <code>t⁠r⁠a⁠n⁠s⁠f⁠o⁠r⁠m</code> property can rotate images and other elements. It accepts functions as values. To add a function that rotates an image, we type in <code>r⁠o⁠t⁠a⁠t⁠e⁠(⁠)</code>. We enter there number of degrees we want to rotate image.90deg means 90 degrees clickwise

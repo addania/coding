@@ -9,7 +9,14 @@ category: "impressions"
 
 **23.04.2020 - Thursday**
 
-Today I learned how to `deploy` my code 😈😈😈
+I finally finished my mini innocent PR. And from the deepest bottom of my head I sent it to my dearest colleagues for code review and QA testing:
+
+<img src="https://i.imgur.com/Z070cEp.png" alt="Photo by Addania" />
+
+
+😈😈😈 Have fun guys, muhahahaha!
+
+Plus today I learned how to `deploy` my code 😈😈😈
 
 >I am inevitable!
 
