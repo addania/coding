@@ -2946,32 +2946,825 @@ useEffect(
     ()=> {
         console.log("Im triggered")
         return () => {console.log("cleanup")}
-    }, []
+    }
 )
 ```
->
+>With above code, the cleanup will not run upon the mounting of component, but then after it will run always `before` the component updates
+>If we pass empty array to the useEffect which means useEffect will only run upon mounting and dismounting, we will see that cleanup runs only when we unmount the component (in app js to have a button which toggls display of Cockpit component)
 ``` es6
+useEffect(
+    ()=> {
+        console.log("Im triggered")
+        return () => {console.log("cleanup")}
+    },[]
+)
 ```
->
+>What if we had some function in the useEffect and we wanted to clea it up? We would need to assign it to variable for example `timer`. And we would then pass it to the return of the useEffect with word clear:
 ``` es6
+    useEffect(()=> {
+        console.log("I am useEffect")
+        const timer= setTimeout(
+            () => {
+                alert("bla")
+            }, 500
+        )
+        return (
+            () => {
+                clearTimeout(timer)
+                console.log("cleanup work")
+            }
+        )
+    }, [])
 ```
->
+**Rendering in React**
+>Imagine that App is a parent component to Persons and Cockpit component. If anything changes in App component (state or props), both Cockpit and Parsons will re-render. Imagine we only change something in App component that only regards Cockpit component. Persons component will still re-render. Which is totally unnecessary and not optimal. What to do? We can use shouldComponentUpdate for that (in class components, or we can use extends PureComponent) to prevent unnecessary re-renders in Persons component. For functional based components we can use ReactMemo.
+>Useing shouldComponentUpdate in Persons component - we can say only re-render this component if my main prop: persons change, else keep it as it is. How to do it, compare nextProps to current props:
 ``` es6
+shouldComponentUpdate(nextProps, nextState){
+if (nextProps.persons !== this.props.persons){
+    return true
+} else {
+    return false
+}
+}
 ```
->
+> Please notice that this.props.persons is actually an array. When we want to compare two arrays, they are reference types and such comparison is only doing a shallow comparison. What does it mean? It only compares if array one is pointing in the memroy to the same address as the pointer for the array 2. It does not go through each element of the array and compares pointers of each element. No, arrays and objects are reference types and for such comparisons, only their pointers to memory addresses will be compared. Therefore it is SUPER IMPORTANT that any time we change props or state, we create NEW array or NEW OBJECT, such as: 
 ``` es6
+const newArray=[...oldArray]
+this.setState(newArray)
+const newObject={...oldObject}
+this.setState(newObject)
 ```
 
->
+>Only then we can trully guarantee that our checks  and shouldComponentUpdate will work correctly. Lesson: NEVER MUTATE STATE OR PROPS.
+
+>In Developer tools when you click on settings (3 vertical dots) ->More tools ->Rendering you can check `Paint Flashing` option which will then enable highlightening of the components which rendered.
+
+>For functional components as they dont have shouldComponentUpdate, we can do the same using React.memo. React.memo uses memoization which is a technique where React will store a snapshot of this component and it will only re-render this only if the inputs to the component change. How to use it? Simply wrap your functional component in React.memo
+
+> You can do it at the default export
+``` es6
+export default React.memo(Cockpit);
+```
+>Or with named export
+``` es6
+export const Cockpit = React.memo( (props) => {
+....
+})
+```
+>Now logical conclusion would be to always use React.memo for functional components and shouldComponent update for class based components. Is it such a good idea? No, it is not. Why? Beause some components always change when their children change and to perform an extra check like shouldComponentUpdate is unnecessary. We should only implement it if my parent components updates and there are cases for which one particular child component is not interested in those changes and should not unnecessary update.
+
+>Pure components: When you have a class based component where you use shouldComponentUpdate and we want to perform a check to compare **all the props** that matter to the component, there is an easier way to do it rather than:
+``` es6
+shouldComponentUpdate(nextProps, nextState){
+if (nextProps.persons !== this.props.persons || nextProps.changed !== this.props.changed || nextProps.clicked !== this.props.clicked){
+    return true
+} else {
+    return false
+}
+}
+```
+>The better way is to extend a **PURE** component
+``` es6
+import React, { PureComponent } from "react";
+
+class Persons extends PureComponent {
+    ...
+}
+```
+> Pure component is just a normal component which already implemented complete shouldComponentUpdate check for **all** its props. extends PureComponent will have same result as full shouldComponentUpdate check.
+
+**How React renders REAL DOM**
+> When render() method is called it does NOT immediately render the the REAL DOME. This also applies to functional components (even though they do not have render() method, their return renders stuff). Render() is more like a suggestion of what the HTML should look like in the end. But render() can be called and lead to the same result as is already displayed. THat is also a reason why we use shouldComponentUpdate (so that we avoid unnecessary re-renders). And sometimes even a prop can change, but we will still render the same result (for whatever reason). And this still does not necessarily mean that it hits real DOM and that DOM starts to re-render.
+> IN fact what React render does it compares `virtual DOMS`. It has `old` VIRTUAL DOM and `new / future / re-rendered` VIRTUAL DOM. Why do we use virtual DOMs instead of real DOM? Virtual DOMs are faster.
+
+> Virtual DOM is a DOM representation in Javascript. You can represent ALL HTML elements (DOM elements) and objects in pure Javascript (without rendering anything to the browser). 
+
+> React keeps 2 copies of the real dom: one is old virtual dom and second one is new/re-rendered virtual dom (which is created when the rende() method in class based component is called or when functional component returns soemthing).
+
+> Calling render() does not immediately update real DOM. It compares old aversus new virtual DOM and it checks if there are any differencies. If it can detect differencies, then it reaches out to the real DOM and updates it, but only at the places where differencies were detected. If no differencies were found, it does not touch the DOM.
+> Accessing the DOM is REALY SLOW. You want to do it as little as possible.
+
+**React return statement**
+>In React you can only return one root JSX element. 
+``` es6
+return (
+    <div>
+       //other child elements
+    </div>
+)
+```
+>You cannot return 2 or more siblings/adjucent elements on the root level. 
+``` es6
+return (
+    <div></div>
+    <div></div>
+)
+```
+>If we do so, we get an error that: `Adjacent JSX elements must be wrapped in an enclosing tag`
+
+>Therefore you need to always wrap your JSX in one single outer/root div or fragment `<>`.
+``` es6
+return (
+    <div>
+       //other child elements
+    </div>
+)
+```
+>or using fragment:
+``` es6
+return (
+    <>
+       //other child elements
+    </>
+)
+```
+>Exceptions are when we iterate through lists with the help of a map method. Even though we return the list of JSX  elements, in this case it is ok! And the reason why it is ok is that that there is a key on each element of an array!
+``` es6
+return this.props.persons.map(
+    (person, index) => {
+        return (
+            <Person key={person.id}>
+        )
+    }
+)
+```
+> So in order to render on the root level adjucent elements, we need to provide them as a list with keys!
+``` es6
+return [
+    <div key="01"></div>, 
+    <div key="02"></div>,
+    <div key="03"></div>
+]
+```
+> Another way how to render adjucent elements without needing to add another div which we do not need from structural perspective is adding a HOC (higher order component) - these are components which wrap other components.
+
+>We usually create a dedicated folder for hocs and in it let's create an `aux.js` file which stands for auxiliary. Windows users should call this file `auxiliary.js` as aux is reserved word on Windows.
+``` es6
+import React from "react"
+const Aux = (props) => props.children
+export default Aux;
+```
+> children is a special property and it means anything that we wrap our aux component around. So anything between opening and closing tag of aux component. In the example below children would be the paragraph.
+``` es6
+<Aux>
+    <p></p>
+</Aux>
+```
+> In this example it would be an array or persons
+``` es6
+return (
+    <Aux>
+        this.props.persons.map(
+        (person, index) => {
+            return (
+                <Person key={person.id}>
+            )
+          }
+        )
+    </Aux>
+)
+```
+> React also has an built-in Aux component called React.Fragment part of react package.
+``` es6
+return (
+    <React.Fragment>
+        this.props.persons.map(
+        (person, index) => {
+            return (
+                <Person key={person.id}>
+            )
+          }
+        )
+    </React.Fragment>
+)
+```
+
+**HOC - Higher order components**
+> HOCs wrap other components and maybe add extra logic to it. For example HOC can add a class to the whole children tree. For that we will create a new file called `withClass.js`
+> Code can look like this:
+``` es6
+import React from "react";
+const WithClass = (props) => {
+  return <div clasName={props.classes}>{props.children}</div>;
+};
+export default WithClass;
+```
+> In App.js we then replace our div with className with following:
+``` es6
+return (
+        <WithClass classes="App">
+      <button onClick={this.handleRemoveCockpit} >Toggle Cockpit</button>
+        {this.state.showCockpit && <Cockpit title={this.props.projectTitle} persons={this.state.persons} toggl={this.togglePersonsHandler} />}
+       {persons}
+       </WithClass>
+    );
+```
+> Another way to write HOC is by creating regular javascript function (not a functional component)
+``` es6
+const withClass = (WrappedComponent, className) => {
+  return 
+};
+export default withClass;
+```
+> This function accepts couple of arguments (can be many). One of the arguments is WrappedComponent, which will be component around which we will wrap that HOC. Another argument is for example className, but can be anything.
+> This function will return something weird... It will return FUNCTIONAL component. WHAAAAT????
+``` es6
+import React from "react";
+
+const withClass = (WrappedComponent, className) => {
+  return props => (
+      <div className={className}>
+          <WrappedComponent />
+      </div>
+  )
+};
+export default withClass;
+```
+> Now how to use this weird thing?? We will not use it in our return statement of App component, we will use it at the export as a normal function with 2 arguments
+``` es6
+export default withClass(App, "App");
+```
+
+**Updating state incorrectly**
+> State is not updated synchronously. It is asynchronous which mean React schedules it and sometimes things are chunked before state is updated or it only is updated when React has resources to update it. Therefore it is incorrect to use OLD state directly when we are setting new state!!! Why? Because the OLD state which we access directly is NOT guaranteed to be the latest state (it could be unexpected state)!!!
+> How to do it then? We can pass a function instead of the old state and this arrow function takes an argument previousState (and optionally props if we need them)
+> Example functional components - INCORRECT
+``` es6
+const [rowVisible, setRowVisible] = React.useState(false)
+...
+onClick={() =>setRowVisible(!rowVisible)
+```
+> Example functional components - CORRECT way of updating state depending on the old state
+``` es6
+const [rowVisible, setRowVisible] = React.useState(false)
+onClick={() =>setRowVisible((previousVisible)=> !previousVisible)
+```
+
+> Example class components - INCORRECT
+``` es6
+state ={
+    counter: 0
+}
+...
+this.setState({counter: this.state.counter+1})
+
+```
+> > Example class components - CORRECT way of updating state depending on the old state - here React guarantees the state is what we think it is
+``` es6
+state ={
+    counter: 0
+}
+...
+this.setState( (previousState, props) => {
+    return
+         {counter: previousState+1}
+    }
+)
+```
+> Read more: https://reactjs.org/docs/hooks-reference.html#functional-updates
+
+**Prop types**
+>React community built a package which helps you define types of props you pass to your components. You need to install it with 
+``` es6
+npm install --save prop-types
+```
+> Then you can import PropTypes
+``` es6
+import PropTypes from 'prop-types'
+```
+> Then after our component definition we can define prop types for examplpe for Person component
+``` es6
+Person.propTypes= {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func
+}
+```
+> Of course another way to define props is using flow or typescript
+
+**Using reference - ref**
+> What if we want to focus our inputs when app starts? Javascript has a way to focus with document.querySelector
+``` es6
+componentDidMount(){
+    document.querySelector('input').focus();
+}
+```
+> Other super cool possibilities is to style a background of a paragraph:
+``` es6
+document.querySelector('p').style.backgroundColor = "red";
+```
+> We cal also use regular css selectors, like class selector `.mia` or ids with `#my-id`
+``` es6
+document.querySelector('.mia').style.backgroundColor = "blue";
+document.querySelector('#my-id').style.backgroundColor = "green";
+```
+> Of course these elements need to have those class names or ids:
+``` es6
+<p onClick={this.props.click} className="mia">
+          I'm {this.props.name} and I am {this.props.age} years old!
+</p>
+<p id="my-id">Hi</p>
+```
+>There are many other selectors, like selecting all occurances with `querySelectorAll()`. This selector returns an array of HTML elements which we want to select, so we will need to loop over them in order to style them
+``` es6
+const x=document.querySelectorAll('p');
+        for (let i = 0; i < x.length; i++) {
+            x[i].style.backgroundColor = "red";
+}
+```
+> However, this is way is not the optimal way, because it takes into consideration first item it founds, so we cant focus for example the last element if we have more. React has its own way to handle this using references. Any element (including components) can have a special property called `ref`. 
+> There are multiple ways how to use ref. One way is to pass anonymous arrow function with some arguments. First argument is the element itself on which I placed it on, for example inputElement
+``` es6
+<input ref={(inputEle)=>{ inputEle.focus()}} />
+```
+> We would do this if we wanted to directly use this inputElement in the ref function. 
+
+> But what if we wanted to you it elsewhere? We could use following syntax to set a global reference in the class component to this element.
+``` es6
+<input ref={(inputEle)=>{ this.inputElement =inputEle}} />
+```
+> And then we can use it in for example in ComponentDidMount()
+``` es6
+componentDidMount(){
+this.inputElement.focus()
+}
+```
+> Another way how to create ref is in the constructor
+``` es6
+constructor(props){
+    super(props);
+    this.inputElementRef = React.createRef();
+}
+```
+> `this.inputElementRef = React.createRef();` is not my input, it is only a reference to ANY object React gives me as a reference
+
+> Then instead of an arrow function in a ref property of some element, I can use`this.inputElementRef`
+``` es6
+<input ref={this.inputElementRef} />
+
+```
+> Then I can use this in order to create the focus in componentDidMount. Please note, if we use React.createRef() we need ot access `current` property of our reference element!!
+``` es6
+componentDidMount(){
+this.inputElementRef.currents.focus();
+}
+```
+> How to do this in functional component? We will use a hook called useRef hook
+``` es6
+import React, {  useRef } from "react";
+const toggleBtnRef= useRef()
+```
+> We will ne add our togglBtnRef to our button which we want to click automatically when you load the component:
+``` es6
+ <button ref={toggleBtnRef} />
+```
+> And then we use our toggleBtnRef in useEffect to trigger that automated click:
+``` es6
+useEffect(()=> {
+    toggleBtnRef.current.click()
+}, [])
+```
+**Passing props chain problem and solving it with Context**
+>IN bigger apps we will face a problem where we need ot pass a prop from the parent all the way down through component tree down to a child component. And maybe only the last child needs the prop and none of the other components are interested in it. This can be cumbersome and inconvenient. Therefore react created something called context!
+
+>Context enables to have some data (state) in multiple components without needing to pass them down the component tree
+>Let's set this up. We will start by creating a new file which will hold the context object:
+``` es6
+import React from 'react'
+
+const AuthContext = React.createContext()
+
+export default AuthContext
+```
+> We can also add some default value for our context (but it is optional)
+``` es6
+import React from 'react'
+
+const AuthContext = React.createContext({ authenticated: false})
+
+export default AuthContext
+```
+> But let us assume we do not do it and we start with just empty context
+> Then in our main component, for example in App.js, we import this context. 
+``` es6
+import AuthContext from '../context/AuthContext'
+```
+>Place where we put the context matter in these ways. Place it in the higher component where you have the state which needs to be passed down the tree. Use it to wrap the components which hold those components which need this data.
+>ON this level we wil use the property Provider of that context object to wrap other components by it where the context will be avaulable (on ALL of those components and beaneath them)
+``` es6
+ <AuthContext.Provider value={ {authenticated: this.state.authenticated} }>
+```
+> Please not that we need double curly braces, because value needs and object. First pair of braces means its a dynamic object (not a static value), second pair of braces means we are actually pasing an object in there.
+> By setting the value we made part of our state be available to all components which are wrapped by our AuthContext:
+``` es6
+ <AuthContext.Provider value={ {authenticated: this.state.authenticated, login: this.loginHandler} }>
+        <button onClick={this.handleRemoveCockpit} >Toggle Cockpitttt</button>
+        {this.state.showCockpit && <Cockpit title={this.props.projectTitle} persons={this.state.persons} toggl={this.togglePersonsHandler} />}
+       {persons}
+ </AuthContext.Provider>
+```
+> Then how can one component down the tree use this value? Imagine we are in the Person component. Ofc we need to import the context and here we will CONSUME it!
+``` es6
+import AuthContext from '../../../context/AuthContext'
+...
+<AuthContext.Consumer>{(context)=>
+<p>{context.authenticated ? 'Authenticated!' : 'LOGIN!!!'}</p>
+}</AuthContext.Consumer>
+```
+>Whole component looks like this:
+``` es6
+import React, { Component } from "react";
+import classes from "./Person.css";
+import AuthContext from '../../../context/AuthContext'
+
+class person extends Component {
+    constructor(props){
+        super(props)
+        this.inputElementRef = React.createRef()
+    }
+    componentDidMount(){
+        this.inputElementRef.current.focus()
+    }
+  render() {
+    return (
+      <div className={classes.Person}>
+      <AuthContext.Consumer>{(context)=>
+      <p>{context.authenticated ? 'Authenticated!' : 'LOGIN!!!'}</p>
+    }</AuthContext.Consumer>
+        <p onClick={this.props.click} className="mia">
+          I'm {this.props.name} and I am {this.props.age} years old!
+        </p>
+        <p id="my-id">HI</p>
+        <p>{this.props.children}</p>
+        <input ref={this.inputElementRef} type="text" onChange={this.props.changed} value={this.props.name} />
+      </div>
+    );
+  }
+}
+
+export default person;
+
+```
+> Please note very important thing. We wrap our paragraph by the AuthContext.Consumer. This component however, does not accept JSX elements as children!!! It onyl accepts an arrow function. This function receives as argument whole context object which we wanted to deliver here. This function returns the JSX elements where we want to use the context
+``` es6
+<AuthContext.Consumer>{(context)=>
+      <p>{context.authenticated ? 'Authenticated!' : 'LOGIN!!!'}</p>
+    }</AuthContext.Consumer>
+```
+> This approach has one flaw. We would not be able to access our context in for example componentDidMount. Therefore there is more elegant way how to access the context in class based components.
+> We can add a static property written exactly this way:
+``` es6
+static contextType = AuthContext;
+```
+> And then you can access your context for example in the componentDidMount
+``` es6
+componentDidMount(){
+        console.log(this.context.authenticated)
+    }
+```
+> Moreover,in the return statement, we dont need `<AuthContext>{(context)=> ....}</AuthContext>`
+> We can simply use
+``` es6
+{this.context.authenticated ? ... : .... }
+```
+> Whole file:
+``` es6
+import React, { Component } from "react";
+import classes from "./Person.css";
+import AuthContext from '../../../context/AuthContext'
+
+class person extends Component {
+    constructor(props){
+        super(props)
+        this.inputElementRef = React.createRef()
+    }
+    
+    static contextType = AuthContext; 
+
+    componentDidMount(){
+        this.inputElementRef.current.focus()
+        console.log(this.context.authenticated)
+    }
+  render() {
+    return (
+      <div className={classes.Person}>
+      
+      <p>{this.context.authenticated ? 'Authenticated!' : 'LOGIN!!!'}</p>
+
+        <p onClick={this.props.click} className="mia">
+          I'm {this.props.name} and I am {this.props.age} years old!
+        </p>
+        <p id="my-id">HI</p>
+        <p>{this.props.children}</p>
+        <input ref={this.inputElementRef} type="text" onChange={this.props.changed} value={this.props.name} />
+      </div>
+    );
+  }
+}
+
+export default person;
+```
+> Functional components has a useContext hook for exactly this.
+``` es6
+
+```
+> 
 ``` es6
 ```
->
+> 
 ``` es6
 ```
->
+> 
 ``` es6
 ```
->
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
+``` es6
+```
+> 
 ``` es6
 ```
 >Linters are code quality checking tool
