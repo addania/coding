@@ -53,17 +53,17 @@ tsc app.ts
 
 
 > We will start creating an html file with following content:
-```
+``` es6
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typescript Course</title>
     <script src="app.js"  defer></script>
-</head>
-<body>
-</body>
+  </head>
+  <body>
+  </body>
 </html>
 ```
 >Especially important is the script tag which will envoke our `app.js` file and will execute it:
@@ -91,7 +91,7 @@ tsc app.ts
 
 >Problem is however, for now we will need to always save code, compile it, and manually refresh the browser. But we can automate the browser refresh by installing a tool.
 
-> Go to your main project folder and initialize npm. It will create the `package.json` file. Hit enter for each question it asks you
+> Go to your main project folder and initialize npm with `npm init`. It will create the `package.json` file. Hit enter for each question it asks you
 ```
 npm init
 ```
@@ -178,14 +178,14 @@ let number2: number = 5;
 
 >But it is redundant and not encouraged (not best practice), as Typescript can infer the data type itself from how I initialize the constant or variable.
 
-> Best practice would be to define a type if you do not assign value but only initialize a variable:
+> Best practice would be to define a type `if you do not assign value but only initialize a variable`:
 ```
-let number3;
+let x;
 ```
 
->Then it would be encouraged to define type:
+>Then it is actually encouraged to define type:
 ```
-let number3: number;
+let x: number;
 ```
 ## Object types
 ![](https://i.imgur.com/dGwZPCQ.jpg "Photo from mocah.org")<p style="font-size: 12px; text-align: right">_Photo from mocah.org_</p>

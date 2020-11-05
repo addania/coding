@@ -223,6 +223,10 @@ p {
 font-size: 18px;
 }
 ```
+> Font size can also be expressed in rem which will then scale the font size based on the default font size user chose. The number given represents how much bigger the font will be based on the defaul user selected font.
+``` 
+font-size: 1.2rem;
+```
 > Changing bold (thickness or narrowness of the font) using font-weight (it can hold values bold or normal):
 ```
 p {
@@ -1076,6 +1080,36 @@ transform: rotate(-45deg);
 ```
 button {
 transform: rotate(-90deg);
+}
+```
+**Media queries**
+> Media queries are very useful when we want to have diffrent styling based on the different screen sizes, for example large, medium or small (which is usually a mobile).
+> In a project we usually start developing the layout how it should look on the mobile phone and defining styles for the mobile first with for example defning the widths:
+``` es6
+.Burger {
+  width: 100%;
+  height: 250px;
+}
+```
+
+> Then maybe on medium screen sizes we define the width of
+``` es6
+@media (min-width: 500px) and (min-height: 401px) {
+  .Burger {
+    width: 450px;
+    height: 400px;
+  }
+}
+```
+
+
+> Then on the large screen we want to use a different size.
+``` es6
+@media (min-width: 1000px) and (min-height: 700px) {
+  .Burger {
+    width: 700px;
+    height: 600px;
+  }
 }
 ```
 

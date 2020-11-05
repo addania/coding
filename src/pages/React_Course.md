@@ -6,6 +6,8 @@ category: "knowledge-base"
 
 ![](https://i.imgur.com/jX7rNIv.jpg "Photo by PhotoMIX Ltd. from Pexels")
 
+This article is basically my notes following an amazing [React]() course by Maximilian Schwarzmüller which I would recommend to everyone who wants to learn React.
+
 **Basics**
 > Javascript is a programming language that can be executed in browsers.
 
@@ -505,7 +507,7 @@ console.log(filter(1,2,3)) // [1]
 console.log(name) // 'Adda'
 console.log(title) // 'The Emperor'
 ```
->It looks like we are creating a new array, but we are not, we are `destructuring` and array and creating 2 variables: name and title
+>It looks like we are creating a new array, but we are not, we are `destructuring` an array and creating 2 variables: name and title
 
 >The order defines which property name withh be (the first), title (the second).
 
@@ -2371,7 +2373,7 @@ background-color: ${props => {
 `
 ```
 **CSS modules**
->By default styles in the .css file are global! They do not only belong to the component, where they are imported. They will be applied to anycomponent in the entire app.
+>By default styles in the .css file are global! They do not only belong to the component, where they are imported. They will be applied to any component in the entire app.
 
 >It can be demonstrated like this:
 Person.css
@@ -2508,7 +2510,9 @@ localIdentName: '[name]__[local]__[hash:base64:5]'
               {
                 loader: require.resolve('css-loader'),
                 options: {
-                  importLoaders: 1,
+                importLoaders: 1,
+                modules: true,
+                localIdentName: '[name]__[local]__[hash:base64:5]'
                 },
               },
               {
@@ -2792,7 +2796,7 @@ export default App;
 - componentWillUnmount()
 - render()
 
->React executes those methods for us and different runtimes and we can use them to do stuff with component at certain point of time. Such as: fetch data from web, do some cleanup work before component is removed from DOM, etc.
+>React executes those methods for us at different runtimes and we can use them to do stuff with component at certain point of time. Such as: fetch data from web, do some cleanup work before component is removed from DOM, etc.
 
 **Creation of component**
 >Order of execution:
@@ -2951,6 +2955,7 @@ useEffect(
 ```
 >With above code, the cleanup will not run upon the mounting of component, but then after it will run always `before` the component updates
 >If we pass empty array to the useEffect which means useEffect will only run upon mounting and dismounting, we will see that cleanup runs only when we unmount the component (in app js to have a button which toggls display of Cockpit component)
+
 ``` es6
 useEffect(
     ()=> {
@@ -2959,7 +2964,8 @@ useEffect(
     },[]
 )
 ```
->What if we had some function in the useEffect and we wanted to clea it up? We would need to assign it to variable for example `timer`. And we would then pass it to the return of the useEffect with word clear:
+
+> What if we had some function in the useEffect and we wanted to clean it up? We would need to assign it to variable for example `timer`. And we would then pass it to the return of the useEffect with word clear:
 ``` es6
     useEffect(()=> {
         console.log("I am useEffect")
@@ -3229,6 +3235,8 @@ this.setState( (previousState, props) => {
 ``` es6
 npm install --save prop-types
 ```
+>Please note that `--save` means to save this entry in the `package.json` file
+
 > Then you can import PropTypes
 ``` es6
 import PropTypes from 'prop-types'
@@ -3242,6 +3250,16 @@ Person.propTypes= {
     changed: PropTypes.func
 }
 ```
+>If some prop is required and not optional, then we can add `isRequired`:
+``` es6
+Person.propTypes= {
+    click: PropTypes.func,
+    name: PropTypes.string.isRequired,
+    age: PropTypes.number,
+    changed: PropTypes.func
+}
+```
+
 > Of course another way to define props is using flow or typescript
 
 **Using reference - ref**
@@ -3468,21 +3486,98 @@ export default person;
 ```
 > Functional components has a useContext hook for exactly this.
 ``` es6
+import React, { useContext } from "react";
+...
+const authContext= useContext(AuthContext)
+...
+ <button onClick={authContext.login}>
+          Log in!!!!
+      </button>
 
 ```
-> 
+> Whole file:
+``` es6
+import React, { useEffect, useRef, useContext } from "react";
+import classes from "./Cockpit.css";
+import AuthContext from '../../context/AuthContext'
+
+const Cockpit = React.memo((props) => {
+
+    const toggleBtnRef= useRef()
+    const authContext= useContext(AuthContext)
+
+    useEffect(()=> {
+        console.log("I am useEffect")
+        toggleBtnRef.current.click()
+        
+    }, [])
+    
+    const assignedClasses = [];
+    
+    let btnClass="";
+    
+    if (props.showPersons){
+        btnClass = classes.Red;
+    }
+    
+    if (props.persons.length <= 2) {
+      assignedClasses.push(classes.red); // classes = ['red']
+    }
+    if (props.persons.length <= 1) {
+      assignedClasses.push(classes.bold); // classes = ['red', 'bold']
+    }
+  return (
+     <div className={classes.Cockpit}>
+      <h1>{props.title}</h1>
+      <p className={assignedClasses.join(" ")}>This is really working!</p>
+      <button ref={toggleBtnRef} className={btnClass} onClick={props.toggl}>
+        Toggle Persons
+      </button>
+      <button onClick={authContext.login}>
+          Log in!!!!
+      </button>
+
+    </div>
+  );
+});
+
+export default Cockpit;
+
+```
+>useCOntext hook is the same as static contextType is for class based components
+
+> Context API manages data without need to pass it around as props! Same is also what redux does.
+
+**Planning React application**
+> Planning process:
+- Component tree (structure) - from design to small lego pieces
+- Application state (data) - using and manipulating data (for example ingredients user selected for burger and how much it costs)
+- Components vs containers - stateless (dumb) components vs statefull components (in class based components using state property or functional components using useState). STatefull components are also called containers
+
+**Adding google fonts to react app**
+> Go to: https://fonts.google.com/ and search for your favourite font (for example open sans). 
+
+> Click on it and then you will see list of different versions, such as bold, etc. Click on + sign to add the specific styles which you want to include.
+
+>ON the right bar click on embed and you will see the link tag. copy it
+``` es6
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+```
+> We can use this link tag in our public folder in index.html file
+> Add it to the head tag (for example above the title tag)
+
+>Then we can use this font in our global css file: index.css
+``` es6
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+```
+> Sans serif will still be as a backup font
 ``` es6
 ```
-> 
-``` es6
-```
-> 
-``` es6
-```
-> 
-``` es6
-```
-> 
+> Good practice is to name all global variables in capital letters (and store them outside of components)
 ``` es6
 ```
 > 
