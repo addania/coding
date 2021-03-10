@@ -52,6 +52,7 @@ Steps we will follow on our journey to new computer configuration with developme
 - Handbook: Daily Routine
 - Main Transformer: Front-End Config
 - Main Transformer: Daily Routine
+
 ---
 
 ##GENERAL SETTINGS##
@@ -468,7 +469,7 @@ sudo apt-get install git-flow
 > Please note that later on in your repo you will need to initiate the git flow with:
 
 ```
-git flow init
+git flow init --defaults
 ```
 
 > And later on you will be creating branches with
@@ -477,7 +478,8 @@ git flow init
 git flow feature start <name-of-your-branch>
 ```
 
->Create a new branch based on another branch:
+> Create a new branch based on another branch:
+
 ```
 git flow feature start 11153s-redesign-dashboard-header-action-buttons feature/11117-redesign-Dashboard-Menu
 ```
@@ -771,8 +773,19 @@ docker ps
 > To do it, go to the root folder of the project (all backend stuff is done in root folder):
 
 ```
+npm run insights-start:backend
+```
+
+<!--- just
+
+OLD INFO - INITIAL
+
+> To do it, go to the root folder of the project (all backend stuff is done in root folder):
+
+```
 ./gradlew bootRun
 ```
+
 
 > Alternatively instead of `./gradlew bootRun` is to use:
 
@@ -787,6 +800,7 @@ make start
 ```
 make importQ
 ```
+--->
 
 > Now we are ready to start the front end. You can follow to the <code>Front-End Config</code> section.
 
@@ -828,6 +842,12 @@ docker system prune
 
 ---
 
+<h2>Other configs</h2>
+
+It is also important to set aws and npm registry as mentioned [here](http://handbook.adverity.net/handbook-structure-2.0/development-environment/general/private-npm-registry/).
+
+---
+
 <h2>Main App: Front-End Config</h2>
 
 ![](https://i.imgur.com/894yf32.jpg?1 "Photo by Pixabay from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Pixabay from Pexels_</p>
@@ -838,15 +858,14 @@ Then you can navigate to web-app folder:
 
 ```
 cd web-app
-npm install
-npm run bootstrap
+npm run bootstrap:ci
 ```
 
 > To start the frontend, open a new tab in your terminal and follow these instructions:
 
 ```
 cd web-app
-npm start
+npm run insights-start
 ```
 
 > You will need to open the browser. Where <code>appName</code> is the repo name. App will run under:
@@ -1204,22 +1223,24 @@ git push origin myBeautifulNewBranch
 
 ![](https://i.imgur.com/k7kjCMC.jpg "Photo by bongkarn thanyakij from Pexels")<p style="font-size: 12px; text-align: right">_Photo by bongkarn thanyakij from Pexels_</p>
 
-
 ---
 
 <h2>Main Transformer: Setup</h2>
 
->Clone repo with:
+> Clone repo with:
+
 ```
 git clone <ULR>
 ```
 
->Prerequisites:
+> Prerequisites:
+
 - docker
 - docker-compose
 - nvm
 
 > Go to the root folder of the project and create a .env file:
+
 ```
 touch .env
 ```
