@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{227:function(e,n,t){"use strict";t.r(n);var a=t(0),c=t.n(a),l=t(219),o=(t(100),t(220),t(221));n.default=function(){return c.a.createElement(l.a,null,c.a.createElement("div",{style:{textAlign:"center"}},c.a.createElement("h2",null,"Get in Touch"),c.a.createElement(o.a,null),c.a.createElement("p",null,"Do you have some constructive feedback? You can contact me at: ",c.a.createElement("code",null,"zabacinka@yahoo.com"))))}}}]);
-//# sourceMappingURL=component---src-pages-contact-js-2fca616b8f85fb3c144e.js.map
