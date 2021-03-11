@@ -6,9 +6,9 @@ category: "knowledge-base"
 
 ![](https://i.imgur.com/axjkYSi.jpg "Photo by Traversy Media from Pexels")
 
-> React is mainly used to build single page application. But wait, single? Who wants to be single? :) We want more pages, right? Then how to do it in React? How can we redirect to home, about or portfolio page?
+> React is mainly used to build single page application. But wait, single? Who wants to be `single`? :) We want more pages, right? Then how to do it in React? How can we redirect to `home`, `about` or `portfolio` page?
 
-> Great solution for that is react router dom
+> Great solution for that is `react-router-dom`
 
 > Install react router dom from terminal:
 
