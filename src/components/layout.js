@@ -48,7 +48,8 @@ export default ({ children }) => {
             color: "grey",
           }}
         >
-          © 2019 Design and Development by {data.site.siteMetadata.author}
+          © {new Date().getFullYear()} Design and Development by{" "}
+          {data.site.siteMetadata.author}
         </p>
       </footer>
     </div>
