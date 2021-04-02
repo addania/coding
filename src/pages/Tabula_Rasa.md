@@ -41,6 +41,7 @@ Steps we will follow on our journey to new computer configuration with developme
 
 **Company specific:**
 
+- Daily memo extension
 - Main App: Repo setup
 - Main App: Backend - Docker
 - Main App: Backend - Docker Compose
@@ -96,11 +97,11 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
 nvm --version
 ```
 
-> Now we will need to set the default version of Node.js. It is good practice to set it to the latest version, which in my case currently is 12.16.1:
+> Now we will need to set the default version of Node.js. It is good practice to set it to the latest version, which in my case currently is 15.13.0. You can check the latest version here: nodejs.org/en/
 
 ```
-nvm install 12.16.1
-nvm use 12.16.1
+nvm install 15.13.0
+nvm use 15.13.0
 ```
 
 > Test if the installation was successful:
@@ -136,8 +137,8 @@ git --version
 > Configure your username and email address:
 
 ```
-git config --global user.name "Emma Paris"
-git config --global user.email "eparis@atlassian.com”
+git config --global user.name "addya"
+git config --global user.email "addya@guilneas.com”
 ```
 
 Congrats, Git is now installed :)
@@ -492,6 +493,14 @@ git flow feature start 11153s-redesign-dashboard-header-action-buttons feature/1
 
 ![](https://i.imgur.com/UdGibOh.jpg "Photo by Negative Space from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Negative Space from Pexels_</p>
 
+<h2>Daily memo</h2>
+
+> Use following extension: https://github.com/pmedianetwork/daily-memo-chrome-extension
+
+> Follow the read-me notes
+
+---
+
 <h2>Main App: Repo setup</h2>
 
 > Clone the repo from the Github URL
@@ -844,7 +853,191 @@ docker system prune
 
 <h2>Other configs</h2>
 
-It is also important to set aws and npm registry as mentioned [here](http://handbook.adverity.net/handbook-structure-2.0/development-environment/general/private-npm-registry/).
+> You will need to install HomeBrew to follow steps below. Go to: [brew.sh](https://brew.sh)
+
+> Install brew:
+
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+> When it asks you to press RETURN it actually means to press ENTER
+
+> Then follow instructions in the terminal. It will say something liek: Add HomeBrew to your PATH in home/addania/.profile:
+
+```
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/addania/.profile
+```
+
+> Second instruction will be something like this:
+
+```
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+```
+
+> Now check if you can use HomeBrew
+
+```
+brew help
+```
+
+> Then you can proceed with steps below:
+
+> It is important to set aws and npm registry as mentioned [here](https://handbook.internal.adverity.net/development-environment/general/private-npm-registry/). Instructions are a little bit confusing and useful for MAC users, not Ubuntu, so here are the steps:
+
+> Update your system
+
+```
+sudo apt update
+```
+
+> Go to this [website](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install) and install aws-cli version 2. It is important that you install version 2 and not version 1 (because it can mess up your setup and then you will have to uninstall the version 1 and install version 2). Command should be following, but confirm with the above page:
+
+```
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+
+> Last command you will probably have to do separately:
+
+```
+sudo ./aws/install
+```
+
+> Check if you have the correct version of the aws:
+
+```
+aws --version
+```
+
+> If above command gives you version, then skip next workaround and move on to installing aws-vault.
+
+> If above command gives you unexpected result like for example not found, then the folder in which the aws resides is probably different from the default. For this scenario, here is the following workaround. Check following path, if your aws is there:
+
+```
+/usr/local/aws-cli/v2/current/bin/aws --version
+```
+
+> If you found it, then run this command:
+
+```
+which aws
+```
+
+> It will probably output you something like `/usr/local/bin/aws`. Use that output to link your current aws path `/usr/local/aws-cli/v2/current/bin/aws` to the default one `/usr/local/bin/aws`:
+
+```
+ln -s /usr/local/aws-cli/v2/current/bin/aws /usr/local/bin/aws
+```
+
+> If this does not work, try it without local:
+
+```
+ln -s /usr/local/aws-cli/v2/current/bin/aws /usr/bin/aws
+```
+
+> This should work now, you should again confirm with `aws --version` which should output a version
+
+> Then you need to install the aws-vault. Go to this [website](https://github.com/99designs/aws-vault) and in read.me check the latest releases. For example in the time of writing latest release was: https://github.com/99designs/aws-vault/releases/tag/v6.3.1
+
+> Download the file `aws-valut-linux-amd64`
+
+> Then go to the terminal and move it the `/usr/local/bin/aws-vault`
+
+```
+sudo mv aws-vault-linux-amd64 /usr/local/bin/aws-vault
+```
+
+> Then use this command:
+
+```
+sudo chmod +x /usr/local/bin/aws-vault
+```
+
+> Test if the vault works:
+
+```
+aws-vault --version
+```
+
+> Add vault to the adverity-main:
+
+```
+aws-vault add adverity-main
+```
+
+> Verify if it worked:
+
+```
+aws-vault list
+```
+
+> Verify access:
+
+```
+aws-vault exec adverity-main -- aws sts get-caller-identity
+```
+
+> then go to the root folter on you PC (such as Home). Create a `.aws` folder or navigate to it if it already exists. Create a config file there (without any extension).
+
+> /.aws/config file should look like described in the handbook [here](https://handbook.internal.adverity.net/development-environment/general/private-npm-registry/). Here is just a mock with xxx and yyy placeholders:
+
+```
+ [profile adverity-main]
+ # if you have set up MFA, you should uncomment the line below and update mfa_serial with the ARN of your MFA virtual device
+ #mfa_serial= xxxxx
+ region=eu-west-1
+ source_profile= yyyyy
+
+ [profile codeartifact]
+ role_arn = xxxxx
+ region=eu-west-1
+ source_profile = yyyyy
+```
+
+> Test if you have correct access by running:
+
+```
+aws-vault exec codeartifact -- aws codeartifact list-domains
+```
+
+> Expected outcome should look like this:
+
+```
+ {
+     "domains": [
+         {
+             "name": "xx",
+             "owner": "yyy",
+             "status": "Active",
+             "encryptionKey": "zzz"
+         }
+     ]
+ }
+```
+
+> Go to the root folder of your computer (Home) and find a file there called: `.bashrc` and paste following snippet into it. Please note, paste it at the end BEFORE the last NVM commands:
+
+```
+export ADVERITY_CODEARTIFACT_AUTH_TOKEN=`aws-vault exec codeartifact -- aws codeartifact get-authorization-token --domain adverity --domain-owner 508912190628 --query authorizationToken --output text`
+```
+
+> Restart your terminal!
+
+> Then go to terminal and execute:
+
+```
+source ~/.bashrc
+```
+
+> Verify if your setup works:
+
+```
+git clone git@github.com:pmedianetwork/npm-repo-test.git npm-repo-test \
+    && cd "$_" \
+    && npm install
+```
 
 ---
 

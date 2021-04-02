@@ -21,7 +21,7 @@ to find that perfect subtle (and dangerous) alignment for my dangerous ..
 
 Today I will work on my very first issue and I will solve it, crack it,
 nail it.. all on my own! Completely alone!! And then I will obviously rule
-the universe.. At least that is the plan.. What can possible stop me? :))
+the universe.. At least that is the plan.. What can possibly stop me? :))
 Hmm, maybe I should take a look at that issue first, maybe :))
 
 2 hours later....
@@ -50,7 +50,7 @@ to purchase a special treat for them.
 
 I called it a <s>bribe</s>.. thank-you package :)
 
-- the 1st one for the 1st colleagues
+- the 1st one for the 1st colleague
 
 - the 2nd one for <s>the 2nd coll</s>.. ok, for ME.
 

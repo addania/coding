@@ -6,6 +6,16 @@ category: "knowledge-base"
 
 ![](https://i.imgur.com/0v7juum.jpg "Photo by Format from Pexels")
 
+**Foreword**
+
+> This entire section are my personal notes from 2 amazing CSS courses:
+
+- https://css-for-js.dev/
+
+- https://www.codecademy.com/courses/learn-css/
+
+> All the credits go to [Josh Comeau](https://courses.joshwcomeau.com/) and [codecademy](https://www.codecademy.com/)
+
 **TERMINILOGY**
 
 > Imagine this snippet:
@@ -180,7 +190,7 @@ h1.teal {
 
 ![](https://i.imgur.com/dDjN9MR.png "Photo by Addania")
 
-> Chaining selectors can be also with space, but it selects different thing. It selects all elements with class teal which are `descendents` of h1 tag. This kind of selector actually selects based on their location in the document. The below example selects for only those selectors which are nested in h1 tag. This is called `descendant combinator`
+> Chaining selectors can be also with `space`, but it selects different thing. It selects all elements with class teal which are `descendents` of h1 tag. This kind of selector actually selects based on their location in the document. The below example selects for only those selectors which are nested in h1 tag. This is called `descendant combinator`
 > HTML:
 
 ```
@@ -203,6 +213,62 @@ h1 .purple {
 ```
 
 ![](https://i.imgur.com/fgfKOTN.png "Photo by Addania")
+
+> There is an interesting piece of information about the descendant combinator. It will style every child/descendant of that parent!
+
+> HTML
+
+```
+<ul class="main-list">
+  <li>Salt</li>
+  <li>Pepper</li>
+  <li>
+    Fruits & Veg:
+    <ul>
+      <li>Apple</li>
+      <li>Banana</li>
+      <li>Carrots</li>
+    </ul>
+  </li>
+</ul>
+```
+
+> CSS
+
+```
+.main-list li {
+  border: 1px dotted;
+}
+```
+
+> In above example, every li which is a descendant of the class main-list will have border, so also Apple, Banana, etc.
+
+![](https://i.imgur.com/yvg2pla.png "Photo by Addania")
+
+> But what if we only wanted to style the DIRECT children? So directly beneath the main unordered list? So in our case only Salt, Pepper and Fruits?
+
+![](https://i.imgur.com/X19ODSi.png "Photo by Addania")
+
+> We would need to use `>`
+
+```
+.main-list > li {
+  border: 1px dotted;
+}
+```
+
+> How about we only wanted to put border around Apple, Banana and Carrots?
+
+![](https://i.imgur.com/UANLyFI.png "Photo by Addania")
+
+> One way to do it, is to target li which is a direct child of ul which is nested within class main-list:
+
+```
+.main-list ul > li {
+  border: 1px dotted;
+}
+
+```
 
 > Another selector based on the location in the document is called an `adjuscent sibling combinator`. It uses a plus sign (+) in oredr to select the next sibling on the same hierarchy. For example styling a pararaph which comes directly after the heading at the same hierarchy level in the HTML:
 
@@ -270,10 +336,11 @@ h3 .steel {
 h1 .purple, h3 .steel {
   color: lightblue;
 }
-
 ```
 
 ![](https://i.imgur.com/WiFdSmL.png "Photo by Addania")
+
+> Be careful with applying same style to multiple elements. Unfortunately, the comma operator has one annoying pitfall: if any of the selectors are invalid, the rule won't be applied at all. entire rule will be thrown away.
 
 > Another way to style `stranger` and `out here` would be nesting selectors:
 > CSS
@@ -330,16 +397,18 @@ body h1 + p .special {...}
 ```
 
 **Pseaudo-classes**
+
 > Let's have a button which changes color on hover. We might want to use a state for it and use `onMouseEnter` and `onMouseLeave` event listeners on that button. But it is possible do this entirely with CSS.
 
 > Syntax looks like this:
+
 ```
 selector:pseudo-class {
   property: value;
 }
 ```
 
->An exmaple is here:
+> An exmaple is here:
 
 ```
 <style>
@@ -356,16 +425,59 @@ selector:pseudo-class {
 
 > Let's see some of them.
 
+> `focus` - in HTML, there is always an "active element". This is the element that is currently selected. When a button is clicked, focus moves to that button. When you press the "Tab" key, focus will move to the next interactive element on the page.
+
+> By default, the `body` tag is focused. When focus moves to an interactive element, like a form input or a link, that element gets an outline effect, to show the user which element has focus. Example is here:
+
+```
+<style>
+  button:focus {
+    border: 2px solid royalblue;
+    background: pink;
+    color: white;
+  }
+</style>
+<button>Hello</button>
+<button>world</button>
+<button>!</button>
+```
+
+> Click on the first button and press "Tab". Focus moves to the next button, and it gains the focus styles. You can press "Shift Tab" to go back to the first button.
+
+> Focus styles are important for folks who don't navigate with a pointer device (eg. a mouse, trackpad, or touch-screen). For a variety of reasons, some users exclusively use their keyboard to access the internet, and for them, the focus indicator helps them understand where they are on the page.
+
+> `checked` - The :checked pseudo-class only applies to checkboxes and radio buttons that are "filled in". Example:
+
+```
+<style>
+  input:checked {
+  width: 24px;
+  height: 24px;
+  }
+</style>
+<input type="checkbox"/>check me
+```
+
+> We can also chain multiple pseudo-classes and apply them to mulitple elemts by separating them by comma:
+
+```
+.something:focus, .something:hover {
+  /* Shared styles! */
+}
+```
+
 **Media queries**
 
-
->In order to accommodate screens of different shapes and sizes, CSS features media queries, which allow us to apply different CSS in different scenarios - on different screen sizes (desktop, mobile, tablet, etc). The CSS syntax is `@media`
+> In order to accommodate screens of different shapes and sizes, CSS features media queries, which allow us to apply different CSS in different scenarios - on different screen sizes (desktop, mobile, tablet, etc). The CSS syntax is `@media`
 
 > Think about `@media` as `if` statements in javascript, followed by braces with a condition inside:
+
 ```
 @media (condition) { ... styles which will be applied if the condition is met ... }
 ```
->Example style will be applied if the width of the screen is between = and 300px:
+
+> Example style will be applied if the width of the screen is between = and 300px:
+
 ```
 @media (max-width: 300px) {
     .small-only {
@@ -373,7 +485,9 @@ selector:pseudo-class {
     }
   }
 ```
+
 > Media queries are often used when we want to hide some content and display something else:
+
 ```
 <style>
   @media (max-width: 300px) {
@@ -395,6 +509,7 @@ selector:pseudo-class {
   Meanwhile, you'll only see me on small ones.
 </div>
 ```
+
 > `display: none` is a declaration that removes an element from the rendering process; it's as if it doesn't exist
 
 > `max-width` adds styles on `small` screens
@@ -483,6 +598,170 @@ h1 {
 ```
 
 ![](https://i.imgur.com/ZrJnm95.jpg "Photo by Daniel Frese from Pexels")
+
+> For setting colors you can use hex codes - but hex codes are not:
+
+```
+div {
+    background-color: #00bfff;
+    color: #ffffff;
+}
+```
+
+> But there is even a better way to represent colors and that is HSB / HSL: Hue Saturation Brightness or Hue Saturation Lightness
+
+```
+.colorful-thing {
+  color: hsl(200deg 100% 50%);
+  border-bottom: 3px solid hsl(100deg 75% 50%);
+}
+```
+
+> The best explanation of this concept is on the Photoshop color picker:
+
+![](https://i.imgur.com/CpQ6a4e.png "Photo by Addania")
+
+> `Hue` means the color itself / the pigment. It is measured in degrees starting at 0 till 360 degrees. Representing colors from red to ... hmm ...red again :) It is the vertical color stripe in the Photoshop color picker
+
+> `Saturation` and `Brightness` are represented on the two-dimensional grid
+
+> `Saturation` changes when moving from the lef to right. Right being the most saturated. Moving left colors become more pastelly and more washed away. When reaching far left, colors are just grey, with no hue. It is represented in percentage.
+
+> `Brightness` changes when you move vertically from top to down. Top being light colors eventually white and down being darker colors everntually black. It is represented in percentage.
+
+> Knowing this makes it pretty intuitive now how to use hsl in the CSS: Look again here:
+
+```
+.colorful-thing {
+  color: hsl(200deg 100% 50%);
+}
+```
+
+> This color has around 200 degrees of the hue, which is blue, 100% of saturation - so full color, no washing away, no greying, 50% of its brightness.
+
+> If you want your color to be semi-transparent, you can pass a fourth value for the `alpha` channel. This is a unitless number between 0 (fully transparent) and 1 (the default, fully opaque)
+
+```
+ .first.box {
+    background-color: hsl(340deg 100% 50% / 1);
+  }
+  .second.box {
+    background-color: hsl(340deg 100% 50% / 0.75);
+  }
+```
+
+> A lower `alpha` number means that the pixels are transparent.
+
+> This "version" of HSL color is part of a 2016 revision to how colors work in CSS. It enjoys wide browser support, but will not work in Internet Explorer. If your project supports IE, you'll need to use a slightly different syntax:
+
+```
+.colorful-thing {
+  color: hsl(200deg, 100%, 50%);
+  background-color: hsla(200deg, 100%, 50%, 0.2);
+}
+```
+
+> Instead of being space-separated, the values inside the hsl() function are comma-separated. If you'd like the color to be transparent, you'll need to use the hsla() function instead of the hsl() function.
+
+> You can play online with hsl here: https://hslpicker.com/#0af
+
+**Units**
+
+> Some property values use units. There are couple of units:
+
+- pixels
+- ems
+- rems
+- percetages
+
+> Most popular unit is a `pixel` for anything size-related:
+
+```
+.box {
+  width: 1000px;
+  margin-top: 32px;
+  padding: 8px;
+  font-size: 16px;
+}
+```
+
+> `Em` is a relative unit, equal to the font size of the current element. If a heading has a font-size of 24px, and we give it a bottom padding of 2em, we can expect that the element will have 48px of cushion underneath it (2 × 24px)
+
+```
+p {
+  font-size: 12px;
+  padding-bottom: 2em;
+}
+```
+
+![](https://i.imgur.com/ywjiFBY.png "Photo by Addania")
+
+> Using em means that a component's UI will change depending on the font size of the container it's placed within. This can be useful, but more often than not, it's a nuisance.
+
+> `Rems` are more useful. The `rem` unit is quite a lot like the `em` unit, with one crucial difference: it's always relative to the root element, the `html` tag.
+
+> All of the `rems` in your app will be taking their cues from that root HTML tag. By default, the HTML tag has a font size of 16px, so 1rem will be equal to 16px.
+
+```
+html {
+  font-size: 16px;
+}
+h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: gray;
+}
+p {
+  font-size: 1rem;
+}
+```
+
+> Changing all the text scales accordingly, when you change the root font size? That's why people like the rem unit. No matter where an element is in the DOM tree, the rem is consistent. It behaves consistently and predictably, like pixels, but it respects user preferences when it comes to increasing/decreasing default font sizes.
+
+> Here is the comparison of the text between html tag having font size 16px and when it has 12px:
+
+```
+html {
+  font-size: 12px;
+}
+```
+
+![](https://i.imgur.com/cPxpZVI.png "Photo by Addania")
+
+> But in real application we DO NOT want to set pixel size for the html tag becasue it would override user default setting. So DO NOT set html tag font size.
+
+> The `percentage` unit is often used with width/height, as a way to consume a portion of the available space.
+
+```
+<div class="box">
+  <div class="child"></div>
+</div>
+
+.box {
+  width: 250px;
+  height: 250px;
+  background-color: pink;
+}
+.child {
+  width: 50%;
+  height: 75%;
+  background-color: black;
+}
+```
+
+> How to use units: best practises:
+
+- For typography, use rem, because it has important accessibility benefits.
+- When it comes to properties that relate to the box model — padding, border, margin — use pixels. It's more intuitive than rem, and there isn't a clear accessibility win.
+- For width/height, it'll depend on whether we want the element to be a fixed size, or a relative size. We might want one div to always be 250px wide, while another one should be 50% of the available space.
+- For color, it is good to use hsl.
+- Use em for the rare cases when you want one property to scale directly with font size.
+
+![]( "Photo by Addania")
 
 **IMAGES**
 
