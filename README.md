@@ -8,6 +8,13 @@
   Addania's coding knowledge base
 </h1>
 
+To start the project:
+
+```shell
+git checkout gh-pages
+npm start
+```
+
 In this repository, the page is built on the master branch. Therefore all code commits should go to gh-pages. Deploy should go to master branch.
 
 ```shell
