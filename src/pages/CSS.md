@@ -466,6 +466,62 @@ selector:pseudo-class {
 }
 ```
 
+**Pseaudo-elements**
+
+> Pseudo-elements are like pseudo-classes, but they don't target a specific state. Instead, they target "sub-elements" within an element. For example, we can style the placeholder text in a form input with ::placeholder
+
+HTML:
+
+```
+<input placeholder="enter text"/>
+```
+
+CSS:
+
+```
+input::placeholder {
+  color: goldenrod;
+}
+```
+
+> Two of the most common pseudo-elements are ::before and ::after. These pseudo-elements are added inside the element, right before and after the element's content.
+
+```
+<style>
+  p::before {
+    content: '→ ';
+    color: deeppink;
+  }
+
+  p::after {
+    content: ' ←';
+    color: deeppink;
+  }
+</style>
+
+<p>
+  This paragraph has little arrows!
+</p>
+```
+
+![](https://i.imgur.com/u4pUZR9.png "Photo by Addania")
+
+> They are like secpret spans before and after that element. We could rewrite the above example like so:
+
+```
+<style>
+.pseudo-pseudo {
+  color: deeppink;
+}
+</style>
+
+<p>
+  <span class="pseudo-pseudo">→ </span>
+  This paragraph has little arrows!
+  <span class="pseudo-pseudo"> ←</span>
+</p>
+```
+
 **Media queries**
 
 > In order to accommodate screens of different shapes and sizes, CSS features media queries, which allow us to apply different CSS in different scenarios - on different screen sizes (desktop, mobile, tablet, etc). The CSS syntax is `@media`
@@ -524,13 +580,23 @@ https://www.codecademy.com/learn/learn-css://www.w3.org/Style/Examples/007/fonts
 
 Examples:
 
-> Changing font:
+> Changing font family:
 
 ```
 h1 {
 font-family: Garamond;
 }
 ```
+
+> Font families come in different styles. The 3 most popular:
+
+- Serif
+- Sans-serif
+- Monospace
+
+A “serif” is a little adornment at the edge of strokes. Serif fonts are very common in print media, but less so on the web (they tend to create a more sophisticated, aged look).
+
+![](https://i.imgur.com/wcCRuBJ.png "Photo by Addania")
 
 > General rules about font-families:
 
@@ -540,6 +606,19 @@ font-family: Garamond;
 h1 {
   font-family: "Courier New";
 }
+```
+
+> We can find good font library by google: www.fonts.google.com. Where we can search for any font we like.
+
+> We need to then click on the font and select which variation we like to use (can be multiple) - green arrow. Then we can see which fonts we selected by clicking on the selected families icon - purple icon. There we can find how to integrate them to your application as link tag in html (blue arrow), or even how to import them directly (to a js file):
+
+![](https://i.imgur.com/Jzidzo4.png"Photo by Addania")
+
+> Example of importing fonts to your html so that they can be used in your application:
+
+```
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 ```
 
 > Changing font size:
@@ -566,7 +645,7 @@ font-weight: bold;
 
 **ALIGNING TEXT**
 
-> Aligning text to right, left or center
+> To align text horizontally (to right, left or center) we use text-align property. It also works on images.
 
 ```
 h1 {
@@ -753,15 +832,13 @@ html {
 }
 ```
 
-> How to use units: best practises:
+> How to use units - best practises:
 
 - For typography, use rem, because it has important accessibility benefits.
 - When it comes to properties that relate to the box model — padding, border, margin — use pixels. It's more intuitive than rem, and there isn't a clear accessibility win.
 - For width/height, it'll depend on whether we want the element to be a fixed size, or a relative size. We might want one div to always be 250px wide, while another one should be 50% of the available space.
 - For color, it is good to use hsl.
 - Use em for the rare cases when you want one property to scale directly with font size.
-
-![]( "Photo by Addania")
 
 **IMAGES**
 
@@ -800,6 +877,24 @@ text-transform: capitalize;
 ```
 .cursive {
 font-family: cursive;
+}
+```
+
+**TEXT SPACING**
+
+> We can tweak the horizontal gap between characters using the letter-spacing property.
+
+```
+h3 {
+  letter-spacing: 3px;
+}
+```
+
+> We can tweak the vertical distance between lines using the `line-height` property. `line-height` is a bit of an odd duck because it takes a unitless value. This works as a ratio: `line-height: 2` means that the lines should be twice as tall as a different element with line-height: 1 - for example often with respect to our font size.
+
+```
+h3 {
+  line-height: 2;
 }
 ```
 
@@ -854,17 +949,67 @@ min-heigth: 30px;
 
 > A border is a line what surrounds an element, like a frame around a painting. Borders can be set with a specific width, style, and color.
 
-**width** — The thickness of the border. A border’s thickness can be set in pixels or with one of the following keywords: thin, medium, or thick.
+**border-width** — The thickness of the border. A border’s thickness can be set in pixels, ems, rems or with one of the following keywords: thin, medium, or thick.
 
-**style** — The design of the border. Web browsers can render any of 10 different styles. Some of these styles include: none, dotted, and solid.
+**border-style** — The design of the border. Web browsers can render any of 10 different styles. Some of these styles include: none, dotted, dashed, double, groove, ridge, inset, outset, mixed and solid.
 
-**color** — The color of the border. Web browsers can render colors using a few different formats, including 140 built-in color keywords.
+![](https://i.imgur.com/posMCos.png "Photo by Addania")
+
+**border-color** — The color of the border. Web browsers can render colors using a few different formats, including 140 built-in color keywords.
+
+> All these properties can be written as a shorthand:
 
 ```
 p {
   border: 3px solid coral;
 }
 ```
+
+> Only `border-style` filed is required in the above shorthand:
+
+```
+.good {
+  border: solid;
+}
+```
+
+> This will produce a black, 3px-thick border
+
+> Following code is invalid. It will not work because it lacks style:
+
+```
+.not-good {
+  border: 2px pink;
+}
+```
+
+> If we don't specify a border color, it'll use the font's color by default. By font-color property `color` is meant.
+
+> If you want to specify this behaviour explicitly, it can be done with the special `currentColor` keyword. `currentColor` is always a reference to the element's derived text color (whether set explicitly or inherited), and it can be used anywhere a color might be used:
+
+```
+.box {
+  color: hotpink;
+  border: 1px solid currentColor;
+  box-shadow: 2px 2px 2px currentColor;
+}
+```
+
+> As we saw we can defined mixed border-styles:
+
+```
+border-style: dashed dotted;
+```
+
+![](https://i.imgur.com/MBNlZ0G.png "Photo by Addania")
+
+**Border radius**
+
+> The CSS Working Group has published a list of mistakes they've made with the CSS language. One of these mistakes is listed: "border-radius should have been corner-radius"
+
+> It's not hard to understand why. The border-radius property rounds an element (content) even if it has no border!
+
+![](https://i.imgur.com/c2rGi84.png "Photo by Addania")
 
 > Border with rounded corners
 
@@ -875,7 +1020,7 @@ div.container {
 }
 ```
 
-> Perfect circle border - set the radius equal to height of the box or 100%
+> Perfect circle border - set the radius equal to height of the box or 50%
 
 ```
 div.container {
@@ -893,7 +1038,7 @@ div.container {
   height: 60px;
   width: 60px;
   border: 3px solid rgb(22, 77, 100);
-  border-radius: 100%;
+  border-radius: 50%;
 }
 ```
 
@@ -923,9 +1068,37 @@ border-radius: 100px 0px 100px 0px;
 border-radius: 100px 0px 0px 0px;
 ```
 
+**D-shape**
+
+```
+border-radius: 10px 40px 40px 10px;
+```
+
+> All these 4 values have their individual properties:
+
+```
+border-top-left-radius: 8px;
+border-top-right-radius: 16px;
+border-bottom-right-radius: 32px;
+border-bottom-left-radius: 64px;
+```
+
 **PADDING**
 
-> Padding: space between content and border. Can have properties:
+> Padding: space between content and border. It is an inner space.
+
+> If we have some element with padding, and we set its background to red, also padding will have red background
+
+```
+.someElement {
+  padding: 48px;
+  background-color: "tomato";
+}
+```
+
+![](https://i.imgur.com/2BKHRCL.png "Photo by Addania")
+
+> Padding can have properties:
 
 ```
 padding-top: 30px;
@@ -933,6 +1106,19 @@ padding-right: 15px;
 padding-bottom: 30px;
 padding-left: 15px;
 ```
+
+> The same as obve can be re-written using logical properties (which are applicable to also languages which are written right to left, or vertically)
+
+```
+  padding-block-start: 20px;
+  padding-block-end: 40px;
+  padding-inline-start: 60px;
+  padding-inline-end: 80px;
+```
+
+> Block means vertically on top of each other and inline horizontally next to each other
+
+> Padding, like other properties of box model, can be expressed in px, em or rem. Pixels are the most common. Using percantages is possible but not recommended because it yields unexpected results.
 
 > Padding: In order to have same padding on all four sides use:
 
@@ -955,6 +1141,25 @@ padding: 10px 15px;
 > Padding: Top and Bottom paddings (vertical paddings) **DO NOT** collapse!
 
 > Padding: Left and Right paddings (horizontal paddings) **DO NOT** collapse! And are always added together.
+
+> If we want a padding of 48px everywhere except for the bottom, we can write it in 2 ways:
+
+```
+.box {
+  padding: 48px 48px 0 48px;
+}
+```
+
+> Or
+
+```
+.box {
+  padding: 48px;
+  padding-bottom: 0;
+}
+```
+
+> `padding-bottom` overwrites `padding` because if comes second in the css file
 
 **MARGIN**
 
@@ -1088,32 +1293,57 @@ CSS:
 
 **BOX MODEL**
 
-> The classical box model works in a way that:
+> The way width is calculated is based on the `box-sizing` property. It can hold 2 values: default `content-box` or `border-box`
+
+> By default it has value of `content-box`
+
+> Imagine code like this where section is 500px:
 
 ```
-actual rendered width of elemen`s box
-= width + padding+ border
+<style>
+  section {
+    width: 500px;
+  }
+  .box {
+    width: 100%;
+    padding: 20px;
+    border: 4px solid;
+  }
+</style>
+<section>
+  <div class="box"></div>
+</section>
 ```
 
-![](https://i.imgur.com/xLqkYbN.png "Photo by codecademy.com")
-
-> This is also controlled by porperty called `box-sizing`which has as a default value in browsers: `content-box`
-
-> This can create problems to work with boxe sizes and positioning elements
-
-> Another value of `box-sizing` can be `border-box`
-
-> To reset the `content-box` and use `border-box`, we can use:
+> What will be the width of the box? It will actually be 548px.
 
 ```
-* {
+500px of content + 2*20px of padding + 2*4px of border
+```
+
+![](https://i.imgur.com/6Kh7jZx.png "Photo by Addania")
+
+> What will be the height? Height will be 48px
+
+```
+0px of content because we did not specify it + 2*20px padding +2*4px of border
+```
+
+> But this is not what we want. We probably want that the content + padding + border is of the width of 500px. For that it is better to use `border-box` value for the `box-sizing` property
+
+![](https://i.imgur.com/axhzVsH.png"Photo by Addania")
+
+> Border-box will then calculate the width of the box based on its content, padding and the border
+
+> Often in applications you would reset the box-sizing for whole document to global styles. In order to do so, copy this snippet any time you start a new project. It is way easier and intuitive to work with border-box then with the content-box:
+
+```
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 ```
-
-> In this box model, if we specify width, it will equal to the actual rendered width of the box. Padding will be `inside` of the width and content width will be calculated automatically:
-
-![](https://i.imgur.com/oVtrdTh.png "Photo by codecademy.com")
 
 **POSITIONINIG**
 
@@ -1627,7 +1857,7 @@ h3 {
 
 ![](https://i.imgur.com/gIVa8dd.png"Photo by Addania")
 
-The CSS in the example above will change the display of all <h1> elements to inline. The browser will render <h1> elements on the same line as other inline elements immediately before or after them (if there are any).
+The CSS in the example above will change the display of all `<h1>` elements to inline. The browser will render `<h1>` elements on the same line as other inline elements immediately before or after them (if there are any).
 
 **ROTATION**
 

@@ -798,7 +798,15 @@ userInput = "mia"
 userName=userInput
 ```
 
-> `Unknown` is a better choice to any
+> If the type of a variable is unknown in order to use it to assign it to a string, we need to check the type:
+
+```
+if (typeof userInput === "string") {
+userName = userInput
+}
+```
+
+> `Unknown` is a better choice to any ,when we are not sure of which type the input will be (like when user enters something), because if enables type checks and forces us to check our types in the code manually. If we use any, all the type checks are disabled - typescript gives up.
 
 ## Never type
 
@@ -899,7 +907,7 @@ console.log("Sending...")
 tsc --init
 ```
 
-> It will initial the whole folder as a typescript project. It will also create `tsconfig.json` file.
+> It will initiate the whole folder as a typescript project. It will also create `tsconfig.json` file.
 
 > Now we will be able to run just `tsc` in the terminal and it will compile all the .ts files in our project.
 
@@ -917,7 +925,7 @@ tsc --watch
 
 ## Excluding and including files to compile
 
-> `tsconfig.json` file is a critical file which tells Typescript how to compile files!
+> `tsconfig.json` file is a critical file which tells Typescript how to compile this whole project!
 
 > It is possible to exclude certain files from compilation. In order to do that you need to add exclude command at the end of the `tsconfig.json` file. Make sure you add the command betwee two curly brackets and separate them by comma:
 
@@ -933,22 +941,22 @@ tsc --watch
 
 > You will need to re-run the compilation with `tsc` command. Notice that file `analytics.js` is not created.
 
-> We can use it with regular expressions to check for any file ending with `dev.ts`
+> We can use it with regular expressions to check for any file ending with `.dev.ts`
 
 ```
 },
   "exclude": [
-    "*dev.ts"
+    "*.dev.ts"
   ]
 }
 ```
 
-> We exclude a file ending with `dev.ts` in ANY folder
+> We exclude a file ending with `.dev.ts` in ANY folder
 
 ```
 },
   "exclude": [
-    "**/*dev.ts"
+    "**/*.dev.ts"
   ]
 }
 ```
@@ -959,6 +967,16 @@ tsc --watch
 },
   "exclude": [
     "node_modules"
+  ]
+}
+```
+
+> We can exlude any folder from compilation and no files within this folder will be compiled:
+
+```
+},
+  "exclude": [
+    "folder_name_to_exclude"
   ]
 }
 ```
@@ -1025,15 +1043,15 @@ tsc --watch
     "target": "es5",
 ```
 
-> Default target is `es5`. And I can see it, because in my `.ts` files I use `const` and `let`, which if I open the `.js` file I will see `var` everywhere. Because in `es5` we do not have `let` and `const`!! `es5` makes sure that code will run in older browsers, but maybe I want to use `es6` and then I have other build tool which will transpile the Javascript code which can be then read by older browsers. Or maybe we want to ship code that ONLy works in modern browsers.
+> Default target is `es5`. And I can see it, because in my `.ts` files I use `const` and `let`, which if I open the `.js` file I will see `var` everywhere. Because in `es5` we do not have `let` and `const`!! `es5` makes sure that code will run in older browsers, but maybe I want to use `es6` and then I have other build tool which will transpile the Javascript code which can be then read by older browsers. Or maybe we want to ship code that ONLY works in modern browsers.
 
-> We can delete the es5 and press `CTRL+SPACE` it will give you all the possible options. You can set target to es6 which is equivalent to es2015. Or use even younger version: es2020
+> We can delete the es5 and press `CTRL+SPACE` it will give you all the possible options. You can set target to es6 which is equivalent to es2015. Or use even more recent version like: es2020
 
 ### Libraries
 
 ![](https://i.imgur.com/zZbnUAa.jpg "Photo by Skitterphoto from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Skitterphoto from Pexels_</p>
 
-> Allows to specify which default objects and features Typescript knows (for example working with the DOM). If "lib" is empty, defaults are assumed based on our target.
+> Allows to specify which default objects and features Typescript knows (for example working with the DOM). If "lib" is empty, defaults are assumed based on our target. As our target is es5 or es6 than it assumes default libraries like working with DOM API, etc.
 
 > Add a button to the index.html file:
 
@@ -1054,7 +1072,11 @@ button.addEventListener("click", () => {
 
 > We needed to add ! after querySelector (to tell to Typescript that this button WILL exist).
 
-> Now we can add custom libraries to our tsconfig.json file which would overwrite defaults. For our Javascript project we would need:
+> Typescript does not complain for example about if the (HTML) document even exists, or if there is property like querySelector or addEventListener, etc. It does not complain becaise lib is commented out, and our target is es5 or es6. But in theory our application maybe is not for browsers, maybe it is a node.js application. Leaving lib empty is recommended.
+
+> If we uncomment lib and leave the array empty, then we override defaults and the libraries are empty, which means now we get all sorts of array, that typescript does not reckognize document, or even console.log, toString, Array<>, etc.
+
+> If we uncomment lib, then we should add custom libraries to our tsconfig.json file which would overwrite defaults. If you hit CTRL+SPACE you get auto-completion and see list of options. For our Javascript project we would need:
 
 ```
      "lib": [
@@ -1073,7 +1095,11 @@ button.addEventListener("click", () => {
 
 ### allowJS and checkJS
 
-> This option allows Javascript files to be compiled. AllowJS will compile .js files. CheckJS will still check syntax of .js files, but it will not compile them. But it does not make sense if you have both .ts and .js files becasue then it will leave to double-compilation. This could be however used in projects where we dont have Typescript at all, but we still want to check .js files.
+> This option allows Javascript files to be compiled. AllowJS will compile .js files. CheckJS will still check syntax of .js files, but it will not compile them. But it does not make sense if you have both .ts and .js files becaue then it will leave to double-compilation. This could be however used in projects where we dont have Typescript at all, but we still want to check .js files.
+
+### JSX
+
+> This is relevant only for React projects. It specifies what JSX code is generated.
 
 ### sourceMap
 
@@ -1087,7 +1113,7 @@ button.addEventListener("click", () => {
 "sourceMap": true,
 ```
 
-> In the sources we will see our code and also we will be able to put cursor in a specific line of the code and stop then execution of the code there. Which is good for debuggin (like adding `debugger` in the code). But this is only done in browser and we are not polluting our code in reality.
+> In the sources we will see our code and also we will be able to put cursor in a specific line of the code and stop then execution of the code there. Which is good for debugging (like adding `debugger` in the code). But this is only done in browser and we are not polluting our code in reality.
 
 ### outDir and rootDir
 
@@ -1103,7 +1129,7 @@ button.addEventListener("click", () => {
 
 > While our .ts files might reside in `src` folder.
 
-> Please note that then you also nbeed to adpat .index.html file to point to the .js files in dist folder:
+> Please note that then you also need to adpat `index.html` file to point to the .js files in dist folder:
 
 ```
 <script src="dist/app.js" defer></script>
@@ -1127,7 +1153,7 @@ button.addEventListener("click", () => {
 "rootDir": "./src",
 ```
 
-> The difference however is that `rootDir` will also make sure that ou`tDir will replicate folder structure of the`rootDir`
+> The difference however is that `rootDir` will also make sure that `outDir` will replicate folder structure of the `rootDir`
 
 > Often we set both `outDir` and `rootDir`
 
@@ -1141,13 +1167,13 @@ button.addEventListener("click", () => {
 
 ### noEmit
 
-> `noEmit` setting will make sure NO `.js` files are produced (for example if I only want to check my files)
+> `noEmit` setting will make sure no `.js` files are produced (for example if I only want to check my files)
 
 ```
 "noEmitOnError": true,
 ```
 
-> There is another one `noEmitOnError` which makes sure no js file is produced if there was compilation error.
+> There is another one `noEmitOnError` which makes sure no `.js` file is produced if there was a compilation error.
 
 ```
 "noEmitOnError": true,
