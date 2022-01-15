@@ -292,6 +292,379 @@ const hero:{
 }
 ```
 
+## More about object type
+
+**Object Types**
+
+> TypeScript has a general object type that corresponds to JavaScript's object type. This type includes all non-primitive values: arrays, dates, sets, maps, functions (callable objects), as well as objects in the narrower sense (things that can be written out as an object literal).
+
+> Since the object type is so general, you are unlikely to ever want to use it in practice. In this session you will learn how to write and work with types for objects in the narrower sense.
+
+> In the simplest case, object types are written out exactly like object literals, but instead of assigning values to properties, you assign types:
+
+```
+type Message = { text: string, urgent: boolean }
+let welcome: Message = { text: 'Welcome!', urgent: false }
+```
+
+> As with all types, you can also use object types directly, without first assigning them to a type alias:
+
+```
+let welcome: { text: string, urgent: boolean } = { text: 'Welcome!', urgent: false }
+```
+
+> You can also leave out any explicit type annotations and let TypeScript infer the object type for you:
+
+```
+// The inferred type of welcome is { text: string, urgent: boolean }
+let welcome = { text: 'Welcome!', urgent: false }
+```
+
+> But it is good practice to use explicit type annotations everywhere. And with objects, more than with primitives, the inferred type will often not be what you want. For example, if you want your object to have optional or read-only properties (discussed later in this session), you will have to tell the compiler with an explicit annotation.
+
+> An object type can include properties of any other type. It can also have many nested levels, in a similar way to defining a complex object literal. For example:
+
+```
+type Message = { text: string, urgent: boolean }
+type MessageSender = {
+ messages: Message[],
+ scheduledFor: Date,
+ format: 'email'|'inapp'|'sms',
+ from: {
+   email: string,
+   name: {
+     first: string,
+     last: string,
+   },
+ },
+}
+let messages: Message[] = [ /** ... */ ]
+let messageSender: MessageSender = {
+ messages: messages,
+ scheduledFor: new Date(2018, 5, 21),
+ format: 'email',
+ from: {
+   email: 'orcaniser@skillerwhale.com',
+   name: { first: 'Eelton', last: 'John' },
+ },
+}
+```
+
+**Type Compatibility (Structural Typing)**
+
+> In TypeScript, one object type A is compatible with another object type B when every property in B has a matching property in A. A matching property is a property with the same key and a compatible type - where compatibility is checked recursively in the case of properties that are themselves objects.
+
+> Object type A is compatible with object type B even if A has additional properties not present in B (but then B will not be compatible with A).
+
+```
+type Message = { text: string, urgent: boolean }
+type Todo = { text: string, urgent: true | false }
+type DetailedMessage = { text: string, urgent: boolean, detail: string }
+```
+
+> Here, the types Message and Todo are both compatible with each other. (Note the types boolean and true | false are mutually compatible, since the sets of values described by these types are identical.)
+
+> The type DetailedMessage is also compatible with both Message and Todo, but Message and Todo are not compatible with DetailedMessage, because they are missing the additional detail: string property.
+
+> Whenever a value of one type is required by the compiler, a value of a compatible type is allowed. For example, if you have a function that requires a parameter of type Message, you can pass it an argument of type Todo or DetailedMessage without raising an error:
+
+```
+function sendMessage (message: Message) {
+ // do some messaging
+}
+let message: Message = {
+ text: 'Your order has been shipped.',
+ urgent: false
+}
+let todo: Todo = {
+ text: 'Ship order 00046728',
+ urgent: true
+}
+let detailedMessage: DetailedMessage = {
+ text: 'You have a new message.',
+ urgent: false,
+ detail: 'Your order is delayed due to ...'
+}
+sendMessage(message) // ok because message is a Message
+sendMessage(todo) // ok because Todo is compatible with Message
+sendMessage(reminder) // ok because DetailedMessage is compatible with Message
+```
+
+> This is because TypeScript implements a structural typing system, as opposed to a nominal typing system.
+
+> In a structural typing system, one type is considered compatible with another when it has the same (or compatible) members. Compatibility in nominal typing systems is stricter: whenever a value of one type is required, only a value of that named type - or of a subtype explicitly declared as such - is allowed.
+
+> Other example:
+
+```
+type Message = { text: string; urgent: boolean };
+type Text = { text: string };
+const welcome: Message = { text: "xxx", urgent: true };
+const text: Text = { text: "xxx" };
+const printing = (a: Text) => {
+ console.log(a.text);
+};
+printing(text);
+printing(welcome); // Message is compatible with Text
+const printing2 = (a: Message) => {
+ console.log(a.text);
+};
+printing2(text); // text is not compatible with Message
+printing2(welcome);
+```
+
+**Optional Properties**
+
+> Sometimes you will want to limit the properties that your objects can have, but without insisting that they have all of these properties all of the time. In principle, you could do this by typing some properties as unions with undefined.
+
+```
+type Message = { text: string, urgent: boolean, detail: string | undefined }
+let messageWithoutDetail: Message = {
+ text: 'Your order has been shipped.',
+ urgent: false,
+ detail: undefined
+}
+let messageWithDetail: Message = {
+ text: 'You have a new message.',
+ urgent: false,
+ detail: 'Your order is delayed due to ...'
+}
+```
+
+> This approach can be tedious, however, especially if you want to have several potentially undefined properties. In order to satisfy the TypeScript compiler, you have to explicitly give your messageWithoutDetail object a detail property with a value of undefined. But in JavaScript, it would be possible to access a detail property on this object (which would have the value undefined) without explicitly setting it.
+
+> The explicit detail assignment is needed by the compiler, but is not needed by the JavaScript run-time engine.
+
+> To simplify your code in these cases, TypeScript includes a ? modifier to indicate that a property is optional. This implicitly makes the type of that property a union with undefined, but also allows you to leave the property out altogether when defining objects of the relevant type.
+
+```
+type Message = { text: string, urgent: boolean, detail?: string }
+let messageWithoutDetail: Message = {
+ text: 'Your order has been shipped.',
+ urgent: false
+}
+let messageWithDetail: Message = {
+ text: 'You have a new message.',
+ urgent: false,
+ detail: 'Your order is delayed due to ...'
+}
+```
+
+> Other examples of optional properties:
+
+```
+type Flat = { location: string; area: number; price: number | undefined };
+type Flat2 = { location: string; area: number; price?: number };
+
+const newHome: Flat = { location: "Prag", area: 60 }; // error, price needs to be provided, but can have value of undefined
+const newHome2: Flat = { location: "Prag", area: 60, price: undefined }; // ok
+const newHome3: Flat = { location: "Prag", area: 60, price: 700 }; // ok
+const homeSweetHome: Flat2 = { location: "Prag", area: 60 }; // ok, because price is optional and does not need to be defined
+const homeSweetHome2: Flat2 = { location: "Prag", area: 60, price: 700 }; // ok
+const homeSweetHome3: Flat2 = { location: "Prag", area: 60, price: undefined }; // ok, because price can be undefined
+```
+
+> You can use control flow and type narrowing to handle optional properties, by first checking whether the property is undefined.
+
+```
+let message: Message = { /* ... */ }
+let details: string[] = []
+// Error: Argument of type 'string | undefined' is not assignable to parameter of type 'string'
+details.push(message.details)
+if (message.detail !== undefined) {
+ // OK: message.details has been narrowed to type 'string'
+ details.push(message.detail)
+}
+```
+
+> Another example:
+
+```
+type Message2 = { text: string; urgent: boolean; detail?: string };
+let details: string[] = [];
+const message: Message2 = { text: "Hi", urgent: false, detail: "blue" };
+details.push(message.detail); // error because detail can be undefined and in details variable we want to only have strings
+```
+
+**Excess Property Checks**
+
+> TypeScript's structural typing system, where types are considered compatible even if they have additional properties, gives you a lot of flexibility when working with object types.
+> Optional properties take advantage of a flexible feature of JavaScript - that undefined properties can always be accessed at run-time (and have the value undefined) - to save you from writing extra lines of code just to satisfy the compiler.
+
+> Combining these two features of TypeScript, however, creates a hole in the compiler that bugs could potentially fall through. Consider the following code:
+
+```
+type Message = { text: string, urgent: boolean, detail?: string }
+const message: Message = {
+ text: 'Welcome!',
+ urgent: false,
+ deetail: 'Your account has been created.'
+}
+```
+
+> Here the message variable has a property called deetail instead of a property called detail. This is almost certainly a typo, and a bug in the code.
+
+> Another example:
+
+```
+type Message3 = { text: string; urgent: boolean; detail?: string };
+const message3 = {
+ text: "Welcome!",
+ urgent: false,
+ deetail: "Your account has been created.",
+};
+const printing3 = (a: Message3) => {
+ console.log(a.text);
+};
+printing3(message3); //compiler considers this as ok, but it is a hole in the system! message3 is compatible with Message3
+```
+
+> But given the rules of structural typing and optional properties alone, this would not be an error: an object does not have to have the optional detail property to count as a Message, and it can have any additional properties - deetail or anything else - and still be compatible with the Message type.
+
+> In order to catch bugs like these, TypeScript imposes excess property checks in certain situations on top of its core structural typing system. Where excess property checks apply, one object type will be considered compatible with another when it has all the same properties as the other type and no additional properties.
+
+> There are two situations where TypeScript uses excess property checks:
+> When an object literal is assigned to a variable with an explicit type (as in the example above with Message).
+> When an object literal is passed directly as a function argument (as in the example below).
+
+> Because of this, the buggy code above in fact does generate an error, as does the similarly buggy code in the function call below:
+
+```
+type Message = { text: string, urgent: boolean, detail?: string }
+function sendMessage (message: Message) {
+ // do message sending
+}
+
+sendMessage({
+ text: 'Welcome!',
+ urgent: false,
+ // Error: Object literal may only specify known properties, and 'deetail'
+ // does not exist in type 'Message'. Did you mean to write 'detail'?
+ deetail: 'Your account has been created.'
+})
+```
+
+> Recap on when excess properties apply:
+
+> Excess properties check will apply and detect our error if we explicitly assign a type:
+
+```
+type Message4 = { text: string; urgent: boolean; detail?: string };
+const message4: Message4 = {
+ text: "Welcome!",
+ urgent: false,
+ deetail: "Your account has been created.", // we will get an error here now! excess properties are not allowed
+};
+const printing4 = (a: Message3) => {
+ console.log(a.text);
+};
+printing4(message4);
+```
+
+> Another way how excess properties check will apply and detect our error if we pass object literal directly to our function!
+
+```
+type Message5 = { text: string; urgent: boolean; detail?: string };
+const printing5 = (a: Message5) => {
+ console.log(a.text);
+};
+
+printing5({
+ text: "Welcome!",
+ urgent: false,
+ deetail: "Your account has been created.", // we will get an error here now! excess properties are not allowed
+});
+```
+
+> In some cases, excess property checks may result in a compiler error that doesn't correspond to a bug in your code - because you really do intend the object in question to have an additional property not specified in its type. In these cases, the simplest and usually best solution is just to include the additional property as an explicit optional property in the type definition.
+
+**Read-Only Properties**
+
+> You can indicate that a property cannot be reassigned using the readonly property modifier. TypeScript will indicate an error if a line of code reassigns the value of a readonly property after it has been set.
+> You prepend the readonly modifier to a property that you want to be read-only.
+
+```
+type Message = {
+ readonly text: string,
+ urgent: boolean
+}
+let welcome: Message = {
+ text: 'Welcome',
+ urgent: false
+}
+// Error: Cannot assign to 'text' because it is a read-only property
+welcome.text = 'Welcome!!'
+function print (message: Message) {
+ // Error: Cannot assign to 'text' because it is a read-only property
+ message.text = `** ${message.text} **`
+ console.log(message)
+}
+```
+
+> Another example:
+
+```
+type Message6 = {
+  readonly text: string;
+  urgent: boolean;
+};
+let welcome6: Message6 = {
+  text: "Welcome",
+  urgent: false,
+};
+welcome6.text = "Bem vindo"; // error when trying to assign a new value to the text
+```
+
+> readonly can be particularly useful for function parameter types, providing a degree of assurance that the function will not modify the values that are passed to it.
+> Note that specifying a property as readonly only prevents reassignments to that property, however. It does not prevent the value itself from being changed if it is mutable. For example, an array assigned to a readonly property can still have new items added to it.
+
+```
+type Message7 = {
+ readonly clients: Array<string>;
+};
+let welcome7: Message7 = {
+ clients: ["A", "B"],
+};
+welcome7.clients = ["A", "B", "C"]; // assigning new value to clients is not allowed
+welcome7.clients.push("C"); // but mutating array is still allowed
+```
+
+**Typing Methods in Object Types**
+
+> Object types can include method types as well as data types.
+> To type a method on an object you use a function type expression. Function type expressions mirror the syntax of arrow functions, with a typed list of parameters in brackets, and a return type after the => arrow. For example:
+
+```
+type SendMessageFunction = (messages: Message[], saveLocalCopy: boolean) => string
+```
+
+> Another example:
+
+```
+type Print = (a: Message5) => void
+const printing8: Print = (a) => {
+ console.log(a.text);
+};
+
+```
+
+You can use a function type expression as an object property type like any other. Objects annotated with that type will then need to implement a method matching that function signature.
+
+```
+type MessageSender = {
+ sendAll: (messages: Message[], saveLocalCopy: boolean) => string
+}
+let sender: MessageSender = {
+ sendAll: (messages: Message[], saveLocalCopy: boolean) => {
+   // do some sending
+   return 'OK'
+}
+sender.sendAll(someMessages)
+
+```
+
+> Note that the parameter names in the implementation of a function or method do not have to match the parameter names in the type definition. However, the convention is to use the same names unless you have a good reason not to.
+
 ## Array type
 
 <img src="https://i.imgur.com/PqcRvxa.jpg" style="width: 800px"><p style="font-size: 12px; text-align: right; width: 100%">_Photo from wowhead.com_</p>
@@ -497,7 +870,7 @@ let petList: any[];
 
 ## Union type:
 
-> Imagine I want to have a function which should work on both numbers AND string. It would either add 2 numbers or concatenate 2 strings:
+> Imagine I want to have a function which should work on both numbers AND strings. It would either add 2 numbers or concatenate 2 strings:
 
 ```
 const combine = (input1, input2) => {
@@ -514,6 +887,425 @@ const combine = (input1: number | string, input2: number | string) => {
     return (result)
 };
 ```
+
+## More about union types:
+
+**Unions of Sets and Types**
+
+> Every type describes a set of values - the values that have that type. The boolean type describes the set of the two possible Boolean values, true and false, the string type describes the set of all of the possible strings, and so on.
+
+> In set theory, the union of two or more sets is the (super)set containing all the elements of those (sub)sets. The union of the set of all rational numbers and the set of all irrational numbers, for example, is the set of all real numbers.
+
+> In type theory, the union of two or more types is the (super)type which describes the union of the sets described by those (sub)types. The boolean type, for example, is effectively the union of the literal types true and false.
+
+> In TypeScript, you can construct unions of any subtypes with the | operator. For example:
+
+```
+type OptionalString = string | undefined // e.g. 'hello whale', undefined
+type StringOrNumber = string | number // e.g. 'The meaning of life', 42
+type OneOrMoreNumbers = number | number[] // e.g. 8, 12, [1, 2, 3, 4, 5]
+type Primitive = boolean | string | number | bigint // e.g. true, 'true', 82, 10n
+```
+
+> The | operator is intentionally similar to the logical "or" operator, ||. You can read it as "or". The values of type X | Y must be either of type X or of type Y.
+
+**Unions and Supertypes**
+
+> Unions are supertypes of their component subtypes. Likewise, any built-in supertype (though not explicitly defined as a union) is equivalent to a union of all its subtypes, in the sense that it describes the exact same set of values.
+
+> For example, the general object type is equivalent to a union of every specific object type you might define. And the maximally general any and unknown types are equivalent to unions of every other type.
+
+> The unknown type behaves in all respects just like a union of every other type, and fits naturally into the rest of the type system. The any type is special, however: it is like a union of every other type which also signals that type checking should be disabled for variables of that type.
+
+> Because supertypes are equivalent to unions of their subtypes, writing an explicit union of a supertype with any of its subtypes is effectively meaningless: the resulting union will be no different from the supertype itself.
+
+> For example, a union with any results in a type that exactly equivalent to any itself, and likewise for unknown.
+
+```
+type AnyByAnotherName = any | string
+
+type UnknownByAnotherName = unknown | number
+```
+
+> In unions with any and unknown, meanwhile, any takes priority.
+
+```
+type AnyInDisguise = any | unknown
+```
+
+> This means that any variable with the AnyInDisguise type will have all type checking disabled for it, just like an ordinary any variable.
+
+**Unions of Literal Types**
+
+> You can create unions of primitive types like string and number to describe even larger and more general sets of values. On the other side, you can create unions of literal types to describe smaller and more precise sets of values.
+
+> When dealing with HTTP response codes, for example, the number type is too general, as not every number is a valid response code. In JavaScript, or TypeScript without unions of literal types, you might check that numbers are within the desired range at run-time:
+
+```
+function validateResponse (response) {
+  if (response === 400 || response === 401 || response === 403 || response === 404) {
+    return response
+  }
+  throw new Error()
+}
+
+function server (code) {
+  switch (option) {
+    case 400:
+      return computerSaysNo()
+    case 401:
+      return logInPlease()
+    case 403:
+      return itsASecret()
+    case 404:
+      return cantFindIt()
+  }
+}
+
+const errorCode = validateResponse(400)
+server(errorCode)
+```
+
+With a union of literal types, you can instead shift the burden of validation onto the compiler:
+
+```
+type ErrorCode = 400 | 401 | 403 | 404
+
+function server (option: ErrorCode) {
+  switch(option) {
+    case 400:
+      return computerSaysNo()
+    case 401:
+      return logInPlease()
+    case 403:
+      return itsASecret()
+    case 404:
+      return cantFindIt()
+  }
+}
+
+server(400)
+```
+
+** Arrays of Union Types**
+
+> In JavaScript, arrays can contain a mixture of values of different types. Typically, however, you want arrays to only contain values of the same type, and TypeScript enforces this restriction.
+
+> By creating an array of a union type, however, you can loosen this restriction in a controlled way. For example, arrays with the following type can contain a mixture of strings and numbers:
+
+```
+type stringsAndNumbers = (string | number)[]
+```
+
+> Note that the | union type operator takes precedence over the [] array type operator, so the brackets are necessary to create an array type of a union type. Dropping the brackets will give you a union type, where one of the subtypes is an array:
+
+```
+type stringOrNumbers = string | number[]
+```
+
+> Above example would be a union type of a string or an array of numbers
+
+> Partly for this reason, it is conventional to leave a space either side of the | operator, and no spaces before the [] operator.
+
+> TypeScript's restriction on arrays is generally a good thing, and you are unlikely to need to use union types in this way to loosen that restriction. You are more likely to use unions of literal types to tighten the restriction even further. For example:
+
+```
+type ErrorCode = 400 | 401 | 403 | 404
+
+const serverResponsesFromLast24Hours: number[] = [
+  /* array of all server responses as numbers */
+]
+
+const errorCodesFromLast24Hours: ErrorCode[] = []
+
+for (const response of serverResponsesFromLast24Hours) {
+  if (response === 400 || response === 401 || response === 403 || response === 404) {
+    errorCodesFromLast24Hours.push(response)
+  }
+}
+
+// Error: Argument of type '200' is not assignable to parameter of type 'ErrorCode'
+errorCodesFromLast24Hours.push(200)
+```
+
+> The more precise you can be about the types of values that can go into your arrays, the more helpful the compiler can be in ensuring that those values are used appropriately throughout your code.
+
+** Unions of Object Types **
+
+> With unions of object types, the union does not merge the properties of the underlying types together. Suppose you have the following types in your code:
+
+```
+type Customer = {
+  name: string,
+  customerSaverNumber: number
+}
+
+type Employee = {
+  name: string,
+  employeeDiscountCode: number,
+}
+
+type CheckoutUser = Customer | Employee
+
+```
+
+> A valid instance of CheckoutUser must be either a Customer or an Employee, and not a hybrid of the two. In other words, it must have a name property, and then either a customerSaveNumber or an employeeDiscountCode, `but not both`.
+
+> The following variable, therefore, does not satisfy the definition of CheckoutUser (is not a valid instance of CheckoutUser):
+
+```
+let customerEmployeeHybrid = {
+  name: 'Rod',
+  customerSaverNumber: 479823498,
+  employeeDiscountCode: 094839
+}
+```
+
+> However, because of TypeScript's structural typing system, an object is compatible with either the Customer or the Employee type when it has all of the properties of that type, even if it has additional properties as well.
+
+> For this reason, the `customerEmployeeHybrid` variable is compatible with both the Customer type and the Employee type. As a result, it is also compatible with the CheckoutUser union type.
+
+> It is important to remember that this is just the result of the structural typing system. The customerEmployeeHybrid variable is compatible with the Customer and Employee types, but is not a valid instance of either. The difference here will show up anywhere excess property checks apply, such as with a direct assignment to an explicitly annotated variable:
+
+```
+let hybridCustomer: Customer = {
+  name: 'Rod',
+  customerSaverNumber: 479823498,
+  // Error: Object literal may only specify known properties,
+  // and 'employeeDiscountCode' does not exist in type 'Customer'
+  employeeDiscountCode: 094839
+}
+
+let hybridEmployee: Employee = {
+  name: 'Tod',
+  // Error: Object literal may only specify known properties,
+  // and 'customerSaverNumber' does not exist in type 'Employee'
+  customerSaverNumber: 479823498,
+  employeeDiscountCode: 094839
+}
+```
+
+> Other examples:
+
+```
+type Customer = {
+ name: string;
+ customerSaverNumber: number;
+};
+
+type Employee = {
+ name: string;
+ employeeDiscountCode: number;
+};
+
+type CheckoutUser = Customer | Employee;
+
+type Hybrid = {
+ name: string;
+ customerSaverNumber: number;
+ employeeDiscountCode: number;
+};
+
+const a: Customer = { name: "mia", customerSaverNumber: 1 }; // OK
+
+const b: CheckoutUser = { name: "mia", customerSaverNumber: 1 }; // OK
+
+const c: Hybrid = { name: "mia", customerSaverNumber: 1 }; // error, c is missing employee discount code
+
+const d: Employee = { name: "pete", employeeDiscountCode: 202 }; // OK
+
+const e: CheckoutUser = { name: "pete", employeeDiscountCode: 202 }; // OK
+
+const f: Hybrid = { name: "pete", employeeDiscountCode: 202 }; // error, d is missing customerSaverNumber
+
+const k: Hybrid = {
+ name: "david",
+ customerSaverNumber: 1,
+ employeeDiscountCode: 202,
+}; // OK
+
+
+const g: Customer = {
+ name: "dave",
+ customerSaverNumber: 1,
+ employeeDiscountCode: 202,
+}; // error
+
+```
+
+> This error is because we explicitly specify what time g should be type Customer, this is an example when excess properties checks kick in. Typescript does not allow us to have additional property of employeeDiscountCode
+
+```
+const h: Employee = {
+ name: "david",
+ customerSaverNumber: 1,
+ employeeDiscountCode: 202,
+}; // error
+```
+
+> This error is because we explicitly specify what time h should be type Employee, this is an example when excess properties checks kick in. Typescript does not allow us to have additional property of customerSaverNumber
+
+> If we passed above to a function which expects a of a type Customer as an argument, it would work though. This is because excess properties check do not apply and Typescript's default structural typing is in place:
+
+```
+const printMe = (a: Customer) => {
+ console.log(a.name);
+};
+
+const i = {
+ name: "jake",
+ customerSaverNumber: 2,
+ employeeDiscountCode: 202,
+};
+
+printMe(i); // this is ok - because excess properties check does not apply and Typescript's default structural typing is in place
+```
+
+> If we however, passed value of i directly to the call of the function instead of as a constant, typescript will have a problem with it:
+
+```
+const printMe = (a: Customer) => {
+ console.log(a.name);
+};
+
+
+printMe({
+ name: "alan",
+ customerSaverNumber: 3,
+ employeeDiscountCode: 202,
+}); // error - excess properties check kicks in and Typescript's default structural typing is overriden by more strict nominal typing
+```
+
+** Unions of Object Types and Excess Property Checks**
+
+> Excess property checks prevent you from assigning an object literal to an explicitly annotated variable if the literal includes properties not in the annotated type.
+
+> However, there is a loophole in the compiler when it comes to assigning object literals to unions of object types. If the additional property exists in any of the subtypes of the union, the assignment is allowed:
+
+```
+type Customer = {
+  name: string,
+  customerSaverNumber: number
+}
+
+type Employee = {
+  name: string,
+  employeeDiscountCode: number
+}
+
+type CheckoutUser = Customer | Employee
+
+let customerEmployeeHybrid: CheckoutUser = {
+  name: 'Rod',
+  customerSaverNumber: 479823498, // no error
+  employeeDiscountCode: 094839 // no error
+}
+```
+
+> Because the compiler raises no error in this case, you might think that unions of object types do merge the properties of the underlying types together, contrary to what you saw on the previous slide. But what is actually going on here is more subtle.
+
+> Excess property checks work by checking whether each property in the value exists in the type. Does customerSaverNumber exist in the CheckoutUser type? There is no definite answer here: it does exist in Customer, but it doesn't exist in Employee. But excess property checks have to give a definite answer, and since a "no" would rule out perfectly legitimate assignments of Customer values, it has to say "yes".
+
+> The case is the same with employeeDiscountCode: it does exist in Employee, but it doesn't exist in Customer.
+
+> The end result in this case is a legitimate assignment to a CheckoutUser variable that would not be a legitimate assignment to either a Customer variable or an Employee variable. Ideally the assignment of this hybrid object wouldn't be allowed, but the compiler cannot rule it out without also ruling out perfectly acceptable assignments of (non-hybrid) Customer and Employee values as well.
+
+** Discriminating Properties**
+
+> To get around the potentially problematic situation described in the previous slide, you can give the underlying types used in a union of object types a discriminating property: a property with the same key, but an incompatible type. For example, you could give the Customer and Employee object types each a role property with a different literal type:
+
+```
+type Customer = {
+  role: 'Customer',
+  name: string,
+  customerSaverNumber: number
+}
+
+type Employee = {
+  role: 'Employee',
+  name: string,
+  employeeDiscountCode: number
+}
+
+type CheckoutUser = Customer | Employee
+```
+
+> With discriminating properties like these, it becomes impossible to create a hybrid object that is compatible with both types, and so the problematic situation from the previous slide will never arise. Any valid assignment to a CheckoutUser variable will have to have a role property, and the value of that property will determine which other properties are allowed.
+
+```
+let customerWithEmployeeDiscountCode: CheckoutUser = {
+  role: 'Customer',
+  name: 'Rod',
+  customerSaverNumber: 479823498,
+  // Error: Object literal may only specify known properties,
+  // and 'employeeDiscountCode' does not exist in type 'Customer'
+  employeeDiscountCode: 094839
+}
+
+let employeeWithCustomerSaverNumber: CheckoutUser = {
+  role: 'Employee',
+  name: 'Tod',
+  // Error: Object literal may only specify known properties,
+  // and 'customerSaverNumber' does not exist in type 'Employee'
+  customerSaverNumber: 479823498,
+  employeeDiscountCode: 094839
+}
+```
+
+**Tagged Union Types**
+
+> A union of object types in which each object contains a discriminating property is known variously as a tagged union, a discriminated union, or a sum type. Tagged unions are a useful data type common in functional programming languages, which TypeScript is able to bring to JavaScript.
+
+> It is common to use the name 'tag' for the discriminating property (at least when no other more meaningful name suggests itself from the nature of the data). But you can use any name you want.
+
+> In the example from previous slide, the discriminating property was included in the relevant subtypes themselves, but in many cases your code will be more maintainable if you include it in the higher-level union type instead. That way the subtypes can change independently of each other:
+
+```
+type Customer = {
+  name: string,
+  customerSaverNumber: number
+}
+
+type Employee = {
+  name: string,
+  employeeDiscountCode: number
+}
+
+type CheckoutUser = { tag: 'Customer', value: Customer }
+                  | { tag: 'Employee', value: Employee }
+```
+
+> With the discriminating property in the union type, you can also easily add further options that don't have any additional data associated with them:
+
+```
+type CheckoutUser = { tag: 'Anonymous' }
+                  | { tag: 'Manager' }
+                  | { tag: 'Customer', value: Customer }
+                  | { tag: 'Employee', value: Employee }
+```
+
+> There is nothing intrinsically special or different about tagged unions like these: they behave in all respects like any other union of object types. But because of the discriminating property, you can use them with switch statements to cleanly handle each subtype separately. The compiler will use type narrowing in each case block to determine which properties are available, and - as long as you haven't disabled strict null checks - will typically also be able to warn you if you forget to cover any of the cases.
+
+```
+const validCustomerSaverNumbers: number[] = [ /** ... */ ]
+
+const validEmployeeDiscountCodes: number[] = [ /** ... */ ]
+
+function discountApplies (checkoutUser: CheckoutUser): boolean {
+  switch (checkoutUser.tag) {
+    case 'Anonymous':
+      return false
+    case 'Manager':
+      return true
+    case 'Customer':
+      return validCustomerSaverNumbers.includes(checkoutUser.value.customerSaverNumber)
+    case 'Employee':
+      return validEmployeeDiscountCodes.includes(checkoutUser.value.employeeDiscountCode)
+  }
+}
+```
+
+> Note that in the 'Customer' and 'Employee' cases you need to access other properties on the checkoutUser.value object, rather than on checkoutUser directly.
 
 ## Literal types
 
