@@ -18,6 +18,13 @@ category: "knowledge-base"
 
 > Classes exist to speed up creation of objects. What we used so far was literal notation of objects.
 
+**Objects**
+
+> Objects can be created in two ways:
+
+- as object literal: const a = {name: 'Pete'}
+- as an instance of a class const a = new Person("Pete")
+
 **Our first class**
 
 > Classes are defined with a keyword `class` and names are by convention capitalized:
@@ -100,3 +107,148 @@ console.log("ourFirstClass", ourFirstClass);
 ![](https://i.imgur.com/GjKUh8l.png "Photo by Addania")<p style="font-size: 12px; text-align: right">_Photo by Addania_</p>
 
 > And this is a regular JS object! 🤯
+
+**Methods**
+
+> Classes do not only have properties, but also methods - object functions.
+
+> Special one is constructor which is triggered when we instantiate our class as `const accounting = new Department("Accounting")`;
+
+> In oder to add a method we just write its name parenthesis and curly braces such as `describe` method as below:
+
+```
+class Department {
+  name: string;
+  constructor(n: string) {
+    this.name = n;
+  }
+  describe() {
+    console.log("Department: " + name);
+  }
+}
+const accounting = new Department("Accounting");
+const marketing = new Department("Marketing");
+accounting.describe();
+```
+
+> However there is a problem! `"Department: " + name` assumes that we have a const / variable called name.
+
+> But the class method has only access to its own scope - code block of the describe method (so anything within curly braces), so we would need to have a variable called name in the method itself:
+
+```
+class Department {
+  name: string;
+  constructor(n: string) {
+    this.name = n;
+  }
+  describe() {
+    const greeting = "HELLO"
+    console.log("Department: " + greeting);
+  }
+}
+const accounting = new Department("Accounting");
+const marketing = new Department("Marketing");
+accounting.describe();
+```
+
+> Class method also has access to global variable above the class:
+
+```
+const global = "I AM TOTALY GLOBAL"
+
+class Department {
+  name: string;
+  constructor(n: string) {
+    this.name = n;
+  }
+  describe() {
+
+    console.log("Department: " + global);
+  }
+}
+const accounting = new Department("Accounting");
+const marketing = new Department("Marketing");
+accounting.describe();
+```
+
+> Class method however, does not have access to properties within the class. So describe method cannot access name property. We will get an error: "Cannot find name"
+
+> In order to give access to the class properties and other methods, we need to use a special keyword: `this`.
+
+```
+class Department {
+  name: string;
+  constructor(n: string) {
+    this.name = n;
+  }
+  describe() {
+    console.log("Department: " + this.name);
+  }
+}
+const accounting = new Department("Accounting");
+const marketing = new Department("Marketing");
+accounting.describe();  // Department: Accounting
+```
+
+> `This` refers back to the CONCRETE INSTANCE of this class that was created. But there is a trick too. It does not refer to the class, but to its instance. So in above example `this` refers to the `accounting` object (which was based on Department class).
+
+> Even more interestingly `this` refers to the place which called it. So `this` can be tricky. Let's demonstrate.
+
+> We add another object which is declared as an object literal:
+
+```
+const accountingCopy = { describe: accounting.describe}
+accountingCopy.describe()
+```
+
+> Console output will be: `Department: undefined`
+
+> Reason is that I created an object literal called accountingCopy which contains one property describe which is pointing to the describe method of accounting object. In other words our accountingCopy contains describe property which is passing the describe method from accounting object - we are not executing it at that point, it is `executed with accountingCopy.describe()`. When this function executes `this` will not refer to the accounting object where the method was part of originally and hence its name. It will refer to the thing which is responsible for calling this method. Resonsible for calling this method was `accountingCopy` exactly in this place:
+
+```
+accountingCopy.describe()
+```
+
+> So `this` refers to accountingCopy and accountingCopy does not have any name property. Therefore we get undefined.
+
+> This is something to keep in mind when working with classes. In order for compiler to yell at us when we assume that this refers to original method, we can improve our code:
+
+```
+describe(this: Department) {
+    console.log("Department: " + this.name);
+  }
+```
+
+> We can add `this` as a parameter to descrie method which is of a type: Department. This is not a parameter per se. We can still call describe method without any parameter:
+
+```
+accounting.describe()
+```
+
+> But it is understood by Typescript, in order to define what `this` refers to. And since we assign type `Department` we are saying that when describe is executed, `this` refers to the instance of the class `Department`. Which is at the end just an object of a type `Department`.
+
+> Using this approach will then yield a typescript error if we try to use describe with a different object - our object literal accountingCopy which is not an instance of the class Department:
+
+```
+accountingCopy.describe()
+```
+
+> Using `describe(this: Department){}` adds an extra safety check. We would get otified and we would need to fix this, for example by adding name property to our object literal: `accountingCopy`
+
+```
+class Department {
+  name: string;
+  constructor(n: string) {
+    this.name = n;
+  }
+  describe(this: Department) {
+    console.log("Department: " + this.name);
+  }
+}
+
+const accounting = new Department("Accounting");
+
+const accountingCopy = { name: "Addy", describe: accounting.describe };
+
+accountingCopy.describe();
+```
