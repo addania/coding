@@ -1173,13 +1173,15 @@ button.addEventListener("click", () => {
 "noEmitOnError": true,
 ```
 
-> There is another one `noEmitOnError` which makes sure no `.js` file is produced if there was a compilation error.
+> There is another one `noEmitOnError` which makes sure no `.js` file is produced if there was a compilation error. It is enought that in one file there is an error and no `js` files will be generated.
 
 ```
 "noEmitOnError": true,
 ```
 
 ### Strict
+
+> This enables all strict type-checking options
 
 > We can set strict to true, which will be equivalent to enabling all the rest of strict options to true:
 
@@ -1205,20 +1207,86 @@ button.addEventListener("click", () => {
 "strictNullChecks": true,
 ```
 
-> `strictNullChecks` is checking if the objects we try to access actually exist. SO for our button, we needed to add `!`after the querySelector, because otherwise Typescript would complain that it is not sure if that selector exists. It is because of this option. If it is true, it throws such errors to notify you maybe this does not exist.
+> `strictNullChecks` is checking if the objects we try to access actually exist. So for our button, we needed to add `!`after the querySelector, because otherwise Typescript would complain that it is not sure if that selector exists. It is because of this option. If it is true, it throws such errors to notify if some element might be null / might not exist.
 
 ```
 "strictNullChecks": true,
+```
+
+### noUnused...
+
+> `noUnusedLocals` will ensure we dont have unused variables in the file. FOllowing code with throw an error, because user1 is defined but never used:
+
+```
+const adding = (a1: number, a2: number) => {
+  const user1 = 'mia'
+  return a1+a2;
+};
+```
+
+> However. this one checks block scoped variables. The global variables are allowed not being used in a file because maybe they are used in another file. SO this code will not throw an error for user2, it will only throw error for user1:
+
+```
+const user2 = "addania";
+
+const adding = (a1: number, a2: number) => {
+  const user1 = "mia";
+  return a1 + a2;
+};
+```
+
+> `noUnusedParameters` will ensure that all parameters of the function are used in the body of the function. Following code will throw an error cause a2 is not used. Error will read: `a2 is declared but its value is never read`.
+
+```
+const adding = (a1: number, a2: number) => {
+  return a1;
+};
+```
+
+### noImplicitReturns
+
+> This is also an important setting. It makes sure that our functions cover all branches and return something under all circumstances.
+
+> Following function only return something when addition is more then a zero. But it does not cover cases when it it zero and less. So not all paths are covered and we will be warned with the message: `No all code pathes return a value`.
+
+```
+const adding = (a1: number, a2: number) => {
+  if (a1 + a2 > 0) {
+    return a1 + a2;
+  }
+};
+```
+
+> We need to add final return, even if it does not return anything to fix this error:
+
+```
+const adding = (a1: number, a2: number) => {
+  if (a1 + a2 > 0) {
+    return a1 + a2;
+  }
+  return;
+};
 ```
 
 ## Syntax:
 
 ![](https://i.imgur.com/equqbFL.jpg "Photo by Miguel Constantin Montes from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Miguel Constantin Montes from Pexels_</p>
 
-> <code>!</code> means I am sure my element with certain ID will always be there becasue I checked that id:
+> <code>!</code> means I am sure my element with certain ID will always be there in the `.html` file because I checked that id:
 
 ```
 const input1 = document.getElementById("num1")!;
+```
+
+> A cleaner way how to work aroudn this error is to have a run-time check if the button exists with and if statement:
+
+```
+const button = document.getQuerySelector("button")
+if (button) {
+  button.addEventListener("click", () => {
+    console.log("clicked"
+  )})
+}
 ```
 
 > <code>as HTMLInputElement</code> means TYPECASTING which says what kind of element it will be, in following case it will be an input element:
@@ -1227,18 +1295,275 @@ const input1 = document.getElementById("num1")!;
 const input1 = document.getElementById("num1")! as HTMLInputElement;
 ```
 
+## Typescript Next Generation Features
+
+> Typescript does not only allow creating types and compiles the code. It also allows using some next generation Javascript (introduced with ES6) and new features and makes it easier to write your code - modern syntax. It does not stop there, if you use modern javascript syntax and want to compile the code to older version like `"target": "es5"` in the tsconfig.json, then it will compile your shiny modern code to the older javascript with workarounds so that it can be run on older browsers.
+
+### let and const
+
+> Modern Javascript features allow to define `const` which will not change and `let` which can change.
+
+> We cannot re-assign new value to const, while we can do it for let. If we try to re-assign a constant, we get a typescript error. In the browser we would also get an runtime error:
+
+```
+const user = "mia"
+user = "addania"
+```
+
+> We can still use `var` as before, which allows to re-assign values. We should not use `var` not anymore.
+
+> `let` and `const` have one important difference to var regarding the scope in which they are available.
+
+> `var` has a global and function scope. Function scope means that var is only available within the function itself, but outside of the function all variables are global - available in our file.
+
+> But these two scopes are not the only scopes. There are other scopes like in if statements.
+
+```
+const user2 = "addania";
+if (user2 === "addania") {
+  var b = 'i am be'
+}
+console.log("b", b)
+```
+
+> This would work with var in Javascript - like in a browser. Because var is not in the function, it will have global scope. Typescript will compail about it, warning us though, because it is not good code to write.
+
+> This would not work with let and const. This would throw an error:
+
+```
+const user2 = "addania";
+if (user2 === "addania") {
+  let b = 'i am be'
+  let c = 'i am ci'
+}
+console.log(b, c)
+```
+
+> let and const introduced new scope - block scope which is part of if statements, for loops, functions or even any snippet within curly braces - we can randomly add curly braces to the code and create a block scope:
+
+```
+{
+  const onlyAvailableHere = "I'm VIP"
+  let user
+}
+```
+
+### Arrow functions
+
+> Instead using function keyword:
+
+```
+function add(a: number, b: number) {
+  return a+b
+}
+```
+
+> We can use arrow functions:
+
+```
+const add = (a: number, b: number) => {
+  return a+b
+}
+```
+
+> Still possible like this:
+
+```
+const add = function(a: number, b: number){
+  return a+b
+}
+```
+
+> Benefits of arrow functions:
+
+- shorter syntax
+- we can ommit `return` keyword: `const add = (a: number, b: number) => a+b` (called implicit return)
+- we can omit parameter braces if we only have one parameter: `const double = a => a*2`
+
+> Please note, if we have no parameters, we need to use empty parenthesis `() =>`
+
+### Default function parameters
+
+> We can have a function with 2 parameters, but we can set a parameter to have a default value, if this value is not provided when the function is called. It is done using `=` sign:
+
+```
+const adding = (a1: number, a2: number = 0) => a1 + a2;
+console.log("addng with default: ", adding(5));
+```
+
+> This only works if the parameter with the default value is the **last one**. This code below would not work / compile:
+
+```
+const adding = (a1: number = 1, a2: number) => a1 + a2;
+console.log("addng with default: ", adding(5));
+```
+
+> If all arguments would have default value, then it would work:
+
+```
+const adding = (a1: number = 1, a2: number = 5) => a1 + a2;
+console.log("addng with default: ", adding());
+```
+
+> Rule is, first declare parameters which are obligatory and only then parameters which are option and all need to have a default value set.
+
+### SPREAD OPERATOR
+
+> Spread operator is really useful to pull out elements of an array.
+
+```
+const hobbies = ["yoga", "cross-fit"];
+const activeHobbies = ['hiking', ...hobbies]
+```
+
+> ...hobbies will not add whole hobbies array and add it to the activeHobbies array. Result will not be: ['hiking', ["yoga", "cross-fit"]]
+
+> The result will be: ["hiking2, "yoga", "cross-fit"]
+
+> Spread operator will pull out individual values from the array.
+
+> Another example:
+
+```
+activeHobbies.push(...hobbies)
+```
+
+> Spread operator works also for objects. If we have `person` object and we declare a new constant copiedPerson and simply assign person to it like this:
+
+```
+const person = {
+  name: 'adda',
+}
+const copiedPerson = person
+```
+
+> Then we are only referencing this object. We do not create a new object with new memory address. We only create a new pointer which will point to the same memory address where person lives. This is important concept, because it can cause mutating existing objects which in React will NOT cause re-render.
+
+> Spread operator will help to create a new object with new memory address and it will pull out all the key-value pairs from `person` and idd them to the completely brand new shiny object `copiedPerson`
+
+```
+const person = {
+  name: 'adda',
+}
+const copiedPerson = {...person}
+```
+
+> Same goes for arrays. To create a new array from the old one:
+
+```
+const hobbies = ["yoga", "cross-fit"];
+const activeHobbies = [...hobbies]
+```
+
+> To create a new array of hobbies and want to add something more to it:
+
+```
+const hobbies = ["yoga", "cross-fit"];
+const activeHobbies = [ ...hobbies, 'hiking',]
+```
+
+> we can also change the order in case hiking should be first:
+
+```
+const hobbies = ["yoga", "cross-fit"];
+const activeHobbies = ['hiking', ...hobbies]
+```
+
+### Rest operator
+
+> Imagine you want to create a function which will add unlimited amount of numbers. We do not know if it will be 2 or 10 or 1000. Rest parameter will help to create an array from the incoming parameters:
+
+```
+const addUnlimited = (...numbers: Array<number>) => {
+  let total = 0;
+  numbers.forEach((num) => {
+    total = total + num;
+  });
+  return total;
+};
+console.log("unlimited", addUnlimited(10, 20, 30, 40));
+console.log("unlimited", addUnlimited(10, 20));
+console.log("unlimited", addUnlimited());
+```
+
+> Same example using reduce:
+
+```
+const addUnlimited2 = (...numbers: Array<number>) => {
+  return numbers.reduce((currentResult, currentValue) => currentResult + currentValue, 0);
+};
+console.log("unlimited2", addUnlimited(10, 20, 30, 40));
+console.log("unlimited2", addUnlimited(10, 20));
+console.log("unlimited2", addUnlimited());
+```
+
+> If our function should accept exactly 5 numbers, then we can limit it by a typing is as a tupple instead of array of numbers.
+
+```
+const addUnlimited2 = (...numbers: [number, number, number, number, number]) => {
+  return numbers.reduce((currentResult, currentValue) => currentResult + currentValue, 0);
+};
+```
+
+### Array and Object descrtucturing
+
+> If we have an array and we want to extract its values into separate constants we can use array destructuring:
+
+```
+const hobbies = ["yoga", "cross-fit"];
+const [ hobby1, hobby2 ] = hobbies
+```
+
+> Destructure means you really pull emelents out of the array.
+
+> We can even use rest parameters and store the rest of the values to a dedicated constant for example `other`. All remaining elements in the other will be an **array** of strings:
+
+```
+const hobbies = ["yoga", "cross-fit", "hiking", "surfing", "diving"];
+const [ hobby1, hobby2, ...other ] = hobbies
+```
+
+> Same works for objects. Here we take the person object and pull out all the key-value paris and assign first three to dedicated constants and the rest to the otherInfo const:
+
+```
+const human = {
+  firstName: "mia",
+  id: "1",
+  gender: "female",
+  age: 18,
+  nationality: undefined,
+};
+const { firstName, id, gender, ...otherInfo } = human;
+```
+
+> Please note that the constant names need to reflect the key names in the original object. Order does not matter, but the names do!
+
+> If we wanted to overwrite those names, we put a colon there `:`
+
+```
+const human = {
+  firstName: "mia",
+  id: "1",
+  gender: "female",
+  age: 18,
+  nationality: undefined,
+};
+const { firstName: randomName, id, gender, ...otherInfo } = human;
+```
+
 ## Best practises tips:
 
 ![](https://i.imgur.com/VDxi6vE.jpg "Photo by Porapak Apichodilok from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Porapak Apichodilok from Pexels_</p>
 
 > **Do not ignore**
 
-Do not use<code>@ts-ignore</code>. It turns off the compilr completely from the next line and prevents from spotting type errors
+Do not use <code>@ts-ignore</code>. It turns off the compiler completely from the next line and prevents from spotting type errors
 
 > **Do not use React.FunctionComponent**
 > Eee:
 
 ```
+
 type Props = { foo: string }
 const Foo: React.FunctionComponent<Props> = ({ foo }) => <div>{foo}</div>
 
@@ -1247,7 +1572,9 @@ const Foo: React.FunctionComponent<Props> = ({ foo }) => <div>{foo}</div>
 Approved:
 
 ```
+
 const Foo = ({ foo }: Props) => <div>{foo}</div>
+
 ```
 
 > **Do not use enums**
@@ -1255,13 +1582,17 @@ const Foo = ({ foo }: Props) => <div>{foo}</div>
 Nein:
 
 ```
+
 enum Direction { Up, Down, Left, Right}
+
 ```
 
 Jaaaa:
 
 ```
+
 type Direction = "up" | "down" | "left" | "right"
+
 ```
 
 > **Do not us wide types like object or any**
@@ -1269,3 +1600,7 @@ type Direction = "up" | "down" | "left" | "right"
 Always try to find concrete types
 
 ![](https://i.imgur.com/ob6G3qI.jpg "Photo by Pixabay from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Pixabay from Pexels_</p>
+
+```
+
+```

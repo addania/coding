@@ -22,7 +22,6 @@ git checkout gh-pages
 git add .
 git commit -m "X"
 git push origin gh-pages
-git checkout master
 npm run deploy
 ```
 

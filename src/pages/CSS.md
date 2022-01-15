@@ -1083,6 +1083,57 @@ border-bottom-right-radius: 32px;
 border-bottom-left-radius: 64px;
 ```
 
+**OUTLINE**
+
+> What is difference between border and outline? In some aspects, they're similar! They both add a visual edge to a given element.
+
+> The core difference is that outline doesn't affect layout. Outline is kinda more like box-shadow; it's a cosmetic effect draped over an element, without nudging it around, or changing its size.
+
+> It has similar properties like border:
+
+```
+outline-width
+outline-color
+outline-style
+```
+
+> Outline is stacked outside of the border and can be used as second border for visual effect.
+
+```
+border: 4px solid darkviolet;
+outline: 4px solid deeppink;
+```
+
+> There is no outline-radius! (Only in Firefox)
+
+> Outlines have a special `outline-offset` property. It allows you to add a bit of a gap between the element and its outline.
+
+```
+outline-offset: 4px;
+```
+
+> We should not set:
+
+```
+button {
+  outline: none;
+}
+```
+
+> This would break navigation for keyboard users; that ring is required for them to know which element is currently focused!
+
+> The only exception is if we provide a suitable alternative. For example:
+
+```
+button {
+  outline: none;
+}
+button:focus {
+  background: navy;
+  color: white;
+}
+```
+
 **PADDING**
 
 > Padding: space between content and border. It is an inner space.
@@ -1163,7 +1214,11 @@ padding: 10px 15px;
 
 **MARGIN**
 
-> Margin: Space outside of the border. It has following values:
+> Margin increases the space around an element, giving it some breathing room. As we saw earlier, margin is "personal space". Margin is the space outside of the border.
+
+> Margin is mysterious. It can do wacky things, like pull an element outside a parent, or center itself within its container.
+
+> It has following values:
 
 ```
 margin-top: 10px;
@@ -1172,29 +1227,255 @@ margin-bottom: 10px;
 margin-left: 30px;
 ```
 
-> Margin: If you want to have same margin on all four sides use:
+> Also here are logical equivalents for languages which are not left to right:
+
+```
+  margin-block-start: 20px;
+  margin-block-end: 40px;
+  margin-inline-start: 60px;
+  margin-inline-end: 80px;
+```
+
+> If you want to have same margin on all four sides use:
 
 ```
 margin: 10px;
 ```
 
-> Margin: In order to specify exactly how much margin there should be on each side of the content in a single declaration. The values go in clock-wise direction: margin on the top (10 pixels), right (15 pixels), bottom (20 pixels), and left (30 pixels) sides of the content.
+> In order to specify exactly how much margin there should be on each side of the content in a single declaration. The values go in clock-wise direction: margin on the top (10 pixels), right (15 pixels), bottom (20 pixels), and left (30 pixels) sides of the content.
 
 ```
 margin: 10px 15px 20px 30px;
 ```
 
-> Margin: If the top and bottom values for margin will equal each other, and the left and right values for margin will also equal each other, you can use the following shortcut. First value defines margin top and bottom to be 10px, margin left and right to be 15px.
+> If the top and bottom values for margin will equal each other, and the left and right values for margin will also equal each other, you can use the following shortcut. First value defines margin top and bottom to be 10px, margin left and right to be 15px.
 
 ```
 margin: 10px 15px;
 ```
 
-> Margin: Margin property also allows to position an element in the center of another containing element. There are 2 requirements in order to do it:
+> Padding and border only allow positive numbers including 0. But margins can be negative!! Negative margins can pull element outside of the parent.
 
-**1/** top and bottom margin is defined and then followed by word auto, meaning right and left margin will be done automatically based on the width of the element and the container in which we want to center it
+HTML
 
-**2/** width of the element needs to be defined and needs to be smaller than the width of the container where the element resides
+```
+<main>
+  <div class="pink-box"></div>
+</main>
+```
+
+CSS:
+
+```
+main {
+  width: 200px;
+  height: 200px;
+  border: 3px solid;
+}
+
+.pink-box {
+  width: 50%;
+  height: 50%;
+  border: 3px solid deeppink;
+  background: white;
+  margin-top: -32px;
+  margin-left: -32px;
+}
+```
+
+![](https://i.imgur.com/uQIeFSP.png "Photo by Addania")
+
+> What if we wanted to do something super cool? Like a heading which peeks out of its container? Like this:
+
+![](https://i.imgur.com/GL1kzFM.png "Photo by Addania")
+
+> This is how you could achieve it.
+
+HTML:
+
+```
+ <body>
+    <div class="card">
+      <div class="header">HEADER PEEKING OUT</div>
+      <p>
+        Otters have long, slim bodies and relatively short limbs. Their most
+        striking anatomical features are the powerful webbed feet used to swim,
+        and their seal-like abilities holding breath underwater.
+      </p>
+    </div>
+  </body>
+```
+
+CSS
+
+```
+body {
+  background-color: #222;
+  box-sizing: border-box;
+  margin: 50px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 25px;
+}
+
+.header {
+  background-color: deeppink;
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10px;
+  margin-top: -40px;
+  padding: 25px;
+}
+```
+
+> Please note, that in case this is not working for you, and instead of re-positioning the header, you decrease the margin of entire card - try to add some padding to the container where the header is positioned. Alternative increase the negative margin (it needs to be more than for example padding of the card)
+
+> Negative margin can also pull a sibling closer:
+
+HTML:
+
+```
+<main>
+  <div class="pink-box"></div>
+  <div class="neighbor"></div>
+</main>
+```
+
+CSS
+
+```
+main {
+  width: 200px;
+  height: 200px;
+  border: 3px solid;
+}
+
+.pink-box {
+  width: 50%;
+  height: 50%;
+  border: 3px solid deeppink;
+  background: white;
+  margin-bottom: -32px;
+}
+
+.neighbor {
+  width: 50%;
+  height: 50%;
+  background: silver;
+  margin-left: 16px;
+}
+```
+
+![](https://i.imgur.com/1ziZlPf.png "Photo by Addania")
+
+> If we apply negative margin to the first box, it will influence all its siblings position!!!
+
+HTML:
+
+```
+<main>
+  <div class="box one"></div>
+  <div class="box two"></div>
+  <div class="box three"></div>
+</main>
+```
+
+CSS
+
+```
+main {
+  width: 200px;
+  height: 200px;
+  border: 3px solid silver;
+}
+
+.box {
+  width: 25%;
+  height: 25%;
+  border: 3px solid;
+  background: white;
+}
+
+.box.one {
+  border-color: deeppink;
+  margin-top: -24px;
+}
+```
+
+![](https://i.imgur.com/NHHpHPI.png "Photo by Addania")
+
+> The interesting thing is those two black boxes: they "follow" the deep pink box up. When we use margin to tweak an element's position, we might also be tweaking every subsequent element as well. This is different from other methods of shifting an element's position, like using `transform: translate`
+
+> There is one last trick a negative margin can do. Imagine you have a card which has a padding. So everything inside of it (all its children) will have this padding.
+
+![](https://i.imgur.com/BAKi7AA.png "Photo by Addania")
+
+> What if we wanted to create one exception for the image which will ignore the padding and will extend from one edge to the other of the card? Something like this?
+
+![](https://i.imgur.com/esazm7o.png "Photo by Addania")
+
+> We can achieving it by wrapping the image in a wrapper and applying negative margin to the right and left both!! Please note: images are "replaced elements". They do not reside in the DOM, they are imported. FOr that reason, any manipulation and layouting with images should be done using wrappers around them. Not with images directly.
+
+HTML
+
+```
+<div class="card">
+  <p>
+    Otters have long, slim bodies and relatively short limbs. Their most striking anatomical features are the powerful webbed feet used to swim, and their seal-like abilities holding breath underwater.
+  </p>
+  <div class="wrapper">
+  <img alt="A cute otter in water" src="/course-materials/otter.jpg" />
+  </div>
+  <p>
+    More importantly, otters are glorious water dogs, playful and curious. The otter, no other, is the best animal.
+  </p>
+</div>
+```
+
+CSS
+
+```
+body {
+  background: #222;
+  padding: 32px;
+}
+
+.card {
+  background-color: white;
+  padding: 32px;
+  border-radius: 8px;
+}
+
+.wrapper {
+  margin-left: -32px;
+  margin-right: -32px;
+}
+
+img {
+  display: block;
+  width: 100%;
+
+}
+
+p, img {
+  margin-bottom: 16px;
+}
+
+```
+
+> Nice article about negative margins is here: https://www.quirksmode.org/blog/archives/2020/02/negative_margin.html
+
+> Margin is really about changing the gap between elements.
+
+> Margin property also allows to position an element in the center of a parent element. There are 2 requirements in order to do it:
+
+**1/** top and bottom margin is defined and then followed by word auto, meaning right and left margin will be done automatically based on the maximum available horizontal space of the element and the container in which we want to center it
+
+**2/** width of the element needs to be defined and needs to be smaller than the width of the container where the element resides. Why? Block elements will naturally grow to fill the available horizontal space, so we need to give our element a width in order to center it.
 
 ```
 div {
@@ -1202,6 +1483,46 @@ width: 200px
 margin: 0px auto;
 }
 ```
+
+> Another example:
+
+HTML:
+
+```
+<main>
+  <section class="content">
+    Hello World
+  </section>
+</main>
+```
+
+CSS:
+
+```
+.content {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  background: palevioletred;
+  padding: 16px;
+}
+
+main {
+  width: 100%;
+  height: 200px;
+  border: 3px solid silver;
+}
+```
+
+![](https://i.imgur.com/IsCaFWd.png "Photo by Addania")
+
+> This only works for horizontal margin. Setting top/bottom margin to auto is equivalent to setting it to 0px.
+
+> There are other ways how to center items in a container with modern layout rendering modes like Flexbox or Grid.
+
+> Important difference is that margin auto is used on the single child element selectively!
+
+> Flexbox and Grid are both powerful tools for managing layout. But their properties are applied to a container, and affect all children.
 
 > Margin: Top and Bottom margin is also called: **Vertical margin**. Left and Right margin is called **Horizontal Margin**
 
@@ -1237,7 +1558,416 @@ margin: 0px auto;
 - scroll - a scrollbar is added to the element’s box so that the rest of the content can be viewed by scrolling.
 - visible - the overflow content will be displayed outside of the containing element. This is the default value.
 
-**DEFAULT VALUES**
+**LAYOUTS**
+
+> In CSS we have different layouting modes. Here are examples: Flow, Flexible Box (FlexBox), Positioned layout, Grid (CSS Grid), etc.
+
+> The default one is FLOW. Plain HTML document without CSS uses FLOW exclusively.
+
+**FLOW LAYOUT**
+
+> In Flow layout, every element will use a display value of either `inline`, `block`, or `inline-block`. This value governs how the Flow layout algorithm will place the element. The default value depends on the tag; `div`, `section`, `nav`, `header`, `footer`, `article`, `paragraph`, `heading`, `form`, `blockquote` are block by default, while `spans` , `strong`, `a` are inline.
+
+> In flow layout, block elements stack in the block direction, and inline elements stack in the inline direction.
+
+**Greedy block elements**
+
+> When you place a block element to the page, its content box consumes hungrily all available horizontal space!
+
+> A heading might only need 150px to contain its letters, but if you put it in an 800px container, it will consume 800px of width for its content.
+
+![](https://i.imgur.com/TZFFgjG.png "Photo by Addania")
+
+> Even if we shrink its content, so that it only uses so much space that it needs with width: fit-content, it will still not share its inline space with another element - instead margin will fill out the remaining horizontal space:
+> HTML:
+
+```
+<h2>
+  Hello World
+</h2>
+<div class="red-box"></div>
+<h2>
+  Hello World
+</h2>
+<div class="red-box"></div>
+```
+
+CSS
+
+```
+h2 {
+  width: -moz-fit-content;
+  width: fit-content;
+  border: 2px dotted;
+}
+
+.red-box {
+  width: 50px;
+  height: 25px;
+  background: red;
+}
+```
+
+![](https://i.imgur.com/RbTY7cp.png "Photo by Addania")
+
+**Polite inline elements**
+
+> These are polite guys who do not want to make a fuss. They go with the flow. They are rendered where they are. Lots of CSS properties do not work with inline elemets: adjust the positioning or changing its size. FOllowing will not have any effect:
+
+```
+strong {
+  height: 2em;
+  width: 300px;
+  margin-top: 300px;
+  margin-bottom: 300px;
+}
+```
+
+> Inline elements are like `go-with-the-flow-type` folks. They don't want to inconvenience anyone by pushing any boundaries. You can shift things in the inline direction with margin-left and margin-right, but you can't change its width or height.
+
+> The exception are `replaced` elements also called `foreign` objects:
+
+- `<img />`
+- `<video />`
+- `<canvas />`
+
+> These replaced elements are technically inline but they are special :) They can affect block layout. We can set explicit dimensions or add some magin-top.
+
+> How to reconcile this? There is a trick. Try to pretend that it's a foreign object within an inline wrapper. When you pass it a width or height, you're applying those properties to the foreign object. The inline wrapper still goes with the flow.
+
+> Another exception is a `button` tag. They are technically inline, but can be given be given width and height.
+
+**Magic space around inline elements**
+
+> Imagine you have an image in a div:
+
+HTML
+
+```
+<div>
+    <img alt="cat" src="https://i.imgur.com/9h4pjj0.png">
+</div>
+```
+
+CSS
+
+```
+img {
+  width: 300px;
+}
+```
+
+> When you inpect the height of the image it will be: 132 px
+
+![](https://i.imgur.com/aTBTWuu.png "Photo by Addania")
+
+> When you inpect the height of the image it will be: 136.13 px
+
+![](https://i.imgur.com/guqtUjm.png "Photo by Addania")
+
+> Why is that? Why is there 6px difference in height? It's neither a padding, border or a margin. Reason is that the inline elements are treated like typography and there is some space reserved between lines, because we usually do not want text to be cramped at each other.
+
+> We can fix it with setting `display: block` to the image or add `line-height: 0` to the wrapping div.
+
+> Now let's place 3 images nex to each other - they are all inline, so shoudl be placed next to each other.
+
+HTML
+
+```
+    <div>
+      <img alt="cat" src="https://i.imgur.com/9h4pjj0.png" />
+      <img alt="cat" src="https://i.imgur.com/9h4pjj0.png" />
+      <img alt="cat" src="https://i.imgur.com/9h4pjj0.png" />
+    </div>
+```
+
+> You will notice there is space between them. 😮
+
+![](https://i.imgur.com/b1qAoCs.png "Photo by Addania")
+
+> This is a whitespace between elements! Surprisingly, if we squish our HTML so that there are no newlines or whitespace characters between images, this problem goes away:
+
+HTML
+
+```<div>
+      <img alt="cat" src="https://i.imgur.com/9h4pjj0.png" /><img alt="cat" src="https://i.imgur.com/9h4pjj0.png" /><img alt="cat" src="https://i.imgur.com/9h4pjj0.png" />
+    </div>
+
+```
+
+![](https://i.imgur.com/5qE2UiS.png "Photo by Addania")
+
+> This happens because HTML is `space-sensitive`, at least to an extent. The browser can't tell the difference between whitespace added to separate words in a paragraph, and whitespace added to indent our HTML and keep it readable.
+
+> How do we solve this problem? There are some ideas on CSS Tricks: https://css-tricks.com/fighting-the-space-between-inline-block-elements/. But this doesn't come up a ton these days. In most realistic scenarios, we'd use flexbox or floats, and neither of those rendering modes suffer from this problem.
+
+**Inline elements can wrap**
+
+> Inline elements can wrap. Which is also one of their trick - compared to block elements.
+
+> Therefore they can create other shapes than rectangles:
+
+```
+<p>
+  This is a paragraph with <strong>some very bolded words in it</strong>.
+</p>
+```
+
+![](https://i.imgur.com/3oBAWqY.png "Photo by Addania")
+
+> It's worth noting that it's still considered "one shape". If we add a border:
+
+```
+strong {
+  border: 2px solid;
+}
+```
+
+> ...we can see that we don't get 2 discrete rectangles, but rather a single rectangle cut in half and repositioned:
+
+> This is also a reason why some preperties do not work on them. Like vertical margins.
+
+> Other properties like horizontal padding leads to unexpected results. Let's add some padding left and right to the wrapped text in the paragraph.
+
+HTML:
+
+```
+<p>
+  <strong>
+    These words are broken up across many lines.
+  </strong>
+</p>
+```
+
+CSS:
+
+```
+strong {
+  padding-left: 8px;
+  padding-right: 8px;
+  background: peachpuff;
+}
+
+p {
+  max-width: 125px;
+}
+```
+
+> Result is unexpected. Padding is only applied to the tips - very beginning of the text and at the very end (last line - end of the text)
+
+![](https://i.imgur.com/RrMA6bu.png "Photo by Addania")
+
+> If we want to change this behaviour and applie this padding to each individual line, then we can do a black magic trick:
+
+```
+-webkit-box-decoration-break: clone;
+box-decoration-break: clone;
+```
+
+![](https://i.imgur.com/aOMZsoJ.png "Photo by Addania")
+
+> `box-decoration-break` accepts two values: `slice` (default)and `clone`.
+
+> `slice` acts like a sushi roll being chopped. It's not a bunch of individual boxes, it's 1 long box, sliced into bits.
+
+> `clone` is interesting: it allows us to treat each segment as its own box, and copy the styles to each one. Instead of 1 long box, we have 4 boxes, each with the same styles.
+
+**Mutant inline-block**
+
+> `display: inline-block` is a weird fella. It is a combination of block and inline display.
+
+> Essentially, inline-block allows you to drop a block element into an inline context. It's a block in inline's clothing. it's an element that internally acts like a block element, but externally acts like an inline element. The parent container will treat it as an inline element, since it's external. But the element itself can be styled like a block.
+
+> This means that inline-block elements will go with the flow, but we will be able to apply block properties on it: like width, height, vertical margins, on hover events etc.
+
+> Cute example is:
+
+HTML
+
+```
+<p>
+  <strong>Warning:</strong> Alpaca may bite.
+</p>
+```
+
+CSS:
+
+```
+strong {
+  display: inline-block;
+  color: white;
+  background-color: red;
+  width: 100px;
+  text-align: center;
+}
+
+strong:hover {
+  transform: scale(1.2);
+}
+```
+
+> We've effectively turned our strong element into a block element, as far as its own CSS declarations are concerned. Everything between the four corners of the element is block in nature. But from the paragraph's perspective, it's an inline element. It lays it out as an inline element, in the inline direction beside the text.
+
+> Disadvantage of inline-block elements is that they do not wrap 😥
+
+**WIDTH ALGORITHMS**
+
+> Block elements have default width of `auto`. They grow to consume (100% of parent content width - child margins)
+
+HTML:
+
+```
+<body>
+ <h1>
+  Hello World
+ </h1>
+</body>
+```
+
+CSS:
+
+```
+h1 {
+  margin: 0 16px;
+  background-color: chartreuse;
+}
+```
+
+![](https://i.imgur.com/tN9jXMu.png "Photo by Addania")
+
+> If we set the width of a block element to 100% the result is surprising. It will grow outside of the frame because of the 2\*16px margin
+
+> Reason is that 100% with means 100% of the parent content tag under all circumstances. If body is 400px wide, then also h1 will be 400px wide. But because we have 32px margin, it will grow out of the frame.
+
+![](https://i.imgur.com/6ZM3s85.png "Photo by Addania")
+
+> Therefore again, block elements have default with `auto` and not `100%`. It's a subtle but important distinction: by default, block elements have dynamic sizing. They're context-aware.
+
+> Broadly speaking, there are two kinds of values we can specify for width:
+
+- Measurements (100%, 200px, 5rem)
+- Keywords (auto, fit-content)
+
+> Measurement-based values are either completely explicit (eg. 200px), or relative to the parent's available space (eg. 50%).
+
+> Keywords, on the other hand, let us specify different sorts of behaviours depending on the context.
+
+> Some of the keywords:
+
+> `auto` - allow to consume as much space as available given contraints (parent content size, margins, etc)
+
+> `min-content` - is an intrinsic value - it chooses the smallest available space **based on the element itself / elements' children**! It is different from `auto` or `measurements` which are **extrinsic** and **based on the parent** container. min-content will shrink the width to the minimum, so that each line contains at least one word. Whenever it encounters whitespace or a hyphenated word, it'll break it onto a new line.
+
+HTML:
+
+```
+<h1>
+  I am shrinking and shrinking, slowly fading away.
+</h1>
+```
+
+CSS:
+
+```
+h1 {
+  width: min-content;
+  background-color: deeppink;
+}
+```
+
+![](https://i.imgur.com/W94uNQa.png "Photo by Addania")
+
+> `max-content` - it never adds any line-breaks. The element's width will be the smallest value that contains the content, without breaking it up. If the content is too big, it will create a vertical scroll bar. It pays no attention to the constraints set by the parent. It will size the element based purely on the length of its unbroken children. `max-content` is based also on children.
+
+![](https://i.imgur.com/oFSQXtP.png "Photo by Addania")
+
+> How could this be useful? Only for those test which are short and we dont want to break them. It has an advantage that its size is only around the letter, it does not consume all 100% of available space as for auto. So adding a background-color would only color the background behind letters, not whole line:
+
+CSS
+
+```
+h1 {
+  width: max-content;
+  background-color: mediumspringgreen;
+}
+```
+
+![](https://i.imgur.com/dj8l4md.png "Photo by Addania")
+
+> With width: auto
+
+CSS
+
+```
+h1 {
+  width: auto;
+  background-color: mediumspringgreen;
+}
+```
+
+![](https://i.imgur.com/KIMNK39.png "Photo by Addania")
+
+> `fit-content` - its width is also based on the children. But it is the middle ground between min and max content. If that width can fit within the parent container, it behaves just like max-content, not adding any line-breaks. If the content is too wide to fit in the parent, however, it adds line-breaks as-needed to ensure it never exceeds the available space.
+
+HTML
+
+```
+<h2>Short</h2>
+<h2>A mid-length heading</h2>
+<h2>The longest heading you've ever seen in your life, will it ever end, ahhhhh ohmigod 😬😬😬😬😬😬😬</h2>
+```
+
+CSS
+
+```
+h2 {
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: peachpuff;
+  margin-bottom: 16px;
+  padding: 8px;
+}
+```
+
+![](https://i.imgur.com/XJqAhip.png "Photo by Addania")
+
+> `fit-content` behaves just like `width: auto`. But it does not extend to the 100% width of the parent like auto down in the piture bellow. Which makes it better to use background color.
+
+![](https://i.imgur.com/w7BsFSn.png "Photo by Addania")
+
+> If we dont want to or cant use fit-content but want to replicate its behaviour, we can use 2 workarounds:
+
+CSS
+
+```
+h2 {
+  max-width: max-content;
+}
+```
+
+> Why does it work? Because we haven't changed the width property, the default block-level behavior will continue; the h2 will grow to fill the available horizontal space.
+
+> Let's suppose we have a 600px container, and our h2 only has a few characters. The max-content size might be 100px. Because 100px is smaller than 600px, max-width will constrain the width.
+
+> What if the h2 has a bunch of characters? Maybe max-content would be 1000px. This value is larger than the container size of 600px, and so max-width has no effect.
+
+> Another solution is:
+
+CSS
+
+```
+h2 {
+  display: table;
+}
+```
+
+> display: table causes elements to render using Table layout. This is the layout mode used by the <table> HTML tag. It's an alternative algorithm to flow layout or positioned layout.
+
+> By default, tables will shrink to hold their contents, but are still block-level elements. This is exactly what we want in this case, though it is a bit of a hack; a table element expects to have table rows as children, not text.
+
+> We can add constraints to an element's size using `min-width` and `max-width`. This is useful to account of possibly idfferent screen sizes. The particularly exciting thing about min-width and max-width is that they let us mix units. We can specify constraints in pixels, but set a percentage width.
+
+> **DEFAULT VALUES**
 
 > Each browser has its own default styles. It is in case we do not define styles for a certain element. These browser styles are called: `user agent styles`. User agent means browser.
 
