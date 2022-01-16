@@ -252,3 +252,117 @@ const accountingCopy = { name: "Addy", describe: accounting.describe };
 
 accountingCopy.describe();
 ```
+
+**Private and public access**
+
+> Imagine we have a method to add employees to our Department class:
+
+```
+class Department {
+  name: string;
+  employees: Array<string> = [];
+
+  constructor(n: string) {
+    this.name = n;
+  }
+  addEmployee(employee: string) {
+    this.employees.push(employee);
+  }
+  printEmployees() {
+    console.log("Number of slaves: ", this.employees.length);
+    console.log("List of slaves: ", this.employees);
+  }
+}
+const accounting = new Department("Accounting");
+accounting.addEmployee("Pete");
+accounting.addEmployee("Steve");
+accounting.printEmployees();
+```
+
+> Code above will console log, that we have 2 slaves and their names are Pete and Steve. Which is cool and we can add new slaves by using `accounting.addEmployee`.
+
+> But we can also modify employees from outside of the class and by direct assignment:
+
+```
+accounting.employees[2] = "Anna"
+```
+
+> Anna is an infiltrator and should not be on the list. But she is now! :( Our poor precious class was compromised! Now there are two ways we can manipulate with the property inside of our class. This may be desired behaviour but in larger applications this is typically not what we want. We tend to want to have one single way how to do things - one source of truth. Therefore `accounting.employees[2] = "Anna"` may not be the desired way how to change <s>employees</s> slaves list.
+
+> More over maybe our `addEmployee` method does not ONLY add an employee but does more - like some validation, adding some default information about the employee atc. And if we had 2 ways of doing it, they might differ.
+
+> In order to prevent such direct assignments from outside of the class, we can turn employees property (field) to a private property. How? Super ultra easy: add `private` keyword in front of a property or a method
+
+```
+class Department {
+  name: string;
+  private employees: Array<string> = [];
+
+  constructor(n: string) {
+    this.name = n;
+  }
+  addEmployee(employee: string) {
+    this.employees.push(employee);
+  }
+  printEmployees() {
+    console.log("Number of slaves: ", this.employees.length);
+    console.log("List of slaves: ", this.employees);
+  }
+}
+```
+
+> This means that emplyoees property is only accessible from `inside` of the Department class. Not from outside. Now we cant access employees like this: `accounting.employees[2] = "Anna"`
+
+> `private` keyword is a modifier. We also have a `public` keyword, which is a default, so we do not have to add it. FOr example class name is public by default (because we did not set it to private):
+
+```
+class Department {
+  name: string;
+  ....
+}
+```
+
+> But we could also write it like this (although it is redundant):
+
+```
+class Department {
+  public name: string;
+  ....
+}
+```
+
+**Shorthand initialization**
+
+> Often we will have classes with many properties which need to be initialized when creating instance of the class:
+
+```
+class Department {
+  name: string;
+  id: number;
+  size: number;
+  employees: Array<string> = [];
+
+  constructor(n: string, id: number, size: number) {
+    this.name = n;
+    this.id = id
+    this.size = size
+  }
+}
+const accounting = new Department("Accounting", 1, 500);
+```
+
+> Defining the properties beneath the class and also initializing them all in the constructor is kind of tedious and double work. Typescript allows us to use shorthand initialization which looks like this:
+
+```
+class Department {
+  employees: Array<string> = [];
+  constructor(private name: string, private id: number, private size: number) {}
+}
+const accounting = new Department("Accounting", 1, 500);
+
+```
+
+> Please note two things.
+
+- We cannot anymore have any random name of the variable, such as `n`. It needs to be `name`.
+- We must use `private` or `public` keyword to define its access type. We cannot ommit `public`, though
