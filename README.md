@@ -15,6 +15,8 @@ git checkout gh-pages
 npm start
 ```
 
+Your local will run under: http://localhost:8000/
+
 In this repository, the page is built on the master branch. Therefore all code commits should go to gh-pages. Deploy should go to master branch.
 
 ```shell

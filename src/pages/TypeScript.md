@@ -8,7 +8,7 @@ category: "knowledge-base"
 
 ## Intro
 
-This article is basically my notes following an amazing [Typescript course](https://www.udemy.com/course/understanding-typescript/) by Maximilian Schwarzmüller which I would recommend to everyone who wants to learn Typescript.
+This article is basically my notes following an amazing [Typescript course](https://www.udemy.com/course/understanding-typescript/) by Maximilian Schwarzmüller and [SkillerWhale](https://skillerwhale.com/) training notes which I would recommend to everyone who wants to learn Typescript.
 
 > Typescript is a <code>superset</code> to Javascript which means it is a programming languages which builds on top of Javascript. It adds new features and advantages to Javascript. It allows to write cleaner, less error-prone and more powerful code.
 
@@ -722,6 +722,268 @@ let mixedAchievements: (string | number)[];
 ```
 let mixedAchievements: Array<string | number>;
 ```
+
+**More on Array types**
+
+> Arrays in `JavaScript` can have elements of different types. This is usually undesirable, and is a potential source of bugs. For example, when mapping or filtering an array, you want to assume all the elements have the same type.
+
+> Arrays in `TypeScript`, on the other hand, can only have elements of the same type.
+
+> There are two syntax options for defining an array. Because arrays are so common, TypeScript provides a short way to define array types, using square brackets:
+
+```
+const strings: string[] = ['once', 'upon', 'a', 'time']
+```
+
+> You can also use the Array generic type. Generic types are like functions for types, which take their arguments in angle brackets:
+
+```
+const strings: Array<string> = ['once', 'upon', 'a', 'time']
+```
+
+> TypeScript will raise a type error if you try to add an element of the wrong type to an array. The benefit of this restriction is that it can infer the type of every element in your array, and will raise an error if you try to do anything with an array element that is not compatible with its type.
+
+> You can loosen Typescript's array type restriction in a controlled way by creating an `array of a union type`. For example, arrays with the following type can contain a mixture of strings and numbers:
+
+```
+const arrayWithStringsAndNumbers: (string | number)[] = [1, 'two', 3]
+```
+
+> Be careful, the `|` union type operator takes precedence over the `[]` array type operator, so the brackets are necessary to create an array type of a union type. Dropping the brackets will give you a union type where one of the subtypes is an array:
+
+```
+let stringORArrayOfNumbers: string | number[] = 'just a string'
+```
+
+> TypeScript's restriction on arrays is generally a good thing, and you are unlikely to need to use union types in this way to loosen that restriction. You are more likely to use unions of literal types to tighten the restriction even further. For example:
+
+```
+type ErrorCode = 400 | 401 | 403
+const serverResponsesFromLast24Hours: number[] = [
+  /* array of all server responses as numbers */
+]
+const errorCodesFromLast24Hours: ErrorCode[] = []
+for (const response of serverResponsesFromLast24Hours) {
+if (response === 400 || response === 401 || response === 403) {
+errorCodesFromLast24Hours.push(response)
+  }
+}
+// Error: Argument of type '200' is not assignable to parameter of type 'ErrorCode'
+errorCodesFromLast24Hours.push(200)
+```
+
+> The more precise you can be about the types of values that can go into your arrays, the more helpful the compiler can be in ensuring that those values are used appropriately throughout your code.
+
+> If you do not explicitly annotate your array variables, TypeScript will infer the type based on the types of the elements in the initial assignment. There are called `Inferred Array Types`.
+
+```
+const x = [1, 2, 3] // x has the inferred type 'number[]'
+const y = ['one', 'two', 'three'] // y has the inferred type 'string[]'
+const z = [1, true, 'three'] // z has the inferred type '(string | number | boolean)[]'
+```
+
+> The inferred type will always be a `general` type, like number or string, and not a `literal` type, like 1 or 'three'. If the elements in the initial assignment have different types, the inferred type of the array will be a union of all those types.
+
+> If your initial assignment is an empty array, TypeScript will look at how you use the array to infer the type.
+
+```
+const x = [] // x initially has the inferred type 'any[]'
+x.push(1) // x now has the inferred type 'number[]'
+x.push('two') // x now has the inferred type '(number | string)[]'
+```
+
+> The inferred type will adapt based on the values you add to the array, so when you lookup elements from the array subsequently you will get a suitably cautious union type. But there will be nothing to stop you adding more values of different types.
+
+> For this reason, it is good practice to explicitly annotate any array that is initialised as an empty array.
+
+```
+const x: Array< string | number > = []
+```
+
+**Readonly Arrays**
+
+> Arrays in JavaScript are `mutable`: you can add and remove elements using the push, pop, shift, and unshift methods, reassign the elements at any index, and modify the whole array with methods like sort:
+
+```
+const numbers = [2, 4]
+numbers.push(1) // [2, 4, 1]
+numbers[1] = 3 // [2, 3, 1]
+numbers.sort() // [1, 2, 3]
+```
+
+> As seen above, even if we declare an array as a `const`, we still can `mutate` it. Const only prevents up from re-assigning the entire array like so:
+
+```
+const numbers = [2, 4]
+numbers = [1,2,3] // not possible
+```
+
+> But we can still re-assign individual elements of an array:
+
+```
+const numbers = [2, 4]
+numbers[1] = 3 // [2, 3]
+```
+
+> TypeScript arrays are also `mutable` by default, but you can create an `immutable` array using the `ReadonlyArray` generic type or the `readonly` type modifier. TypeScript will raise a compiler error if you attempt to alter a readonly array.
+
+```
+const numbers: readonly number[] = [2, 4] // or: const numbers: ReadonlyArray<number> = [2, 4]
+numbers.push(1) // Error: Property 'push' does not exist on type 'readonly number[]'.
+numbers[1] = 3 // Error: Index signature in type 'readonly number[]' only permits reading.
+numbers.sort() // Error: Property 'sort' does not exist on type 'readonly number[]'.
+```
+
+> Note that this is not the same as the difference between `let` and `const` arrays. You cannot reassign a different array to a `const` variable, but you can still `mutate` the array itself. On the other hand, you cannot `mutate` a readonly array, but if it is assigned to a `let` variable, you can still reassign a different array to that variable.
+
+> Summary or arrays re-assigning and mutability:
+
+```
+let numbers: ReadonlyArray<number> = [1, 2];
+numbers = [3, 4]; // OK: re-assigning whole array is ok because it is declared as let
+numbers[1] = 0; // Error: numbers is readonly therefore its individual elements cannot be re-assigned
+
+const pets: ReadonlyArray<string> = ["pheonix hatchling", "bear cub"];
+pets = ["pebble"]; // Error: array declared as const cannot be re-assigned
+pets[0] = "personal world destroyer"; // Error: pets is readonly therefore its individual elements cannot be re-assigned
+
+const mounts: Array<string> = ["spectral tiger", "drake of the west wind"];
+mounts = ["fire hawk", "flameward hippogryph"]; // Error: array declared as const cannot be re-assigned
+mounts[1] = "heart of the aspects"; // OK: individual elements of const srray can still be re-assigned
+
+let titles: Array<string> = ["Savior of Azeroth", "Dragonslayer"];
+titles = ["the Flamebreaker", "Defender of a Shattered World"]; // OK: array declared as let can be re-assigned
+titles[1] = "Blessed Defender of Nordrassil"; // OK: individual elements of let array can still be re-assigned
+```
+
+> Please note, that `readonly` is only on the surface and refers to the level on which is it declared. Imagine we have array of objects:
+
+```
+const achievements: ReadonlyArray<{ name: string; date: number }> = [
+  { name: "Bucket List", date: 1644150502 },
+  { name: "Chromatic Champion", date: 1644150502 },
+];
+
+achievements[0] = {name: "Taste the Rainbow!", date: 1644150502} // Error: you cant re-assign given element because achievements is readonly
+achievements[0].name = "Taste the Rainbow" // OK: readonly is only on the surface level of array elements, but if we dig deeper we can change values
+```
+
+> In above example we can see that we cant assign a new object to `achievements[0]` but we can change its name or date: `achievements[0].name`
+
+> If we do not even want to be able to change the name or date of those objects, then we need to add readonly further down the tree:
+
+```
+const achievements: ReadonlyArray<{ readonly name: string; readonly date: number }> = [
+  { name: "Bucket List", date: 1644150502 },
+  { name: "Chromatic Champion", date: 1644150502 },
+];
+
+achievements[0] = {name: "Taste the Rainbow!", date: 1644150502} // Error: you cant re-assign given element because achievements is readonly
+achievements[0].name = "Taste the Rainbow" // Error: name is now also readonly property of the object
+```
+
+> Readonly modifier can be user on arrays or objects or properties of object.
+
+> We can also make an entire object readonly:
+
+```
+type Item = Readonly<{item: string, amount: number}>
+```
+
+**String Indexed Access**
+
+> JavaScript `arrays` are special kinds of `objects`.
+
+```
+const iAmArray = ['elementOnIndexZero', 'elementOnIndexOne', 'elementOnIndexTwo']
+iAmArray[0] // 'elementOnIndexZero'
+```
+
+> Under the hood in Javascript, the array looks something like this:
+
+```
+iAmArray = {
+  '0': 'elementOnIndexZero',
+  '1': 'elementOnIndexOne',
+  '2': 'elementOnIndexTwo',
+}
+iAmArray[0] // 'elementOnIndexZero'
+```
+
+> You can access indexed elements of an array using a string as well as a number.
+
+```
+const x = [2, 4, 6, 8]
+x[0] === x['0'] // true
+```
+
+> TypeScript attempts to accommodate this quirk by allowing `string-keyed property access` when it can be certain that the string can successfully be parsed as a number.
+
+> In practice, this means when the string is a string representation of a number that is either passed as a literal value or a variable with a literal type.
+
+```
+const x: number[] = [2, 4, 6, 8]
+let literalVariable: '0' = '0'
+let stringVariable: string = '0'
+x['0'] // ok
+x[literalVariable] // ok
+x[stringVariable] // Error: Element implicitly has an 'any' type because index expression is not of type 'number'.
+```
+
+> The last case here raises an error because there is no type guarantee that `stringVariable` will hold a string representation of a number.
+
+> To get all of this to work, TypeScript allows you to access an array property using any string-keyed property, but implicitly gives the resulting element the any type if it cannot be parsed as a number. If you have the `noImplicitAny` compiler flag disabled, therefore, the last line in the example above will not raise an error.
+
+> More usefully, TypeScript will also allow you to access string-keyed properties of arrays when it can be certain that these correspond to genuine properties or methods on the array.
+
+```
+const x: number[] = [2, 4, 6, 8]
+
+const arrayPropertyKey = 'length'
+
+x['length'] // ok: equivalent to `x.length`
+x[arrayPropertyKey] // ok: also equivalent to `x.length`
+x['sort'] // ok: equivalent to x.sort, i.e. retrieves the fill method on x (without calling it)
+x['sort']() // ok: equivalent to x.sort(), i.e. retrieves the fill method on x (and calls it)
+```
+
+**Unchecked Indexed Access**
+
+> Because the elements of TypeScript arrays all have the same type, the compiler "knows" the type of each element. But there is a catch.
+
+```
+const totals: number[] = [1, 2, 3]
+
+for (const total of totals) {
+// total has type 'number' :)
+}
+
+// firstTotal has type 'number' :/
+const firstTotal = totals[0]
+
+// fourthTotal has type 'number' :(
+const fourthTotal = totals[3]
+```
+
+> The compiler gives fourthTotal an inferred type of number, but in fact totals[3] is undefined. This is called `unchecked index access`: the compiler doesn't force you to check whether the element at any given index exists.
+
+> If you are worried about this possibility, you can enable the `noUncheckedIndexedAccess` compiler flag. With this flag enabled, the type of elements accessed using an index will be a union type with undefined:
+
+```
+const totals: number[] = [1, 2, 3]
+
+for (const total of totals) {
+// total has type 'number' :)
+}
+
+// firstTotal has type 'number | undefined' :/
+const firstTotal = totals[0]
+
+// fourthTotal has type 'number | undefined' :)
+const fourthTotal = totals[3]
+```
+
+> Unchecked index access is a way in which TypeScript is not completely type safe. But because the errors that it lets through are rare, and enabling `noUncheckedIndexedAccess` forces you to write extra manual checks every time you need to access an element, this option is disabled by default.
 
 ## Tuples
 
@@ -1510,7 +1772,7 @@ let newFunction: () => number;
 let newFunction: (a: number, b: number) => number;
 ```
 
-## Function types and callbacks
+**Function types and callbacks**
 
 ![](https://i.imgur.com/tp0nHv2.jpg "Photo by Hassan OUAJBIR from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Hassan OUAJBIR from Pexels_</p>
 
@@ -1551,6 +1813,348 @@ const add = (n1: number, n2: number, callback: (num: number) => void ): number =
     return result
 }
 ```
+
+**More on function types**
+
+> Function signatures in TypeScript are simply annotated versions of JavaScript function signatures.
+
+```
+// annotated function declaration
+function add (a: number, b: number): number {
+  return a + b
+}
+
+// annotated function expression
+const multiply = function (c: number, d: number): number {
+  return c * d
+}
+
+// annotated arrow function expression
+const subtract = (e: number, f: number): number => {
+  return e - f
+}
+```
+
+> If you don't explicitly annotate the parameter or return types, the TypeScript compiler will infer them for you.
+
+> While the compiler is generally good at inferring return types, unannotated parameters will usually have an inferred type of any (you will see the exceptions later on). Assuming you have the default `noImplicitAny` flag enabled, this will raise an error, so as a general rule `parameter types must always be annotated`.
+
+> Functions that do not include an explicit return value have an inferred return type of void, which you can also specify explicitly.
+
+```
+function logger (): void {
+console.log('Hey Skillers!')
+}
+
+function loggerWithReturn (): void {
+console.log('Have a great day!')
+return
+}
+```
+
+> JavaScript's default return value (for functions that don't specify one) is undefined, hence undefined is the only value assignable to a variable of type void. There are some slight differences between the types void and undefined, however.
+
+> If your function explicitly returns undefined, its inferred return type will be undefined rather than void.
+
+> And although a function whose annotated return type is void can explicitly return undefined, a function whose annotated return type is undefined must do so:
+
+```
+// OK
+function logger (): void {
+console.log('Hey Skillers!')
+return undefined
+}
+
+// Error: A function whose declared type is neither 'void' nor 'any' must return a value.
+function logger (): undefined {
+console.log('Hey Skillers!')
+}
+```
+
+> You will see another difference between void and undefined later on. For now, just note that you should always use void as the return type for functions that do not return an explicit value (and not use it for anything else).
+
+**Function Parameters**
+
+> Functions in JavaScript are all technically `variadic` functions: they are able to accept a variable number of arguments. This is why you can get unintended consequences related to undefined or NaN instead of run-time errors when you pass in the wrong number of arguments:
+
+```
+function doNothing (number) {
+return number
+}
+
+doNothing(1, 2, 3, 4, 5) // 1
+doNothing() // undefined
+
+function add (a, b, c) {
+return a + b + c
+}
+
+add() // NaN
+add(1) // NaN
+add(1, 2, 3, 4, 5) // 6
+```
+
+> TypeScript protects you from this buggy behaviour by throwing a compilation error any time you pass in the wrong number of arguments. When you really do want flexibility in the number of arguments you can pass to a function, there are two controlled ways in which TypeScript allows this.
+
+**Optional Parameters**
+
+> The parameter list in a function signature can end with any number of optional parameters, marked as optional with the ? operator. You do not need to supply an argument corresponding to an optional parameter when you call the function, and the compiler will guard against run-time errors by making the type of this parameter a union with undefined.
+
+```
+function add (a: number, b: number, c?: number) {
+return c === undefined
+? a + b
+: a + b + c
+}
+
+add(1) // Error: Expected 2 arguments, but got 1
+add(1, 2) // 3
+add(1, 2, 3) // 6
+```
+
+> As with JavaScript, you can also make an argument optional by providing a default value after the type annotation:
+
+```
+function multiply (a: number, b: number = 10) {
+return a \* b
+}
+
+multiply(12, 10) // 120
+multiply(12) // 120
+```
+
+> In this case, the parameter's type will not be a union with undefined, since the default value will be used whenever the argument is not specified.
+
+**Rest Parameters**
+
+> In the case of an unknown number of arguments you can use a rest parameter, just as you would in JavaScript. Since rest parameters are `arrays`, they must be annotated as an array type.
+
+```
+function add (...numbers: number[]) {
+return numbers.reduce((a, b) => a + b, 0)
+}
+
+add(1, 2, 3, 4, 5) // 15
+add() // 0
+```
+
+> Similarly but when we know first two parameters, and rest of the parameters are of an unknown length:
+
+```
+function add (x: number, y: number, ...numbers: number[]) {
+  return x+y+numbers.reduce((a, b) => a + b, 0)
+  }
+add(1, 2, 3, 4, 5) // 15
+add(1,2) // 0
+```
+
+**Function Type Expressions**
+
+> You can provide types for your functions inline, by annotating the parameters and the return value directly in the function signature, as you have seen. But you can also specify the type of a function separately from its implementation using a `function type expression`.
+
+> The syntax for `function type expressions` mirrors the syntax for arrow functions, but you can use them to annotate both styles of function expression:
+
+```
+type NumberToString = (value: number, leadingZeros: number) => string
+
+const numberToString: NumberToString = (value, leadingZeros) => {
+return value.toString().padLeft(leadingZeros)
+}
+
+// -OR-
+
+const numberToString: NumberToString = function (value, leadingZeros) {
+return value.toString().padLeft(leadingZeros)
+}
+
+```
+
+> The `NumberToString` type specifies a function that takes two number arguments and returns a string. The numberToString variable is assigned a function that matches this type signature.
+
+> Note that, if you provide a function type annotation, you do not need to provide explicit type annotations for the parameters or the return value in the function expression itself, as these will be inferred to match those in the function type.
+
+> Also note that there is no way to explicitly annotate a function declaration with a function type expression. You need to write a function expression, assign that to a variable, and annotate the variable with the function type.
+
+> Function type expressions are mainly useful in two cases.
+
+> The first case is when you want to provide a type annotation for a function parameter passed to a higher-order function:
+
+```
+type Action = 'Submit' | 'Cancel'
+
+type Handler = (input: string) => void
+
+const submitCallbacks: Handler[] = []
+
+const cancelCallbacks: Handler[] = []
+
+const addListener = (action: Action, handler: Handler) => {
+switch (action) {
+case 'Submit':
+submitCallbacks.push(handler)
+break
+case 'Cancel':
+cancelCallbacks.push(handler)
+break
+ }
+}
+```
+
+> When passing a function expression as an argument, you do not need to explicitly annotate its parameters or return type. As with function expressions assigned to annotated function variables, these types will be inferred based on the type of the parameter:
+
+```
+addListener('Submit', (input) => {
+inputs.push(input)
+console.log('thank you for you input')
+})
+```
+
+> The second case in which function type expressions are useful is when you want to specify the type signature of a method on an object type:
+
+```
+type SetOfNumbers = {
+values: number[],
+add: (value: number) => void,
+delete: (value: number) => void,
+contains: (value: number) => boolean,
+entries: () => number[]
+}
+```
+
+**Compatibility of Function Types (Structural Typing)**
+
+> TypeScript implements a structural typing system, which means that the type of the value you assign to a variable doesn't have to be identical to the type of the variable, it only has to be compatible with it.
+
+> With object types, for example, object type B is compatible with object type A if it contains at least the same properties as object type A. It can contain additional properties as well (at least where excess property checks don't apply).
+
+> Something similar is true of functions: you can assign a function of type B to a function variable of type A, as long as type B is compatible with type A.
+
+> For function type B to be compatible with function type A, three things have to hold:
+
+- 1. The return type of function type B must be compatible with the return type of function type A.
+
+```
+let returnsStringB = (): string => 'boo!'
+let returnsStringOrNumberA = (): string | number => Math.random() < 0.5 ? 2 : 'boo!'
+
+returnsStringOrNumberA = returnsStringB // OK: B can be assigned to A because B is compatible with A
+returnsStringB = returnsStringOrNumberA // ERROR: A is not compatible with B, B cant handle numbers
+```
+
+> The first assignment is fine, because string is compatible with string | number. But the second assignment is not allowed, because string | number is not compatible with string.
+
+- 2.  The types of the parameters in function type A must be compatible with the types of the parameters in function type B. (Note this is the opposite way round from the first condition.)
+
+```
+let takesStringB = (x: string): void => {}
+let takesStringOrNumberA = (x: string | number): void => {}
+
+takesStringB = takesStringOrNumberA // OK
+takesStringOrNumberA = takesStringB // ERROR
+```
+
+> The first assignment is fine, because takesStringOrNumber can be called with a string (as the type of takesString expects). The second assignment is not allowed, because takesString can't be called with a number (but the type of takesStringOrNumber says that it can be).
+
+> Another way to think about this is: in the place of takeStringB we expect something that can handle strings. If we provide it with a function that can handle string and numbers, we are fine. In the second line, in the place of takesStringOrNumberA we expect a function that can handle strings and numbers. But if we pass there a function which can only with with strings, then this is not OK.
+
+3. Function type B must have no more parameters than function type A (unless those additional parameters are optional or rest parameters), but it can have fewer.
+
+```
+let takesTwoArguments = (x: number, y: number) => x + y
+
+takesTwoArguments = (x: number) => x + 10 // OK
+takesTwoArguments = (x: number, y: number, z: number) => x + y + z // ERROR
+takesTwoArguments = (x: number, y: number, z?: number) => x + y // OK
+```
+
+> The first assignment is fine: the compiler will insist on a second argument when you call this function, but the function body will ignore it and there will be no run-time error. The second assignment, however, raises an error, because the compiler would only allow you to call this function with two arguments, and the required third argument would be undefined. For the same reason, the third assignment will not raise an error: since the third parameter is optional, the function body will not cause a run-time error when its value is undefined.
+
+> Don't worry if you don't understand all of these rules at once, this is the kind of thing that becomes clearer over time, with practice. For now, the important thing to know is that each of these constraints exists to make sure that type errors will not slip through when handling functions and function assignments.
+
+**Function Type Compatibility with void**
+
+> In general, for one function to be compatible with another function, the return type of the first function must be compatible with that of the second function. As we saw above, this is to prevent type errors from sneaking past the compiler:
+
+```
+type ReturnsNumber = (x: number) => number
+
+const returnsStringOrNumber: ReturnsNumber = (x: number): string | number => {
+return x < 10 ? x + 2 : 'x is too large'
+}
+
+// ERROR: Type '(x: number) => string | number' is not assignable to type 'ReturnsNumber'.
+// Type 'string | number' is not assignable to type 'number'.
+// Type 'string' is not assignable to type 'number'.
+```
+
+> If this assignment was allowed, then returnsStringOrNumber(20) would have the string value 'x is too large' (because of the function itself), but the type number (because of the ReturnsNumber type annotation). To prevent this kind of type error, assignments like these are not allowed.
+
+> There is one exception to this general rule, however. A function that returns any value (not just undefined) is compatible with a void function.
+
+> This exception exists to allow common patterns like these:
+
+```
+const source = [4, 8, 16]
+const destination = []
+
+source.forEach(n => destination.push(n))
+```
+
+> The array method, forEach, requires a void function as its argument, but here we are passing it a function that returns a number (the push method returns the new length of the array).
+
+> Strictly speaking this shouldn't be allowable, because the only value compatible with void is undefined. And because of this exception, type errors can get past the compiler:
+
+```
+type ReturnsVoid = () => void
+
+const returnsString: ReturnsVoid = () => 'not undefined!!'
+
+const result = returnsString() // result has type 'void', but its value is a 'string'
+```
+
+> Type errors like these can never give rise to any run-time errors, however. They simply mean that you have a value that is not undefined that the compiler will not let you use as such (because it is assigned to a variable with the type void).
+
+> Note that this exception only applies to void functions, not to functions that have a return type of undefined. This is another key difference between void and undefined as return types.
+
+**Never**
+
+> The never type represents values that can never occur at run-time. It is not possible to assign anything to a variable of type never. In other words, the set described by this type is the empty set.
+
+> Perhaps surprisingly, the never type has some practical applications. One such application is as the return type of a function that will never return, either because it always throws an error, or because it runs forever.
+
+```
+function tick (): never {
+let counter: number = 0
+while (true) counter += 1
+}
+
+function fail (): never {
+throw new Error('something went wrong')
+}
+```
+
+> TypeScript uses control flow analysis to determine whether a function will never return, and in principle can give functions an inferred return type of never in these cases.
+
+> The inferred return type for functions that never return, however, is only never for function expressions. For function declarations, the inferred type is void.
+
+```
+// the inferred type of failDeclaration is '() => void'
+function failDeclaration () {
+throw new Error('something went wrong')
+}
+
+// the inferred type of failExpression is '() => never'
+const failExpression = function () {
+throw new Error('something went wrong')
+}
+
+// the inferred type of failExpressionArrow is also '() => never'
+const failExpressionArrow = () => {
+throw new Error('something went wrong')
+}
+```
+
+> Ideally, the return type for function declarations that never return would also be never. But when the never type was introduced, this was found to be too big a breaking change for a lot of existing code, so for practical reasons the more accurate inference was only applied to function expressions.
 
 ## Unknown type
 
@@ -1604,7 +2208,7 @@ userName = userInput
 
 ![](https://i.imgur.com/GrnyFyS.jpg "Photo by Elina Krima from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Elina Krima from Pexels_</p>
 
-> Functions which throw error cancel the script after the word throw, so that there is NO possibility it will ever return anything.
+> Functions which throw error cancel the script after the word `throw`, so that there is no possibility it will ever return anything.
 
 ```
 const generateError = (message: string, code: number) => {
@@ -1613,7 +2217,7 @@ const generateError = (message: string, code: number) => {
 generateError("Upsy", 500)
 ```
 
-> So the type of such function is NOT `void` (because `void` returns `undefined`. Type of such function is `never`.
+> So the type of such function is not `void` (because `void` returns `undefined`). Type of such function is `never`.
 
 ```
 const generateError = (message: string, code: number): never => {
@@ -1622,7 +2226,7 @@ const generateError = (message: string, code: number): never => {
 generateError("Upsy", 500)
 ```
 
-> We can also console log this and see there is NO console log:
+> We can also console log this and see there is no console log:
 
 ```
 const generateError = (message: string, code: number): never => {
@@ -1632,7 +2236,7 @@ const something = generateError("Upsy", 500)
 console.log(something)
 ```
 
-> Also another function which would NEVER return anything is an infite loop function:
+> Also another function which would `never` return anything is an infite loop function:
 
 ```
 const generateError = (message: string, code: number): never => {
