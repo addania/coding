@@ -898,4 +898,393 @@ const myAcc = new Accounting(10, 100);
 myAcc.describe();
 ```
 
-> Very important note is that abstract classes cant be instantiated themselves. If we tried to create and instance of Department now, we would get an error.
+> Very important note is that abstract classes can't be instantiated themselves. It is just a class which is there to be inhereted from, so that inheriting classes can be instatiated and it forces its child classes to provide full implementation (of describe method in our example)
+
+> In other words, abstract class is a class which cant be instantiated, it can only be extended.
+
+**Private constructors**
+
+> In object oriented programming we have something called `singleton pattern`. Singleton patter ensures that we always only have 1 single instance of a class. They are useful when we cant use static methods and you dont want to create multiple object from a given class (you only want to have exactly one object based on this class). For example if we know we only have exactly one Accounting Department we might want to only allow for creating one such object based on Accounting class.
+
+> In order to avoid being able to call `new Accounting()` multiple times, we can turn our construtor into private using a `private` keyword in front of it:
+
+```
+class Accounting extends Department {
+  ...
+  private constructor() {
+    ...
+  }
+  ...
+}
+```
+
+> This will mean we cannot calls `new` on it:
+
+```
+const myAcc = new Accounting()
+```
+
+> Our constructor is only accessible from the `inside` of the class. But how can we create an object out of it if we cannot call it from outside of the class? The answer are `static` methods which can be called on the class itself without instantiating them.
+
+> We can create a `static` property called for example `instance` (can be other name), which will be undefined initially, but once we instantiate the Accounting class, then we store that instance there. It will be our flag which denotes whether we already have an instance or not.
+
+> Furthermore, we will also add a static method called `getInstance` (can be other name), which will instanciate our class and have there the logic to check if we already have such a class.
+
+```
+class Accounting extends Department {
+  private static instance: Accounting;
+
+  static getInstance() {
+    if (this.instance) {
+      return this.instance;
+    } else {
+      this.instance = new Accounting(10, 100);
+      return this.instance;
+    }
+  }
+
+  private constructor(id: number, size: number) {
+    super("Accounting", id, size);
+    this.reports = [];
+    this.lastReport = this.reports[0];
+  }
+}
+```
+
+> Please note that in `static getInstance()` method `this` keyword refers to the `class` itself not to its instance. For nont-static methods it referes to the instance of the class.
+
+> Alternative would be that we use `Accounting` instead of this `keyword`:
+
+```
+class Accounting extends Department {
+  ...
+  static getInstance() {
+    if (Accounting.instance) {
+      return Accounting.instance;
+    } else {
+      Accounting.instance = new Accounting(10, 100);
+      return Accounting.instance;
+    }
+  }
+  ...
+}
+```
+
+> Please note, that inside of the class we `can` use `new Accounting()` which means we can use the private constructor. Even if it is private it can be used from within the class.
+
+> How can we then create an object out of such class?
+
+```
+const myAcc = Accounting.getInstance();
+```
+
+> If I call `Accounting.getInstance()` again I will not create two objects, I will get the same object referenced:
+
+```
+const myAcc = Accounting.getInstance();
+const myAcc2 = Accounting.getInstance();
+const myAcc3 = Accounting.getInstance();
+```
+
+**Interfaces**
+
+> Interafces are a feature of Typescript, not vanilla Javascript. Interface describes how an object should look like. In order to create on we use keyword `interface` and then its name with capital letter (this is a convention, not a must):
+
+```
+interface Person {
+  name: string;
+  age: number
+}
+```
+
+> Unlike `class`, `interafce` is not a blueprint. It is a custom `type` which defines which properties and their types it is going to have. It does not store concrete values like "Addania" and "18". If I try to initialize it with a concrete value, I would get an error:
+
+```
+interface Person {
+  name: string = Mia;
+}
+```
+
+> We can also define types for methods in the interface:
+
+```
+interface Person {
+  name: string;
+  age: number;
+  greet(phrase: string): void;
+}
+```
+
+> `greet` is our method, `phrase` is the parameter which needs to be provided to that method and `void` is its return type.
+
+> Why do we use interfaces? We can use it for type checking. If wecreate a let at the beginning maybe we dont want to give it a value, we just want to make sure later on it is assgined a proper object with a proper type. We can use our new interface as a custom type:
+
+```
+let person: Person
+```
+
+> Then when we assign a value to person, it needs to follow the structure we defined in the interface:
+
+```
+person = {
+  name: "Addania",
+  age: 18,
+  greet(phrase: string) {
+    console.log(phrase + " " + this.name);
+  },
+};
+person.greet("Hi, my name is");
+```
+
+> But WHY?? Why an interface and not just a regular type? All we need is to remove `interface` keyword and use `type keyword and we also need an equal sign.
+
+```
+Person = {
+  name: string;
+  age: number;
+  greet(phrase: string): void;
+}
+```
+
+> This will also work! We can use them interchangeably. But interafce and a type are not the same. And there are differences.
+
+> `Interfaces` can only be used to describe an object! No other type. `Types` are more generic and we can store any type there: union type, function type, etc. `Type` is more flexible, but `interface` is clearer that conveys the intention on defining an object.
+
+> With interface we can also implement an interface in the class! (Although we can also do it with the custom type). Interface then declares a contract which a class need to adhere to. For example:
+
+```
+interface Greetable {
+  name: string;
+  greet(phrase: string): void;
+}
+```
+
+> Now how to define that a class should adhere to this contract (interface)? We use `implements` keyword.
+
+```
+class Person implements Greetable {...}
+```
+
+> Class can implement multiple interfaces:
+
+```
+class Person implements Greetable, Admirable {...}
+```
+
+> Whole code:
+
+```
+interface Greetable {
+  name: string;
+  greet(phrase: string): void;
+}
+
+class Person implements Greetable {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+  greet(phrase: string) {
+    console.log(phrase + " " + this.name);
+  }
+}
+const queen = new Person("Mia");
+queen.greet("Your Majesty");
+```
+
+> This class can also have more properties and more methods!
+
+```
+class Person implements Greetable {
+  name: string;
+  age: number = 18;
+  constructor(name: string) {
+    this.name = name;
+  }
+  greet(phrase: string) {
+    console.log(phrase + " " + this.name);
+  }
+  print(){
+    console.log("Test run")
+  }
+}
+```
+
+> Often what we want is to share interfaces between different classes, so that they have a common structure to adhere to, but each class can also have its specifics. Please note we still can inherit from such a class.
+
+> Interaface is a bit like an abstract class, but interface does not have any implementation details at all. Abstract classes (because they are classes) can also hld other implementation details (apart from the abstract method)
+
+> Terminology: Person is a class which implements Greetable interface
+
+> Why interfaces? We use them when we want to ensure and force that a class has a certain structures (like a greet method). We can then easily share functionalities among classes, and each class can then have its own implementation of that interface (methods and properties). It is especially useful when other parts of the code rely on that structure.
+
+> Private and public modifiers are not available in the interface. So this code will not work:
+
+```
+interface Greetable {
+  private name: string;
+  public age: number;
+}
+```
+
+> But we can use `readonly` modifier to mark the property which can only be set once and is readonly thereafter:
+
+```
+interface Greetable {
+  readonly name: string;
+}
+```
+
+> We can use readonly also on a type:
+
+```
+type Greetable = {
+  readonly name: string;
+}
+```
+
+> Please note that if I use `readonly` in the `interface`, then I don't have to set readonly property inside of the `class`. And still, it will throw an error if I try to re-assign the value to the name.
+
+```
+interface Greetable {
+  readonly name: string;
+}
+class Person implements Greetable {
+  name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+let queen: Greetable
+queen = new Person("Mia");
+queen.name = "Adda";
+```
+
+> In above code `queen.name = "Adda";` will throw an error.
+
+> We can also implement inheritance in interfaces. For example, we can have Named and Greetable as two separate interfaces and our class will extend both of them:
+
+```
+interface Named {
+  name: string;
+}
+interface Greetable {
+  greet(phrase: string): void;
+}
+
+class Person implements Greetable, Named {
+  name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+  greet(phrase: string) {
+    console.log(phrase + " " + this.name);
+  }
+}
+let queen: Greetable;
+queen = new Person("Mia");
+queen.greet("Your Majesty");
+```
+
+> Alternatively, perhaps we know that each Greetable object always need to have a name, then we could extend Greetable interface with Named interface, so that together they form a new interface which forces every Greetable object to have a greet method but also to have a name. How to do it? We can simply use extends keyword after the interface name.
+
+```
+interface Named {
+  name: string;
+}
+interface Greetable extends Named {
+  greet(phrase: string): void;
+}
+```
+
+> Our class then can only implement Greetable but it automatically also needs to have name property:
+
+```
+class Person implements Greetable {...}
+```
+
+> We could also extend multiple interfaces:
+
+```
+interface Named {
+  name: string;
+}
+interface Greetable extends Named, AnotherInterface, CoolInterface {
+  greet(phrase: string): void;
+}
+```
+
+> For classes you can only inherit from one class! We cannot inherit from multiple classes! So you cannot do this:
+
+```
+class Person extends Being, Human {...}
+```
+
+> Interfaces can also be used in order to define the structure of a function as a replacement of function types. Function types look like this:
+
+```
+type Add = ( n1:number, n2:number ) => number
+let add: Add;
+add = (x: number, y: number) => {
+  return x+y
+}
+```
+
+> Interfaces define structure of objects and functions are objects. So defining a function with and interface we do the following:
+
+```
+interface Add {
+  (n1:number, n2:number): number
+}
+```
+
+> This is similar how we would type a method in the class (except we dont have a name of the function, it is an anonymouse function in the interface function definition)
+
+> Optional properties in interfaces are denoted with a questionmark:
+
+```
+interface Add {
+  name: string;
+  age?: number
+}
+```
+
+> We can also make methods optional:
+
+```
+interface Add {
+  name: string;
+  age?: number
+  greet?(phrase: string): void
+}
+```
+
+> Just like we can make a property in the class optional:
+
+```
+class Person {
+  name?: string
+  constructor(n?: string){
+    if(n){
+      this.name = n
+    }
+  }
+}
+
+const Dave = new Person()
+```
+
+> Notice how we do not have the then pass any argument when instantiating the class `new Person()`. Alternatively, instead of a questionmark, we could provide the default value for n in the constructor:
+
+```
+constructor(n: string = "human")
+```
+
+> Please note that optional property in interface and class are only loosly related. I can have an optional parameter in interface, but a required parameter in the class!
+
+> Optional parameters can also be in constructor or methods. If we have one, we can use questionmark to denote it or use a default value if that parameter is not provided
+
+> Now let's take a look at the js file and see how interfaces are compiled to js... The answer is... NOTHING! They are not compiled, they are completely absent. It is only typescript feature helping during development helping to write clearer code. No trace will be left in the production.
+
+> One last note: what is the difference between interface and the class: interfaces cant be instantiated and are not compiled to js. Classes can be instantiated and are compiled to js.
