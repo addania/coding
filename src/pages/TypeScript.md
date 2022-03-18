@@ -2991,12 +2991,112 @@ type Direction = "up" | "down" | "left" | "right"
 
 ```
 
-> **Do not us wide types like object or any**
+> **Do not use wide types like object or any**
 
 Always try to find concrete types
 
 ![](https://i.imgur.com/ob6G3qI.jpg "Photo by Pixabay from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Pixabay from Pexels_</p>
 
-```
+**Intersection types**
+
+![](https://i.imgur.com/KlTaZzV.png "Photo by Deva Darshan from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Deva Darshan from Pexels_</p>
+
+> Intersection types allow us to combine other types
+
+> Imagine we have a following types:
 
 ```
+type Admin = {
+  name: string;
+  privileges: Array<string>
+}
+
+type Employee = {
+  name: string;
+  startDate: Date;
+}
+```
+
+> What if I want to combine these two objects to a new type `ElevatedEmployee` which should contain all of above? Of course we could create a new type and define it manually:
+
+```
+type ElevatedEmployee = {
+  name: string;
+  startDate: Data;
+  priviledges: Array<string>
+}
+```
+
+> But since we already have a type for Admin and for Employee, we can combine them and create a new type based on them. This will also allow us to have one source of truth. IN order to define an intersection type, weuse `ampersand` symbol.
+
+```
+type ElevatedEmployee = Admin & Employee;
+const david: ElevatedEmployee = {
+  name: "Dave",
+  privileges: [],
+  startDate: new Date(),
+}
+```
+
+> We could also achieve this with interfaces:
+
+```
+interface Admin {
+  name: string;
+  privileges: Array<string>;
+}
+
+interface Employee {
+  name: string;
+  startDate: Date;
+}
+
+interface ElevatedEmployee extends Admin, Employee {}
+
+const david: ElevatedEmployee = {
+  name: "Dave",
+  privileges: [],
+  startDate: new Date(),
+};
+```
+
+> Intersection can be used for any types, not only objects:
+
+```
+type Combinable = string | number
+type Calculatable = number | boolean
+type Universal = Combinable & Calculatable
+```
+
+> As a result Universal type will be of a type number, because number is the only `intersection` between (string or number) and (number or boolean).
+
+> Why is that? Simply because of the way intersections are implemented. Intersections of union types will result in whatever is common for both union types. Intersection of object will result in combination of all its objects.
+
+**Type guards**
+
+![](https://i.imgur.com/NYjRWPJ.png "Photo by Mike from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Mike from Pexels_</p>
+
+> Type guards help us with union types. Because we need to know which exact type we are getting at run time.
+
+**a) typeof type guard**
+
+> Imagine a function which can get Combinable parameters - strings or numbers. In order to process those numbers correctly, we need to have a logic which distinguished between strings and numbers. When those are strings or at least one of them is a string, we concatenate them. If both are numbers then we add them up:
+
+```
+type Combinable = string | number;
+
+const addUp = (a: Combinable, b: Combinable) => {
+  if (typeof a === "string" || typeof b === "string") {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+};
+
+console.log("strings: ", addUp("m", "n"));
+console.log("numbers: ", addUp(1, 2));
+console.log("string & number: ", addUp("m", 1));
+```
+
+> `if (typeof a === "string" || typeof b === "string") {...}` is called a type guard. It allows us to use the flexibility of the union type gives us, bubt still ensures that our code runs correctly at run time.
+
+**b) typeof type guard**
