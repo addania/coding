@@ -6,8 +6,9 @@ import { Carousel } from "../components/carousel.js"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./index.css"
 import vid from "../assets/videos/vid.mp4"
-import yogata from "../assets/gifs/yogata.gif"
-import advent from "../assets/images/advent.png"
+import yogata from "../assets/gifs/yoga.gif"
+import advent from "../assets/gifs/advent.gif"
+import highcharts from "../assets/gifs/highcharts.gif"
 
 export default ({ data }) => {
   console.log(data)
@@ -111,7 +112,7 @@ export default ({ data }) => {
               </a>
             </div>
             <div style={{ width: "350px" }}>
-              <img src={yogata} alt="yogata" />
+              <img src={highcharts} alt="highcharts" />
             </div>
           </p>
         </div>
