@@ -8,6 +8,27 @@
   Addania's coding knowledge base
 </h1>
 
+Pre-requisites:
+
+- git
+- gatsby
+- node.js
+
+Please refer to this article: https://addania.github.io/coding/Intro_to_Gatsby/
+
+You will need gatsby installed:
+
+```shell
+npm install -g gatsby-cli
+```
+
+To setup the project:
+
+```shell
+git clone
+npm install
+```
+
 To start the project:
 
 ```shell

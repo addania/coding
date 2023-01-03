@@ -882,7 +882,7 @@ achievements[0] = {name: "Taste the Rainbow!", date: 1644150502} // Error: you c
 achievements[0].name = "Taste the Rainbow" // Error: name is now also readonly property of the object
 ```
 
-> Readonly modifier can be user on arrays or objects or properties of object.
+> Readonly modifier can be used on arrays, objects or properties of object.
 
 > We can also make an entire object readonly:
 
@@ -1195,7 +1195,7 @@ type UnknownByAnotherName = unknown | number
 type AnyInDisguise = any | unknown
 ```
 
-> This means that any variable with the AnyInDisguise type will have all type checking disabled for it, just like an ordinary any variable.
+> This means that any variable with the `AnyInDisguise` type will have all type checking disabled for it, just like an ordinary any variable.
 
 **Unions of Literal Types**
 
@@ -1249,7 +1249,7 @@ function server (option: ErrorCode) {
 server(400)
 ```
 
-** Arrays of Union Types**
+**Arrays of Union Types**
 
 > In JavaScript, arrays can contain a mixture of values of different types. Typically, however, you want arrays to only contain values of the same type, and TypeScript enforces this restriction.
 
