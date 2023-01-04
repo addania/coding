@@ -63,7 +63,7 @@ export default ({ data }) => {
             >
               Unreal Engine
             </div>
-            <video width="350" controls>
+            <video width="450" controls>
               <source src={obstacleAssault} type="video/mp4"></source>
             </video>
           </p>
@@ -84,7 +84,7 @@ export default ({ data }) => {
             >
               Unreal Engine
             </div>
-            <video width="350" controls>
+            <video width="450" controls>
               <source src={warehouseWrackage} type="video/mp4"></source>
             </video>
           </p>
@@ -139,7 +139,7 @@ export default ({ data }) => {
             >
               Unreal Engine
             </div>
-            <video width="350" controls>
+            <video width="450" controls>
               <source src={landscaping} type="video/mp4"></source>
             </video>
           </p>
@@ -172,7 +172,7 @@ export default ({ data }) => {
             >
               React, Gatsby
             </div>
-            <div style={{ width: "350px" }}>
+            <div style={{ width: "450px" }}>
               <a href="https://addania.github.io/yogata/">
                 <img src={yogata} alt="yogata" />
               </a>
@@ -196,7 +196,7 @@ export default ({ data }) => {
             >
               React, Highcharts
             </div>
-            <div style={{ width: "350px" }}>
+            <div style={{ width: "450px" }}>
               <a href="https://addania.github.io/challenge/">
                 <img src={highcharts} alt="highcharts" />
               </a>
@@ -221,7 +221,7 @@ export default ({ data }) => {
             >
               React, Create React App
             </div>
-            <div style={{ width: "350px" }}>
+            <div style={{ width: "450px" }}>
               <a href="https://addania.github.io/adventOfCode/">
                 <img src={adventCode} alt="adventCode" />
               </a>
@@ -244,7 +244,7 @@ export default ({ data }) => {
             >
               Javascript
             </div>
-            <div style={{ width: "350px" }}>
+            <div style={{ width: "450px" }}>
               <a href="http://www.karrmey.com/a/b/c/d/core.html">
                 <img src={bookFinder2} alt="bookFinder2" />
               </a>
@@ -279,7 +279,7 @@ export default ({ data }) => {
             >
               Illustrator
             </div>
-            <div style={{ width: "350px" }}>
+            <div style={{ width: "450px" }}>
               <img src={blogDesign} alt="blogDesign" />
             </div>
           </p>
@@ -301,7 +301,7 @@ export default ({ data }) => {
             >
               Illustrator
             </div>
-            <div style={{ width: "350px" }}>
+            <div style={{ width: "450px" }}>
               <img src={wineFacts} alt="wineFacts" />
             </div>
           </p>
@@ -334,7 +334,7 @@ export default ({ data }) => {
             >
               Illustrator
             </div>
-            <div style={{ width: "350px" }}>
+            <div style={{ width: "450px" }}>
               <img src={portfolio} alt="portfolio" />
             </div>
           </p>

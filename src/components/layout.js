@@ -21,7 +21,7 @@ export default ({ children }) => {
     `
   )
   return (
-    <div style={{ margin: `3rem auto`, maxWidth: 800, padding: `0 1rem` }}>
+    <div style={{ margin: `3rem auto`, maxWidth: 1000, padding: `0 1rem` }}>
       <header style={{ marginBottom: `1.5rem`, paddingTop: "20px" }}>
         <Link to="/" style={{ textShadow: `none`, backgroundImage: `none` }}>
           <h3 style={{ display: `inline`, fontSize: "1rem" }}>
