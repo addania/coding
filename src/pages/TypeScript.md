@@ -1292,7 +1292,7 @@ errorCodesFromLast24Hours.push(200)
 
 > The more precise you can be about the types of values that can go into your arrays, the more helpful the compiler can be in ensuring that those values are used appropriately throughout your code.
 
-** Unions of Object Types **
+**Unions of Object Types**
 
 > With unions of object types, the union does not merge the properties of the underlying types together. Suppose you have the following types in your code:
 
@@ -1438,7 +1438,7 @@ printMe({
 }); // error - excess properties check kicks in and Typescript's default structural typing is overriden by more strict nominal typing
 ```
 
-** Unions of Object Types and Excess Property Checks**
+**Unions of Object Types and Excess Property Checks**
 
 > Excess property checks prevent you from assigning an object literal to an explicitly annotated variable if the literal includes properties not in the annotated type.
 
@@ -1472,7 +1472,7 @@ let customerEmployeeHybrid: CheckoutUser = {
 
 > The end result in this case is a legitimate assignment to a CheckoutUser variable that would not be a legitimate assignment to either a Customer variable or an Employee variable. Ideally the assignment of this hybrid object wouldn't be allowed, but the compiler cannot rule it out without also ruling out perfectly acceptable assignments of (non-hybrid) Customer and Employee values as well.
 
-** Discriminating Properties**
+**Discriminating Properties**
 
 > To get around the potentially problematic situation described in the previous slide, you can give the underlying types used in a union of object types a discriminating property: a property with the same key, but an incompatible type. For example, you could give the Customer and Employee object types each a role property with a different literal type:
 
@@ -2057,7 +2057,7 @@ takesStringOrNumberA = takesStringB // ERROR
 
 > Another way to think about this is: in the place of takeStringB we expect something that can handle strings. If we provide it with a function that can handle string and numbers, we are fine. In the second line, in the place of takesStringOrNumberA we expect a function that can handle strings and numbers. But if we pass there a function which can only with with strings, then this is not OK.
 
-3. Function type B must have no more parameters than function type A (unless those additional parameters are optional or rest parameters), but it can have fewer.
+- 3. Function type B must have no more parameters than function type A (unless those additional parameters are optional or rest parameters), but it can have fewer.
 
 ```
 let takesTwoArguments = (x: number, y: number) => x + y
@@ -2116,7 +2116,7 @@ const result = returnsString() // result has type 'void', but its value is a 'st
 
 > Note that this exception only applies to void functions, not to functions that have a return type of undefined. This is another key difference between void and undefined as return types.
 
-**Never**
+**Never Return type**
 
 > The never type represents values that can never occur at run-time. It is not possible to assign anything to a variable of type never. In other words, the set described by this type is the empty set.
 

@@ -6,9 +6,24 @@ import { Carousel } from "../components/carousel.js"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./index.css"
 import vid from "../assets/videos/vid.mp4"
+import landscaping from "../assets/videos/landscaping.mp4"
+import obstacleAssault from "../assets/videos/obstacleAssault.mp4"
+import warehouseWrackage from "../assets/videos/warehouseWrackage.mp4"
 import yogata from "../assets/gifs/yoga.gif"
 import advent from "../assets/gifs/advent.gif"
+import adventCode from "../assets/gifs/adventCode.gif"
 import highcharts from "../assets/gifs/highcharts.gif"
+import bookFinder from "../assets/gifs/bookFinder.gif"
+import bookFinder2 from "../assets/gifs/bookFinder2.gif"
+import portfolio from "../assets/gifs/portfolio.gif"
+import blogDesign from "../assets/gifs/blogDesign.gif"
+import wineFacts from "../assets/gifs/wineFacts.gif"
+import webDesign from "../assets/images/webDesign.png"
+import webDesign2 from "../assets/images/webDesign2.png"
+import webWine from "../assets/images/webWine.png"
+import webWine2 from "../assets/images/webWine2.png"
+import portfolioDesign from "../assets/images/portfolioDesign.png"
+import portfolioDesign2 from "../assets/images/portfolioDesign2.png"
 
 export default ({ data }) => {
   console.log(data)
@@ -31,35 +46,50 @@ export default ({ data }) => {
           Game development
         </h4>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <p>
-            <div style={{ textAlign: "center" }}>Obstacle Assault</div>
+          <p
+            style={{
+              textAlign: "center",
+              backgroundColor: "black",
+              color: "white",
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <div>Obstacle Assault</div>
+            <div
+              style={{
+                fontSize: "14px",
+              }}
+            >
+              Unreal Engine
+            </div>
             <video width="350" controls>
-              <source src={vid} type="video/mp4"></source>
+              <source src={obstacleAssault} type="video/mp4"></source>
             </video>
           </p>
-          <p>
-            <div style={{ textAlign: "center" }}>Warehouse Wreckage</div>
+          <p
+            style={{
+              textAlign: "center",
+              backgroundColor: "black",
+              color: "white",
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <div>Warehouse Wreckage</div>
+            <div
+              style={{
+                fontSize: "14px",
+              }}
+            >
+              Unreal Engine
+            </div>
             <video width="350" controls>
-              <source src={vid} type="video/mp4"></source>
+              <source src={warehouseWrackage} type="video/mp4"></source>
             </video>
           </p>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <p>
-            <div style={{ textAlign: "center" }}>Castle environment</div>
-            <video width="350" controls>
-              <source src={vid} type="video/mp4"></source>
-            </video>
-          </p>
-          <p>
-            <div style={{ textAlign: "center" }}>Crypt raider</div>
-            <video width="350" controls>
-              <source src={vid} type="video/mp4"></source>
-            </video>
-          </p>
-        </div>
-
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
           <p>
             <div style={{ textAlign: "center" }}>Tanks Wars</div>
             <video width="350" controls>
@@ -75,12 +105,46 @@ export default ({ data }) => {
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <p>
-            <div style={{ textAlign: "center" }}>3D Character modelling</div>
+            <div style={{ textAlign: "center" }}>Crypt raider</div>
             <video width="350" controls>
               <source src={vid} type="video/mp4"></source>
             </video>
           </p>
+        </div>*/}
+        <h4
+          style={{
+            textAlign: "center",
+            marginBottom: "20px",
+            marginTop: "30px",
+          }}
+        >
+          Artistic
+        </h4>
+
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <p
+            style={{
+              textAlign: "center",
+              backgroundColor: "black",
+              color: "white",
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <div>Landscaping</div>
+            <div
+              style={{
+                fontSize: "14px",
+              }}
+            >
+              Unreal Engine
+            </div>
+            <video width="350" controls>
+              <source src={landscaping} type="video/mp4"></source>
+            </video>
+          </p>
         </div>
+
         <h4
           style={{
             textAlign: "center",
@@ -91,46 +155,206 @@ export default ({ data }) => {
           Websites
         </h4>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <p>
-            <div style={{ textAlign: "center" }}>Yogata:</div>
-            <div style={{ textAlign: "center" }}>
-              <a href="https://addania.github.io/yogata/">
-                https://addania.github.io/yogata/
-              </a>
+          <p
+            style={{
+              textAlign: "center",
+              backgroundColor: "black",
+              color: "white",
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <div>Yogata</div>
+            <div
+              style={{
+                fontSize: "14px",
+              }}
+            >
+              React, Gatsby
             </div>
             <div style={{ width: "350px" }}>
-              <img src={yogata} alt="yogata" />
+              <a href="https://addania.github.io/yogata/">
+                <img src={yogata} alt="yogata" />
+              </a>
             </div>
           </p>
 
-          <p>
-            <div style={{ textAlign: "center" }}>Highcharts:</div>
-
-            <div style={{ textAlign: "center" }}>
-              <a href="https://addania.github.io/challenge/">
-                https://addania.github.io/challenge/
-              </a>
+          <p
+            style={{
+              textAlign: "center",
+              backgroundColor: "black",
+              color: "white",
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <div>Advertising Data</div>
+            <div
+              style={{
+                fontSize: "14px",
+              }}
+            >
+              React, Highcharts
             </div>
             <div style={{ width: "350px" }}>
-              <img src={highcharts} alt="highcharts" />
+              <a href="https://addania.github.io/challenge/">
+                <img src={highcharts} alt="highcharts" />
+              </a>
             </div>
           </p>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <p>
-            <div style={{ textAlign: "center" }}>
-              Advent of Code Competitions:
-            </div>
-            <div style={{ textAlign: "center" }}>
-              <a href="https://addania.github.io/adventOfCode/">
-                https://addania.github.io/adventOfCode/
-              </a>
+          <p
+            style={{
+              textAlign: "center",
+              backgroundColor: "black",
+              color: "white",
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <div>Advent of Code</div>
+            <div
+              style={{
+                fontSize: "14px",
+              }}
+            >
+              React, Create React App
             </div>
             <div style={{ width: "350px" }}>
-              <img src={advent} alt="advent" />
+              <a href="https://addania.github.io/adventOfCode/">
+                <img src={adventCode} alt="adventCode" />
+              </a>
+            </div>
+          </p>
+          <p
+            style={{
+              textAlign: "center",
+              backgroundColor: "black",
+              color: "white",
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <div>Book finder</div>
+            <div
+              style={{
+                fontSize: "14px",
+              }}
+            >
+              Javascript
+            </div>
+            <div style={{ width: "350px" }}>
+              <a href="http://www.karrmey.com/a/b/c/d/core.html">
+                <img src={bookFinder2} alt="bookFinder2" />
+              </a>
             </div>
           </p>
         </div>
+
+        <h4
+          style={{
+            textAlign: "center",
+            marginBottom: "20px",
+            marginTop: "30px",
+          }}
+        >
+          Web design
+        </h4>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <p
+            style={{
+              textAlign: "center",
+              backgroundColor: "black",
+              color: "white",
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <div>Blog</div>
+            <div
+              style={{
+                fontSize: "14px",
+              }}
+            >
+              Illustrator
+            </div>
+            <div style={{ width: "350px" }}>
+              <img src={blogDesign} alt="blogDesign" />
+            </div>
+          </p>
+
+          <p
+            style={{
+              textAlign: "center",
+              backgroundColor: "black",
+              color: "white",
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <div>Wine site</div>
+            <div
+              style={{
+                fontSize: "14px",
+              }}
+            >
+              Illustrator
+            </div>
+            <div style={{ width: "350px" }}>
+              <img src={wineFacts} alt="wineFacts" />
+            </div>
+          </p>
+        </div>
+
+        <h4
+          style={{
+            textAlign: "center",
+            marginBottom: "20px",
+            marginTop: "30px",
+          }}
+        >
+          Portfolio Design
+        </h4>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <p
+            style={{
+              textAlign: "center",
+              backgroundColor: "black",
+              color: "white",
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <div>Portfolio</div>
+            <div
+              style={{
+                fontSize: "14px",
+              }}
+            >
+              Illustrator
+            </div>
+            <div style={{ width: "350px" }}>
+              <img src={portfolio} alt="portfolio" />
+            </div>
+          </p>
+        </div>
+        {/*  <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <p>
+            <div style={{ textAlign: "center" }}>Websites design - Illustrator</div>
+            <video width="350" controls>
+              <source src={landscaping} type="video/mp4"></source>
+            </video>
+          </p>
+          
+          <p>
+            <div style={{ textAlign: "center" }}>3D Character modelling</div>
+            <video width="350" controls>
+              <source src={vid} type="video/mp4"></source>
+            </video>
+          </p>
+          
+        </div>*/}
       </Layout>
     </div>
   )
