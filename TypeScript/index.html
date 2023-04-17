@@ -2906,4 +2906,2530 @@ console.log("string &#x26; number: ", addUp("m", 1));
 <blockquote>
 <p><code>if (typeof a === "string" || typeof b === "string") {...}</code> is called a type guard. It allows us to use the flexibility of the union type gives us, bubt still ensures that our code runs correctly at run time.</p>
 </blockquote>
-<p><strong>b) typeof type guard</strong></p></div><hr/><footer style="padding-bottom:20px"><p style="text-align:center;font-size:14px;margin-bottom:0;color:grey">© <!-- -->2023<!-- --> Design and Development by<!-- --> <!-- -->Addania</p></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/TypeScript/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-f3d84b4c8222d4b9c5d2.js"],"app":["/app-c6ae7489a44c6e3c5541.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-46b4173e1060a5c82475.js"],"component---src-pages-about-css-modules-js":["/component---src-pages-about-css-modules-js-6de546fbe33d5afb5f5e.js"],"component---src-pages-about-js":["/component---src-pages-about-js-c14fea35d7b3381d90ef.js"],"component---src-pages-contact-js":["/component---src-pages-contact-js-859ab4cc1ba371e756b0.js"],"component---src-pages-impressions-backup-all-js":["/component---src-pages-impressions-backup-all-js-027ae6ebcd64b4a1fb81.js"],"component---src-pages-impressions-js":["/component---src-pages-impressions-js-a3a4032c8ae25a6c6fd8.js"],"component---src-pages-index-js":["/component---src-pages-index-js-55e9fbc791d726a8611a.js"],"component---src-pages-knowledge-js":["/component---src-pages-knowledge-js-e33b0c8cd163ed1e8502.js"],"component---src-pages-my-files-js":["/component---src-pages-my-files-js-ead31c337ff16adad8bb.js"],"component---src-pages-portfolio-js":["/component---src-pages-portfolio-js-bc1d22dbf39b92f13c71.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-6aa6a69c22311d8323cf.js"]};/*]]>*/</script><script src="/coding/polyfill-f3d84b4c8222d4b9c5d2.js" nomodule=""></script><script src="/coding/component---src-templates-blog-post-js-6aa6a69c22311d8323cf.js" async=""></script><script src="/coding/8e8ef419a4232dec292a51b05d9a734c26533496-ff442865617a5e4ab7d9.js" async=""></script><script src="/coding/app-c6ae7489a44c6e3c5541.js" async=""></script><script src="/coding/framework-70a2455d4a4320e97528.js" async=""></script><script src="/coding/styles-29147cbc04bbc833f6a0.js" async=""></script><script src="/coding/webpack-runtime-4f22d2c8c2fa6249c31a.js" async=""></script></body></html>
+<p><strong>b) typeof type guard</strong></p>
+<p><strong>Interfaces</strong></p>
+<blockquote>
+<p>They represent objects! type can represent anything, interface only object</p>
+</blockquote>
+<pre><code>interface Adda {
+  name: string,
+  nick: string,
+  age: number
+}
+</code></pre>
+<blockquote>
+<p>It is matter of custom. Whichever I choose I should be consistent.</p>
+</blockquote>
+<p><strong>Alias</strong></p>
+<blockquote>
+<p>Is when we extract our own type:</p>
+</blockquote>
+<pre><code>type User = {
+  id: string,
+  age: number
+}
+</code></pre>
+<p><strong>Promises</strong></p>
+<blockquote>
+<p>How to type a promise from an api? Use <code>Promise&#x3C;></code></p>
+</blockquote>
+<pre><code>interface LukeSkywalker {
+  name: string;
+  height: string;
+  mass: string;
+  hair_color: string;
+  skin_color: string;
+  eye_color: string;
+  birth_year: string;
+  gender: string;
+}
+
+export const fetchLukeSkywalker = async (): Promise&#x3C;LukeSkywalker> => {
+  const data = await fetch("https://swapi.dev/api/people/1").then((res) => {
+    return res.json();
+  });
+
+  return data;
+};
+</code></pre>
+<blockquote>
+<p>Another possibility is to use casting -> with word <code>as</code>. We can cast data to LukeSkywalker.</p>
+</blockquote>
+<pre><code>interface LukeSkywalker {
+  name: string;
+  height: string;
+  mass: string;
+  hair_color: string;
+  skin_color: string;
+  eye_color: string;
+  birth_year: string;
+  gender: string;
+}
+
+export const fetchLukeSkywalker = async () => {
+  const data = await fetch("https://swapi.dev/api/people/1").then((res) => {
+    return res.json();
+  });
+
+  return data as LukeSkywalker;
+};
+</code></pre>
+<p><strong>Sets</strong></p>
+<blockquote>
+<p>Sets are collections of values. A value in the Set may only occur once; it is unique in the Set's collection.</p>
+</blockquote>
+<pre><code>const guitarists = new Set();
+</code></pre>
+<blockquote>
+<p>How to type sets?</p>
+</blockquote>
+<pre><code>const guitarists = new Set&#x3C;string>();
+</code></pre>
+<p><strong>Objects with variables as keys</strong></p>
+<blockquote>
+<p>How to type objects which can have a variable as a key to avoid errors such as? No index signature with a parameter of type 'string' was found on type '{}'</p>
+</blockquote>
+<blockquote>
+<p>In this case the index is refering to the key of the object. Any such TS errors about index usually refer to the key of object (unless you work with arrays).</p>
+</blockquote>
+<blockquote>
+<p>First solution</p>
+</blockquote>
+<pre><code>const createCache = () => {
+  const cache = {};
+
+  const add = (id: string, value: string) => {
+    cache[id] = value;
+  };
+
+  return {
+    cache,
+    add,
+  };
+};
+</code></pre>
+<blockquote>
+<p>There are couple of ways how to type such an object:</p>
+</blockquote>
+<pre><code>const cache: {
+    [id: string]: string;
+    } = {};
+</code></pre>
+<blockquote>
+<p>In above example I can use also any other key, not only id. I can use index, or any other work (k, n):</p>
+</blockquote>
+<pre><code>const cache: {
+    [index: string]: string;
+    } = {};
+</code></pre>
+<blockquote>
+<p>Or:</p>
+</blockquote>
+<pre><code>const cache: {
+    [k: string]: string;
+    } = {};
+</code></pre>
+<blockquote>
+<p>This [k: string] inside of a type is called index signature.</p>
+</blockquote>
+<blockquote>
+<p>Another approach is to use interface:</p>
+</blockquote>
+<pre><code>interface Cache {
+  [id: string]: string;
+}
+</code></pre>
+<blockquote>
+<p>Or even using Record. Record allows to add any number of keys to that object at runtime.</p>
+</blockquote>
+<pre><code> const cache: Record&#x3C;string, string> = {};
+</code></pre>
+<p><strong>Typing catch errors</strong></p>
+<blockquote>
+<p>In javascript for each try block, we can only have 1 catch block</p>
+</blockquote>
+<blockquote>
+<p>We can throw any error:</p>
+</blockquote>
+<pre><code>throw 'What the!?'
+throw 7
+throw {wut: 'is this'}
+throw null
+throw new Promise(() => {})
+throw undefined
+</code></pre>
+<blockquote>
+<p>Now imagine a situation like this:</p>
+</blockquote>
+<pre><code>const tryCatchDemo = (state: "fail" | "succeed") => {
+  try {
+    if (state === "fail") {
+      throw new Error("Failure!");
+    }
+  } catch (e) {
+      return e.message;
+    }
+};
+</code></pre>
+<blockquote>
+<p>TS will yell at us that: 'e' is of type 'unknown' and we want to access message on the e.</p>
+</blockquote>
+<blockquote>
+<p>If we try to type "e" directly, it will yell that: Catch clause variable type annotation must be 'any' or 'unknown' if specified.</p>
+</blockquote>
+<pre><code>const tryCatchDemo = (state: "fail" | "succeed") => {
+  try {
+    if (state === "fail") {
+      throw new Error("Failure!");
+    }
+  } catch (e: Error) {
+      return e.message;
+    }
+};
+</code></pre>
+<blockquote>
+<p>One way to fix this is:</p>
+</blockquote>
+<pre><code>const tryCatchDemo = (state: "fail" | "succeed") => {
+  try {
+    if (state === "fail") {
+      throw new Error("Failure!");
+    }
+  } catch (e) {
+    if(e instanceof Error){return e.message;}
+    }
+};
+</code></pre>
+<p><strong>Extending interface</strong></p>
+<blockquote>
+<p>A reminder: interface is a type for objects. type can be anything, but interface can only be object.</p>
+</blockquote>
+<blockquote>
+<p>Look at the code below, it has a duplication of id everywhere:</p>
+</blockquote>
+<pre><code>interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+}
+
+interface Post {
+  id: string;
+  title: string;
+  body: string;
+}
+</code></pre>
+<blockquote>
+<p>How can we avoid duplication? We can create Id Interface and extend the User and Post with Id.</p>
+</blockquote>
+<pre><code>interface Id {
+  id: string
+}
+
+interface User extends Id {
+  firstName: string;
+  lastName: string;
+}
+
+interface Post extends Id {
+  title: string;
+  body: string;
+}
+</code></pre>
+<blockquote>
+<p>Please note that extends is only available for interfaces, and not for types.</p>
+</blockquote>
+<blockquote>
+<p>Why is it usefull? If I change my mind and I want id to be number, I can then only change it in one place instead of multiple.</p>
+</blockquote>
+<blockquote>
+<p>we can use extends with more items:</p>
+</blockquote>
+<pre><code>interface Post extends Id, User {
+    title: string;
+  body: string;
+}
+</code></pre>
+<p><strong>Object intersection</strong></p>
+<blockquote>
+<p>This combines objects. Imagine we have a scenario like this:</p>
+</blockquote>
+<pre><code>interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+}
+
+interface Post {
+  title: string;
+  body: string;
+}
+export const getDefaultUserAndPosts = (): unknown => {
+  return {
+    id: "1",
+    firstName: "Matt",
+    lastName: "Pocock",
+    posts: [
+      {
+        title: "How I eat so much cheese",
+        body: "It's pretty edam difficult",
+      },
+    ],
+  };
+};
+</code></pre>
+<blockquote>
+<p>How do we type this return statement instead of unknown so it's both User AND { posts: Post[] }?</p>
+</blockquote>
+<blockquote>
+<p>We can do it like this:</p>
+</blockquote>
+<pre><code>interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+}
+
+interface Post {
+  title: string;
+  body: string;
+}
+export const getDefaultUserAndPosts = (): User &#x26; { posts: Array&#x3C;Post> } => {
+  return {
+    id: "1",
+    firstName: "Matt",
+    lastName: "Pocock",
+    posts: [
+      {
+        title: "How I eat so much cheese",
+        body: "It's pretty edam difficult",
+      },
+    ],
+  };
+};
+</code></pre>
+<blockquote>
+<p>This little operator &#x26; is called intersection and it allows us to combine types. (While extends allows for inheritance)</p>
+</blockquote>
+<blockquote>
+<p>We can intersect more things: User &#x26; { posts: Array<Post> } &#x26; { age: number }</p>
+</blockquote>
+<p><strong>Pick</strong></p>
+<blockquote>
+<p>What if we have a type like this:</p>
+</blockquote>
+<pre><code>interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+}
+</code></pre>
+<blockquote>
+<p>and we want to create a new type which will contain everything except for id?
+We can use omit to do that:</p>
+</blockquote>
+<pre><code>type MyType = Omit&#x3C;User, "id">
+</code></pre>
+<blockquote>
+<p>We can omit multiple items:</p>
+</blockquote>
+<pre><code>type MyType = Omit&#x3C;User, "id", "firstName">
+</code></pre>
+<p><strong>Pick</strong></p>
+<blockquote>
+<p>Maybe we want to only get 1 single property form already defined type.</p>
+</blockquote>
+<blockquote>
+<p>Image we only want property lastName from User:</p>
+</blockquote>
+<pre><code>interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+}
+</code></pre>
+<blockquote>
+<p>We can then use pick utility in TS to do so:</p>
+</blockquote>
+<pre><code>type MyType = Pick&#x3C;User, "lastName">
+</code></pre>
+<p><strong>Typing Asynch functions</strong></p>
+<blockquote>
+<p>Imagine you have a situation like this:</p>
+</blockquote>
+<pre><code>interface User {
+  id: string;
+  lastName: string;
+}
+
+const createThenGetUser = async (
+  createUser: unknown,
+  getUser: unknown,
+): Promise&#x3C;User> => {
+  const userId: string = await createUser();
+  const user = await getUser(userId);
+  return user;
+};
+</code></pre>
+<blockquote>
+<p>You want to replace unknowns with proper type:</p>
+</blockquote>
+<pre><code>interface User {
+  id: string;
+  lastName: string;
+}
+
+const createThenGetUser = async (
+  createUser: () => Promise&#x3C;string>,
+  getUser: (id: string) => Promise&#x3C;User>
+): Promise&#x3C;User> => {
+  const userId: string = await createUser();
+  const user = await getUser(userId);
+  return user;
+};
+</code></pre>
+<p><strong>Return type of function</strong></p>
+<blockquote>
+<p>How can we say to TS to take the type from a return statement of a function?</p>
+</blockquote>
+<pre><code>const myFunc = () => {
+  return 123;
+};
+</code></pre>
+<blockquote>
+<p>We can use ReturnType helper and typeof</p>
+</blockquote>
+<pre><code>type MyFuncReturn = ReturnType&#x3C;typeof myFunc>;
+</code></pre>
+<p><strong>Arguments type of function</strong></p>
+<blockquote>
+<p>How can we say to TS to take the type from arguments of a function?</p>
+</blockquote>
+<pre><code>function sum(a: number, b: string): string {
+  return a + b;
+}
+</code></pre>
+<blockquote>
+<p>We want a type called SumParams which will be [a: number, b: string]. We will use helper Parameters for if and it will return us a tuple.</p>
+</blockquote>
+<pre><code>type SumParams = Parameters&#x3C;typeof sum>;
+</code></pre>
+<blockquote>
+<p>type FirstParam will be number</p>
+</blockquote>
+<pre><code>type FirstParam = SumParams[0];
+</code></pre>
+<blockquote>
+<p>type SecondParam will be string</p>
+</blockquote>
+<pre><code>type SecondParam = SumParams[1];
+</code></pre>
+<blockquote>
+<p>This is useful to type stuff which is not in my control, for example from 3rd party libraries</p>
+</blockquote>
+<p><strong>Awaited</strong></p>
+<blockquote>
+<p>What if we have an asynch function which returns a promise, but we want to extract a type from it without the Promise.</p>
+</blockquote>
+<pre><code>type A = Promise&#x3C;string>;
+</code></pre>
+<blockquote>
+<p>Awaited helps us to unwrap the promise</p>
+</blockquote>
+<pre><code>type B = Awaited&#x3C;A> // string
+</code></pre>
+<p><strong>Extracting keys from an object</strong></p>
+<blockquote>
+<p>Imagine we have an object like this:</p>
+</blockquote>
+<pre><code>const testingFrameworks = {
+  vitest: {
+    label: "Vitest",
+  },
+  jest: {
+    label: "Jest",
+  },
+  mocha: {
+    label: "Mocha",
+  },
+};
+</code></pre>
+<blockquote>
+<p>And we want to extract a union type of its keys: "vitest" | "jest" | "mocha"</p>
+</blockquote>
+<blockquote>
+<p>We will use keyof typeof for this:</p>
+</blockquote>
+<pre><code>type TestingFramework = keyof typeof testingFrameworks;
+</code></pre>
+<p><strong>Union, Discriminated union and Enum</strong></p>
+<blockquote>
+<p>What is difference between Union, Discriminated union and Enum</p>
+</blockquote>
+<blockquote>
+<p>A is a discriminated union, with 'type' as the discriminator. Discriminated unions have common properties which are used to differentiate between members of the union. In this case, type is the discriminator.</p>
+</blockquote>
+<pre><code>type A =
+  | {
+      type: "a";
+      a: string;
+    }
+  | {
+      type: "b";
+      b: string;
+    }
+  | {
+      type: "c";
+      c: string;
+    };
+</code></pre>
+<blockquote>
+<p>B is a union, but not a discriminated union.</p>
+</blockquote>
+<pre><code>type B = "a" | "b" | "c";
+</code></pre>
+<blockquote>
+<p>C is an enum.</p>
+</blockquote>
+<pre><code>enum C {
+  A = "a",
+  B = "b",
+  C = "c",
+}
+</code></pre>
+<p><strong>Extract</strong></p>
+<blockquote>
+<p>Now how can we extract one piece of info from discriminated union? Imagine we have a disc. union of type A:</p>
+</blockquote>
+<pre><code>type A =
+  | {
+      type: "a";
+      a: string;
+    }
+  | {
+      type: "b";
+      b: string;
+    }
+  | {
+      type: "c";
+      c: string;
+    };
+</code></pre>
+<blockquote>
+<p>and we want to extract such a type for "a":</p>
+</blockquote>
+<pre><code>type Extracted = Extract&#x3C;A, { type: 'a' }>
+</code></pre>
+<blockquote>
+<p>Extract is a type helper and super useful. Another example:</p>
+</blockquote>
+<pre><code>export type Event =
+  | {
+      type: "click";
+      event: MouseEvent;
+    }
+  | {
+      type: "focus";
+      event: FocusEvent;
+    }
+  | {
+      type: "keydown";
+      event: KeyboardEvent;
+    };
+
+type ClickEvent = Extract&#x3C;Event, { type: "click" }>;
+</code></pre>
+<blockquote>
+<p>We can also grab event, or any other property:</p>
+</blockquote>
+<pre><code>type FocussEvent = Extract&#x3C;Event, { event: KeyboardEvent }>
+</code></pre>
+<blockquote>
+<p>It also work not only on objects but also on unions, etc</p>
+</blockquote>
+<pre><code>type Fruit = "apple" | "banana" | "orange"
+type Exotic = Extract&#x3C;Fruit, "banana" | "orange">
+</code></pre>
+<p><strong><em>Exclude</em></strong></p>
+<blockquote>
+<p>It is reverse of Extract. It is useful for discriminated unions. It specifies which property you dont want:</p>
+</blockquote>
+<pre><code>export type Event =
+  | {
+      type: "click";
+      event: MouseEvent;
+    }
+  | {
+      type: "focus";
+      event: FocusEvent;
+    }
+  | {
+      type: "keydown";
+      event: KeyboardEvent;
+    };
+
+type NonKeyDownEvents = Exclude&#x3C;Event, { type: "keydown" }>;
+</code></pre>
+<p><strong>Indexed access type - Object values of keys</strong></p>
+<blockquote>
+<p>What if I have an object like this:</p>
+</blockquote>
+<pre><code>const fakeDataDefaults = {
+  String: "Default string",
+  Int: 1,
+  Float: 1.14,
+  Boolean: true,
+  ID: "id",
+};
+</code></pre>
+<blockquote>
+<p>And I want to extract the type for a specific key?</p>
+</blockquote>
+<pre><code>type StringType = typeof fakeDataDefaults["String"];
+type IntType = typeof fakeDataDefaults["Int"];
+type FloatType = typeof fakeDataDefaults["Float"];
+type BooleanType = typeof fakeDataDefaults["Boolean"];
+type IDType = typeof fakeDataDefaults["ID"];
+</code></pre>
+<blockquote>
+<p>Or alternatively:</p>
+</blockquote>
+<pre><code>type FakeDataDefaults = typeof fakeDataDefaults;
+
+type StringType = FakeDataDefaults["String"];
+type IntType = FakeDataDefaults["Int"];
+type FloatType = FakeDataDefaults["Float"];
+type BooleanType = FakeDataDefaults["Boolean"];
+type IDType = FakeDataDefaults["ID"];
+</code></pre>
+<blockquote>
+<p>We can even access object inside objecz on this way:</p>
+</blockquote>
+<pre><code>const fakeData = {
+  String: "Default string",
+  Int: 1,
+  Float: 1.14,
+  Boolean: true,
+  ID: {
+    job: "driver"
+  },
+};
+
+type Job = typeof fakeData["ID"]["job"]
+</code></pre>
+<p><strong>Accessing prop on discriminated union</strong></p>
+<blockquote>
+<p>If I have an object like this::</p>
+</blockquote>
+<pre><code>type Event =
+  | {
+      type: "click";
+      event: MouseEvent;
+    }
+  | {
+      type: "focus";
+      event: FocusEvent;
+    }
+  | {
+      type: "keydown";
+      event: KeyboardEvent;
+    };
+</code></pre>
+<blockquote>
+<p>and I want to extract a type from it of: "click" | "focus" | "keydown"?</p>
+</blockquote>
+<pre><code>type EventType = Event["type"];
+</code></pre>
+<blockquote>
+<p>If you access a key on a union, you are accessing all permutations of that key.</p>
+</blockquote>
+<blockquote>
+<p>It would not work if one of the elements in the union would miss "type". It works well in discriminated unions using discriminators.</p>
+</blockquote>
+<p><strong>As const annotation</strong></p>
+<blockquote>
+<p>Imagine we enum like this:</p>
+</blockquote>
+<pre><code>const programModeEnumMap = {
+  GROUP: "group",
+  ANNOUNCEMENT: "announcement",
+  ONE_ON_ONE: "1on1",
+  SELF_DIRECTED: "selfDirected",
+  PLANNED_ONE_ON_ONE: "planned1on1",
+  PLANNED_SELF_DIRECTED: "plannedSelfDirected",
+};
+</code></pre>
+<blockquote>
+<p>We want to access the type on GROUP key:</p>
+</blockquote>
+<pre><code>type GroupProgram = typeof programModeEnumMap["GROUP"]
+</code></pre>
+<blockquote>
+<p>But this resolves to string and not "group". Why? Because this enum can be altered. For example lik ethis:</p>
+</blockquote>
+<pre><code>programModeEnumMap.GROUP = "party"
+</code></pre>
+<blockquote>
+<p>This is mutable. So it must be typed as string.</p>
+</blockquote>
+<blockquote>
+<p>How can we make the programModeEnumMap to resolve to literal values instead of generic values?</p>
+</blockquote>
+<pre><code>const programModeEnumMap = {
+  GROUP: "group",
+  ANNOUNCEMENT: "announcement",
+  ONE_ON_ONE: "1on1",
+  SELF_DIRECTED: "selfDirected",
+  PLANNED_ONE_ON_ONE: "planned1on1",
+  PLANNED_SELF_DIRECTED: "plannedSelfDirected",
+} as const;
+</code></pre>
+<blockquote>
+<p>As const freezes values and makes them resolve to their literal types. It also adds readonly annotation to the enum as well. This means it turns it into immutable. Its values cannot be changed</p>
+</blockquote>
+<blockquote>
+<p>Same is true just for arrays. They are infered as array of numbers for example.</p>
+</blockquote>
+<pre><code>const myArr = [1,2,3]
+type MyArr = typeof myArr // Array&#x3C;number>
+</code></pre>
+<blockquote>
+<p>Why? Because I can do:</p>
+</blockquote>
+<pre><code>myArr[0]
+myArr.push(123)
+</code></pre>
+<blockquote>
+<p>But if I add as const to the array, I wont be able to modify the array</p>
+</blockquote>
+<pre><code>const myArr = [1, 2, 3] as const;
+</code></pre>
+<blockquote>
+<p>This array will be readonly and its type will be [1, 2, 3]</p>
+</blockquote>
+<blockquote>
+<p>Another way how to freeze an object is Object.freeze():</p>
+</blockquote>
+<pre><code>const programModeEnumMap = Object.freeze({
+  GROUP: "group",
+  ANNOUNCEMENT: "announcement",
+  ONE_ON_ONE: "1on1",
+  SELF_DIRECTED: "selfDirected",
+  PLANNED_ONE_ON_ONE: "planned1on1",
+  PLANNED_SELF_DIRECTED: "plannedSelfDirected",
+});
+</code></pre>
+<blockquote>
+<p>Object.freeze only works on the first level of object -> it does not go deeper. As const goes all the way down.</p>
+</blockquote>
+<p><strong>Indexed Access with Union</strong></p>
+<blockquote>
+<p>Imagine we have an object like this:</p>
+</blockquote>
+<pre><code>const programModeEnumMap = {
+  GROUP: "group",
+  ANNOUNCEMENT: "announcement",
+  ONE_ON_ONE: "1on1",
+  SELF_DIRECTED: "selfDirected",
+  PLANNED_ONE_ON_ONE: "planned1on1",
+  PLANNED_SELF_DIRECTED: "plannedSelfDirected",
+}
+</code></pre>
+<blockquote>
+<p>And we want to create a union of "1on1" | "selfDirected" | "planned1on1"</p>
+</blockquote>
+<blockquote>
+<p>One lame way to do it:</p>
+</blockquote>
+<pre><code>type Program = typeof programModeEnumMap;
+export type IndividualProgram =
+  | Program["ONE_ON_ONE"]
+  | Program["SELF_DIRECTED"]
+  | Program["PLANNED_ONE_ON_ONE"];
+</code></pre>
+<blockquote>
+<p>Better way is like this:</p>
+</blockquote>
+<pre><code>type Program = typeof programModeEnumMap;
+export type IndividualProgram = Program["ONE_ON_ONE" | "SELF_DIRECTED" | "PLANNED_ONE_ON_ONE"]
+</code></pre>
+<blockquote>
+<p>Notice that we can pass a union to the indexed access :)</p>
+</blockquote>
+<p><strong>Accessing types of object values</strong></p>
+<blockquote>
+<p>Imagine we have an object like this:</p>
+</blockquote>
+<pre><code>const frontendToBackendEnumMap = {
+  singleModule: "SINGLE_MODULE",
+  multiModule: "MULTI_MODULE",
+  sharedModule: "SHARED_MODULE",
+} as const;
+</code></pre>
+<blockquote>
+<p>And we want to infer type from the values as a union: "SINGLE<em>MODULE" | "MULTI</em>MODULE" | "SHARED_MODULE"</p>
+</blockquote>
+<blockquote>
+<p>We can do it like this:</p>
+</blockquote>
+<pre><code>type BackendModuleEnum =
+  typeof frontendToBackendEnumMap[keyof typeof frontendToBackendEnumMap];
+</code></pre>
+<blockquote>
+<p>We can make it nicer:</p>
+</blockquote>
+<pre><code>type Obj = typeof frontendToBackendEnumMap
+type BackendModuleEnum = Obj[keyof Obj]
+</code></pre>
+<blockquote>
+<p>We coud achieve them same if we do this:</p>
+</blockquote>
+<pre><code>type   BackendModuleEnum = Obj["SINGLE_MODULE" | "MULTI_MODULE" | "SHARED_MODULE"]
+</code></pre>
+<blockquote>
+<p>But in this case the type will not be up-to-date if anything changes</p>
+</blockquote>
+<p><strong>Creating union out of array</strong></p>
+<blockquote>
+<p>Imagine we have an array:</p>
+</blockquote>
+<pre><code>const fruits = ["apple", "banana", "orange"] as const;
+</code></pre>
+<blockquote>
+<p>And we want to get from there a union of "apple" | "banana":</p>
+</blockquote>
+<pre><code>type AppleOrBanana = typeof fruits[0 | 1];
+</code></pre>
+<blockquote>
+<p>What if we want union of all fruits? "apple" | "banana" | "orange"</p>
+</blockquote>
+<blockquote>
+<p>We can do it in a lame way like this:</p>
+</blockquote>
+<pre><code>type Fruit = typeof fruits[0 | 1 | 2];
+</code></pre>
+<blockquote>
+<p>More elegant though is:</p>
+</blockquote>
+<pre><code>type Fruit = typeof fruits[number];
+</code></pre>
+<blockquote>
+<p>The word number lets you access any member of the array, no matter how long it is</p>
+</blockquote>
+<p><strong>Template literals</strong></p>
+<blockquote>
+<p>Imagine we have a function which takes in an argument called route of a type Route:</p>
+</blockquote>
+<pre><code>export const goToRoute = (route: Route) => {};
+</code></pre>
+<blockquote>
+<p>We want to type Route to accept any string which starts with a slash:</p>
+</blockquote>
+<pre><code>goToRoute("/users");
+goToRoute("/");
+goToRoute("/admin/users");
+</code></pre>
+<blockquote>
+<p>We can use template literals for that which are denoted by a backtick:</p>
+</blockquote>
+<pre><code>type Route = `/${string}`;
+</code></pre>
+<blockquote>
+<p>Or similarly</p>
+</blockquote>
+<pre><code>type MyString = string
+type Route = `/${MyString}`;
+</code></pre>
+<blockquote>
+<p>Syntax is similar to Javascript template literal, except we can also pass in types</p>
+</blockquote>
+<blockquote>
+<p>Imagine you have these two types:</p>
+</blockquote>
+<pre><code>type BreadType = "rye" | "brown" | "white";
+
+type Filling = "cheese" | "ham" | "salami";
+</code></pre>
+<blockquote>
+<p>And you want to create a type of them which will be like this:</p>
+</blockquote>
+<pre><code>type Sandwich =
+      | "rye sandwich with cheese"
+      | "rye sandwich with ham"
+      | "rye sandwich with salami"
+      | "brown sandwich with cheese"
+      | "brown sandwich with ham"
+      | "brown sandwich with salami"
+      | "white sandwich with cheese"
+      | "white sandwich with ham"
+      | "white sandwich with salami"
+</code></pre>
+<blockquote>
+<p>We can do it simply as this:</p>
+</blockquote>
+<pre><code>type Sandwich = `${BreadType} sandwich with ${Filling}`;
+</code></pre>
+<blockquote>
+<p>Now imagine that we have some type Routes:</p>
+</blockquote>
+<pre><code>type Routes = "/users" | "/users/:id" | "/posts" | "/posts/:id";
+</code></pre>
+<blockquote>
+<p>We want to create a type DynamicRoutes from Routes type, but only those which contain <code>:</code></p>
+</blockquote>
+<pre><code>type DynamicRoutes =  "/users/:id" | "/posts/:id";
+</code></pre>
+<blockquote>
+<p>How to do it? We can use Extract helper function which takes 2 parameters: first the type from which we are extracting and second parameter type which will narrow it down</p>
+</blockquote>
+<pre><code>type Routes = "/users" | "/users/:id" | "/posts" | "/posts/:id";
+
+type WithDots = `${string}:${string}`;
+type DynamicRoutes = Extract&#x3C;Routes, WithDots>;
+</code></pre>
+<blockquote>
+<p>Alternatively:</p>
+</blockquote>
+<pre><code>type DynamicRoutes = Extract&#x3C;Routes, `${string}:${string}`>;
+</code></pre>
+<blockquote>
+<p>We can think of template literals almost like a regEx for Typescript :)</p>
+</blockquote>
+<blockquote>
+<p>Template literals are powerful for string manipulations</p>
+</blockquote>
+<blockquote>
+<p>Now lets talk about converting a template literal into keys in an object.</p>
+</blockquote>
+<blockquote>
+<p>Imagine template literal type defined as this:</p>
+</blockquote>
+<pre><code>type TemplateLiteralKey = `${"user" | "post" | "comment"}${"Id" | "Name"}`;
+</code></pre>
+<blockquote>
+<p>Resulting type is:</p>
+</blockquote>
+<pre><code>userId | userName | postId | postName | commentId | commentName
+</code></pre>
+<blockquote>
+<p>What if we now want to create an object where we take those as keys?</p>
+</blockquote>
+<pre><code>type ObjectOfKeys =  {
+        userId: string;
+        userName: string;
+        postId: string;
+        postName: string;
+        commentId: string;
+        commentName: string;
+}
+</code></pre>
+<blockquote>
+<p>Answer:</p>
+</blockquote>
+<pre><code>type ObjectOfKeys = {
+  [key in TemplateLiteralKey]: string;
+};
+</code></pre>
+<blockquote>
+<p>Alternatively use Record:</p>
+</blockquote>
+<pre><code>type ObjectOfKeys = Record&#x3C;TemplateLiteralKey, string>;
+</code></pre>
+<p><strong>Record</strong></p>
+<blockquote>
+<p>Record allows us to create an object based on the type of key and type of value.</p>
+</blockquote>
+<blockquote>
+<p>Official documentation says: A Record&#x3C;K, T> is an object type whose property keys are K and whose property values are T. That is, keyof Record&#x3C;K, T> is equivalent to K, and Record&#x3C;K, T>[K] is (basically) equivalent to T.</p>
+</blockquote>
+<pre><code>type Record&#x3C;K extends string, T> = {
+    [P in K]: T;
+}
+</code></pre>
+<p><strong>TS-TOOLBELT</strong></p>
+<blockquote>
+<p>TS-TOOLBELT is a small library which contains for example a Split function which allows you to split a string based on a character on a type level.</p>
+</blockquote>
+<blockquote>
+<p>Here is documentation: <a href="https://millsp.github.io/ts-toolbelt/modules/string_split.html">https://millsp.github.io/ts-toolbelt/modules/string_split.html</a></p>
+</blockquote>
+<blockquote>
+<p>This is what you import:</p>
+</blockquote>
+<pre><code>import { S } from "ts-toolbelt";
+</code></pre>
+<blockquote>
+<p>Imagine you have this string</p>
+</blockquote>
+<pre><code>type Path = "Users/John/Documents/notes.txt";
+</code></pre>
+<blockquote>
+<p>And we want to split it by slash /</p>
+</blockquote>
+<blockquote>
+<p>Resulting type should be an array of its elements:</p>
+</blockquote>
+<pre><code>type Result =  ["Users", "John", "Documents", "notes.txt"]
+</code></pre>
+<blockquote>
+<p>How to do it? Here is how:</p>
+</blockquote>
+<pre><code>import { S } from "ts-toolbelt";
+
+type Path = "Users/John/Documents/notes.txt";
+
+type SplitPath = S.Split&#x3C;Path, "/">;
+</code></pre>
+<p><strong>UPPERCASE</strong></p>
+<blockquote>
+<p>What if we have a string literal type and we want to make it uppercase?</p>
+</blockquote>
+<pre><code>type Greeting = "Hello, world"
+</code></pre>
+<blockquote>
+<p>We can use utility function called Uppercase:</p>
+</blockquote>
+<pre><code>type ShoutyGreeting = Uppercase&#x3C;Greeting>
+</code></pre>
+<blockquote>
+<p>It will equal to:</p>
+</blockquote>
+<pre><code>type ShoutyGreeting = "HELLO, WORLD"
+</code></pre>
+<blockquote>
+<p>Another example. Imagine we have such type:</p>
+</blockquote>
+<pre><code>type Event = `log_in` | "log_out" | "sign_up";
+</code></pre>
+<blockquote>
+<p>And we want ot create an object of it that will look like this:</p>
+</blockquote>
+<pre><code>type ObjectOfKeys = {
+        LOG_IN: string;
+        LOG_OUT: string;
+        SIGN_UP: string;
+      }
+</code></pre>
+<blockquote>
+<p>How to do it? Here find the solutio:</p>
+</blockquote>
+<pre><code>type ObjectOfKeys = Record&#x3C;Uppercase&#x3C;Event>, string>;
+</code></pre>
+<blockquote>
+<p>Similarly, we have Lowercase or Capitalize</p>
+</blockquote>
+<p><strong>Generics - type functions / type helpers</strong></p>
+<blockquote>
+<p>How can I tell to typescript that Whatever type I pass in, I want that to be returned?</p>
+</blockquote>
+<pre><code>type ReturnWhatIPassIn&#x3C;T> = T;
+</code></pre>
+<blockquote>
+<p>ReturnWhatIPassIn creates a variable called T but it can have any name.</p>
+</blockquote>
+<blockquote>
+<p>When I pass in "miau", it will return "miau"</p>
+</blockquote>
+<blockquote>
+<p>If I pass in true, it will return true</p>
+</blockquote>
+<pre><code>type Miau = ReturnWhatIPassIn&#x3C;"miau">
+type Twelve = ReturnWhatIPassIn&#x3C;12>
+type False = ReturnWhatIPassIn&#x3C;false>
+</code></pre>
+<blockquote>
+<p>This allows us to create functions which return other types</p>
+</blockquote>
+<pre><code>type ReturnWhatIPassIn&#x3C;T> = T;
+</code></pre>
+<blockquote>
+<p><code>ReturnWhatIPassIn</code> is name of function</p>
+</blockquote>
+<blockquote>
+<p><code>&#x3C;T></code> is agument to the function</p>
+</blockquote>
+<blockquote>
+<p><code>T</code> is what the function returns</p>
+</blockquote>
+<blockquote>
+<p><code>type Miau = string</code> is a static type</p>
+</blockquote>
+<blockquote>
+<p>If I add <code>&#x3C;T></code> to the type, I convert it to a function: <code>type Miau&#x3C;T> = T</code></p>
+</blockquote>
+<blockquote>
+<p>If we remove <code>&#x3C;T></code> from <code>ReturnWhatIPassIn</code> it would no longer be a function, it would be a static value:</p>
+</blockquote>
+<pre><code>type ReturnWhatIPassIn = 12
+</code></pre>
+<blockquote>
+<p>We can add as many arguments to the function as I want:</p>
+</blockquote>
+<pre><code>type ReturnWhatIPassIn&#x3C;T, K, U> = T;
+</code></pre>
+<blockquote>
+<p>I can give it default values</p>
+</blockquote>
+<blockquote>
+<p>Imagine this example where we want to have a generic which will take the value and add / to its front:</p>
+</blockquote>
+<pre><code>type AddRoutePrefix&#x3C;TRoute> = `/${TRoute}`;
+
+AddRoutePrefix&#x3C;"about"> will be "/about"
+AddRoutePrefix&#x3C;""> will be "/"
+AddRoutePrefix&#x3C;"about/team"> will be "/about/team"
+</code></pre>
+<blockquote>
+<p>There is a problem that this will also work with numbers and booleans and TS will not complain:</p>
+</blockquote>
+<pre><code>AddRoutePrefix&#x3C;boolean>
+AddRoutePrefix&#x3C;number>
+</code></pre>
+<blockquote>
+<p>How can we limit this only to strings?</p>
+</blockquote>
+<pre><code>type AddRoutePrefix&#x3C;TRoute extends string> = `/${TRoute}`;
+</code></pre>
+<blockquote>
+<p>The syntax extends is like gving a type to the Type Parameter. We can imagine it as if it was really a function:</p>
+</blockquote>
+<pre><code>const addRoutePrefix = (route: string) => {}
+</code></pre>
+<blockquote>
+<p>What if our Type Helper should work with more arguments?</p>
+</blockquote>
+<pre><code>type CreateDataShape&#x3C;T, U> = {
+  data: T;
+  error: U;
+};
+</code></pre>
+<blockquote>
+<p>Now imagine that we not always want to pass in the U and if we dont pass it, then we want it to be undefined.</p>
+</blockquote>
+<pre><code>type CreateDataShape&#x3C;T, U = undefined> = {
+  data: T;
+  error: U;
+};
+</code></pre>
+<blockquote>
+<p>Then we can use this in 2 different ways:</p>
+</blockquote>
+<pre><code>type MyNewType = CreateDataShape&#x3C;string>
+type MyNewType = CreateDataShape&#x3C;string, number>
+</code></pre>
+<blockquote>
+<p>What if I know that I will always pass a function to my type?</p>
+</blockquote>
+<pre><code>type GetParametersAndReturnType&#x3C;T extends (a: any, b: any) => any> = {
+  params: Parameters&#x3C;T>;
+  returnValue: ReturnType&#x3C;T>;
+};
+</code></pre>
+<blockquote>
+<p>Look at the type above and its usage below:</p>
+</blockquote>
+<pre><code>type MyType1 = GetParametersAndReturnType&#x3C;() => string>
+// { params: []; returnValue: string }
+
+type MyType2 = GetParametersAndReturnType&#x3C;(s: string) => void>
+// { params: [string]; returnValue: void }
+
+type MyType3 = GetParametersAndReturnType&#x3C;(n: number, b: boolean) => number>
+// { params: [number, boolean]; returnValue: number }
+</code></pre>
+<blockquote>
+<p>This will work with 2 parameters, but what if we need more?</p>
+</blockquote>
+<pre><code>type GetParametersAndReturnType&#x3C;T extends (...args: any) => any> = {
+  params: Parameters&#x3C;T>;
+  returnValue: ReturnType&#x3C;T>;
+};
+</code></pre>
+<blockquote>
+<p>Not there is a mind blowing type for generics where we want to make sure we can pass in anything EXCEPT for null or undefined</p>
+</blockquote>
+<blockquote>
+<p>We will start with a code like this:</p>
+</blockquote>
+<pre><code>export type Maybe&#x3C;T> = T | null | undefined;
+</code></pre>
+<p>We want that all these tests pass</p>
+<pre><code>type Yes1 = Maybe&#x3C;string>,
+type Yes2 = Maybe&#x3C;false>,
+type Yes3 = Maybe&#x3C;0>,
+type Yes4 = Maybe&#x3C;"">,
+</code></pre>
+<blockquote>
+<p>But these test should fail:</p>
+</blockquote>
+<pre><code>type No1 = Maybe&#x3C;null>,
+type No2 = Maybe&#x3C;undefined>,
+</code></pre>
+<blockquote>
+<p>And we want to narrow down T to be anything except for null or undefined:</p>
+</blockquote>
+<pre><code>export type Maybe&#x3C;T extends string | number | boolean> = T | null | undefined;
+</code></pre>
+<blockquote>
+<p>But another mind-blowing way to do it is here:</p>
+</blockquote>
+<pre><code>export type Maybe&#x3C;T extends {}> = T | null | undefined;
+</code></pre>
+<blockquote>
+<p><code>{}</code> in typescript has a very special meaning. It represents anything that is not null or undefined. It is different from truthy values, cause we can pass there false or 0</p>
+</blockquote>
+<blockquote>
+<p>Actually if we type something as an empty object, we can assign a string, or number to it</p>
+</blockquote>
+<pre><code>const whatever: {} = "abc"
+const whatever: {} = 123
+const whatever: {} = false
+const whatever: {} = 0
+const whatever: {} = true
+const whatever: {} = {}
+const whatever: {} = []
+</code></pre>
+<blockquote>
+<p>Why is it? Everything in Javascript is an object - array, string with various methods, etc.</p>
+</blockquote>
+<blockquote>
+<p>Moreover, Typescript does structural comparisons when checking if something is comparable. If I need a type: { name: string }, it does not care that I pass { name: string, surname: string, age: number }. It only cares about the name being present and all additional properties are ignored. So if I have a type of empty object {}, I can pass any property in there.</p>
+</blockquote>
+<blockquote>
+<p>null and undefined are not objects. whereas false is still an object, 0 is an object</p>
+</blockquote>
+<blockquote>
+<p>Now how to declare a type which is a non-empty array?</p>
+</blockquote>
+<blockquote>
+<p>If we do this:</p>
+</blockquote>
+<pre><code>type NonEmpty&#x3C;T> = Array&#x3C;T>
+</code></pre>
+<blockquote>
+<p>then we actually can pass empty array</p>
+</blockquote>
+<blockquote>
+<p>We could use tuples for that:</p>
+</blockquote>
+<pre><code>type NonEmpty&#x3C;T> = [T, T, T]
+</code></pre>
+<blockquote>
+<p>but then we would need to know exactly the length of that array, but if we want to be more flexible and to allow for any length, then it wont work.</p>
+</blockquote>
+<blockquote>
+<p>A neat trick is to us following syntax with rest parameter:</p>
+</blockquote>
+<pre><code>type NonEmpty&#x3C;T> = [ T, ...T[]]
+</code></pre>
+<blockquote>
+<p>Or similarly:</p>
+</blockquote>
+<pre><code>type NonEmpty&#x3C;T> = [ T, ...Array&#x3C;T>]
+</code></pre>
+<blockquote>
+<p>This syntax means that I need to have at least one element in the array and then as many as I like, even 0</p>
+</blockquote>
+<blockquote>
+<p>If we want an array that needs to have at least 2 parameters:</p>
+</blockquote>
+<pre><code>type NonEmpty&#x3C;T> = [ T, T, ...Array&#x3C;T>]
+</code></pre>
+<p><strong>Conditional types</strong></p>
+<blockquote>
+<p>Now how can we conditionally render a type?</p>
+</blockquote>
+<blockquote>
+<p>Imagine if I pass "hello" to my type, I want to return "goodbye" and if I pass "goodbye", I want to return "hello"</p>
+</blockquote>
+<pre><code>type YouSayGoodbyeAndISayHello&#x3C;T> = T extends "hello" ? "goodbye" : "hello";
+
+type MyType = YouSayGoodbyeAndISayHello&#x3C;"hello"> // "goodbye"
+type MyType = YouSayGoodbyeAndISayHello&#x3C;"goodbye"> // "hello"
+</code></pre>
+<blockquote>
+<p>In this context <code>T extends "hello"</code> is actually a logical check. Does T extend "hello"?</p>
+</blockquote>
+<blockquote>
+<p>This conditional type is mega powerful and turns typescript from just some static type checks to a its own language</p>
+</blockquote>
+<blockquote>
+<p>Ternary statements can be nested :)</p>
+</blockquote>
+<p><strong>Infer</strong></p>
+<blockquote>
+<p><code>infer</code> keyword is often being used in conditional types</p>
+</blockquote>
+<blockquote>
+<p>Imagine we want to create a type that will accept { data: "ABC" } and it will return "ABC"</p>
+</blockquote>
+<blockquote>
+<p>If it accepts { data: { name: "DEF"} }, it will return { name: "DEF"}</p>
+</blockquote>
+<blockquote>
+<p>We can do it like this:</p>
+</blockquote>
+<pre><code>type GetDataValue&#x3C;T> = T extends { data: infer E } ? E : never;
+
+type No = GetDataValue&#x3C;string> // returns never cause we didnt pass object with data
+type Yes1 = GetDataValue&#x3C;{ data: "hello" }> // returns "hello"
+type Yes2 = GetDataValue&#x3C;{ data: { name: "hello" } }> // returns { name: "hello" }
+type Yes3 = GetDataValue&#x3C;{ data: { name: "hello"; age: 20 } }> // returns { name: "hello"; age: 20 }
+</code></pre>
+<blockquote>
+<p>how does the infer keyrowd work? Whatever is passed into the data key in an object, the TS will infer its type and save it to a variable called E (can be any name). We can then use that variable later to say what the function should return in case this condition is true!</p>
+</blockquote>
+<blockquote>
+<p>Notice that the E will only be defined for the positive branch and not in the else case. Because in else case, E is not declared. SO we cant do this:</p>
+</blockquote>
+<pre><code>type GetDataValue&#x3C;T> = T extends { data: infer E } ? E : E; // ERROR E is not declared
+</code></pre>
+<blockquote>
+<p>This whole infer allows us to declare a new type variable inside of the conditional check.</p>
+</blockquote>
+<blockquote>
+<p>Another way to do this is exercise is:</p>
+</blockquote>
+<pre><code>type GetDataValue&#x3C;T> = T extends { data: any } ? T["data"] : never;
+</code></pre>
+<p><strong>Template literals with infer</strong></p>
+<blockquote>
+<p>Imagine we have type like this:</p>
+</blockquote>
+<pre><code>type Names = [
+  "Matt Pocock",
+  "Jimi Hendrix",
+  "Eric Clapton",
+  "John Mayer",
+  "BB King",
+];
+</code></pre>
+<blockquote>
+<p>and we want to infer another type from it which will be Pocock, Handrix, Claptop, Mayer</p>
+</blockquote>
+<pre><code>type GetSurname&#x3C;T> = unknow
+ type New1 = GetSurname&#x3C;Names[0]> // returns "Pocock"
+ type New2 = GetSurname&#x3C;Names[1]> // returns "Hendrix"
+ type New3 = GetSurname&#x3C;Names[2]> // returns "Clapton"
+ type New4 = GetSurname&#x3C;Names[3]> // returns "Mayer"
+ type New5 = GetSurname&#x3C;Names[4]> // returns "King"
+</code></pre>
+<blockquote>
+<p>How ot declare the GetSurname type?</p>
+</blockquote>
+<blockquote>
+<p>One way is using S and spliting it:</p>
+</blockquote>
+<pre><code>import { S } from "ts-toolbelt";
+type GetSurname&#x3C;T extends string> = S.Split&#x3C;T, " ">[1];
+</code></pre>
+<blockquote>
+<p>But we can also use template literal and word infer:</p>
+</blockquote>
+<pre><code>type GetSurname&#x3C;T> = T extends `${infer First} ${infer Last}` ? Last : never;
+</code></pre>
+<p><strong>Mapped types</strong></p>
+<blockquote>
+<p>Imagine we have a union type:</p>
+</blockquote>
+<pre><code>type Route = "/" | "/about" | "/admin" | "/admin/users";
+</code></pre>
+<blockquote>
+<p>And we want to create a type for an object where both keys and values will be the members of the union:</p>
+</blockquote>
+<pre><code>type Result = {
+        "/": "/";
+        "/about": "/about";
+        "/admin": "/admin";
+        "/admin/users": "/admin/users";
+}
+</code></pre>
+<blockquote>
+<p>In order to do this we can use mapped types which iterated through each member of a union, defines a variable, for example Key and then allows us to use this variable:</p>
+</blockquote>
+<pre><code>type RoutesObject = {
+  [Key in Route]: Key;
+};
+</code></pre>
+<blockquote>
+<p>Variable name is anything we want</p>
+</blockquote>
+<pre><code>type RoutesObject = {
+  [R in Route]: R;
+};
+</code></pre>
+<blockquote>
+<p>What <code>in</code> basically does is for every member of a union, extract R and add it as a key and value</p>
+</blockquote>
+<blockquote>
+<p>We can also use it like this:</p>
+</blockquote>
+<pre><code>type RoutesObject = {
+  [Key in "hi" | "there"]: Key;
+};
+</code></pre>
+<blockquote>
+<p>It would resolve into an object</p>
+</blockquote>
+<pre><code>{
+  hi: "hi",
+  there: "there",
+}
+</code></pre>
+<blockquote>
+<p>Values also dont need to be same as keys:</p>
+</blockquote>
+<pre><code>type RoutesObject = {
+  [Key in "hi" | "there"]: string;
+};
+</code></pre>
+<blockquote>
+<p>Mapped types also work with objects. Imagine we have an object type like this:</p>
+</blockquote>
+<pre><code>interface Attributes {
+  firstName: string;
+  lastName: string;
+  age: number;
+}
+</code></pre>
+<blockquote>
+<p>And we want to extract from it a type that will look like this:</p>
+</blockquote>
+<pre><code>{
+  firstName: () => string;
+  lastName: () => string;
+  age: () => number;
+}
+</code></pre>
+<blockquote>
+<p>We can do it like this:</p>
+</blockquote>
+<pre><code>type AttributeGetters = {
+  [K in keyof Attributes]: () => Attributes[K];
+};
+</code></pre>
+<blockquote>
+<p>Keyof Attributes also creates a union of all the keys in Attribute type</p>
+</blockquote>
+<blockquote>
+<p>We can even create a same type as Attributes using mapped type:</p>
+</blockquote>
+<pre><code>type MyNewAttribute = {
+  [K in keyof Attributes]: Attributes[K];
+};
+</code></pre>
+<blockquote>
+<p>MyNewAttribute is now equivalent type as Attribute. Why would we want to do that? If we needed a new type where all keys are optional or readonly:</p>
+</blockquote>
+<pre><code>type MyNewAttribute = {
+  [K in keyof Attributes]?: Attributes[K];
+};
+
+type MyNewAttribute = {
+  readonly [K in keyof Attributes]: Attributes[K];
+};
+</code></pre>
+<blockquote>
+<p>now what if we want to rename the keys of the new object type?</p>
+</blockquote>
+<pre><code>type NowThis = {
+        getFirstName: () => string;
+        getLastName: () => string;
+        getAge: () => number;
+ }
+</code></pre>
+<blockquote>
+<p>We can use as property which allows us to use template literals</p>
+</blockquote>
+<pre><code>type AttributeGetters = {
+  [K in keyof Attributes as `get${Capitalize&#x3C;K>}`]: () => Attributes[K];
+};
+</code></pre>
+<blockquote>
+<p>This <code>as</code> works as a remapper</p>
+</blockquote>
+<blockquote>
+<p>Now if we have an object type like this</p>
+</blockquote>
+<pre><code>interface Attributes {
+  greet1: [ "hi", "there" ];
+  greet2: [ "hello", "you" ];
+}
+</code></pre>
+<blockquote>
+<p>And we wanted to extract a type that would be</p>
+</blockquote>
+<pre><code>type GreetOnly = {
+  greet1: "hi";
+  greet2: "hello";
+}
+</code></pre>
+<blockquote>
+<p>We can do it like this</p>
+</blockquote>
+<pre><code>type NewType = {
+  [K in keyof Attributes]: Attributes[K][0]
+}
+</code></pre>
+<blockquote>
+<p>Now imagine we have a type like this:</p>
+</blockquote>
+<pre><code>interface Example {
+  name: string;
+  age: number;
+  id: string;
+  organisationId: string;
+  groupId: string;
+}
+</code></pre>
+<blockquote>
+<p>And we want to extract a type from it which has such keys, which contain <code>id</code> in it. Resulting type should look like this:</p>
+</blockquote>
+<pre><code>type Result: {
+        id: string;
+        organisationId: string;
+        groupId: string;
+}
+</code></pre>
+<blockquote>
+<p>We will need conditional type, remapping and a generic</p>
+</blockquote>
+<pre><code>type OnlyIdKeys&#x3C;T> = {
+  [K in keyof T as `${K extends "id" | "organisationId" | "groupId"
+    ? K
+    : never}`]: T[K];
+};
+</code></pre>
+<blockquote>
+<p>Then we use this type like this:</p>
+</blockquote>
+<pre><code>type Result = OnlyIdKeys&#x3C;Example>;
+</code></pre>
+<blockquote>
+<p>Another even more generic and elegant way is to use template literals to search for an anything that contains id in it (WOW)</p>
+</blockquote>
+<pre><code>type OnlyIdKeys&#x3C;T> = {
+  [K in keyof T as K extends `${string}${"id" | "Id"}${string}`
+    ? K
+    : never]: T[K];
+};
+</code></pre>
+<blockquote>
+<p>Now assume we have a discriminated union like this:</p>
+</blockquote>
+<pre><code>type Route =
+  | {
+      route: "/";
+      search: {
+        page: string;
+        perPage: string;
+      };
+    }
+  | { route: "/about"; search: {} }
+  | { route: "/admin"; search: {} }
+  | { route: "/admin/users"; search: {} };
+</code></pre>
+<blockquote>
+<p>and we want to extract a type of it, which will look like this:</p>
+</blockquote>
+<pre><code>type Interesting = {
+        "/": {
+          page: string;
+          perPage: string;
+        };
+        "/about": {};
+        "/admin": {};
+        "/admin/users": {};
+      }
+</code></pre>
+<blockquote>
+<p>How can we do it? Tip: We will need mapped type, indexed access aaaaand an Extract.</p>
+</blockquote>
+<pre><code>type RoutesObject = {
+  [K in Route["route"]]: Extract&#x3C;Route, { route: K }>["search"];
+};
+</code></pre>
+<blockquote>
+<p>And a super elegant way to do it is:</p>
+</blockquote>
+<pre><code>type RoutesObject = {
+  [K in Route as Route["route"]]: Route["search"];
+};
+</code></pre>
+<blockquote>
+<p>We keep K as a Route and then we have access to the entire object including route and search. The key is then remapped to be Route["route"] and value to Route["search"]. Wow</p>
+</blockquote>
+<p><strong>Object to union</strong></p>
+<blockquote>
+<p>What if we have an object like this?</p>
+</blockquote>
+<pre><code>interface Values {
+  email: string;
+  firstName: string;
+  lastName: string;
+}
+</code></pre>
+<blockquote>
+<p>And from this we want to create a union o tuples:</p>
+</blockquote>
+<pre><code>type UN = ["email", string] | ["firstName", string] | ["lastName", string]
+</code></pre>
+<blockquote>
+<p>First we will create an intermediary type which looks like this:</p>
+</blockquote>
+<pre><code>type F = {
+  [K in keyof Values]: [K, Values[K]];
+};
+</code></pre>
+<blockquote>
+<p>Which will then look like this:</p>
+</blockquote>
+<pre><code>type F = {
+  email: ["email", string];
+  firstName: ["firstName", string];
+  lastName: ["lastName", string];
+}
+</code></pre>
+<blockquote>
+<p>And then the only thing we need to do it so simply extract value of object to a union type, which we did before:</p>
+</blockquote>
+<pre><code>type ImUnion = F[keyof F]
+</code></pre>
+<blockquote>
+<p>So the whole magic looks like this:</p>
+</blockquote>
+<pre><code>interface Values {
+  email: string;
+  firstName: string;
+  lastName: string;
+}
+
+type F = {
+  [K in keyof Values]: [K, Values[K]];
+};
+
+type ValuesAsUnionOfTuples = F[keyof F];
+</code></pre>
+<blockquote>
+<p>And to even make it nicer:</p>
+</blockquote>
+<pre><code>type ValuesAsUnionOfTuples = {
+  [K in keyof Values]: [K, Values[K]];
+}[keyof Values];
+</code></pre>
+<blockquote>
+<p>Similarly if we have such an object:</p>
+</blockquote>
+<pre><code>interface FruitMap {
+  apple: "red";
+  banana: "yellow";
+  orange: "orange";
+}
+</code></pre>
+<blockquote>
+<p>And we want a union type of it like this:</p>
+</blockquote>
+<pre><code>type MyBreakfast: "apple:red" | "banana:yellow" | "orange:orange"
+</code></pre>
+<blockquote>
+<p>We can do it like this:</p>
+</blockquote>
+<pre><code>type TransformedFruit = {
+  [K in keyof FruitMap]: `${K}:${FruitMap[K]}`;
+}[keyof FruitMap];
+</code></pre>
+<p><strong>Array to union / Tuple to union type</strong></p>
+<blockquote>
+<p>Imagine I have an array type like this:</p>
+</blockquote>
+<pre><code>type X = [ "user", "id", "name"]
+</code></pre>
+<blockquote>
+<p>What if I want a union type of it?</p>
+</blockquote>
+<pre><code>type Y = X[number] // "user" | "id" | "name"
+</code></pre>
+<p><strong>Generics in functions</strong></p>
+<blockquote>
+<p>How to type a function with generics to return what is passed in?</p>
+</blockquote>
+<pre><code>const returnWhatIPassIn = &#x3C;E>(t: E) => {
+  return t;
+};
+</code></pre>
+<blockquote>
+<p>We add <code>&#x3C;T></code> in front of the parameters parentheses. And we are creating a type helper out of this function</p>
+</blockquote>
+<blockquote>
+<p>The function then receives T and also returns T</p>
+</blockquote>
+<blockquote>
+<p>It is equivalent to creating such a type:</p>
+</blockquote>
+<pre><code>type ReturnWhatIPassIn&#x3C;T> = T
+type One = ReturnWhatIPassIn&#x3C;1> // returns 1
+type Two = ReturnWhatIPassIn&#x3C;2> // returns 2
+</code></pre>
+<blockquote>
+<p>We could also anotate the return type explicitely. But TS infers it correctly:</p>
+</blockquote>
+<pre><code>const returnWhatIPassIn = &#x3C;E>(t: E):E => {
+  return t;
+};
+</code></pre>
+<blockquote>
+<p>We can also restrict T to only accept strings, but still be inferred as what literal value what is passed in and not as a generic string</p>
+</blockquote>
+<pre><code>export const returnWhatIPassIn = &#x3C;T extends string>(t: T) => t;
+</code></pre>
+<blockquote>
+<p>What if we want to pass in 2 parameters?</p>
+</blockquote>
+<pre><code>const returnBothOfWhatIPassIn = &#x3C;T, U>(a: T, b: U) => {
+  return {
+    a,
+    b,
+  };
+};
+</code></pre>
+<blockquote>
+<p>Above syntax is same as</p>
+</blockquote>
+<pre><code>type Result&#x3C;A, B> = {
+  a: A,
+  b: B
+}
+</code></pre>
+<blockquote>
+<p>T will be infered as string and U as a number if we pass in values like this:</p>
+</blockquote>
+<pre><code>const result = returnBothOfWhatIPassIn("a", 1);
+</code></pre>
+<blockquote>
+<p>If we want them to be literal, we can extend each</p>
+</blockquote>
+<pre><code>const returnBothOfWhatIPassIn = &#x3C;T extends string, U extends number>(a: T, b: U) => {
+  return {
+    a,
+    b,
+  };
+};
+</code></pre>
+<blockquote>
+<p>This is pretty important charcteristics of generics and how we can use literal values</p>
+</blockquote>
+<blockquote>
+<p>Similar example. What if we have a function like this which receives array of statuses and returns them? We dont want however the return type to be array of strings, we want it to be array of individual status (their literal values).</p>
+</blockquote>
+<pre><code>const makeStatus = &#x3C;TStatuses extends string[]>(
+  statuses: TStatuses
+) => {
+  return statuses;
+};
+
+const statuses = makeStatus(["INFO", "DEBUG", "ERROR", "WARNING"]);
+</code></pre>
+<blockquote>
+<p>Solution:</p>
+</blockquote>
+<pre><code>const makeStatus = &#x3C;TStatuses extends string>(
+  statuses: Array&#x3C;TStatuses>
+): Array&#x3C;TStatuses> => {
+  return statuses;
+};
+
+const statuses = makeStatus(["INFO", "DEBUG", "ERROR", "WARNING"]);
+</code></pre>
+<blockquote>
+<p>Important is that we can make in braces &#x3C;> whatever we want, it can be array of something or the something.</p>
+</blockquote>
+<p><strong>Generics and components</strong></p>
+<blockquote>
+<p>Imagine we have a component like this</p>
+</blockquote>
+<pre><code>export class Component{
+  private props: unknown;
+
+  constructor(props: unknown) {
+    this.props = props;
+  }
+
+  getProps = () => this.props;
+}
+
+const component = new Component({ a: 1, b: 2, c: 3 });
+</code></pre>
+<blockquote>
+<p>And we want to make sure that whatever props we pass in, we will also infer the type from them</p>
+</blockquote>
+<blockquote>
+<p>Solution looks like this</p>
+</blockquote>
+<pre><code>export class Component&#x3C;TProps> {
+  private props: TProps;
+
+  constructor(props: TProps) {
+    this.props = props;
+  }
+
+  getProps = () => this.props;
+}
+
+const component = new Component({ a: 1, b: 2, c: 3 });
+</code></pre>
+<blockquote>
+<p>Now what if we want our clone function to infer the props of the object we are passing in?</p>
+</blockquote>
+<pre><code>export class Component&#x3C;TProps> {
+  private props: TProps;
+  constructor(props: TProps) {
+    this.props = props;
+  }
+  getProps = () => this.props;
+}
+
+const cloneComponent = (component) => {
+  return new Component(component.getProps());
+};
+</code></pre>
+<blockquote>
+<p>Solution</p>
+</blockquote>
+<pre><code>export class Component&#x3C;TProps> {
+  private props: TProps;
+  constructor(props: TProps) {
+    this.props = props;
+  }
+  getProps = () => this.props;
+}
+
+const cloneComponent = &#x3C;TProps>(component: Component&#x3C;TProps>) => {
+  return new Component(component.getProps());
+};
+</code></pre>
+<p><strong>How to create generics with Sets</strong></p>
+<blockquote>
+<p>Set is just an array with unique values.</p>
+</blockquote>
+<blockquote>
+<p>Imagine we have a set like this:</p>
+</blockquote>
+<pre><code>export const createSet = ()=> {
+  return new Set();
+};
+const stringSet = createSet&#x3C;string>();
+const numberSet = createSet&#x3C;number>();
+const unknownSet = createSet();
+</code></pre>
+<blockquote>
+<p>And we want this to be infered as set of strings for the first one, set of number for seconds one and set of unknown for third one. Here is how:</p>
+</blockquote>
+<pre><code>export const createSet = &#x3C;T>(): Set&#x3C;T> => {
+  return new Set();
+};
+const stringSet = createSet&#x3C;string>();
+const numberSet = createSet&#x3C;number>();
+const unknownSet = createSet();
+</code></pre>
+<blockquote>
+<p>Another way ho to do it:</p>
+</blockquote>
+<pre><code>export const createSet = &#x3C;T>() => {
+  return new Set&#x3C;T>();
+};
+const stringSet = createSet&#x3C;string>();
+const numberSet = createSet&#x3C;number>();
+const unknownSet = createSet();
+</code></pre>
+<blockquote>
+<p>We can create sets like this</p>
+</blockquote>
+<pre><code>contt mySet = new Set&#x3C;number>()
+mySet.add(123) // works
+mySet.add("hi") // error
+</code></pre>
+<blockquote>
+<p>In above problem, how to set a default type if we dont pass anything? TS would infer unknown, but what if we want it to be string?</p>
+</blockquote>
+<pre><code>export const createSet = &#x3C;T = string>() => {
+  return new Set&#x3C;T>();
+};
+const numberSet = createSet&#x3C;number>();
+const stringSet = createSet&#x3C;string>();
+const otherStringSet = createSet();
+</code></pre>
+<p><strong>Typing asynchronous functions with generics</strong></p>
+<blockquote>
+<p>How to type in a fetch function which should receive a type?</p>
+</blockquote>
+<pre><code>const fetchData = async &#x3C;T>(url: string): Promise&#x3C;T> => {
+  const data = await fetch(url).then((response) => response.json());
+  return data;
+};
+</code></pre>
+<blockquote>
+<p>Then when we call it we should prove its type:</p>
+</blockquote>
+<pre><code>async () => {
+  const data = await fetchData&#x3C;{ name: string }>(
+    "https://swapi.dev/api/people/1"
+  );
+</code></pre>
+<blockquote>
+<p>We could also do it like this:</p>
+</blockquote>
+<pre><code>const fetchData = async &#x3C;T>(url: string) => {
+  const data = await fetch(url).then((response) => response.json());
+  return data as T;
+};
+</code></pre>
+<blockquote>
+<p>But there is a better way:</p>
+</blockquote>
+<pre><code>const fetchData = async &#x3C;T>(url: string) => {
+  const data: T = await fetch(url).then((response) => response.json());
+  return data;
+};
+</code></pre>
+<blockquote>
+<p>Or even:</p>
+</blockquote>
+<pre><code>const fetchData = async &#x3C;T>(url: string) => {
+  const data: T = await fetch(url).then((response): Promise&#x3C;T> => response.json());
+  return data;
+};
+</code></pre>
+<blockquote>
+<p>Goal is to not let any sneaky any leave this line of code</p>
+</blockquote>
+<p><strong>Function overloading</strong></p>
+<blockquote>
+<p>Based on an amazing article from Dmitri Pavlutin:
+<a href="https://dmitripavlutin.com/typescript-function-overloading/#:~:text=Function%20overloading%20in%20TypeScript%20lets,the%20function%20should%20be%20invoked">https://dmitripavlutin.com/typescript-function-overloading/#:~:text=Function%20overloading%20in%20TypeScript%20lets,the%20function%20should%20be%20invoked</a></p>
+</blockquote>
+<blockquote>
+<p>Most of the functions accept a fixed set of arguments. But some functions can accept a variable number of arguments, arguments of different types, and could even return different types depending on how you invoke the function. To annotate such function TypeScript offers the function overloading feature. Let's see how function overloading works.</p>
+</blockquote>
+<blockquote>
+<p>Let's consider a function that returns a welcome message to a particular person:</p>
+</blockquote>
+<pre><code>function greet(person: string): string {
+  return `Hello, ${person}!`;
+}
+</code></pre>
+<blockquote>
+<p>The function above accepts 1 argument of type string: the name of the person. Invoking the function is pretty simple:</p>
+</blockquote>
+<pre><code>greet('World'); // 'Hello, World!'
+</code></pre>
+<blockquote>
+<p>What if you'd like to make the greet() function more flexible? For example, make it additionally accept a list of persons to greet. Such a function would accept a string or an array of strings as an argument, as well as return a string or an array of strings.</p>
+</blockquote>
+<blockquote>
+<p>How to annotate such a function? There are 2 approaches.</p>
+</blockquote>
+<blockquote>
+<p>The first approach is straightforward and involves modifying the function signature directly by updating the parameter and return types.</p>
+</blockquote>
+<blockquote>
+<p>Here's how greet() looks after updating the parameter and return types:</p>
+</blockquote>
+<pre><code>function greet(person: string | string[]): string | string[] {
+  if (typeof person === 'string') {
+    return `Hello, ${person}!`;
+  } else if (Array.isArray(person)) {
+    return person.map(name => `Hello, ${name}!`);
+  }
+  throw new Error('Unable to greet');
+}
+</code></pre>
+<blockquote>
+<p>Now you can invoke greet() in 2 ways:</p>
+</blockquote>
+<pre><code>greet('World');          // 'Hello, World!'
+greet(['Jane', 'Joe']); // ['Hello, Jane!', 'Hello, Joe!']
+</code></pre>
+<blockquote>
+<p>Updating the function signature directly to support the multiple ways of invocation is the usual and a good approach. However, there are situations when you might want to take an alternative approach and define separately all the ways your function can be invoked. This approach is called function overloading.</p>
+</blockquote>
+<blockquote>
+<p>The second approach is to use the <code>function overloading</code> feature. I recommend it when the function signature is relatively complex and has multiple types involved.</p>
+</blockquote>
+<blockquote>
+<p>Putting the function overloading in practice requires defining the so-called overload signatures and an implementation signature.</p>
+</blockquote>
+<blockquote>
+<p>The overload signature defines the parameter and return types of the function, and doesn't have a body. A function can have multiple overload signatures: corresponding to the different ways you can invoke the function.</p>
+</blockquote>
+<blockquote>
+<p>The implementation signature, on the other side, also has the parameter types and return type, but also a body that implements the function. There can be only one implementation signature.</p>
+</blockquote>
+<blockquote>
+<p>Let's transform the function greet() to use the function overloading:</p>
+</blockquote>
+<pre><code>// Overload signatures
+function greet(person: string): string;
+function greet(persons: string[]): string[];
+
+// Implementation signature
+function greet(person: unknown): unknown {
+  if (typeof person === 'string') {
+    return `Hello, ${person}!`;
+  } else if (Array.isArray(person)) {
+    return person.map(name => `Hello, ${name}!`);
+  }
+  throw new Error('Unable to greet');
+}
+</code></pre>
+<blockquote>
+<p>The greet() function has 2 overload signatures and one implementation signature.</p>
+</blockquote>
+<blockquote>
+<p>Each overload signature describes one way the function can be invoked. In the case of greet() function, you can call it 2 ways: with a string argument, or with an array of strings argument.</p>
+</blockquote>
+<blockquote>
+<p>The implementation signature function greet(person: unknown): unknown { ... } contains the proper logic how the function works.</p>
+</blockquote>
+<blockquote>
+<p>Now, as before, you can invoke greet() with the arguments of type string or array of strings:</p>
+</blockquote>
+<pre><code>greet('World');          // 'Hello, World!'
+greet(['Jane', 'Joe']);  // ['Hello, Jane!', 'Hello, Joe!']
+</code></pre>
+<blockquote>
+<p>You should think carefully, because function overloads are at their best when you have a different return type based on something that you pass in. If you just have the same return type, no matter what happens, it's always going to return a string, then you should probably be using a union to express these parameters instead.</p>
+</blockquote>
+<p><strong>Casting</strong></p>
+<blockquote>
+<p>When we think we know better what this type is we can use <code>as</code> keyword which will say to typescript - I know what the type is so use it as I say. TYpescript will be: OK, Master.</p>
+</blockquote>
+<pre><code>sendEmail("abc" as EmailAddress)
+</code></pre>
+<blockquote>
+<p>In general this is not a good idea in Typescript</p>
+</blockquote>
+<p><strong>Type aliases</strong></p>
+<blockquote>
+<p>When we create our own types with some random name:</p>
+</blockquote>
+<pre><code>type RandomWord = string
+</code></pre>
+<blockquote>
+<p>RandomWord is a type alias</p>
+</blockquote>
+<p><strong>Branded types</strong></p>
+<blockquote>
+<p>Also known as nominal types. These types are really interesting, because they let you specify logic on the type level.</p>
+</blockquote>
+<blockquote>
+<p>Imagine that throughout your application you will deal with emails. But to defined them as a string is too broad. You want to make sure they follow a pattern of an email address. We will use branded types for that</p>
+</blockquote>
+<blockquote>
+<p>Branded types allows us to create a type to which within normal rules of Typescript no value would be possible to bed assigned to them. They are so called illegal types.</p>
+</blockquote>
+<blockquote>
+<p>Example of illegal type is intersection between string and number:</p>
+</blockquote>
+<pre><code>type Illegal = string &#x26; number
+</code></pre>
+<blockquote>
+<p>This will result in never type because you cant have something that is both string and number. We cannotassign anything to never types.</p>
+</blockquote>
+<blockquote>
+<p>Branded type is created as a base type and then intersection with object, where we label the Brand as for example Email:</p>
+</blockquote>
+<pre><code>type Mail = string &#x26; { __brand: "Email" }
+</code></pre>
+<blockquote>
+<p>String cannot be intersected with an object but notice that this is now not typed as never! Assigning value to this type will now not be possible.</p>
+</blockquote>
+<pre><code>const a: Mail = "abc" //ERROR
+</code></pre>
+<blockquote>
+<p>What we are missing still is a rule which will detect if it is a valid email address, like contains @, etc.</p>
+</blockquote>
+<pre><code>const isEmail = (email: string): email is Mail => {
+  return email.includes("@gmail.com")
+}
+</code></pre>
+<blockquote>
+<p>Notice that the output of the <code>email is Mail</code>. This is also called casting where we say to the typescript that we know better than Typescript what the return type is going to be. Such a statement now means that if the isEmail returns true, then we can safely assume that email is of a type Mail. Else it cannot be assumed it is of type Mail and it will only be a string</p>
+</blockquote>
+<blockquote>
+<p>We can then use our function like this:</p>
+</blockquote>
+<pre><code>type Mail = string &#x26; { __brand: "Email" }
+
+const isEmail = (email: string): email is Mail => {
+  return email.includes("@gmail.com")
+}
+
+const sendWelcomeEmail = (email: Mail) => {
+  //
+}
+
+const signUp = (email: string) => {
+  if (isEmail){
+     sendWelcomeEmail(email) // email will be correctly typed as Mail
+  }
+}
+</code></pre>
+<blockquote>
+<p>Another way to approach this topic is to use assert and then throw error if the condition for email address is not met:</p>
+</blockquote>
+<pre><code>type Mail = string &#x26; { __brand: "Email" }
+
+const asserEmail = (email: string): asserts email is Mail => {
+  if (!email.includes("@gmail.com")){
+    throw new Error(`Invalid argument: [${email}] is not a valid email`)
+  }
+}
+
+const sendWelcomeEmail = (email: Mail) => {
+  //
+}
+
+const signUp = (email: string) => {
+  assertEmail(email);
+  sendWelcomeEmail(email) // email will be correctly typed as Mail, cause we reached so far here without error
+}
+</code></pre>
+<p><strong>Global scope</strong></p>
+<blockquote>
+<p>howto declare and type in global scope</p>
+</blockquote>
+<pre><code>declare global {
+  function myFunc(): boolean;
+  var myVar: number;
+}
+
+globalThis.myFunc = () => true;
+globalThis.myVar = 1;
+</code></pre>
+<blockquote>
+<p>noteice that in global scope we can only declare and type. We cannot write the implementation or assignment</p>
+</blockquote>
+<blockquote>
+<p>Only vars work in global scope. No const or let.</p>
+</blockquote>
+<blockquote>
+<p>Cool thing about global scope is that it support ambient merging. I can declare a global in one file and the same global in other file and the result will be a merged global from both files:</p>
+</blockquote>
+<blockquote>
+<p>File 1</p>
+</blockquote>
+<pre><code>declare global {
+  interface DispatchableEvent {
+    LOG_IN: {
+      username: string;
+      password: string;
+    };
+  }
+}
+</code></pre>
+<blockquote>
+<p>File 2</p>
+</blockquote>
+<pre><code>declare global {
+  interface DispatchableEvent {
+    LOG_OUT: {};
+    UPDATE_USERNAME: {
+      username: string;
+    };
+  }
+}
+</code></pre>
+<blockquote>
+<p>Result:</p>
+</blockquote>
+<pre><code>interface DispatchableEvent {
+    LOG_IN: {
+      username: string;
+      password: string;
+    };
+    LOG_OUT: {};
+    UPDATE_USERNAME: {
+      username: string;
+    };
+  }
+</code></pre>
+<blockquote>
+<p>It's a combination of declaration merging and declaring global. Having this global interface that you can append to gives you a really nice solution for certain problems.</p>
+</blockquote>
+<blockquote>
+<p>With multiple files we're really solving the problem of colocation. We want a pattern that we can just copy and paste over several files in our application and make sure that we're declaring the types really close to where the implementation is. Of course, we could just declare this in a single interface and just import that to all the places that we need it. Then, of course, it's not colocated. Whereas when they're colocated together, even though you're putting it inside a global scope, it means that if you delete this entire file, then log out just disappears from the ether and it doesn't matter anymore. Weirdly, by using a global here, we're able to get a more modular approach to our types.</p>
+</blockquote>
+<p><strong>Process.env</strong></p>
+<blockquote>
+<p>In Node.js, process.env is a <code>global variable</code> injected during runtime. It is a view of the state of the system environment variables.</p>
+</blockquote>
+<p><strong>Type predicates</strong></p>
+<blockquote>
+<p>sometimes you want more direct control over how types change throughout your code.</p>
+</blockquote>
+<blockquote>
+<p>To define a user-defined type guard, we simply need to define a function whose return type is a type predicate:</p>
+</blockquote>
+<pre><code>function isFish(pet: Fish | Bird): pet is Fish {
+  return (pet as Fish).swim !== undefined;
+}
+</code></pre>
+<blockquote>
+<p><code>pet is Fish</code> is our type predicate in this example. A predicate takes the form <code>parameterName is Type</code>, where parameterName must be the name of a parameter from the current function signature.</p>
+</blockquote>
+<blockquote>
+<p>Any time isFish is called with some variable, TypeScript will narrow that variable to that specific type if the original type is compatible.</p>
+</blockquote>
+<blockquote>
+<p>Please note that we can need to return the Fish in this case.</p>
+</blockquote>
+<blockquote>
+<p>If we have a function which does not return anything (is void) and maybe only throws error,it would not be enough to use the predicate. We will need to use <code>asserts</code> keyword</p>
+</blockquote>
+<pre><code>interface User {
+  id: string;
+  name: string;
+}
+
+interface AdminUser extends User {
+  role: "admin";
+  organisations: string[];
+}
+
+interface NormalUser extends User {
+  role: "normal";
+}
+
+function assertUserIsAdmin(
+  user: NormalUser | AdminUser
+): asserts user is AdminUser {
+  if (user.role !== "admin") {
+    throw new Error("Not an admin user");
+  }
+}
+</code></pre>
+<blockquote>
+<p>please note that asserts only works with function declaration and not with arrow functions. workaround is always to use function declaration or such a workaround:</p>
+</blockquote>
+<pre><code>const assertUserIsAdmin: (
+  user: NormalUser | AdminUser
+) => asserts user is AdminUser = (user) => {
+  if (user.role !== "admin") {
+    throw new Error("Not an admin user");
+  }
+};
+</code></pre>
+<blockquote>
+<p>as per this comment: <a href="https://github.com/microsoft/TypeScript/issues/34523#issuecomment-700491122">https://github.com/microsoft/TypeScript/issues/34523#issuecomment-700491122</a></p>
+</blockquote>
+<p><strong>CHATGPT</strong></p>
+<blockquote>
+<p>My very first chat with CHATGPT and it already solved my problem:</p>
+</blockquote>
+<blockquote>
+<p>Q: How do I use predicates with generics in typescript</p>
+</blockquote>
+<blockquote>
+<p>A: In TypeScript, you can use generics to create reusable components that work with different types. Predicates can be used to narrow down the type of a generic parameter based on some condition. Here is an example of how to use predicates with generics in TypeScript:</p>
+</blockquote>
+<pre><code>type FilterFunction&#x3C;T> = (item: T) => boolean;
+
+function filter&#x3C;T>(items: T[], predicate: FilterFunction&#x3C;T>): T[] {
+  return items.filter(predicate);
+}
+
+function isNumber(value: unknown): value is number {
+  return typeof value === "number";
+}
+
+const numbers = [1, 2, 3, "four"];
+const filteredNumbers = filter(numbers, isNumber);
+
+console.log(filteredNumbers); // [1, 2, 3]
+</code></pre>
+<blockquote>
+<p>In this example, we define a FilterFunction type that takes a generic parameter T and returns a boolean. We then define a filter function that takes an array of type T and a FilterFunction<T> predicate as arguments. The filter function returns a new array that contains only the items that match the predicate.</p>
+</blockquote>
+<blockquote>
+<p>We also define an isNumber function that takes an unknown value and returns a boolean. This function is used as the predicate in the filter function to filter out non-numeric values from the numbers array.</p>
+</blockquote>
+<blockquote>
+<p>Note that the isNumber function returns a type predicate value is number. This tells TypeScript that if the isNumber function returns true for a value, that value is of type number. This allows TypeScript to narrow down the type of the numbers array from Array&#x3C;number | string> to Array<number>.</p>
+</blockquote>
+<blockquote>
+<p>By using generics and predicates in TypeScript, you can write more reusable and type-safe code.</p>
+</blockquote>
+<blockquote>
+<p>Q: given the above explanation, how would you then turn isNode to a predicate in this piece of code?</p>
+</blockquote>
+<pre><code>interface DOMNodeExtractorConfig&#x3C;T, Result> {
+  isNode: (node: unknown) => boolean;
+  transform: (node: T) => Result;
+}
+</code></pre>
+<blockquote>
+<p>To turn isNode into a predicate, you need to change its return type to node is T. This tells TypeScript that if isNode returns true for a value, that value is of type T. Here's how you can update the DOMNodeExtractorConfig interface with a predicate type for isNode:</p>
+</blockquote>
+<pre><code>interface DOMNodeExtractorConfig&#x3C;T, Result> {
+  isNode: (node: unknown) => node is T;
+  transform: (node: T) => Result;
+}
+</code></pre>
+<blockquote>
+<p>Now, when you use DOMNodeExtractorConfig, TypeScript will know that isNode is a type predicate and can narrow down the type of node accordingly. For example, if T is HTMLDivElement, TypeScript will be able to determine if a value is an HTMLDivElement or not based on the return value of isNode.</p>
+</blockquote>
+<blockquote>
+<p>Here's an example of how you can use DOMNodeExtractorConfig with a predicate for isNode:</p>
+</blockquote>
+<pre><code>function extractNodes&#x3C;T, Result>(config: DOMNodeExtractorConfig&#x3C;T, Result>, nodes: unknown[]): Result[] {
+  return nodes.filter(config.isNode).map(config.transform);
+}
+
+const divExtractor: DOMNodeExtractorConfig&#x3C;HTMLDivElement, string> = {
+  isNode: (node: unknown): node is HTMLDivElement => node instanceof HTMLDivElement,
+  transform: (div: HTMLDivElement) => div.textContent || "",
+};
+
+const nodes: unknown[] = [document.createElement("div"), document.createElement("p")];
+const divs = extractNodes(divExtractor, nodes);
+
+console.log(divs); // [ &#x3C;div>&#x3C;/div> ]
+</code></pre>
+<blockquote>
+<p>In this example, we define a divExtractor object with a predicate for isNode that checks if a value is an instance of HTMLDivElement. We then call extractNodes with the divExtractor and an array of unknown nodes. extractNodes uses the predicate to filter out non-div nodes and returns an array of transformed HTMLDivElement nodes.</p>
+</blockquote>
+<blockquote>
+<p>By using a predicate for isNode, TypeScript can ensure that only nodes of the correct type are passed to the transform function.</p>
+</blockquote>
+<blockquote>
+<p>Q: wow, you are amazing. thank you!
+A: You're welcome! I'm glad I could help. If you have any more questions, feel free to ask!</p>
+</blockquote>
+<p><strong>Typescript and Classes</strong></p>
+<blockquote>
+<p>We can actually use the name of the class as a type in Typescript. Classes have this funny property where they can actually cross boundaries a little bit and be used as either a type or a runtime value. Pretty cool!</p>
+</blockquote>
+<pre><code>class CustomError extends Error {
+  constructor(message: string, public code: number) {
+    super(message);
+    this.name = "CustomError";
+  }
+}
+const handleCustomError = (error: CustomError) => {
+  console.error(error.code);
+};
+</code></pre>
+<p><strong>Builder patterns</strong></p>
+<blockquote>
+<p>The builder pattern is a design pattern used in software development to simplify the creation of complex objects. In TypeScript, the builder pattern involves creating a builder class that allows you to construct an object step by step.</p>
+</blockquote>
+<blockquote>
+<p>Here's an example to help illustrate how the builder pattern works in TypeScript:</p>
+</blockquote>
+<pre><code>class User {
+  constructor(
+    public readonly firstName: string,
+    public readonly lastName: string,
+    public readonly email: string,
+    public readonly age: number,
+    public readonly address?: string
+  ) {}
+}
+
+class UserBuilder {
+  private firstName: string = '';
+  private lastName: string = '';
+  private email: string = '';
+  private age: number = 0;
+  private address?: string;
+
+  setFirstName(firstName: string): UserBuilder {
+    this.firstName = firstName;
+    return this;
+  }
+
+  setLastName(lastName: string): UserBuilder {
+    this.lastName = lastName;
+    return this;
+  }
+
+  setEmail(email: string): UserBuilder {
+    this.email = email;
+    return this;
+  }
+
+  setAge(age: number): UserBuilder {
+    this.age = age;
+    return this;
+  }
+
+  setAddress(address: string): UserBuilder {
+    this.address = address;
+    return this;
+  }
+
+  build(): User {
+    return new User(
+      this.firstName,
+      this.lastName,
+      this.email,
+      this.age,
+      this.address
+    );
+  }
+}
+</code></pre>
+<blockquote>
+<p>In the example above, we have a User class that represents a user with basic information such as their first name, last name, email, age, and address. We also have a UserBuilder class that allows us to construct a User object step by step.</p>
+</blockquote>
+<blockquote>
+<p>To create a User object using the builder pattern, you would first create a new UserBuilder object, set its properties using the builder's setXXX methods, and then call the build method to create the User object. Here's an example:</p>
+</blockquote>
+<pre><code>const user = new UserBuilder()
+  .setFirstName('John')
+  .setLastName('Doe')
+  .setEmail('john.doe@example.com')
+  .setAge(30)
+  .setAddress('123 Main St')
+  .build();
+</code></pre>
+<blockquote>
+<p>In the example above, we create a new User object with the UserBuilder class by setting its properties using the builder's setXXX methods and then calling the build method to create the User object.</p>
+</blockquote>
+<blockquote>
+<p>Using the builder pattern can make it easier to construct complex objects with many properties because it allows you to break down the construction process into smaller, more manageable steps.</p>
+</blockquote>
+<p><strong>Definitely typed</strong></p>
+<blockquote>
+<p>Definitely Typed is a repository that contains type definitions for lots and lots of libraries, which aren't built in TypeScript. <a href="https://github.com/DefinitelyTyped/DefinitelyTyped">https://github.com/DefinitelyTyped/DefinitelyTyped</a></p>
+</blockquote>
+<p><strong>Overriding types from external libraries with d.ts file</strong></p>
+<blockquote>
+<p>What if we use a function from external library which is poorly typed and returns a string instead of union of:</p>
+</blockquote>
+<pre><code>export const getAnimatingState = (): string => {
+  if (Math.random() > 0.5) {
+    return "before-animation";
+  }
+
+  if (Math.random() > 0.5) {
+    return "animating";
+  }
+
+  return "after-animation";
+};
+</code></pre>
+<blockquote>
+<p>If we use this function, we will get return of string. Which is very loose:</p>
+</blockquote>
+<pre><code>import { getAnimatingState } from "external-lib";
+
+const animatingState = getAnimatingState();
+</code></pre>
+<blockquote>
+<p>In order to override this, we will need to create a new file with d.ts extension: for example abc.d.ts</p>
+</blockquote>
+<blockquote>
+<p>In this file we will <code>declare module</code> and type our getAnimatingState properly</p>
+</blockquote>
+<pre><code>declare module "fake-lib" {
+  export type Mytype = "before-animation" | "animating" | "after-animation";
+  export function getAnimatingState(): Mytype;
+}
+</code></pre>
+<blockquote>
+<p>Then in file where we actually use the function we will import the getAnimatingState from our new d.ts file:</p>
+</blockquote>
+<pre><code>import { getAnimatingState } from "fake-lib";
+
+const animatingState = getAnimatingState();
+</code></pre>
+<blockquote>
+<p>Our function now returns "before-animation" | "animating" | "after-animation" instead of string</p>
+</blockquote>
+<p><strong>Identity functions</strong></p>
+<blockquote>
+<p>identity function takes in a value and returns the same value.</p>
+</blockquote>
+<pre><code>const asConst = &#x3C;T>(t: T) => t;
+</code></pre>
+<blockquote>
+<p>If we call this function with array of object like this:</p>
+</blockquote>
+<pre><code>const fruits = asConst([
+  {
+    name: "apple",
+    price: 1,
+  },
+  {
+    name: "banana",
+    price: 2,
+  },
+]);
+</code></pre>
+<blockquote>
+<p>The infered return type of asConst function will be Array&#x3C;{name: string, price: number}></p>
+</blockquote>
+<blockquote>
+<p>But we want it to be literal values of it, not just tring or number. We want the concrete thing.</p>
+</blockquote>
+<blockquote>
+<p>How to solve this? We can use an external library ts-toolkit., It exports F and something called Narrow which will help us with the inference:</p>
+</blockquote>
+<pre><code>import { F } from "ts-toolbelt";
+
+export const asConst = &#x3C;T>(t: F.Narrow&#x3C;T>) => t;
+</code></pre>
+<blockquote>
+<p>Now the inferred type will be:</p>
+</blockquote>
+<pre><code>[
+  {
+    name: "apple",
+    price: 1,
+  },
+  {
+    name: "banana",
+    price: 2,
+  },
+]
+</code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre>
+<pre><code></code></pre></div><hr/><footer style="padding-bottom:20px"><p style="text-align:center;font-size:14px;margin-bottom:0;color:grey">© <!-- -->2023<!-- --> Design and Development by<!-- --> <!-- -->Addania</p></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/TypeScript/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-f3d84b4c8222d4b9c5d2.js"],"app":["/app-c6ae7489a44c6e3c5541.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-46b4173e1060a5c82475.js"],"component---src-pages-about-css-modules-js":["/component---src-pages-about-css-modules-js-6de546fbe33d5afb5f5e.js"],"component---src-pages-about-js":["/component---src-pages-about-js-c14fea35d7b3381d90ef.js"],"component---src-pages-contact-js":["/component---src-pages-contact-js-859ab4cc1ba371e756b0.js"],"component---src-pages-impressions-backup-all-js":["/component---src-pages-impressions-backup-all-js-027ae6ebcd64b4a1fb81.js"],"component---src-pages-impressions-js":["/component---src-pages-impressions-js-a3a4032c8ae25a6c6fd8.js"],"component---src-pages-index-js":["/component---src-pages-index-js-55e9fbc791d726a8611a.js"],"component---src-pages-knowledge-js":["/component---src-pages-knowledge-js-e33b0c8cd163ed1e8502.js"],"component---src-pages-my-files-js":["/component---src-pages-my-files-js-ead31c337ff16adad8bb.js"],"component---src-pages-portfolio-js":["/component---src-pages-portfolio-js-bc1d22dbf39b92f13c71.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-6aa6a69c22311d8323cf.js"]};/*]]>*/</script><script src="/coding/polyfill-f3d84b4c8222d4b9c5d2.js" nomodule=""></script><script src="/coding/component---src-templates-blog-post-js-6aa6a69c22311d8323cf.js" async=""></script><script src="/coding/8e8ef419a4232dec292a51b05d9a734c26533496-ff442865617a5e4ab7d9.js" async=""></script><script src="/coding/app-c6ae7489a44c6e3c5541.js" async=""></script><script src="/coding/framework-70a2455d4a4320e97528.js" async=""></script><script src="/coding/styles-29147cbc04bbc833f6a0.js" async=""></script><script src="/coding/webpack-runtime-4f22d2c8c2fa6249c31a.js" async=""></script></body></html>
