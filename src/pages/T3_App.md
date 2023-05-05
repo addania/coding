@@ -2768,5 +2768,1032 @@ export const profileRouter = createTRPCRouter({
       return filterUserForClient(user);
     }),
 });
+```
+
+**2.19 SSG Helper**
+
+> Now we want our meta data to load instantaneously.
+
+> Search for SSG Helper for trpc: https://trpc.io/docs/v9/ssg-helpers
+
+> It will pre-hydrate some data ahead of time.
+
+> In our file: `[slug].tsx` we will create a function called: getStaticProps:
+
+> Firstly we need to create the ssg helper:
 
 ```
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "~/server/api/root";
+import { prisma } from "~/server/db";
+import superjson from "superjson";
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const ssg = createServerSideHelpers({
+    router: appRouter,
+    ctx: { prisma, userId: null },
+    transformer: superjson,
+  });
+
+  const slug = context.params?.slug;
+
+  if (typeof slug !== "string") {
+    throw new Error("no slug");
+  }
+
+  const username = slug.replace("@", "");
+  await ssg.profile.getUserByUsername.prefetch({ username });
+
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+      username,
+    },
+  };
+};
+
+export const getStaticPaths = () => {
+  return { paths: ["/@addania"], fallback: "blocking" };
+};
+```
+
+> This will make sure that the data is there where the page loads.
+
+> This means that when we go to `[slug].tsx` -> the loading is never there. If we console log isLoading, it wont be there.
+
+> `const ssg` is a helper which makes the magic of pre-fetching data.
+
+> `GetStaticProps` type is provided by next
+
+> `await ssg.profile.getUserByUsername.prefetch({ username });` this is ftching on the server
+
+> `prefetch` is a cool helper which pre-fetches the data ahead of time & hydrates it through server side props.
+
+> `trpcState: ssg.dehydrate(),` - this dehrydrates -> takes everything we fetched, puts it in the shape that can be parsed through next.js server side props (in this case static props) and ensures data is there when we need it and loading state of `[slug].tsx` will never be hit.
+
+> In order for this all to work, we need to tell next.js which paths are valid:
+
+```
+export const getStaticPaths = () => {
+  return { paths: [], fallback: "blocking" };
+};
+```
+
+> `const username = slug.replace("@", "")`; our slug contains still `@` and it needs to be removed when we want to pass username
+
+> Now we can tidy up a bit the profile page `[slug].stx`. We no longer hardcode "addania", but we fetch it. We dont need loading state.
+
+> Whole code lloks like this:
+
+```import type { GetStaticProps, NextPage } from "next";
+import Head from "next/head";
+import { api } from "~/utils/api";
+
+const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
+  const { data } = api.profile.getUserByUsername.useQuery({
+    username,
+  });
+
+  if (!data) {
+    return <div className="flex h-screen justify-center">404</div>;
+  }
+
+  return (
+    <>
+      <Head>
+        <title>{data.username}</title>
+      </Head>
+      <main className="flex h-screen justify-center">
+        <div>{data.username}</div>
+      </main>
+    </>
+  );
+};
+
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "~/server/api/root";
+import { prisma } from "~/server/db";
+import superjson from "superjson";
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const ssg = createServerSideHelpers({
+    router: appRouter,
+    ctx: { prisma, userId: null },
+    transformer: superjson,
+  });
+
+  const slug = context.params?.slug;
+
+  if (typeof slug !== "string") {
+    throw new Error("no slug");
+  }
+
+  const username = slug.replace("@", "");
+  await ssg.profile.getUserByUsername.prefetch({ username });
+
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+      username,
+    },
+  };
+};
+
+export const getStaticPaths = () => {
+  return { paths: [], fallback: "blocking" };
+};
+
+export default ProfilePage;
+
+```
+
+**2.20 Layouting**
+
+> All pages should have same layout, so in the components folder let's create a file called: `layout.tsx` and paste there code from `index.tsx`
+
+```
+import type { PropsWithChildren } from "react";
+
+export const PageLayout = (props: PropsWithChildren) => {
+  return (
+    <main className="flex h-screen justify-center">
+      <div className="overflow-y-scroll h-full w-full border-x border-slate-400 md:max-w-2xl">
+          {props.children}
+      </div>
+    </main>
+  );
+};
+
+```
+
+> Then index.tsx will look like this:
+
+```
+const Home: NextPage = () => {
+  const { user, isLoaded: userLoaded, isSignedIn } = useUser();
+
+  // Start fetching data early - reactQuery will cache it
+  api.posts.getAll.useQuery();
+
+  if (!userLoaded) {
+    return <div />;
+  }
+
+  return (
+    <>
+      <Head>
+        <title>Chirp</title>
+        <meta name="description" content="💭" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <PageLayout>
+        <div className="flex border-b border-slate-400 p-4">
+          {!isSignedIn && (
+            <div className="flex justify-center">
+              <SignInButton />
+            </div>
+          )}
+          {!!isSignedIn && (
+            <div className="w-full">
+              <div className="flex w-full justify-between">
+                <div className="flex items-center  space-x-2">
+                  <UserBar />
+                  <p>Hi {user.fullName}</p>
+                </div>
+                <SignOutButton />
+              </div>
+              <CreatePostWizard />
+            </div>
+          )}
+        </div>
+        <Feed />
+      </PageLayout>
+    </>
+  );
+};
+```
+
+> We can then make the profile page also use the same Pagelayout:
+
+```
+import type { GetStaticProps, NextPage } from "next";
+import Head from "next/head";
+import { api } from "~/utils/api";
+
+const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
+  const { data } = api.profile.getUserByUsername.useQuery({
+    username,
+  });
+
+  if (!data) {
+    return <div className="flex h-screen justify-center">404</div>;
+  }
+
+  return (
+    <>
+      <Head>
+        <title>{data.username}</title>
+      </Head>
+      <PageLayout>
+        <div>{data.username}</div>
+      </PageLayout>
+    </>
+  );
+};
+```
+
+**2.21 Finish profile page**
+
+> Let's add profile picture and style it as on Twitter
+
+> Let's make this pretty:
+
+```
+const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
+  const { data } = api.profile.getUserByUsername.useQuery({
+    username,
+  });
+
+  if (!data) {
+    return <div className="flex h-screen justify-center">404</div>;
+  }
+
+  return (
+    <>
+      <Head>
+        <title>{data.username}</title>
+      </Head>
+      <PageLayout>
+        <div className="relative h-36 bg-slate-600">
+          <Image
+            src={data.profilePicture}
+            alt={`@${data.username ?? ""}'s profile pic`}
+            width={128}
+            height={128}
+            className="absolute bottom-0 left-0 -mb-[64px] ml-4 rounded-full border-4 border-black bg-black"
+          />
+        </div>
+        <div className="h-[64px]" />
+        <div className="p-4 text-2xl font-bold">{`@${
+          data.username ?? ""
+        }`}</div>
+        <div className="w-full border-b border-slate-400" />
+      </PageLayout>
+    </>
+  );
+};
+```
+
+> The whole file looks like this:
+
+```
+import type { GetStaticProps, NextPage } from "next";
+import Head from "next/head";
+import { api } from "~/utils/api";
+import Image from "next/image";
+
+const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
+  const { data } = api.profile.getUserByUsername.useQuery({
+    username,
+  });
+
+  if (!data) {
+    return <div className="flex h-screen justify-center">404</div>;
+  }
+
+  return (
+    <>
+      <Head>
+        <title>{data.username}</title>
+      </Head>
+      <PageLayout>
+        <div className="relative h-36 bg-slate-600">
+          <Image
+            src={data.profilePicture}
+            alt={`@${data.username ?? ""}'s profile pic`}
+            width={128}
+            height={128}
+            className="absolute bottom-0 left-0 -mb-[64px] ml-4 rounded-full border-4 border-black bg-black"
+          />
+        </div>
+        <div className="h-[64px]" />
+        <div className="p-4 text-2xl font-bold">{`@${
+          data.username ?? ""
+        }`}</div>
+        <div className="w-full border-b border-slate-400" />
+      </PageLayout>
+    </>
+  );
+};
+
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "~/server/api/root";
+import { prisma } from "~/server/db";
+import superjson from "superjson";
+import { PageLayout } from "~/components/layout";
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const ssg = createServerSideHelpers({
+    router: appRouter,
+    ctx: { prisma, userId: null },
+    transformer: superjson,
+  });
+
+  const slug = context.params?.slug;
+
+  if (typeof slug !== "string") {
+    throw new Error("no slug");
+  }
+
+  const username = slug.replace("@", "");
+  await ssg.profile.getUserByUsername.prefetch({ username });
+
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+      username,
+    },
+  };
+};
+
+export const getStaticPaths = () => {
+  return { paths: [], fallback: "blocking" };
+};
+
+export default ProfilePage;
+```
+
+**2.22 Fetch posts for a given user**
+
+> Now we will want to fetch feeds for a given user/profile
+
+> We will need to create a new router for that. Let's go to: `src/server/api/routers/posts.ts`
+
+```
+ getPostsByUserId: publicProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(({ ctx, input }) =>
+      ctx.prisma.post.findMany({
+        where: {
+          authorId: input.userId,
+        },
+        take: 100,
+        orderBy: [{ createdAt: "desc" }],
+      })
+    ),
+```
+
+> Let's use it then. We will create a new component in components folder. File name will be `postview.tsx` and we will copy there the content of the `PostView` from `index.tsx`
+
+```
+import Image from "next/image";
+
+import dayjs from "dayjs";
+
+import type { RouterOutputs } from "~/utils/api";
+import relativeTime from "dayjs/plugin/relativeTime";
+import Link from "next/link";
+
+dayjs.extend(relativeTime);
+
+type PostWithUser = RouterOutputs["posts"]["getAll"][number];
+
+export const PostView = (props: PostWithUser) => {
+  const { post, author } = props;
+  return (
+    <div
+      key={post.id}
+      className="flex items-center gap-4 border-b border-slate-400 p-8"
+    >
+      <Image
+        src={author.profilePicture}
+        alt="Author image"
+        className="h-12 w-12  rounded-full"
+        width={56}
+        height={56}
+      />
+      <div className="flex flex-col">
+        <div className="flex gap-2 text-slate-400">
+          <Link href={`/@${author.username}`}>
+            <span>{`@${author.username}`}</span>
+          </Link>
+          <Link href={`/post/${post.id}`}>
+            <span>{`•  ${dayjs(post.createdAt).fromNow()}`}</span>
+          </Link>
+        </div>
+        <div className="flex">{post.content}</div>
+      </div>
+    </div>
+  );
+};
+```
+
+> We will need to also retrieve information about users in our `posts.tsx`, so we will abstract a function called: `addUserDataToPosts`
+
+```
+const addUserDataToPosts = async (posts: Post[]) => {
+  const users = (
+    await clerkClient.users.getUserList({
+      userId: posts.map((post) => post.authorId),
+      limit: 100,
+    })
+  ).map(filterUserForClient);
+
+  return posts.map((post) => {
+    const author = users.find((user) => user.id === post.authorId);
+
+    if (!author || !author.username) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Author of the posts not found",
+      });
+    }
+
+    return { post, author: { ...author, username: author.username } };
+  });
+};
+```
+
+> We will then use it in `getAll` and `getPostsByUserId`
+
+> Whole file looks like this:
+
+```
+import clerkClient from "@clerk/clerk-sdk-node";
+import { TRPCError } from "@trpc/server";
+import { z } from "zod";
+
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
+
+import {
+  createTRPCRouter,
+  privateProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
+import { filterUserForClient } from "~/server/helpers/filterUserForClient";
+import { Post } from "@prisma/client";
+
+const addUserDataToPosts = async (posts: Post[]) => {
+  const users = (
+    await clerkClient.users.getUserList({
+      userId: posts.map((post) => post.authorId),
+      limit: 100,
+    })
+  ).map(filterUserForClient);
+
+  return posts.map((post) => {
+    const author = users.find((user) => user.id === post.authorId);
+
+    if (!author || !author.username) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Author of the posts not found",
+      });
+    }
+
+    return { post, author: { ...author, username: author.username } };
+  });
+};
+
+const ratelimit = new Ratelimit({
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.slidingWindow(3, "1 m"),
+  analytics: true,
+  prefix: "@upstash/ratelimit",
+});
+
+export const postsRouter = createTRPCRouter({
+  getAll: publicProcedure.query(async ({ ctx }) => {
+    const posts = await ctx.prisma.post.findMany({
+      take: 100,
+      orderBy: [
+        {
+          createdAt: "desc",
+        },
+      ],
+      where: { authorId: "user_2OBaeJj8EI29omUN4LZTUFl7TBh" },
+    });
+
+    return addUserDataToPosts(posts);
+  }),
+  getPostsByUserId: publicProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(({ ctx, input }) =>
+      ctx.prisma.post
+        .findMany({
+          where: {
+            authorId: input.userId,
+          },
+          take: 100,
+          orderBy: [{ createdAt: "desc" }],
+        })
+        .then(addUserDataToPosts)
+    ),
+
+  create: privateProcedure
+    .input(
+      z.object({
+        content: z
+          .string()
+          .emoji({ message: "Contains non-emoji characters" })
+          .min(1)
+          .max(280),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const authorId = ctx.userId;
+
+      const { success } = await ratelimit.limit(authorId);
+
+      if (!success) {
+        throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+      }
+
+      const post = await ctx.prisma.post.create({
+        data: {
+          authorId,
+          content: input.content,
+        },
+      });
+      return post;
+    }),
+});
+```
+
+> Our `[slug].tsx` file will then generate the PostView:
+
+```
+import type { GetStaticProps, NextPage } from "next";
+import Head from "next/head";
+import { api } from "~/utils/api";
+import Image from "next/image";
+
+import { PostView } from "~/components/postview";
+
+const ProfileFeed = (props: { userId: string }) => {
+  const { data, isLoading } = api.posts.getPostsByUserId.useQuery({
+    userId: props.userId,
+  });
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+  if (!data || data.length === 0) {
+    return <div>User has not posted</div>;
+  }
+  return (
+    <div className="flex flex-col">
+      {data.map((fullPost) => (
+        <PostView {...fullPost} key={fullPost.post.id} />
+      ))}
+    </div>
+  );
+};
+
+const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
+  const { data } = api.profile.getUserByUsername.useQuery({
+    username,
+  });
+
+  if (!data) {
+    return <div className="flex h-screen justify-center">404</div>;
+  }
+
+  return (
+    <>
+      <Head>
+        <title>{data.username}</title>
+      </Head>
+      <PageLayout>
+        <div className="relative h-36 bg-slate-600">
+          <Image
+            src={data.profilePicture}
+            alt={`@${data.username ?? ""}'s profile pic`}
+            width={128}
+            height={128}
+            className="absolute bottom-0 left-0 -mb-[64px] ml-4 rounded-full border-4 border-black bg-black"
+          />
+        </div>
+        <div className="h-[64px]" />
+        <div className="p-4 text-2xl font-bold">{`@${
+          data.username ?? ""
+        }`}</div>
+        <div className="w-full border-b border-slate-400" />
+        <ProfileFeed userId={data.id} />
+      </PageLayout>
+    </>
+  );
+};
+
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "~/server/api/root";
+import { prisma } from "~/server/db";
+import superjson from "superjson";
+import { PageLayout } from "~/components/layout";
+import { LoadingPage } from "~/components/loading";
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const ssg = createServerSideHelpers({
+    router: appRouter,
+    ctx: { prisma, userId: null },
+    transformer: superjson,
+  });
+
+  const slug = context.params?.slug;
+
+  if (typeof slug !== "string") {
+    throw new Error("no slug");
+  }
+
+  const username = slug.replace("@", "");
+  await ssg.profile.getUserByUsername.prefetch({ username });
+
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+      username,
+    },
+  };
+};
+
+export const getStaticPaths = () => {
+  return { paths: [], fallback: "blocking" };
+};
+
+export default ProfilePage;
+```
+
+> The same will also be used in the `index.tsx` in `Feed` component.
+
+```
+const Feed = () => {
+  const { data, isLoading: pageLoading } = api.posts.getAll.useQuery();
+
+  if (pageLoading) {
+    return (
+      <div className="flex w-full justify-center p-8">
+        <LoadingPage />
+      </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <div className="flex w-full justify-center p-8">
+        Something went wrong...
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col">
+      {data.map((fullProps) => (
+        <PostView {...fullProps} key={fullProps.post.id} />
+      ))}
+    </div>
+  );
+};
+```
+
+**2.23 Adding Post View page**
+
+> First let's abstract the ssg to a separate file. In server/helpers, let's create a file called `ssgHelper.tsx`:
+
+```
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "~/server/api/root";
+import { prisma } from "~/server/db";
+import superjson from "superjson";
+
+export const generateSSGHelper = () =>
+  createServerSideHelpers({
+    router: appRouter,
+    ctx: { prisma, userId: null },
+    transformer: superjson,
+  });
+```
+
+> And we will use it in `[slug].tsx` just like this: `const ssg = generateSSGHelper();`:
+
+```
+export const getStaticProps: GetStaticProps = async (context) => {
+  const ssg = generateSSGHelper();
+
+  const slug = context.params?.slug;
+
+  if (typeof slug !== "string") {
+    throw new Error("no slug");
+  }
+
+  const username = slug.replace("@", "");
+  await ssg.profile.getUserByUsername.prefetch({ username });
+
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+      username,
+    },
+  };
+};
+```
+
+> The whole `[slug].tsx` file looks like this:
+
+```
+import type { GetStaticProps, NextPage } from "next";
+import Head from "next/head";
+import { api } from "~/utils/api";
+import Image from "next/image";
+
+import { PostView } from "~/components/postview";
+import { PageLayout } from "~/components/layout";
+import { LoadingPage } from "~/components/loading";
+import { generateSSGHelper } from "~/server/helpers/ssgHelper";
+
+const ProfileFeed = (props: { userId: string }) => {
+  const { data, isLoading } = api.posts.getPostsByUserId.useQuery({
+    userId: props.userId,
+  });
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+  if (!data || data.length === 0) {
+    return <div>User has not posted</div>;
+  }
+  return (
+    <div className="flex flex-col">
+      {data.map((fullPost) => (
+        <PostView {...fullPost} key={fullPost.post.id} />
+      ))}
+    </div>
+  );
+};
+
+const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
+  const { data } = api.profile.getUserByUsername.useQuery({
+    username,
+  });
+
+  if (!data) {
+    return <div className="flex h-screen justify-center">404</div>;
+  }
+
+  return (
+    <>
+      <Head>
+        <title>{data.username}</title>
+      </Head>
+      <PageLayout>
+        <div className="relative h-36 bg-slate-600">
+          <Image
+            src={data.profilePicture}
+            alt={`@${data.username ?? ""}'s profile pic`}
+            width={128}
+            height={128}
+            className="absolute bottom-0 left-0 -mb-[64px] ml-4 rounded-full border-4 border-black bg-black"
+          />
+        </div>
+        <div className="h-[64px]" />
+        <div className="p-4 text-2xl font-bold">{`@${
+          data.username ?? ""
+        }`}</div>
+        <div className="w-full border-b border-slate-400" />
+        <ProfileFeed userId={data.id} />
+      </PageLayout>
+    </>
+  );
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const ssg = generateSSGHelper();
+
+  const slug = context.params?.slug;
+
+  if (typeof slug !== "string") {
+    throw new Error("no slug");
+  }
+
+  const username = slug.replace("@", "");
+  await ssg.profile.getUserByUsername.prefetch({ username });
+
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+      username,
+    },
+  };
+};
+
+export const getStaticPaths = () => {
+  return { paths: [], fallback: "blocking" };
+};
+
+export default ProfilePage;
+```
+
+> Now let's just copy the content of `[slug].tsx` to `[id].tsx` to make our like easier. Rename `ProfilePage` to `SinglePostPage`:
+
+> Let's add a router for single post by id called: `getById`:
+
+```
+getById: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const post = await ctx.prisma.post.findUnique({
+        where: { id: input.id },
+      });
+      if (!post) {
+        throw new TRPCError({ code: "NOT_FOUND" });
+      }
+      return (await addUserDataToPosts([post]))[0];
+    }),
+```
+
+> And then we can use it in the `[id].tsx`:
+
+```
+import type { GetStaticProps, NextPage } from "next";
+import Head from "next/head";
+import { api } from "~/utils/api";
+
+import { PostView } from "~/components/postview";
+import { PageLayout } from "~/components/layout";
+import { generateSSGHelper } from "~/server/helpers/ssgHelper";
+
+const SinglePostPage: NextPage<{ id: string }> = ({ id }) => {
+  const { data } = api.posts.getById.useQuery({
+    id,
+  });
+
+  if (!data) {
+    return <div className="flex h-screen justify-center">404</div>;
+  }
+
+  return (
+    <>
+      <Head>
+        <title>{`${data.post.content} - ${data.author.username}`}</title>
+      </Head>
+      <PageLayout>
+        <PostView {...data} />
+      </PageLayout>
+    </>
+  );
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const ssg = generateSSGHelper();
+
+  const id = context.params?.id;
+
+  if (typeof id !== "string") {
+    throw new Error("no slug");
+  }
+
+  await ssg.posts.getById.prefetch({ id });
+
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+      id,
+    },
+  };
+};
+
+export const getStaticPaths = () => {
+  return { paths: [], fallback: "blocking" };
+};
+
+export default SinglePostPage;
+```
+
+> This creates the page for individual post, yay!
+
+**2.24 How to cut the build time on Vercel to halftime - Github CI**
+
+> You should not be checking your types in lint on Vercel builds. There is not reason to because Github CI is free and it is right there. how to use it?
+
+> On Github our code lives and our code validation should happen there.
+
+> The thing that builds and deploys it should be separate. (Vercel)
+
+> Deploying should not be blocked by typecript passes.
+
+> Github's role is to make sure code is correct
+
+> Vercel's role is to deploy the code we give it
+
+> We will use ChatGPT to write yml files for us :P
+
+> Give it this question: `Write me a minimal github ci .yml workflow file that installs node modules, runs typescript typechecking, and also runs lint. This repo uses npm`
+
+> Out put will be:
+
+```
+name: CI
+
+on: [push, pull_request]
+
+env:
+  DATABASE_URL: "https://fake.com"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run type checking
+        run: npm run type-check
+
+      - name: Run linting
+        run: npm run lint
+
+```
+
+> We will create a `ci.yml` file in this path: `.github/workflows/`
+
+> Paste that content there.
+
+> Please note we added `env: DATABASE_URL: "https://fake.com"`
+
+> We also need to add `type-check` command to `package.json`
+
+```
+"scripts": {
+    "build": "next build",
+...
+    "typecheck": "tsc --noEmit"
+  },
+```
+
+> Let's now try to commit it and push
+
+> Now go to github and check it out
+
+![](https://i.imgur.com/nyMpL9z.png "Photo by Addania")<p style="font-size: 12px; text-align: right">_Photo by Addania_</p>
+
+> This then means we dont need to run type checking on Vercel, so let's disable it:
+
+> Go to file: n`ext.config-mjs` and paste there following:
+
+```
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true
+  },
+  swcMinify: true
+```
+
+> Whole file will look like this:
+
+```
+!process.env.SKIP_ENV_VALIDATION && (await import("./src/env.mjs"));
+
+const config = {
+  reactStrictMode: true,
+  images: {
+    domains: ["images.clerk.dev"],
+  },
+
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en",
+  },
+
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  swcMinify: true,
+};
+export default config;
+
+```
+
+> swcMinifiy will run instead of babel and will speed things up.
+
+**2.25 Real domain**
+
+> Vercel has the option to buy domains when you go to Domains tab
+
+> And it is super easy to add a e-mail server to the domain only with one click on Vercel
+
+> If we have a domain, how do we add it to our project?
+
+> Go to Verce -> Settings -> Domains
+
+> Type in there the domain and click Add.
+
+> If we want to have a subdomain of a domain like `addania.com`, we just pre-fix our domain with something: `chirp.addania.com`
+
+> There you can also add a re-direct.
