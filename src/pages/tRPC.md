@@ -4,8 +4,6 @@ date: "2023-04-09"
 category: "knowledge-base"
 ---
 
-**tRPC**
-
 > tRPC is an open-source framework for building TypeScript APIs. It's a modern alternative to REST APIs and can be used to build APIs for web applications, mobile applications, and other types of software.
 
 > tRPC is for full-stack TypeScript developers. It makes it easy to write endpoints that you can safely use in both the front and backend of your app.

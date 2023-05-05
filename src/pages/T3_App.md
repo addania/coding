@@ -4,8 +4,6 @@ date: "2023-03-28"
 category: "knowledge-base"
 ---
 
-**T3 APP**
-
 > Reference: https://create.t3.gg/
 
 > T3 was recommended to me by couple of people.
