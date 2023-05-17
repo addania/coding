@@ -1,31 +1,35 @@
 html {
-   background-color: rgb(48, 48, 48);
-    color: rgb(48, 48, 48); 
-  }
+  background-color: rgb(48, 48, 48);
+  color: rgb(48, 48, 48);
+}
 
-
-  h3, h1, h2, p, th, td{
-    color: rgb(48, 48, 48);
-  }
+h3,
+h1,
+h2,
+p,
+th,
+td {
+  color: rgb(48, 48, 48);
+}
 
 p {
   font-size: 18px;
   text-align: justify;
 }
 
-  a{
-    text-shadow: none;
-    text-decoration: none;
-    background-image: none;
-    color: teal;
-  }
+a {
+  text-shadow: none;
+  text-decoration: none;
+  background-image: none;
+  color: teal;
+}
 
-  blockquote {
-    font-size: 20px;
-    font-style: normal;
-    border-left: 0.2rem solid grey;
-  }
+blockquote {
+  font-size: 20px;
+  font-style: normal;
+  border-left: 0.2rem solid grey;
+}
 
-  body {
-    margin-top: -50px;
-  }
+body {
+  margin-top: -50px;
+}

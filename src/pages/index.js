@@ -1,83 +1,69 @@
 import React from "react"
 import Layout from "../components/layout.js"
-import { Link, graphql } from "gatsby"
-import SEO from "../components/seo.js"
-import { Carousel } from "../components/carousel.js"
+
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./index.css"
+import mia1 from "../images/mia1.jpg"
+
+const containerStyle = {
+  display: "flex",
+  alignItems: "center",
+  height: "80vh",
+  justifyContent: "flex-end",
+  position: "relative",
+}
+
+const imageStyle = {
+  flex: "0 0 50%",
+  height: "100%",
+  objectFit: "cover",
+  objectPosition: "right",
+  alignItems: "flex-end",
+}
+
+const Tag = ({ title, position, timer }) => {
+  return (
+    <div
+      style={{
+        borderRadius: "10px",
+        position: "absolute",
+        left: 0,
+        top: position,
+        transform: `translateY(-${position})`,
+        transform: `translateX(-100%)`,
+        width: "50%",
+        height: "10%",
+        background: "rgba(0, 0, 0, 0.7)",
+        zIndex: 1,
+        animation: `slide-in ${timer}s forwards`,
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100%",
+        }}
+      >
+        <h3 style={{ color: "white", alignItems: "center" }}>{title}</h3>
+      </div>
+    </div>
+  )
+}
 
 export default ({ data }) => {
   console.log(data)
   return (
     <div>
       <Layout>
-        <h2 style={{ textAlign: "center" }}>Coding Adventures</h2>
-        <p style={{ textAlign: "center" }}>
-          Welcome to the blog about my journey through coding universe. I hope
-          you will enjoy reading and find some useful information
-        </p>
-        <Carousel />
-
-        <h3 style={{ textAlign: "center" }}>ALL ARTICLES</h3>
-        <p style={{ textAlign: "center", fontSize: "15px", color: "grey" }}>
-          {data.allMarkdownRemark.totalCount} Posts
-        </p>
-
-        <table style={{ textAlign: "justify", textJustify: "inter-word" }}>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Title</th>
-              <th>Excerpt</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.allMarkdownRemark.edges.map(({ node }, index) => (
-              <tr key={index}>
-                <td>{node.frontmatter.date}</td>
-                <Link to={node.fields.slug}>
-                  <td style={{ color: "teal" }}>{node.frontmatter.title}</td>
-                </Link>
-                <td>{removeImageTextFromExcerpt(node.excerpt)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div style={containerStyle}>
+          <Tag title="Frontend Developer" position="30%" timer={2} />
+          <Tag title="Passionate about coding" position="50%" timer={2.5} />
+          <Tag title="Experienced Team Lead" position="70%" timer={3} />
+          <img src={mia1} alt="Portrait Image" style={imageStyle} />
+        </div>
       </Layout>
     </div>
-  )
-}
-
-export const query = graphql`
-  query {
-    allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { category: { eq: "knowledge-base" } } }
-    ) {
-      edges {
-        node {
-          id
-          excerpt
-          rawMarkdownBody
-          frontmatter {
-            date
-            title
-            category
-          }
-          fields {
-            slug
-          }
-          timeToRead
-          html
-        }
-      }
-      totalCount
-    }
-  }
-`
-const removeImageTextFromExcerpt = string => {
-  return string.replace(
-    /(Photo by .+ from Pexels)|(Photo by .+ from Pixabay)|(Photo from \b(\w*.com\w*)\b)|(Photo from \w+)/,
-    ""
   )
 }

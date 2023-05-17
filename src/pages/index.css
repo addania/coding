@@ -12,9 +12,10 @@ body {
   margin-top: -30px;
 }
 
-td, tr, th {
- font-Size: 15px;
-
+td,
+tr,
+th {
+  font-size: 15px;
 }
 
 td {
@@ -23,19 +24,28 @@ td {
 }
 
 tr {
-  border-bottom: 1px solid hsla(0,0%,0%,0.12);
+  border-bottom: 1px solid hsla(0, 0%, 0%, 0.12);
 }
 
 code {
- /* color:#c504cd;*/
+  /* color:#c504cd;*/
 }
 
 ul {
-	font-size: 18px;
-	line-height: normal;
+  font-size: 18px;
+  line-height: normal;
 }
 
- blockquote {
-    margin-top: 50px;
-    margin-bottom: 15px;
+blockquote {
+  margin-top: 50px;
+  margin-bottom: 15px;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(-100%);
   }
+  100% {
+    transform: translateX(0);
+  }
+}
