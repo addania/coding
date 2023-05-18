@@ -2136,7 +2136,7 @@ getAll: publicProcedure.query(async ({ ctx }) => {
   }),
 ```
 
-**2.14 Auto-refresh page when adding new post & clearing input**
+**2.14 Auto-refresh (hot reload) page when adding new post & clearing input**
 
 > We now want to disbaled the input while post is being posted and also we want to auto refresh the page. We will do in in CreatePostWizard:
 

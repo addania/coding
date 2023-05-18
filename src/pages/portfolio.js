@@ -8,7 +8,9 @@ import "./index.css"
 import vid from "../assets/videos/vid.mp4"
 import landscaping from "../assets/videos/landscaping.mp4"
 import obstacleAssault from "../assets/videos/obstacleAssault.mp4"
+import obstacleAssaultNew from "../assets/videos/obstacleAssaultNew.mp4"
 import warehouseWrackage from "../assets/videos/warehouseWrackage.mp4"
+import cryptRaider from "../assets/videos/cryptRaider.mp4"
 import yogata from "../assets/gifs/yoga.gif"
 import advent from "../assets/gifs/advent.gif"
 import adventCode from "../assets/gifs/adventCode.gif"
@@ -64,9 +66,32 @@ export default ({ data }) => {
               Unreal Engine
             </div>
             <video width="450" controls>
-              <source src={obstacleAssault} type="video/mp4"></source>
+              <source src={obstacleAssaultNew} type="video/mp4"></source>
             </video>
           </p>
+          <p
+            style={{
+              textAlign: "center",
+              backgroundColor: "black",
+              color: "white",
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
+            <div>Crypt Raider</div>
+            <div
+              style={{
+                fontSize: "14px",
+              }}
+            >
+              Unreal Engine
+            </div>
+            <video width="450" controls>
+              <source src={cryptRaider} type="video/mp4"></source>
+            </video>
+          </p>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
           <p
             style={{
               textAlign: "center",
