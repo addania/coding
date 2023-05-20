@@ -187,8 +187,6 @@ export default ({ data }) => {
               flexGrowth: 1,
               justifyContent: "space-around",
               flexWrap: "wrap",
-              //marginLeft: "24px",
-              // marginRight: "24px",
             }}
           >
             <div
@@ -320,7 +318,7 @@ export default ({ data }) => {
               }}
             >
               <img
-                src={a6}
+                src={a9}
                 width="70px"
                 alt="avatar1"
                 style={{ marginBottom: "8px" }}
@@ -332,7 +330,16 @@ export default ({ data }) => {
                   textAlign: "justify",
                 }}
               >
-                Mia should be cloned. You do a great job!
+                Mia & Sara, thanks and congrats on the Bazaar. There where{" "}
+                {`>70`}
+                people listening and giving feedback and were clearly happy to
+                see already implemented feedback from bazaars earlier this
+                quarter implemented. This is true role modeling of getting
+                feedback early and improving with quick feedback cycles. I think
+                every other team can benefit from adopting the way you
+                participate in this format regularly, gathering feedback and
+                improving iteratively. This is a great example of very good
+                product development practices in work.
               </div>
             </div>
             <div
@@ -358,7 +365,174 @@ export default ({ data }) => {
                   textAlign: "justify",
                 }}
               >
+                I admire the progress you've made in the last year and how well
+                you're handling things as a pod owner. Keep on rocking
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                flexGrowth: 1,
+                alignItems: "center",
+                minWidth: "200px",
+                padding: "24px",
+              }}
+            >
+              <img
+                src={a6}
+                width="70px"
+                alt="avatar1"
+                style={{ marginBottom: "8px" }}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  maxWidth: "200px",
+                  textAlign: "justify",
+                }}
+              >
+                It’s really a pleasure working with you. I’m much obliged and
+                grateful for your help, support and for that you exist in our
+                team.
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                flexGrowth: 1,
+                alignItems: "center",
+                minWidth: "200px",
+                padding: "24px",
+              }}
+            >
+              <img
+                src={a4}
+                width="70px"
+                alt="avatar1"
+                style={{ marginBottom: "8px" }}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  maxWidth: "200px",
+                  textAlign: "justify",
+                }}
+              >
+                Thanks for all the support you provided to QA team over this
+                year! ❤️ And thank you for always inspiring everyone who works
+                with you! 🚀 I hope I'll have opportunity to work with you more
+                next year!
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                flexGrowth: 1,
+                alignItems: "center",
+                minWidth: "200px",
+                padding: "24px",
+              }}
+            >
+              <img
+                src={a9}
+                width="70px"
+                alt="avatar1"
+                style={{ marginBottom: "8px" }}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  maxWidth: "200px",
+                  textAlign: "justify",
+                }}
+              >
+                This year me and Dan joined the Adverity and I feel lucky to
+                cooperate with such an amazing and helpful person like you.
+                Sending my heartiest appreciation for everything you do for me
+                and the QA team
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                flexGrowth: 1,
+                alignItems: "center",
+                minWidth: "200px",
+                padding: "24px",
+              }}
+            >
+              <img
+                src={a5}
+                width="70px"
+                alt="avatar1"
+                style={{ marginBottom: "8px" }}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  maxWidth: "200px",
+                  textAlign: "justify",
+                }}
+              >
+                Is there somebody else who will be testing this that could
+                benefit from Mia’s stellar work on writing the testing
+                requirements. Maybe @qa-engineering?
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                flexGrowth: 1,
+                alignItems: "center",
+                minWidth: "200px",
+                padding: "24px",
+              }}
+            >
+              <img
+                src={a8}
+                width="70px"
+                alt="avatar1"
+                style={{ marginBottom: "8px" }}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  maxWidth: "200px",
+                  textAlign: "justify",
+                }}
+              >
                 Managing the pod really really good!
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                flexGrowth: 1,
+                alignItems: "center",
+                minWidth: "200px",
+                padding: "24px",
+              }}
+            >
+              <img
+                src={a7}
+                width="70px"
+                alt="avatar1"
+                style={{ marginBottom: "8px" }}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  maxWidth: "200px",
+                  textAlign: "justify",
+                }}
+              >
+                Mia should be cloned. You do a great job!
               </div>
             </div>
           </div>
