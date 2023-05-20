@@ -4,6 +4,8 @@ date: "2023-05-05"
 category: "knowledge-base"
 ---
 
+![](https://i.imgur.com/NIS6FUU.png "Photo from docker.com")<p style="font-size: 12px; text-align: right">_Photo from docker.com_</p>
+
 **Running Postgres database in Docker**
 
 > If you build a t3app from: https://create.t3.gg/ with this command:

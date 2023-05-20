@@ -4,7 +4,7 @@ date: "2023-01-23"
 category: "knowledge-base"
 ---
 
-![]( "Photo by from Pexels")
+![](https://i.imgur.com/alxMzwe.png "Photo by from Pexels")
 
 This page is my notes from couple of courses and official zod documentation:
 

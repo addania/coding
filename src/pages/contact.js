@@ -9,6 +9,7 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 
 import Layout from "../components/layout.js"
 import mia3 from "../images/mia3.png"
+import { Polygons } from "../components/animationEffects/Polygons"
 
 const containerStyle = {
   display: "flex",
@@ -24,6 +25,9 @@ const imageStyle = {
   objectFit: "cover",
   objectPosition: "right",
   alignItems: "flex-end",
+  zIndex: 1,
+  margin: 0,
+  marginRight: -1,
 }
 
 const ContactIcon = ({ icon, text, link }) => {
@@ -53,7 +57,7 @@ const ContactForm = () => {
         width: "50%",
         height: "30%",
         background: "rgba(0, 0, 0, 0.8)",
-        zIndex: 1,
+        zIndex: 2,
         animation: `slide-in 3s forwards`,
       }}
     >
@@ -94,7 +98,10 @@ const ContactForm = () => {
 
 export default () => (
   <Layout>
-    <div style={containerStyle}>
+    <div id="container" style={containerStyle}>
+      <div id="tsparticles">
+        <Polygons style={{ width: "100%", height: "300px" }} />
+      </div>
       <ContactForm />
       <img src={mia3} alt="Portrait Image" style={imageStyle} />
     </div>

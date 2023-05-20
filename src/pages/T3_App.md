@@ -4,6 +4,8 @@ date: "2023-03-28"
 category: "knowledge-base"
 ---
 
+![](https://i.imgur.com/9HA97rK.png "Photo from Addania")<p style="font-size: 12px; text-align: right">_Photo from Addania_</p>
+
 > Reference: https://create.t3.gg/
 
 > T3 was recommended to me by couple of people.

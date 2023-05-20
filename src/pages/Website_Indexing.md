@@ -1,8 +1,10 @@
 ---
-title: "T3 APP"
+title: "Website Indexing"
 date: "2023-04-20"
 category: "knowledge-base"
 ---
+
+![](https://i.imgur.com/5v7lCPo.png "Photo by Jayashree Rajagopalan from editage.com")
 
 > Indexing by search engines is the process of collecting and storing information about web pages, documents, and other types of content on the internet, in order to make them available in search results.
 
