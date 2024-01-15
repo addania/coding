@@ -2838,7 +2838,7 @@ type Employee = {
 }
 </code></pre>
 <blockquote>
-<p>But since we already have a type for Admin and for Employee, we can combine them and create a new type based on them. This will also allow us to have one source of truth. IN order to define an intersection type, weuse <code>ampersand</code> symbol.</p>
+<p>But since we already have a type for Admin and for Employee, we can combine them and create a new type based on them. This will also allow us to have one source of truth. In order to define an intersection type, weuse <code>ampersand</code> symbol.</p>
 </blockquote>
 <pre><code>type ElevatedEmployee = Admin &#x26; Employee;
 const david: ElevatedEmployee = {
@@ -2879,7 +2879,7 @@ type Universal = Combinable &#x26; Calculatable
 <p>As a result Universal type will be of a type number, because number is the only <code>intersection</code> between (string or number) and (number or boolean).</p>
 </blockquote>
 <blockquote>
-<p>Why is that? Simply because of the way intersections are implemented. Intersections of union types will result in whatever is common for both union types. Intersection of object will result in combination of all its objects.</p>
+<p>Why is that? Simply because of the way intersections are implemented. Intersections of union types will result in whatever is <code>common</code> for both union types. Intersection of object will result in <code>combination of all its objects' values</code>.</p>
 </blockquote>
 <p><strong>Type guards</strong></p>
 <p><img src="https://i.imgur.com/NYjRWPJ.png" title="Photo by Mike from Pexels"><p style="font-size: 12px; text-align: right"><em>Photo by Mike from Pexels</em></p></p>
@@ -2904,29 +2904,1028 @@ console.log("numbers: ", addUp(1, 2));
 console.log("string &#x26; number: ", addUp("m", 1));
 </code></pre>
 <blockquote>
-<p><code>if (typeof a === "string" || typeof b === "string") {...}</code> is called a type guard. It allows us to use the flexibility of the union type gives us, bubt still ensures that our code runs correctly at run time.</p>
+<p><code>if (typeof a === "string" || typeof b === "string") {...}</code> is called a type guard. It allows us to use the flexibility of the union type gives us, but it still ensures that our code runs correctly at run time. If we did not use this type guard and passed a string and a number - we would get an error because you cannot add number to a string.</p>
 </blockquote>
-<p><strong>b) typeof type guard</strong></p>
-<p><strong>Interfaces</strong></p>
+<p><strong>b) in type guard</strong></p>
 <blockquote>
-<p>They represent objects! type can represent anything, interface only object</p>
+<p>Imagine we have our Admin and Employee types and we also create a type of an UnknownEmployee which either one of them:</p>
 </blockquote>
-<pre><code>interface Adda {
-  name: string,
-  nick: string,
-  age: number
+<pre><code>type Admin = {
+  name: string;
+  privileges: Array&#x3C;string>
+}
+
+type Employee = {
+  name: string;
+  startDate: Date;
+}
+
+type UnknownEmployee = Admin | Employee
+</code></pre>
+<blockquote>
+<p>Now image we want to create a printEmp function which will console log various information about the emplyoee. But TS will complain if we want to access employee.privileges, because it may not exist on UnknownEmployee:</p>
+</blockquote>
+<pre><code>const printEmp = (employee: UnknownEmployee) => {
+  console.log("Privileges: " + employee.priviledges)
+
 }
 </code></pre>
 <blockquote>
-<p>It is matter of custom. Whichever I choose I should be consistent.</p>
+<p>How to do this? We can use <code>in</code> from Javascript and check for the object property.</p>
+</blockquote>
+<pre><code>const printEmp = (employee: UnknownEmployee) => {
+  if ('privileges' in employee) {
+  console.log("Privileges: " + employee.priviledges)
+  }
+}
+printEmp({name: "Mia", privileges: ["flash"]})
+</code></pre>
+<p><strong>b) instanceOf type guard</strong></p>
+<blockquote>
+<p>Imagine we have two classes Car and a Truck and also a union type Vehicle which can be either one of them:</p>
+</blockquote>
+<pre><code>class Car {
+  drive() {
+    console.log("Driving ...")
+  }
+}
+
+class Truck {
+  drive() {
+    console.log("Driving a truck ...")
+  }
+  loadCargo(amount: number) {
+    console.log("Loading cargo ..." + amount)
+  }
+}
+
+type Vehicle = Car | Truck
+
+const v1= new Car()
+const v2= new Turck()
+</code></pre>
+<blockquote>
+<p>We want to have a function which will receive a vehicle of type Vehicle. vehicle.drive() will be ok cause both Vehicles have drive function. But we will have an issue to use: vehicle.loadCargo(100) because only trucks can do that. We will need to find a way how to type guard this.</p>
+</blockquote>
+<pre><code>const useVehicle = (vehicle: Vehicle) => {
+  vehicle.drive()
+  vehicle.loadCargo(100) // TS ERROR
+}
+</code></pre>
+<blockquote>
+<p>We can use <code>in</code> type guard as before:</p>
+</blockquote>
+<pre><code>const useVehicle = (vehicle: Vehicle) => {
+  vehicle.drive()
+  if ('loadCargo' in vehicle){
+    vehicle.loadCargo(100) // works!!
+  }
+}
+
+useVehicle(v1)
+useVehicle(v2)
+</code></pre>
+<blockquote>
+<p>But we can use more fancy <code>instanceOf</code> type guard</p>
+</blockquote>
+<pre><code>const useVehicle = (vehicle: Vehicle) => {
+  vehicle.drive()
+  if (vehicle instanceOf Truck){
+    vehicle.loadCargo(100) // works!!
+  }
+}
+
+useVehicle(v1)
+useVehicle(v2)
+</code></pre>
+<blockquote>
+<p>instanceOf is a normal operator built into the vanilla Javascript. It executes at runtime. And we compare it to a class Truck! Which is then compiled to constructor function at runtime and this is what JS understands. We would not be able ot use it with inteface though! Cause interface is a TS feature.</p>
+</blockquote>
+<p><strong>Discriminated unions</strong></p>
+<blockquote>
+<p>They help as type guards. It is a pattern which you can use when working with union types which makes implementing type guards easier. It is available when working with object types.</p>
+</blockquote>
+<blockquote>
+<p>Imagine we have Bird, Horse and Animal interfaces and a function moveAnimal:</p>
+</blockquote>
+<pre><code>interface Bird {
+  flyingSpeed: number
+}
+interface Horse {
+  runningSpeed: number
+}
+type Animal = Bird | Horse
+
+const moveAnimal = (animal: Animal) => {
+  console.log("Flying speed: " + animal.flyingSpeed) // TS ERROR
+}
+</code></pre>
+<blockquote>
+<p>We can use of with <code>'flyingSpeed' in animal</code> or we use a discriminate union.</p>
+</blockquote>
+<blockquote>
+<p>Discriminate union will look in a way, that both our interfaces will have a common property, for example animalType with different values. And each value "bird" or "horse" will then determin what other properties te interface has: fyingSpee for bird and runningSpeed for horse:</p>
+</blockquote>
+<pre><code>interface Bird {
+  animalType: "bird"
+  flyingSpeed: number
+}
+interface Horse {
+  animalType: "horse"
+  runningSpeed: number
+}
+type Animal = Bird | Horse
+</code></pre>
+<blockquote>
+<p>Then our function can use animal.type as a type guard:
+const moveAnimal = (animal: Animal) => {
+if(animal.type === "bird") {</p>
+</blockquote>
+<pre><code> console.log("Flying speed: " + animal.flyingSpeed) // works !!!
+</code></pre>
+<p>}
+}</p>
+<pre><code>> Or even better it can use a switch:
+const moveAnimal = (animal: Animal) => {
+  switch(animal.type){
+    case "bird":
+      console.log("Flying speed: " + animal.flyingSpeed) // works !!!
+      break;
+    case "horse":
+      console.log("Running speed: " + animal.runningSpeed) // works !!!
+      break;
+  }
+}
+</code></pre>
+<p><strong>Type casting</strong></p>
+<blockquote>
+<p>Helps us tell TS that a specific value is of a certqin type when TS is not able to detect it on its own but I KNOW BETTER 😎.</p>
+</blockquote>
+<blockquote>
+<p>Imagine we have an input element in the HTML:</p>
+</blockquote>
+<pre><code>&#x3C;input type="text" id="user-input">
+</code></pre>
+<blockquote>
+<p>We then want to access this element in our Javascript and change its value.</p>
+</blockquote>
+<pre><code>const userInputElement = document.getElementById("user-input");
+userInputElement.value="Hi" // TS Error
+</code></pre>
+<blockquote>
+<p>TS will complain, because it will inherently type userInputElement as <code>HTMLElement | null</code> and not as HTMLInputElement. HTMLElement is a generic type of any HTML element and hence does not support special properties, like value for an input element.</p>
+</blockquote>
+<blockquote>
+<p>What we want to tell TS here is that the elemt we are selecting is an <code>HTMLInputElement</code> and that it is not null.</p>
+</blockquote>
+<blockquote>
+<p>We can solve null with exclamation mark. Exclamation mark tells TS that whatever in front of it will never yield null.</p>
+</blockquote>
+<pre><code>const userInputElement = document.getElementById("user-input")!;
+userInputElement.value="Hi" // TS Error
+</code></pre>
+<blockquote>
+<p>And we can tell TS that it is <code>HTMLInputElement</code> with type casting. There are two ways to do type casting:</p>
+</blockquote>
+<blockquote>
+<p>Type casting with <code>as</code> keyword.</p>
+</blockquote>
+<pre><code>const userInputElement = &#x3C;HTMLInputElement>document.getElementById("user-input")! as HTMLInputElement;
+userInputElement.value="Hi" // works
+</code></pre>
+<blockquote>
+<p>(!!DO NOT USE IN REACT) Type casting with <code>&#x3C;></code> in front of the element we want to type cast. For this to work we need to have tsconfig file including the "dom" lib (library).</p>
+</blockquote>
+<pre><code>const userInputElement = &#x3C;HTMLInputElement>document.getElementById("user-input")!;
+userInputElement.value="Hi" // works
+</code></pre>
+<blockquote>
+<p>tsconfig file needs to look like this:</p>
+</blockquote>
+<pre><code>"lib": [
+  "dom",
+  "es6",
+  ...
+]
+</code></pre>
+<blockquote>
+<p>Beware this will not work in react where angle brackets denote components.</p>
+</blockquote>
+<p><strong>Index properties</strong></p>
+<blockquote>
+<p>This is TS feature which let's us define flexible object with variable properties.</p>
+</blockquote>
+<blockquote>
+<p>Imagine you need to create an object type but you dont know in advance what the properties will it store. And further I want to use this object on any form I have on my page: email input, username input, etc. There will be different inputs with different identifiers on my page. My type needs to be able to embrace all of them.</p>
+</blockquote>
+<blockquote>
+<p>For this I can use index type with the square brackets. Inside square brackets I use any name I decide, for example <code>key</code> or <code>prop</code>, then I define its type. Objects can have strings, numbers or symbols as a property type.</p>
+</blockquote>
+<pre><code>interface ErrorContainer {
+  [key: string]: string
+}
+or
+interface ErrorContainer {
+  [prop: string]: string
+}
+</code></pre>
+<blockquote>
+<p>With this Im saying I dont know exactly the property name, I dont know the property count, I just know they will be strings.</p>
+</blockquote>
+<blockquote>
+<p>We can add our own properties to such an object, but all will need to have a string value.</p>
+</blockquote>
+<pre><code>interface ErrorContainer {
+  id: string,
+  [prop: string]: string
+}
+</code></pre>
+<blockquote>
+<p>We cannot add our own properties which would have a number value, because it is in clash with <code>[prop: string]: string</code></p>
+</blockquote>
+<pre><code>interface ErrorContainer {
+  id: number, // TS ERROR
+  [prop: string]: string
+}
+</code></pre>
+<blockquote>
+<p>Then we can create objects for example like those. All are valid:</p>
+</blockquote>
+<pre><code>const ob1 = {} // valid
+const ob2 = { email: "adb"} // valid
+const ob3 = { email: "adb", name: "me"} // valid
+</code></pre>
+<blockquote>
+<p>This one would not be valid:</p>
+</blockquote>
+<pre><code>const ob2 = { email: 1} // invalid
+</code></pre>
+<p><strong>Function overloads</strong></p>
+<blockquote>
+<p>Allows us to define different type signatures for the same function, when one function has multiple ways to call this function with different signatures. Good example is our addUp function which can take two strings, string and a number or two numbers</p>
+</blockquote>
+<pre><code>type Combinable = string | number;
+
+const addUp = (a: Combinable, b: Combinable) => {
+  if (typeof a === "string" || typeof b === "string") {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+};
+</code></pre>
+<blockquote>
+<p>This function takes two parameters of a type Combinable and it also returns a value which is of a type Combinable. But we know further, that if we pass in two numbers, it will always returns a number, else it returns a string. But TS types the return value as a Combinable, which will be number or a string and the TS does not know when it is which one. So even in this case the result might be a string, even when we pass two numbers:</p>
+</blockquote>
+<pre><code>const result = addUp(1,2);
+</code></pre>
+<blockquote>
+<p>Same applies to when I pass two strings, return type will be Combinable, which can be a number. Consequence is that on result, I cant call string or math functions: result.split()</p>
+</blockquote>
+<blockquote>
+<p>One way to handle this is type casting with as:</p>
+</blockquote>
+<pre><code>const result = addUp(1,2) as number;
+const result2 = addUp("mia", " cool") as string;
+</code></pre>
+<blockquote>
+<p>What can come handy is a <code>function overload</code>, which is written with the word <code>function</code> on top of your actual function declaration. Please note this only works with the <code>function</code> declaration syntax, not with <code>arrow</code> functions.</p>
+</blockquote>
+<pre><code>type Combinable = string | number;
+
+function addUp(a: number, b: number): number;
+function addUp(a: string, b: string): string;
+function addUp(a: number, b: string): string;
+function addUp(a: string, b: number): string;
+function addUp(a: unknown, b: unknown) {
+  if (typeof a === "string" || typeof b === "string") {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+};
+
+const result = addUp(1,2);
+result.split(" "); // NO ERROR
+</code></pre>
+<blockquote>
+<p>This will explicitely say to TS, that if I call this function with 2 numbers, I will return a number and if I call it with at least one string, I will always get a string.</p>
+</blockquote>
+<p><strong>Optional chaining</strong></p>
+<blockquote>
+<p>Imagine you get your data from backend and you are not sure if in an object certain property is defined. What if job can be undefined.</p>
+</blockquote>
+<pre><code>const user = {
+  name: "mia",
+  lastName: "cool",
+//  job: { title: "CEO", company: "Hyped"}
+}
+
+console.log(user.job.title) // will not  work
+</code></pre>
+<blockquote>
+<p>But what if we might not get the job from the backend, we could do the check first if the job exists and then print out the title:</p>
+</blockquote>
+<pre><code>console.log(user.job &#x26;&#x26; user.job.title) // will work
+</code></pre>
+<blockquote>
+<p>Alternatively you can use optional chaining to achieve this:</p>
+</blockquote>
+<pre><code>console.log(user?.job?.title) // will work
+</code></pre>
+<blockquote>
+<p><code>user?.job</code> means if user exists, access job
+<code>user?.job?.title</code> means if user exists and job exists, access title</p>
+</blockquote>
+<blockquote>
+<p>If the thing in front of the question mark does not exist, it does not try to access the thing after the dot.</p>
+</blockquote>
+<blockquote>
+<p>This allows us to safely nested properties.</p>
+</blockquote>
+<p><strong>Nullish Coalescing</strong></p>
+<blockquote>
+<p>It is a nice feature in TS which helps us deal with nullish data. Imagine we have a piece of data which can be null, undefined or a valid value, especially when we fetch something from the backend. Then if I want to store this data, if it is null, I want it to fall back to some default value. We can use or operator || to do this:</p>
+</blockquote>
+<pre><code>const user = null; // or if it is undefined
+const storedUser = user || "DEFAULT"; // storegUser is DEFAULT
+</code></pre>
+<blockquote>
+<p>But problem will be when we get an empty string, it will resolve as falsy value and also default to "DEFAULT"</p>
+</blockquote>
+<pre><code>const user = ''; // or even 0
+const storedUser = user || "DEFAULT"; // storegUser is DEFAULT
+</code></pre>
+<blockquote>
+<p>What if an empty string is a valid input and I want to keep it. For this TS has an operator - double questionmark operator: <code>??</code> and it is called nullish coalescing. It means if user is null or undefined (and only these two values, not an empty string, not a 0), then use "DEFAULT" user</p>
+</blockquote>
+<pre><code>const user = '';
+const storedUser = user ?? "DEFAULT"; // storegUser is DEFAULT
+</code></pre>
+<p><strong>Generics</strong></p>
+<blockquote>
+<p>Generics only exist in TS.</p>
+</blockquote>
+<p><strong>Built-in generic types in TS</strong></p>
+<blockquote>
+<p>Array is one of the built-in generic types in TS. Imagine we have a const which is an array of strings</p>
+</blockquote>
+<pre><code>const names= ["mia", "david"] // name: string[]
+</code></pre>
+<blockquote>
+<p>Let's think about it as two different types: an array type and a string type. Array type is connected to the string type, because array is just a list of values and we need to specify which values those are. We can use this notation: generic notation:</p>
+</blockquote>
+<pre><code>const names: Array&#x3C;string> = ["mia", "david"];
+</code></pre>
+<blockquote>
+<p>This is a generic notation with the angle brackets. Array itself is a generic type, which then can hold some values. In the angle brackets we define which type the values are, in our case: strings. This then helps me to access each element and do operations on them: for example string operations: <code>name[0].split(' ')</code></p>
+</blockquote>
+<blockquote>
+<p>Promise is another built-in generic type in TS. Promises also exist in vanilla Javascript. Promise can be created using <code>new Promise()</code> syntax and it takes in one argument which is in itself a function and this function gets two arguments (resolve and reject). These two arguments will be passed in automatically by Javascript and the browser. In a promise we can set a timer. The timer had two arguments: callback function and the timing. In the calleback function we can resolve the promise and say "This is done".</p>
+</blockquote>
+<pre><code>const promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("This is done")
+  }, 2000)
+});
+</code></pre>
+<blockquote>
+<p>This creates a promise object and stores in the constant called promise. This const has a special type called <code>Promise&#x3C;unknow></code>. Because this promise will eventually resolve to something. TS will assume it will resolve to unknown cause it does not fully understand from the code, that we will resolve it to string. We can be more specific and we can explicitely type it using our generic type using <code>Promise&#x3C;string></code>:</p>
+</blockquote>
+<pre><code>const promise: Promise&#x3C;string> = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("This is done")
+  }, 2000)
+});
+
+promise.then( (data) => {
+  data.split(" ");
+})
+</code></pre>
+<blockquote>
+<p>If TS knows that promise will resolve to string, then is we do promise.then and retrieve data, we can do string operations on data, such a split. We get better type safety with generics.</p>
+</blockquote>
+<blockquote>
+<p><code>Partial</code> is another built-in type in TS. It turns all the object properties to be optional. Imagine we have CourseGoal object and a function to create one:</p>
+</blockquote>
+<pre><code>interface CourseGoal = {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+const create = (title: string, description: string, date: Date): CoarseGoal => {
+  let goal: Partial&#x3C;CoarseGoal> = {};
+  goal.title= title;
+  goal.description= description;
+  goal.completeUntil= date;
+  return goal as CoarseGoal
+}
+</code></pre>
+<blockquote>
+<p>We need to type the goal as <code>Partial&#x3C;CoarseGoal></code> because we initialize it as an empty object and empty object does not have title, description, etc properties. So initially we use a generic <code>Partial</code> and pass in the <code></code>, making this type having all properties optional. At the end when we add all properties, we want to type cast it and return it as a <code>CoarseGoal</code> type</p>
+</blockquote>
+<blockquote>
+<p><code>Readonly</code> is another built-in TS type which makes sure that an array for example is read-only and that when we try to modify the array by adding/removing the items, TS will yell at us to prevent us from doing so:</p>
+</blockquote>
+<pre><code>const names: Readonly&#x3C;string[]> = [ "Mia", "Dave"];
+names.push("Name"); // TS will complain
+names.pop();
+</code></pre>
+<blockquote>
+<p>We can also use <code>Readonly</code> on objects.</p>
+</blockquote>
+<p><strong>Own generic types</strong></p>
+<blockquote>
+<p>We can build generic classes or functions.</p>
+</blockquote>
+<p><strong>Generic functions</strong></p>
+<blockquote>
+<p>We will start with a function that merges two objects and store its output to const called mergedObject.</p>
+</blockquote>
+<pre><code>const merge = (objectA: object, objectB: object) => {
+  return Object.assign(objectA, objectB)
+}
+
+const mergedObject = merge({name: "Mia"}, {nickname: "Ada"})
+console.log(mergedObject.name) // TS error
+</code></pre>
+<blockquote>
+<p>The problem here is that I cant access name or nickname on the mergedObject. TS only knows we get 2 objects and it infers it will return an object but it does not know which properties it will have (name and nickname). We could do type casting and hard-code this: <code>const mergedObject = merge({name: "Mia"}, {nickname: "Ada"}) as { name: string, nickname: string }</code>. But this is cumbersome. Generics can help us. We can turn this to a generic function.</p>
+</blockquote>
+<pre><code>const merge = &#x3C;T, U>(objectA: T, objectB: U) => {
+  return Object.assign(objectA, objectB)
+}
+
+const mergedObject = merge({name: "Mia"}, {nickname: "Ada"})
+console.log(mergedObject.name) // no error
+</code></pre>
+<blockquote>
+<p>How to create a generic function? We add angle brackets in front of the parameters declaration and use T and U for the types. T and U are just a convention, it can be full name, like Type or User, etc. We will stick to the convention T and U.</p>
+</blockquote>
+<blockquote>
+<p>What does this <code>&#x3C;T, U>(objectA: T, objectB: U)</code> mean? It means that the function will accept two things of a type T and U and then TS infers that the output type will be: <code>T &#x26; U</code>. So we dont need to explicitely type the output, but we could: <code>&#x3C;T, U>(objectA: T, objectB: U): T &#x26; U</code>. THis then helps typescript type the mergedObject correctly and then allow us to access name and nickname.</p>
+</blockquote>
+<blockquote>
+<p>And where is this T and U coming from? It is coming from the place where I call the function:</p>
+</blockquote>
+<pre><code> merge({name: "Mia"}, {nickname: "Ada"})
+</code></pre>
+<blockquote>
+<p>My <code>T</code> is <code>{name: "Mia"}</code>. My <code>U</code> is <code>{nickname: "Ada"}</code>. And TS infers those types.</p>
+</blockquote>
+<blockquote>
+<p>The magic of this approach is that the T and U are not set in stone when I declare the function. They are dynamic and depends on the place where I call the function and what types I pass in. This below will still work.</p>
+</blockquote>
+<pre><code>const mergedObject = merge({work: "No!"}, {chillax: "Yes!"})
+</code></pre>
+<blockquote>
+<p>If I hard-coded the types at the function declaration, it will limit what I can pass to the function:</p>
+</blockquote>
+<pre><code>const merge = (objectA: {name: string}, objectB: {nickname: string}) => {
+  return Object.assign(objectA, objectB)
+}
+
+const mergedObject = merge({work: "No!"}, {chillax: "Yes!"}) // ERROR
+</code></pre>
+<blockquote>
+<p>So with generics, T and U are filled with different types every time I call the function. So T and U are kind of placeholders/variables. Once T is <code>{name: string}</code>, then next time it is <code>{work: string}</code>, etc.</p>
+</blockquote>
+<blockquote>
+<p>For each function call we can ge very specific and typeT and U explicitely:</p>
+</blockquote>
+<pre><code>const mergedObject = merge&#x3C;{work: string}, {chillax: string}>({work: "No!"}, {chillax: "Yes!"})
+</code></pre>
+<blockquote>
+<p>Little bug with our implementation is that at the moment T and U can be anything: string, number, object, array. But what we actually need is just any object. We can do so with so called: generic type constraints. We will use <code>extends</code> keywords to do so.</p>
+</blockquote>
+<pre><code>const merge = &#x3C;T extends object, U extends object>(objectA: T, objectB: U) => {
+  return Object.assign(objectA, objectB)
+}
+</code></pre>
+<blockquote>
+<p>For those constraints, it can be own types (aliases), unions, etc. Anything. We can also constrain only one of the generic types, or none.</p>
+</blockquote>
+<blockquote>
+<p>Another example of a generic function will be one which can extract a key from an object:</p>
+</blockquote>
+<pre><code>const extract = (obj: object, key: string) => {
+  return obj[key]
+}
+</code></pre>
+<blockquote>
+<p>In above example, TS will have a problem with <code>obj[key]</code> because it does not know if the object we are getting will have the given key.</p>
+</blockquote>
+<blockquote>
+<p>We want to type the first parameter as and object and the second parameter and the key of that object. We can achieve this with generic function:</p>
+</blockquote>
+<pre><code>const extract = &#x3C;T extends object, U extends keyof T>(obj: T, key: U) => {
+  return obj[key]
+}
+</code></pre>
+<blockquote>
+<p>This means that the first parameter is and object and second on is the key of that object. Yay! TS will then ensure that it allows us to pass correct types and prevents us from passing incorrect ones.</p>
+</blockquote>
+<pre><code>extract({name: "Mia"}, "name") // WORKS
+extract({name: "Mia"}, "age") // TS ERROR, cool!
+</code></pre>
+<p><strong>Generic classes</strong></p>
+<blockquote>
+<p>Imagine we have a DataStorage class which is able to add and remove an item and also display all items:</p>
+</blockquote>
+<pre><code>class DataStorage {
+  private data = [];
+
+  addItem(item) {
+    this.data.push(item);
+  }
+
+  removeItem(item) {
+    this.data.splice(this.data.indexOf(item),1);
+  }
+
+  getItems(){
+    return [...this.data];
+  }
+}
+</code></pre>
+<blockquote>
+<p>We will get TS errors on data, because we dont specify what type of data we have. We dont care about the data itself, we only want it to be uniform: for example, just strings or just numbers or just objects. We could turn this to a generic class by adding angle brackets after the class name.</p>
+</blockquote>
+<pre><code>class DataStorage&#x3C;T> {
+  private data: T[] = [];
+
+  addItem(item: T) {
+    this.data.push(item);
+  }
+
+  removeItem(item: T) {
+    this.data.splice(this.data.indexOf(item),1);
+  }
+
+  getItems(){
+    return [...this.data];
+  }
+}
+
+const textStorage = new DataStorage&#x3C;string>();
+textStorage.addItem("car"); // is OK
+textStorage.addItem(10); // TS error
+textStorage.removeItem("car"); // is OK
+console.log(textStorage.getItems());
+const numberStorage = new DataStorage&#x3C;number>();
+</code></pre>
+<blockquote>
+<p>Why we want to do this? We want our class to be flexible and store for example strings only, or numbers only, or objects only. As long as we are consistent, we dont care about the type.</p>
+</blockquote>
+<blockquote>
+<p>Generics types give us flexibilty and at the same time full type safety.</p>
+</blockquote>
+<p><strong>Decorators</strong></p>
+<blockquote>
+<p>Are useful for meta-programming. They are useful not for end users visiting my page but for writing code that is easier to use by other developers. They guarantee that one of our classes gets used correctly, or a method in a class.</p>
+</blockquote>
+<blockquote>
+<p>In order to use decorators, we need to go to tsconfig and uncomment: <code>"experimentalDecorators": true</code></p>
+</blockquote>
+<blockquote>
+<p>Decorators are all about classes. We can add one to entire class. Let's create a small <code>Person</code> class.</p>
+</blockquote>
+<pre><code>class Person {
+  name = "Mia"
+
+  constructor() {
+    console.log("Creating a class -> object")
+  }
+}
+
+const pers = new Person()
+console.log(pers)
+</code></pre>
+<blockquote>
+<p>In that example, we have no decorators involved. Decorator is a <code>function</code> to apply to somthing (class) in a certain way. We add one at the top of the file and by convention they typically are capitalized. (Probably need to be declared with keyword function instead of using arrow function). We can apply that function as a decorator. It will only hold console.log for now to see when the decorator function runs.</p>
+</blockquote>
+<pre><code>function Logger() {
+  console.log("Logging...");
+
+}
+</code></pre>
+<blockquote>
+<p>We will not be running it directly, rather, we will use it as a decorator to the Person class. In order to do so, we will use <code>@Logger</code> in front of the class. <code>@</code> is a special symbol TS recognizes and it should point at a function. Please note, it does not run the function <code>Logger()</code> it only refers that function <code>Logger</code>:</p>
+</blockquote>
+<pre><code>function Logger() {
+  console.log("Logging...");
+
+}
+
+@Logger
+class Person {
+  name = "Mia"
+
+  constructor() {
+    console.log("Creating a class -> object")
+  }
+}
+
+const pers = new Person()
+console.log(pers)
+</code></pre>
+<blockquote>
+<p>This will not yet work, because a decorator function needs to get some arguments. For example for a class it gets 1 argument: a constructor function of a class.</p>
+</blockquote>
+<pre><code>function Logger(constructor: Function) {
+  console.log("Logging...");
+  console.log(constructor);
+
+}
+
+@Logger
+class Person {
+  name = "Mia"
+
+  constructor() {
+    console.log("Creating a class -> object")
+  }
+}
+
+const pers = new Person()
+console.log(pers)
+</code></pre>
+<blockquote>
+<p>What will happen is that Logging will be logged BEFORE the Creating class. Decorators run when defining a class, not when instantiating/creating a class. Even if we remove the code that instantiates the class <code>const pers = new Person()</code>, we would still run the Decorator and console log <code>Logging</code>. Decorator runs when the JS finds your class definition.</p>
+</blockquote>
+<blockquote>
+<p>There are other ways to create decorators: via <code>decorator factories</code>. Decorator factory <strong>returns</strong> a decorator function. Decorator factory allows us to configure additional parameters, such as which class it it attached to, etc. Here is an example:</p>
+</blockquote>
+<pre><code>function Logger(logString: string) {
+  return function(constructor: Function){
+    console.log(logString);
+    console.log(constructor);
+  }
+
+}
+
+@Logger("Logger for Person")
+class Person {
+  name = "Mia"
+
+  constructor() {
+    console.log("Creating a class -> object")
+  }
+}
+
+const pers = new Person()
+console.log(pers)
+</code></pre>
+<blockquote>
+<p>Please note that now we created a factory called Logger and it needs to be executed, hence we need to add it as a decorator in this way: <code>@Logger("Logger for Person")</code> with parenthesis.</p>
+</blockquote>
+<blockquote>
+<p>Also notice that the factory returns the decorator function which will get one argument: constructor function of the class.</p>
+</blockquote>
+<blockquote>
+<p>Another interesting thing is that at the place where we attach the decorator to the class, we can pass any number of arguments, such as logString: <code>"Logger for Person"</code></p>
+</blockquote>
+<blockquote>
+<p>Another point is that a return function of the factory is <strong>anonymous</strong> function: <code>function(constructor: Function){}</code></p>
+</blockquote>
+<blockquote>
+<p>Being able to pass in our own arguments to the decorator functions via decorator factory gives us more power over what we can do inside of the decorator.</p>
+</blockquote>
+<blockquote>
+<p>Anothe example, imagine we want to create a decorator factory which will then render a template (some html code) to a particular place in DOM based on a hookId:</p>
+</blockquote>
+<pre><code>function WithTemplate(template: string, hookId: string){
+  return function(constructor: Function){
+    const hookElement = document.getElementById(hookId)
+    if (hookElement){
+      hookElement.innerHTML = template
+    }
+  }
+}
+
+@WithTemplate("&#x3C;h1>I found ya, my Person object! :)&#x3C;/h1>", "app")
+class Person{
+...
+}
+</code></pre>
+<blockquote>
+<p>We need to have a corresponding code in the HTML, for example a div with "app" id where we will render our template:</p>
+</blockquote>
+<pre><code>&#x3C;div id="app">&#x3C;/div>
+</code></pre>
+<blockquote>
+<p>With the code above, we practically search for a hookId and add a template as innerHTML to it.</p>
+</blockquote>
+<blockquote>
+<p>Please note that TS will complain, that we specified constructor, but we are not using it. It is obligatory to specify it, and to tell TS that we will not use it, we can replace it with an underscore:</p>
+</blockquote>
+<pre><code>function WithTemplate(template: string, hookId: string){
+  return function(_: Function){
+   ...
+  }
+}
+</code></pre>
+<blockquote>
+<p>This demonstrate magical power of decorators, we can expose the decorator functions in our library to allow programmers who use our library can import this decorator function and add it to a class and render some content all of a sudden. With decorators we provide tools to developers - hence meta programming.</p>
+</blockquote>
+<blockquote>
+<p>We can do more, we can expose a name of the class for example, because we expose the constructor function.</p>
+</blockquote>
+<pre><code>function WithTemplate(template: string, hookId: string){
+  return function(constructor: any){
+
+    const person = new constructor()
+
+    const hookElement = document.getElementById(hookId)
+    if (hookElement){
+      hookElement.innerHTML = template
+      hookElement.querySelector("h1")!.textContent = person.name
+    }
+  }
+}
+
+@WithTemplate("&#x3C;h1>I found ya, my Person object! :)&#x3C;/h1>", "app")
+class Person{
+  name = "Mia"
+
+  constructor() {
+    console.log("Creating a class -> object")
+  }
+}
+</code></pre>
+<blockquote>
+<p>Above code will create a person via the constructor function and it will have a name property. Then we query the h1 tag, which we know we will always have, because we pass it to decorator function (hence the trick with !). And then we set the h1 textContent to the person.name.</p>
+</blockquote>
+<blockquote>
+<p>We can add more than one decorators to a class.</p>
+</blockquote>
+<pre><code>function WithTemplate(template: string, hookId: string){
+ ...
+}
+
+function Logger(logString: string) {
+ ...
+}
+
+@Logger("Logger for Person")
+@WithTemplate("&#x3C;h1>I found ya, my Person object! :)&#x3C;/h1>", "app")
+class Person{
+ ...
+}
+</code></pre>
+<blockquote>
+<p>If we have multiple decorators, they execute in following way:</p>
+</blockquote>
+<ul>
+<li>decorator factories run top down - topmost first and then subsequent ones</li>
+<li>decorator functions (the return statement from the decorator factories) run bottom up - the closest to the class will be exectuted first.</li>
+</ul>
+<pre><code>function Logger(logString: string) {
+  console.log("I RUN FIRST")
+  return function(constructor: any){
+    console.log("I RUN FOURTH")
+  }
+}
+
+function WithTemplate(template: string, hookId: string){
+  console.log("I RUN SECOND")
+  return function(constructor: any){
+    console.log("I RUN THIRD")
+  }
+}
+
+@Logger("Logger for Person")
+@WithTemplate("&#x3C;h1>I found ya, my Person object! :)&#x3C;/h1>", "app")
+class Person{
+ ...
+}
+</code></pre>
+<blockquote>
+<p>Decorator factories, are just functions and they execute in the order we specify them. But ctual decorator functions then happen bottom up.</p>
+</blockquote>
+<blockquote>
+<p>Decorators dont always need to be added to the class itself, we can use it within the class for properties. Let's imagine we have a Product class, which stores products and their prices:</p>
+</blockquote>
+<pre><code>class Product{
+  title: string;
+  private _price: number;
+
+  setPrice(value: number){
+    if (value > 0){
+      this._price = value;
+    } else {
+      throw new Error("Invalid price - must be positive")
+    }
+
+  }
+
+  constructor(t: string, p: number){
+    this.title = t;
+    this._price = p;
+  }
+
+  getPriceWithTax(tax: number){
+    this._price * (1 + tax)
+  }
+}
+</code></pre>
+<blockquote>
+<p>Let's now create a decorator - Log. Which arguments a decorator function gets, depends on where we add the decorator. If we add it to the class itself as above, we will get constructor as a decorator. We can add a decorator to a property of a class, such as title. Then we will get 2 arguments in our decorator function: target and propety name. Target is the target of the property which can be either prototype for instance properties or for static properties it would be constructor function instead. Hence we type the target as any, because we dont know what structure the object will have.</p>
+</blockquote>
+<pre><code>function Log(target: any, propertyName: string | Symbol){
+  console.log("Property decorator!");
+  console.log("Target", target);
+  console.log("Property Name", propertyName);
+}
+
+class Product{
+  @Log
+  title: string;
+  private _price: number;
+
+  set price(value: number){
+    if (value > 0){
+      this._price = value;
+    } else {
+      throw new Error("Invalid price - must be positive")
+    }
+
+  }
+
+  constructor(t: string, p: number){
+    this.title = t;
+    this._price = p;
+  }
+
+  getPriceWithTax(tax: number){
+    this._price * (1 + tax)
+  }
+}
+</code></pre>
+<blockquote>
+<p>Decorator function for properties also run when the class definition is registered by Javascript. We see the console logs even though we never instanciated the class.</p>
+</blockquote>
+<blockquote>
+<p>Decorators can also be added to accessors (setters and getters). What is an accessor? They are essentially functions that execute on getting and setting a value, but look like regular properties to an external code. So this is ur set price or get price. Other stuff like <code>this.title</code> or <code>this.price</code> are called: data properties.</p>
+</blockquote>
+<blockquote>
+<p>Decorator function for accessors will receive 3 arguments: target, as above, name of the accessor and property descriptor of a type PropertyDecriptor provided by TS.</p>
+</blockquote>
+<pre><code>function Log2(target: any, name: string, descriptor: PropertyDecriptor){
+  console.log("Accessor decorator!");
+  console.log("Target", target);
+  console.log("Accessor name", name);
+  console.log("Descriptor", descriptor);
+}
+
+class Product{
+  title: string;
+  private _price: number;
+
+  @Log2
+  set price(value: number){
+    if (value > 0){
+      this._price = value;
+    } else {
+      throw new Error("Invalid price - must be positive")
+    }
+
+  }
+
+  constructor(t: string, p: number){
+    this.title = t;
+    this._price = p;
+  }
+
+  getPriceWithTax(tax: number){
+    this._price * (1 + tax)
+  }
+}
+</code></pre>
+<blockquote>
+<p>We can also add decorators to method, like to getPriceWithTax:</p>
+</blockquote>
+<pre><code>function Log3(target: any, name: string | Symbol, descriptor: PropertyDecriptor){
+  console.log("Method decorator!");
+  console.log("Target", target);
+  console.log("Method name", name);
+  console.log("Descriptor", descriptor);
+}
+
+class Product{
+  title: string;
+  private _price: number;
+
+  set price(value: number){
+    if (value > 0){
+      this._price = value;
+    } else {
+      throw new Error("Invalid price - must be positive")
+    }
+
+  }
+
+  constructor(t: string, p: number){
+    this.title = t;
+    this._price = p;
+  }
+
+  @Log3
+  getPriceWithTax(tax: number){
+    this._price * (1 + tax)
+  }
+}
+</code></pre>
+<blockquote>
+<p>Last decorator we can add is a parameter decorator. Please note, that name is not the name of the parameter, but name is the method name to which this parameter belongs to. Last argument is the position of the argument (first, second, etc):</p>
+</blockquote>
+<pre><code>function Log4(target: any, name: string | Symbol, position: number){
+  console.log("Method decorator!");
+  console.log("Target", target);
+  console.log("Method name", name);
+  console.log("Position", position);
+}
+
+class Product{
+  title: string;
+  private _price: number;
+
+  set price(value: number){
+    if (value > 0){
+      this._price = value;
+    } else {
+      throw new Error("Invalid price - must be positive")
+    }
+
+  }
+
+  constructor(t: string, p: number){
+    this.title = t;
+    this._price = p;
+  }
+
+
+  getPriceWithTax(@Log4 tax: number){
+    this._price * (1 + tax)
+  }
+}
+</code></pre>
+<blockquote>
+<p>What is really cool is that some decorators, like class decorators and method decorators are capable of returning something. We are talking about the decorator function and not the decorator factory. For example for the class decorator, we can return a new constructor function.</p>
+</blockquote>
+<blockquote>
+<p>In our case, we will return a class which extends the original constructor function and add some properties on top of it: <code>return class extends constructor(){}</code>. Inside I have to call super() in order to call the originalConstructor function of the class.</p>
+</blockquote>
+<pre><code>function WithTemplate(template: string, hookId: string){
+  console.log("I RUN SECOND")
+  return function(originalConstructor: any){
+    console.log("I RUN THIRD")
+    return class extends originalConstructor(){
+      constructor(){
+        super();
+        ... // OUR LOGIC HERE
+      }
+
+    }
+  }
+}
+
+@WithTemplate("&#x3C;h1>I found ya, my Person object! :)&#x3C;/h1>", "app")
+class Person{
+  name = "Mia"
+  constructor() {
+    console.log("Creating a class -> object")
+  }
+}
+</code></pre>
+<blockquote>
+<p>Advantage of this approach is that OUR LOGIC will only e executed when we instantiate the class, and not when we define the class!</p>
+</blockquote>
+<blockquote>
+<p>Method and accessor decorators can also have return values. Decorators on properties and parameters can return something, but TS will ignore them, so they are not taken into account.</p>
+</blockquote>
+<blockquote>
+<p>For accessor or method decorators you can return a brand new property descriptor. For example for a accessor we could return a new get and set function.</p>
+</blockquote>
+<p><strong>Interfaces</strong></p>
+<blockquote>
+<p>Interfaces represent objects! <code>type</code> can represent anything, <code>interface</code> only an object.</p>
+</blockquote>
+<pre><code>interface Adda {
+name: string,
+nick: string,
+age: number
+}
+</code></pre>
+<blockquote>
+<p>It is a matter of custom. Whichever I choose I should be consistent.</p>
 </blockquote>
 <p><strong>Alias</strong></p>
 <blockquote>
 <p>Is when we extract our own type:</p>
 </blockquote>
 <pre><code>type User = {
-  id: string,
-  age: number
+id: string,
+age: number
 }
 </code></pre>
 <p><strong>Promises</strong></p>
@@ -2934,44 +3933,44 @@ console.log("string &#x26; number: ", addUp("m", 1));
 <p>How to type a promise from an api? Use <code>Promise&#x3C;></code></p>
 </blockquote>
 <pre><code>interface LukeSkywalker {
-  name: string;
-  height: string;
-  mass: string;
-  hair_color: string;
-  skin_color: string;
-  eye_color: string;
-  birth_year: string;
-  gender: string;
+name: string;
+height: string;
+mass: string;
+hair_color: string;
+skin_color: string;
+eye_color: string;
+birth_year: string;
+gender: string;
 }
 
 export const fetchLukeSkywalker = async (): Promise&#x3C;LukeSkywalker> => {
-  const data = await fetch("https://swapi.dev/api/people/1").then((res) => {
-    return res.json();
-  });
+const data = await fetch("https://swapi.dev/api/people/1").then((res) => {
+return res.json();
+});
 
-  return data;
+return data;
 };
 </code></pre>
 <blockquote>
 <p>Another possibility is to use casting -> with word <code>as</code>. We can cast data to LukeSkywalker.</p>
 </blockquote>
 <pre><code>interface LukeSkywalker {
-  name: string;
-  height: string;
-  mass: string;
-  hair_color: string;
-  skin_color: string;
-  eye_color: string;
-  birth_year: string;
-  gender: string;
+name: string;
+height: string;
+mass: string;
+hair_color: string;
+skin_color: string;
+eye_color: string;
+birth_year: string;
+gender: string;
 }
 
 export const fetchLukeSkywalker = async () => {
-  const data = await fetch("https://swapi.dev/api/people/1").then((res) => {
-    return res.json();
-  });
+const data = await fetch("https://swapi.dev/api/people/1").then((res) => {
+return res.json();
+});
 
-  return data as LukeSkywalker;
+return data as LukeSkywalker;
 };
 </code></pre>
 <p><strong>Sets</strong></p>
@@ -2996,38 +3995,38 @@ export const fetchLukeSkywalker = async () => {
 <p>First solution</p>
 </blockquote>
 <pre><code>const createCache = () => {
-  const cache = {};
+const cache = {};
 
-  const add = (id: string, value: string) => {
-    cache[id] = value;
-  };
+const add = (id: string, value: string) => {
+cache[id] = value;
+};
 
-  return {
-    cache,
-    add,
-  };
+return {
+cache,
+add,
+};
 };
 </code></pre>
 <blockquote>
 <p>There are couple of ways how to type such an object:</p>
 </blockquote>
 <pre><code>const cache: {
-    [id: string]: string;
-    } = {};
+[id: string]: string;
+} = {};
 </code></pre>
 <blockquote>
 <p>In above example I can use also any other key, not only id. I can use index, or any other work (k, n):</p>
 </blockquote>
 <pre><code>const cache: {
-    [index: string]: string;
-    } = {};
+[index: string]: string;
+} = {};
 </code></pre>
 <blockquote>
 <p>Or:</p>
 </blockquote>
 <pre><code>const cache: {
-    [k: string]: string;
-    } = {};
+[k: string]: string;
+} = {};
 </code></pre>
 <blockquote>
 <p>This [k: string] inside of a type is called index signature.</p>
@@ -3036,13 +4035,13 @@ export const fetchLukeSkywalker = async () => {
 <p>Another approach is to use interface:</p>
 </blockquote>
 <pre><code>interface Cache {
-  [id: string]: string;
+[id: string]: string;
 }
 </code></pre>
 <blockquote>
 <p>Or even using Record. Record allows to add any number of keys to that object at runtime.</p>
 </blockquote>
-<pre><code> const cache: Record&#x3C;string, string> = {};
+<pre><code>const cache: Record&#x3C;string, string> = {};
 </code></pre>
 <p><strong>Typing catch errors</strong></p>
 <blockquote>
@@ -3062,13 +4061,13 @@ throw undefined
 <p>Now imagine a situation like this:</p>
 </blockquote>
 <pre><code>const tryCatchDemo = (state: "fail" | "succeed") => {
-  try {
-    if (state === "fail") {
-      throw new Error("Failure!");
-    }
-  } catch (e) {
-      return e.message;
-    }
+try {
+if (state === "fail") {
+throw new Error("Failure!");
+}
+} catch (e) {
+return e.message;
+}
 };
 </code></pre>
 <blockquote>
@@ -3078,26 +4077,26 @@ throw undefined
 <p>If we try to type "e" directly, it will yell that: Catch clause variable type annotation must be 'any' or 'unknown' if specified.</p>
 </blockquote>
 <pre><code>const tryCatchDemo = (state: "fail" | "succeed") => {
-  try {
-    if (state === "fail") {
-      throw new Error("Failure!");
-    }
-  } catch (e: Error) {
-      return e.message;
-    }
+try {
+if (state === "fail") {
+throw new Error("Failure!");
+}
+} catch (e: Error) {
+return e.message;
+}
 };
 </code></pre>
 <blockquote>
 <p>One way to fix this is:</p>
 </blockquote>
 <pre><code>const tryCatchDemo = (state: "fail" | "succeed") => {
-  try {
-    if (state === "fail") {
-      throw new Error("Failure!");
-    }
-  } catch (e) {
-    if(e instanceof Error){return e.message;}
-    }
+try {
+if (state === "fail") {
+throw new Error("Failure!");
+}
+} catch (e) {
+if(e instanceof Error){return e.message;}
+}
 };
 </code></pre>
 <p><strong>Extending interface</strong></p>
@@ -3108,32 +4107,32 @@ throw undefined
 <p>Look at the code below, it has a duplication of id everywhere:</p>
 </blockquote>
 <pre><code>interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
+id: string;
+firstName: string;
+lastName: string;
 }
 
 interface Post {
-  id: string;
-  title: string;
-  body: string;
+id: string;
+title: string;
+body: string;
 }
 </code></pre>
 <blockquote>
 <p>How can we avoid duplication? We can create Id Interface and extend the User and Post with Id.</p>
 </blockquote>
 <pre><code>interface Id {
-  id: string
+id: string
 }
 
 interface User extends Id {
-  firstName: string;
-  lastName: string;
+firstName: string;
+lastName: string;
 }
 
 interface Post extends Id {
-  title: string;
-  body: string;
+title: string;
+body: string;
 }
 </code></pre>
 <blockquote>
@@ -3146,8 +4145,8 @@ interface Post extends Id {
 <p>we can use extends with more items:</p>
 </blockquote>
 <pre><code>interface Post extends Id, User {
-    title: string;
-  body: string;
+title: string;
+body: string;
 }
 </code></pre>
 <p><strong>Object intersection</strong></p>
@@ -3155,27 +4154,27 @@ interface Post extends Id {
 <p>This combines objects. Imagine we have a scenario like this:</p>
 </blockquote>
 <pre><code>interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
+id: string;
+firstName: string;
+lastName: string;
 }
 
 interface Post {
-  title: string;
-  body: string;
+title: string;
+body: string;
 }
 export const getDefaultUserAndPosts = (): unknown => {
-  return {
-    id: "1",
-    firstName: "Matt",
-    lastName: "Pocock",
-    posts: [
-      {
-        title: "How I eat so much cheese",
-        body: "It's pretty edam difficult",
-      },
-    ],
-  };
+return {
+id: "1",
+firstName: "Matt",
+lastName: "Pocock",
+posts: [
+{
+title: "How I eat so much cheese",
+body: "It's pretty edam difficult",
+},
+],
+};
 };
 </code></pre>
 <blockquote>
@@ -3185,27 +4184,27 @@ export const getDefaultUserAndPosts = (): unknown => {
 <p>We can do it like this:</p>
 </blockquote>
 <pre><code>interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
+id: string;
+firstName: string;
+lastName: string;
 }
 
 interface Post {
-  title: string;
-  body: string;
+title: string;
+body: string;
 }
 export const getDefaultUserAndPosts = (): User &#x26; { posts: Array&#x3C;Post> } => {
-  return {
-    id: "1",
-    firstName: "Matt",
-    lastName: "Pocock",
-    posts: [
-      {
-        title: "How I eat so much cheese",
-        body: "It's pretty edam difficult",
-      },
-    ],
-  };
+return {
+id: "1",
+firstName: "Matt",
+lastName: "Pocock",
+posts: [
+{
+title: "How I eat so much cheese",
+body: "It's pretty edam difficult",
+},
+],
+};
 };
 </code></pre>
 <blockquote>
@@ -3219,9 +4218,9 @@ export const getDefaultUserAndPosts = (): User &#x26; { posts: Array&#x3C;Post> 
 <p>What if we have a type like this:</p>
 </blockquote>
 <pre><code>interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
+id: string;
+firstName: string;
+lastName: string;
 }
 </code></pre>
 <blockquote>
@@ -3243,9 +4242,9 @@ We can use omit to do that:</p>
 <p>Image we only want property lastName from User:</p>
 </blockquote>
 <pre><code>interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
+id: string;
+firstName: string;
+lastName: string;
 }
 </code></pre>
 <blockquote>
@@ -3258,34 +4257,34 @@ We can use omit to do that:</p>
 <p>Imagine you have a situation like this:</p>
 </blockquote>
 <pre><code>interface User {
-  id: string;
-  lastName: string;
+id: string;
+lastName: string;
 }
 
 const createThenGetUser = async (
-  createUser: unknown,
-  getUser: unknown,
+createUser: unknown,
+getUser: unknown,
 ): Promise&#x3C;User> => {
-  const userId: string = await createUser();
-  const user = await getUser(userId);
-  return user;
+const userId: string = await createUser();
+const user = await getUser(userId);
+return user;
 };
 </code></pre>
 <blockquote>
 <p>You want to replace unknowns with proper type:</p>
 </blockquote>
 <pre><code>interface User {
-  id: string;
-  lastName: string;
+id: string;
+lastName: string;
 }
 
 const createThenGetUser = async (
-  createUser: () => Promise&#x3C;string>,
-  getUser: (id: string) => Promise&#x3C;User>
+createUser: () => Promise&#x3C;string>,
+getUser: (id: string) => Promise&#x3C;User>
 ): Promise&#x3C;User> => {
-  const userId: string = await createUser();
-  const user = await getUser(userId);
-  return user;
+const userId: string = await createUser();
+const user = await getUser(userId);
+return user;
 };
 </code></pre>
 <p><strong>Return type of function</strong></p>
@@ -3293,7 +4292,7 @@ const createThenGetUser = async (
 <p>How can we say to TS to take the type from a return statement of a function?</p>
 </blockquote>
 <pre><code>const myFunc = () => {
-  return 123;
+return 123;
 };
 </code></pre>
 <blockquote>
@@ -3306,7 +4305,7 @@ const createThenGetUser = async (
 <p>How can we say to TS to take the type from arguments of a function?</p>
 </blockquote>
 <pre><code>function sum(a: number, b: string): string {
-  return a + b;
+return a + b;
 }
 </code></pre>
 <blockquote>
@@ -3343,15 +4342,15 @@ const createThenGetUser = async (
 <p>Imagine we have an object like this:</p>
 </blockquote>
 <pre><code>const testingFrameworks = {
-  vitest: {
-    label: "Vitest",
-  },
-  jest: {
-    label: "Jest",
-  },
-  mocha: {
-    label: "Mocha",
-  },
+vitest: {
+label: "Vitest",
+},
+jest: {
+label: "Jest",
+},
+mocha: {
+label: "Mocha",
+},
 };
 </code></pre>
 <blockquote>
@@ -3370,18 +4369,18 @@ const createThenGetUser = async (
 <p>A is a discriminated union, with 'type' as the discriminator. Discriminated unions have common properties which are used to differentiate between members of the union. In this case, type is the discriminator.</p>
 </blockquote>
 <pre><code>type A =
-  | {
-      type: "a";
-      a: string;
-    }
-  | {
-      type: "b";
-      b: string;
-    }
-  | {
-      type: "c";
-      c: string;
-    };
+| {
+type: "a";
+a: string;
+}
+| {
+type: "b";
+b: string;
+}
+| {
+type: "c";
+c: string;
+};
 </code></pre>
 <blockquote>
 <p>B is a union, but not a discriminated union.</p>
@@ -3392,9 +4391,9 @@ const createThenGetUser = async (
 <p>C is an enum.</p>
 </blockquote>
 <pre><code>enum C {
-  A = "a",
-  B = "b",
-  C = "c",
+A = "a",
+B = "b",
+C = "c",
 }
 </code></pre>
 <p><strong>Extract</strong></p>
@@ -3402,18 +4401,18 @@ const createThenGetUser = async (
 <p>Now how can we extract one piece of info from discriminated union? Imagine we have a disc. union of type A:</p>
 </blockquote>
 <pre><code>type A =
-  | {
-      type: "a";
-      a: string;
-    }
-  | {
-      type: "b";
-      b: string;
-    }
-  | {
-      type: "c";
-      c: string;
-    };
+| {
+type: "a";
+a: string;
+}
+| {
+type: "b";
+b: string;
+}
+| {
+type: "c";
+c: string;
+};
 </code></pre>
 <blockquote>
 <p>and we want to extract such a type for "a":</p>
@@ -3424,18 +4423,18 @@ const createThenGetUser = async (
 <p>Extract is a type helper and super useful. Another example:</p>
 </blockquote>
 <pre><code>export type Event =
-  | {
-      type: "click";
-      event: MouseEvent;
-    }
-  | {
-      type: "focus";
-      event: FocusEvent;
-    }
-  | {
-      type: "keydown";
-      event: KeyboardEvent;
-    };
+| {
+type: "click";
+event: MouseEvent;
+}
+| {
+type: "focus";
+event: FocusEvent;
+}
+| {
+type: "keydown";
+event: KeyboardEvent;
+};
 
 type ClickEvent = Extract&#x3C;Event, { type: "click" }>;
 </code></pre>
@@ -3455,18 +4454,18 @@ type Exotic = Extract&#x3C;Fruit, "banana" | "orange">
 <p>It is reverse of Extract. It is useful for discriminated unions. It specifies which property you dont want:</p>
 </blockquote>
 <pre><code>export type Event =
-  | {
-      type: "click";
-      event: MouseEvent;
-    }
-  | {
-      type: "focus";
-      event: FocusEvent;
-    }
-  | {
-      type: "keydown";
-      event: KeyboardEvent;
-    };
+| {
+type: "click";
+event: MouseEvent;
+}
+| {
+type: "focus";
+event: FocusEvent;
+}
+| {
+type: "keydown";
+event: KeyboardEvent;
+};
 
 type NonKeyDownEvents = Exclude&#x3C;Event, { type: "keydown" }>;
 </code></pre>
@@ -3475,11 +4474,11 @@ type NonKeyDownEvents = Exclude&#x3C;Event, { type: "keydown" }>;
 <p>What if I have an object like this:</p>
 </blockquote>
 <pre><code>const fakeDataDefaults = {
-  String: "Default string",
-  Int: 1,
-  Float: 1.14,
-  Boolean: true,
-  ID: "id",
+String: "Default string",
+Int: 1,
+Float: 1.14,
+Boolean: true,
+ID: "id",
 };
 </code></pre>
 <blockquote>
@@ -3506,13 +4505,13 @@ type IDType = FakeDataDefaults["ID"];
 <p>We can even access object inside objecz on this way:</p>
 </blockquote>
 <pre><code>const fakeData = {
-  String: "Default string",
-  Int: 1,
-  Float: 1.14,
-  Boolean: true,
-  ID: {
-    job: "driver"
-  },
+String: "Default string",
+Int: 1,
+Float: 1.14,
+Boolean: true,
+ID: {
+job: "driver"
+},
 };
 
 type Job = typeof fakeData["ID"]["job"]
@@ -3522,18 +4521,18 @@ type Job = typeof fakeData["ID"]["job"]
 <p>If I have an object like this::</p>
 </blockquote>
 <pre><code>type Event =
-  | {
-      type: "click";
-      event: MouseEvent;
-    }
-  | {
-      type: "focus";
-      event: FocusEvent;
-    }
-  | {
-      type: "keydown";
-      event: KeyboardEvent;
-    };
+| {
+type: "click";
+event: MouseEvent;
+}
+| {
+type: "focus";
+event: FocusEvent;
+}
+| {
+type: "keydown";
+event: KeyboardEvent;
+};
 </code></pre>
 <blockquote>
 <p>and I want to extract a type from it of: "click" | "focus" | "keydown"?</p>
@@ -3551,12 +4550,12 @@ type Job = typeof fakeData["ID"]["job"]
 <p>Imagine we enum like this:</p>
 </blockquote>
 <pre><code>const programModeEnumMap = {
-  GROUP: "group",
-  ANNOUNCEMENT: "announcement",
-  ONE_ON_ONE: "1on1",
-  SELF_DIRECTED: "selfDirected",
-  PLANNED_ONE_ON_ONE: "planned1on1",
-  PLANNED_SELF_DIRECTED: "plannedSelfDirected",
+GROUP: "group",
+ANNOUNCEMENT: "announcement",
+ONE_ON_ONE: "1on1",
+SELF_DIRECTED: "selfDirected",
+PLANNED_ONE_ON_ONE: "planned1on1",
+PLANNED_SELF_DIRECTED: "plannedSelfDirected",
 };
 </code></pre>
 <blockquote>
@@ -3576,12 +4575,12 @@ type Job = typeof fakeData["ID"]["job"]
 <p>How can we make the programModeEnumMap to resolve to literal values instead of generic values?</p>
 </blockquote>
 <pre><code>const programModeEnumMap = {
-  GROUP: "group",
-  ANNOUNCEMENT: "announcement",
-  ONE_ON_ONE: "1on1",
-  SELF_DIRECTED: "selfDirected",
-  PLANNED_ONE_ON_ONE: "planned1on1",
-  PLANNED_SELF_DIRECTED: "plannedSelfDirected",
+GROUP: "group",
+ANNOUNCEMENT: "announcement",
+ONE_ON_ONE: "1on1",
+SELF_DIRECTED: "selfDirected",
+PLANNED_ONE_ON_ONE: "planned1on1",
+PLANNED_SELF_DIRECTED: "plannedSelfDirected",
 } as const;
 </code></pre>
 <blockquote>
@@ -3611,12 +4610,12 @@ myArr.push(123)
 <p>Another way how to freeze an object is Object.freeze():</p>
 </blockquote>
 <pre><code>const programModeEnumMap = Object.freeze({
-  GROUP: "group",
-  ANNOUNCEMENT: "announcement",
-  ONE_ON_ONE: "1on1",
-  SELF_DIRECTED: "selfDirected",
-  PLANNED_ONE_ON_ONE: "planned1on1",
-  PLANNED_SELF_DIRECTED: "plannedSelfDirected",
+GROUP: "group",
+ANNOUNCEMENT: "announcement",
+ONE_ON_ONE: "1on1",
+SELF_DIRECTED: "selfDirected",
+PLANNED_ONE_ON_ONE: "planned1on1",
+PLANNED_SELF_DIRECTED: "plannedSelfDirected",
 });
 </code></pre>
 <blockquote>
@@ -3627,12 +4626,12 @@ myArr.push(123)
 <p>Imagine we have an object like this:</p>
 </blockquote>
 <pre><code>const programModeEnumMap = {
-  GROUP: "group",
-  ANNOUNCEMENT: "announcement",
-  ONE_ON_ONE: "1on1",
-  SELF_DIRECTED: "selfDirected",
-  PLANNED_ONE_ON_ONE: "planned1on1",
-  PLANNED_SELF_DIRECTED: "plannedSelfDirected",
+GROUP: "group",
+ANNOUNCEMENT: "announcement",
+ONE_ON_ONE: "1on1",
+SELF_DIRECTED: "selfDirected",
+PLANNED_ONE_ON_ONE: "planned1on1",
+PLANNED_SELF_DIRECTED: "plannedSelfDirected",
 }
 </code></pre>
 <blockquote>
@@ -3643,9 +4642,9 @@ myArr.push(123)
 </blockquote>
 <pre><code>type Program = typeof programModeEnumMap;
 export type IndividualProgram =
-  | Program["ONE_ON_ONE"]
-  | Program["SELF_DIRECTED"]
-  | Program["PLANNED_ONE_ON_ONE"];
+| Program["ONE_ON_ONE"]
+| Program["SELF_DIRECTED"]
+| Program["PLANNED_ONE_ON_ONE"];
 </code></pre>
 <blockquote>
 <p>Better way is like this:</p>
@@ -3661,9 +4660,9 @@ export type IndividualProgram = Program["ONE_ON_ONE" | "SELF_DIRECTED" | "PLANNE
 <p>Imagine we have an object like this:</p>
 </blockquote>
 <pre><code>const frontendToBackendEnumMap = {
-  singleModule: "SINGLE_MODULE",
-  multiModule: "MULTI_MODULE",
-  sharedModule: "SHARED_MODULE",
+singleModule: "SINGLE_MODULE",
+multiModule: "MULTI_MODULE",
+sharedModule: "SHARED_MODULE",
 } as const;
 </code></pre>
 <blockquote>
@@ -3673,7 +4672,7 @@ export type IndividualProgram = Program["ONE_ON_ONE" | "SELF_DIRECTED" | "PLANNE
 <p>We can do it like this:</p>
 </blockquote>
 <pre><code>type BackendModuleEnum =
-  typeof frontendToBackendEnumMap[keyof typeof frontendToBackendEnumMap];
+typeof frontendToBackendEnumMap[keyof typeof frontendToBackendEnumMap];
 </code></pre>
 <blockquote>
 <p>We can make it nicer:</p>
@@ -3684,7 +4683,7 @@ type BackendModuleEnum = Obj[keyof Obj]
 <blockquote>
 <p>We coud achieve them same if we do this:</p>
 </blockquote>
-<pre><code>type   BackendModuleEnum = Obj["SINGLE_MODULE" | "MULTI_MODULE" | "SHARED_MODULE"]
+<pre><code>type BackendModuleEnum = Obj["SINGLE_MODULE" | "MULTI_MODULE" | "SHARED_MODULE"]
 </code></pre>
 <blockquote>
 <p>But in this case the type will not be up-to-date if anything changes</p>
@@ -3754,15 +4753,15 @@ type Filling = "cheese" | "ham" | "salami";
 <p>And you want to create a type of them which will be like this:</p>
 </blockquote>
 <pre><code>type Sandwich =
-      | "rye sandwich with cheese"
-      | "rye sandwich with ham"
-      | "rye sandwich with salami"
-      | "brown sandwich with cheese"
-      | "brown sandwich with ham"
-      | "brown sandwich with salami"
-      | "white sandwich with cheese"
-      | "white sandwich with ham"
-      | "white sandwich with salami"
+| "rye sandwich with cheese"
+| "rye sandwich with ham"
+| "rye sandwich with salami"
+| "brown sandwich with cheese"
+| "brown sandwich with ham"
+| "brown sandwich with salami"
+| "white sandwich with cheese"
+| "white sandwich with ham"
+| "white sandwich with salami"
 </code></pre>
 <blockquote>
 <p>We can do it simply as this:</p>
@@ -3777,7 +4776,7 @@ type Filling = "cheese" | "ham" | "salami";
 <blockquote>
 <p>We want to create a type DynamicRoutes from Routes type, but only those which contain <code>:</code></p>
 </blockquote>
-<pre><code>type DynamicRoutes =  "/users/:id" | "/posts/:id";
+<pre><code>type DynamicRoutes = "/users/:id" | "/posts/:id";
 </code></pre>
 <blockquote>
 <p>How to do it? We can use Extract helper function which takes 2 parameters: first the type from which we are extracting and second parameter type which will narrow it down</p>
@@ -3814,20 +4813,20 @@ type DynamicRoutes = Extract&#x3C;Routes, WithDots>;
 <blockquote>
 <p>What if we now want to create an object where we take those as keys?</p>
 </blockquote>
-<pre><code>type ObjectOfKeys =  {
-        userId: string;
-        userName: string;
-        postId: string;
-        postName: string;
-        commentId: string;
-        commentName: string;
+<pre><code>type ObjectOfKeys = {
+userId: string;
+userName: string;
+postId: string;
+postName: string;
+commentId: string;
+commentName: string;
 }
 </code></pre>
 <blockquote>
 <p>Answer:</p>
 </blockquote>
 <pre><code>type ObjectOfKeys = {
-  [key in TemplateLiteralKey]: string;
+[key in TemplateLiteralKey]: string;
 };
 </code></pre>
 <blockquote>
@@ -3843,7 +4842,7 @@ type DynamicRoutes = Extract&#x3C;Routes, WithDots>;
 <p>Official documentation says: A Record&#x3C;K, T> is an object type whose property keys are K and whose property values are T. That is, keyof Record&#x3C;K, T> is equivalent to K, and Record&#x3C;K, T>[K] is (basically) equivalent to T.</p>
 </blockquote>
 <pre><code>type Record&#x3C;K extends string, T> = {
-    [P in K]: T;
+[P in K]: T;
 }
 </code></pre>
 <p><strong>TS-TOOLBELT</strong></p>
@@ -3869,7 +4868,7 @@ type DynamicRoutes = Extract&#x3C;Routes, WithDots>;
 <blockquote>
 <p>Resulting type should be an array of its elements:</p>
 </blockquote>
-<pre><code>type Result =  ["Users", "John", "Documents", "notes.txt"]
+<pre><code>type Result = ["Users", "John", "Documents", "notes.txt"]
 </code></pre>
 <blockquote>
 <p>How to do it? Here is how:</p>
@@ -3905,10 +4904,10 @@ type SplitPath = S.Split&#x3C;Path, "/">;
 <p>And we want ot create an object of it that will look like this:</p>
 </blockquote>
 <pre><code>type ObjectOfKeys = {
-        LOG_IN: string;
-        LOG_OUT: string;
-        SIGN_UP: string;
-      }
+LOG_IN: string;
+LOG_OUT: string;
+SIGN_UP: string;
+}
 </code></pre>
 <blockquote>
 <p>How to do it? Here find the solutio:</p>
@@ -3999,16 +4998,16 @@ AddRoutePrefix&#x3C;number>
 <p>What if our Type Helper should work with more arguments?</p>
 </blockquote>
 <pre><code>type CreateDataShape&#x3C;T, U> = {
-  data: T;
-  error: U;
+data: T;
+error: U;
 };
 </code></pre>
 <blockquote>
 <p>Now imagine that we not always want to pass in the U and if we dont pass it, then we want it to be undefined.</p>
 </blockquote>
 <pre><code>type CreateDataShape&#x3C;T, U = undefined> = {
-  data: T;
-  error: U;
+data: T;
+error: U;
 };
 </code></pre>
 <blockquote>
@@ -4021,8 +5020,8 @@ type MyNewType = CreateDataShape&#x3C;string, number>
 <p>What if I know that I will always pass a function to my type?</p>
 </blockquote>
 <pre><code>type GetParametersAndReturnType&#x3C;T extends (a: any, b: any) => any> = {
-  params: Parameters&#x3C;T>;
-  returnValue: ReturnType&#x3C;T>;
+params: Parameters&#x3C;T>;
+returnValue: ReturnType&#x3C;T>;
 };
 </code></pre>
 <blockquote>
@@ -4041,8 +5040,8 @@ type MyType3 = GetParametersAndReturnType&#x3C;(n: number, b: boolean) => number
 <p>This will work with 2 parameters, but what if we need more?</p>
 </blockquote>
 <pre><code>type GetParametersAndReturnType&#x3C;T extends (...args: any) => any> = {
-  params: Parameters&#x3C;T>;
-  returnValue: ReturnType&#x3C;T>;
+params: Parameters&#x3C;T>;
+returnValue: ReturnType&#x3C;T>;
 };
 </code></pre>
 <blockquote>
@@ -4197,22 +5196,22 @@ type Yes3 = GetDataValue&#x3C;{ data: { name: "hello"; age: 20 } }> // returns {
 <p>Imagine we have type like this:</p>
 </blockquote>
 <pre><code>type Names = [
-  "Matt Pocock",
-  "Jimi Hendrix",
-  "Eric Clapton",
-  "John Mayer",
-  "BB King",
+"Matt Pocock",
+"Jimi Hendrix",
+"Eric Clapton",
+"John Mayer",
+"BB King",
 ];
 </code></pre>
 <blockquote>
 <p>and we want to infer another type from it which will be Pocock, Handrix, Claptop, Mayer</p>
 </blockquote>
 <pre><code>type GetSurname&#x3C;T> = unknow
- type New1 = GetSurname&#x3C;Names[0]> // returns "Pocock"
- type New2 = GetSurname&#x3C;Names[1]> // returns "Hendrix"
- type New3 = GetSurname&#x3C;Names[2]> // returns "Clapton"
- type New4 = GetSurname&#x3C;Names[3]> // returns "Mayer"
- type New5 = GetSurname&#x3C;Names[4]> // returns "King"
+type New1 = GetSurname&#x3C;Names[0]> // returns "Pocock"
+type New2 = GetSurname&#x3C;Names[1]> // returns "Hendrix"
+type New3 = GetSurname&#x3C;Names[2]> // returns "Clapton"
+type New4 = GetSurname&#x3C;Names[3]> // returns "Mayer"
+type New5 = GetSurname&#x3C;Names[4]> // returns "King"
 </code></pre>
 <blockquote>
 <p>How ot declare the GetSurname type?</p>
@@ -4238,24 +5237,24 @@ type GetSurname&#x3C;T extends string> = S.Split&#x3C;T, " ">[1];
 <p>And we want to create a type for an object where both keys and values will be the members of the union:</p>
 </blockquote>
 <pre><code>type Result = {
-        "/": "/";
-        "/about": "/about";
-        "/admin": "/admin";
-        "/admin/users": "/admin/users";
+"/": "/";
+"/about": "/about";
+"/admin": "/admin";
+"/admin/users": "/admin/users";
 }
 </code></pre>
 <blockquote>
 <p>In order to do this we can use mapped types which iterated through each member of a union, defines a variable, for example Key and then allows us to use this variable:</p>
 </blockquote>
 <pre><code>type RoutesObject = {
-  [Key in Route]: Key;
+[Key in Route]: Key;
 };
 </code></pre>
 <blockquote>
 <p>Variable name is anything we want</p>
 </blockquote>
 <pre><code>type RoutesObject = {
-  [R in Route]: R;
+[R in Route]: R;
 };
 </code></pre>
 <blockquote>
@@ -4265,47 +5264,47 @@ type GetSurname&#x3C;T extends string> = S.Split&#x3C;T, " ">[1];
 <p>We can also use it like this:</p>
 </blockquote>
 <pre><code>type RoutesObject = {
-  [Key in "hi" | "there"]: Key;
+[Key in "hi" | "there"]: Key;
 };
 </code></pre>
 <blockquote>
 <p>It would resolve into an object</p>
 </blockquote>
 <pre><code>{
-  hi: "hi",
-  there: "there",
+hi: "hi",
+there: "there",
 }
 </code></pre>
 <blockquote>
 <p>Values also dont need to be same as keys:</p>
 </blockquote>
 <pre><code>type RoutesObject = {
-  [Key in "hi" | "there"]: string;
+[Key in "hi" | "there"]: string;
 };
 </code></pre>
 <blockquote>
 <p>Mapped types also work with objects. Imagine we have an object type like this:</p>
 </blockquote>
 <pre><code>interface Attributes {
-  firstName: string;
-  lastName: string;
-  age: number;
+firstName: string;
+lastName: string;
+age: number;
 }
 </code></pre>
 <blockquote>
 <p>And we want to extract from it a type that will look like this:</p>
 </blockquote>
 <pre><code>{
-  firstName: () => string;
-  lastName: () => string;
-  age: () => number;
+firstName: () => string;
+lastName: () => string;
+age: () => number;
 }
 </code></pre>
 <blockquote>
 <p>We can do it like this:</p>
 </blockquote>
 <pre><code>type AttributeGetters = {
-  [K in keyof Attributes]: () => Attributes[K];
+[K in keyof Attributes]: () => Attributes[K];
 };
 </code></pre>
 <blockquote>
@@ -4315,34 +5314,34 @@ type GetSurname&#x3C;T extends string> = S.Split&#x3C;T, " ">[1];
 <p>We can even create a same type as Attributes using mapped type:</p>
 </blockquote>
 <pre><code>type MyNewAttribute = {
-  [K in keyof Attributes]: Attributes[K];
+[K in keyof Attributes]: Attributes[K];
 };
 </code></pre>
 <blockquote>
 <p>MyNewAttribute is now equivalent type as Attribute. Why would we want to do that? If we needed a new type where all keys are optional or readonly:</p>
 </blockquote>
 <pre><code>type MyNewAttribute = {
-  [K in keyof Attributes]?: Attributes[K];
+[K in keyof Attributes]?: Attributes[K];
 };
 
 type MyNewAttribute = {
-  readonly [K in keyof Attributes]: Attributes[K];
+readonly [K in keyof Attributes]: Attributes[K];
 };
 </code></pre>
 <blockquote>
 <p>now what if we want to rename the keys of the new object type?</p>
 </blockquote>
 <pre><code>type NowThis = {
-        getFirstName: () => string;
-        getLastName: () => string;
-        getAge: () => number;
- }
+getFirstName: () => string;
+getLastName: () => string;
+getAge: () => number;
+}
 </code></pre>
 <blockquote>
 <p>We can use as property which allows us to use template literals</p>
 </blockquote>
 <pre><code>type AttributeGetters = {
-  [K in keyof Attributes as `get${Capitalize&#x3C;K>}`]: () => Attributes[K];
+[K in keyof Attributes as `get${Capitalize&#x3C;K>}`]: () => Attributes[K];
 };
 </code></pre>
 <blockquote>
@@ -4352,52 +5351,52 @@ type MyNewAttribute = {
 <p>Now if we have an object type like this</p>
 </blockquote>
 <pre><code>interface Attributes {
-  greet1: [ "hi", "there" ];
-  greet2: [ "hello", "you" ];
+greet1: [ "hi", "there" ];
+greet2: [ "hello", "you" ];
 }
 </code></pre>
 <blockquote>
 <p>And we wanted to extract a type that would be</p>
 </blockquote>
 <pre><code>type GreetOnly = {
-  greet1: "hi";
-  greet2: "hello";
+greet1: "hi";
+greet2: "hello";
 }
 </code></pre>
 <blockquote>
 <p>We can do it like this</p>
 </blockquote>
 <pre><code>type NewType = {
-  [K in keyof Attributes]: Attributes[K][0]
+[K in keyof Attributes]: Attributes[K][0]
 }
 </code></pre>
 <blockquote>
 <p>Now imagine we have a type like this:</p>
 </blockquote>
 <pre><code>interface Example {
-  name: string;
-  age: number;
-  id: string;
-  organisationId: string;
-  groupId: string;
+name: string;
+age: number;
+id: string;
+organisationId: string;
+groupId: string;
 }
 </code></pre>
 <blockquote>
 <p>And we want to extract a type from it which has such keys, which contain <code>id</code> in it. Resulting type should look like this:</p>
 </blockquote>
 <pre><code>type Result: {
-        id: string;
-        organisationId: string;
-        groupId: string;
+id: string;
+organisationId: string;
+groupId: string;
 }
 </code></pre>
 <blockquote>
 <p>We will need conditional type, remapping and a generic</p>
 </blockquote>
 <pre><code>type OnlyIdKeys&#x3C;T> = {
-  [K in keyof T as `${K extends "id" | "organisationId" | "groupId"
-    ? K
-    : never}`]: T[K];
+[K in keyof T as `${K extends "id" | "organisationId" | "groupId"
+? K
+: never}`]: T[K];
 };
 </code></pre>
 <blockquote>
@@ -4409,51 +5408,51 @@ type MyNewAttribute = {
 <p>Another even more generic and elegant way is to use template literals to search for an anything that contains id in it (WOW)</p>
 </blockquote>
 <pre><code>type OnlyIdKeys&#x3C;T> = {
-  [K in keyof T as K extends `${string}${"id" | "Id"}${string}`
-    ? K
-    : never]: T[K];
+[K in keyof T as K extends `${string}${"id" | "Id"}${string}`
+? K
+: never]: T[K];
 };
 </code></pre>
 <blockquote>
 <p>Now assume we have a discriminated union like this:</p>
 </blockquote>
 <pre><code>type Route =
-  | {
-      route: "/";
-      search: {
-        page: string;
-        perPage: string;
-      };
-    }
-  | { route: "/about"; search: {} }
-  | { route: "/admin"; search: {} }
-  | { route: "/admin/users"; search: {} };
+| {
+route: "/";
+search: {
+page: string;
+perPage: string;
+};
+}
+| { route: "/about"; search: {} }
+| { route: "/admin"; search: {} }
+| { route: "/admin/users"; search: {} };
 </code></pre>
 <blockquote>
 <p>and we want to extract a type of it, which will look like this:</p>
 </blockquote>
 <pre><code>type Interesting = {
-        "/": {
-          page: string;
-          perPage: string;
-        };
-        "/about": {};
-        "/admin": {};
-        "/admin/users": {};
-      }
+"/": {
+page: string;
+perPage: string;
+};
+"/about": {};
+"/admin": {};
+"/admin/users": {};
+}
 </code></pre>
 <blockquote>
 <p>How can we do it? Tip: We will need mapped type, indexed access aaaaand an Extract.</p>
 </blockquote>
 <pre><code>type RoutesObject = {
-  [K in Route["route"]]: Extract&#x3C;Route, { route: K }>["search"];
+[K in Route["route"]]: Extract&#x3C;Route, { route: K }>["search"];
 };
 </code></pre>
 <blockquote>
 <p>And a super elegant way to do it is:</p>
 </blockquote>
 <pre><code>type RoutesObject = {
-  [K in Route as Route["route"]]: Route["search"];
+[K in Route as Route["route"]]: Route["search"];
 };
 </code></pre>
 <blockquote>
@@ -4464,9 +5463,9 @@ type MyNewAttribute = {
 <p>What if we have an object like this?</p>
 </blockquote>
 <pre><code>interface Values {
-  email: string;
-  firstName: string;
-  lastName: string;
+email: string;
+firstName: string;
+lastName: string;
 }
 </code></pre>
 <blockquote>
@@ -4478,16 +5477,16 @@ type MyNewAttribute = {
 <p>First we will create an intermediary type which looks like this:</p>
 </blockquote>
 <pre><code>type F = {
-  [K in keyof Values]: [K, Values[K]];
+[K in keyof Values]: [K, Values[K]];
 };
 </code></pre>
 <blockquote>
 <p>Which will then look like this:</p>
 </blockquote>
 <pre><code>type F = {
-  email: ["email", string];
-  firstName: ["firstName", string];
-  lastName: ["lastName", string];
+email: ["email", string];
+firstName: ["firstName", string];
+lastName: ["lastName", string];
 }
 </code></pre>
 <blockquote>
@@ -4499,13 +5498,13 @@ type MyNewAttribute = {
 <p>So the whole magic looks like this:</p>
 </blockquote>
 <pre><code>interface Values {
-  email: string;
-  firstName: string;
-  lastName: string;
+email: string;
+firstName: string;
+lastName: string;
 }
 
 type F = {
-  [K in keyof Values]: [K, Values[K]];
+[K in keyof Values]: [K, Values[K]];
 };
 
 type ValuesAsUnionOfTuples = F[keyof F];
@@ -4514,16 +5513,16 @@ type ValuesAsUnionOfTuples = F[keyof F];
 <p>And to even make it nicer:</p>
 </blockquote>
 <pre><code>type ValuesAsUnionOfTuples = {
-  [K in keyof Values]: [K, Values[K]];
+[K in keyof Values]: [K, Values[K]];
 }[keyof Values];
 </code></pre>
 <blockquote>
 <p>Similarly if we have such an object:</p>
 </blockquote>
 <pre><code>interface FruitMap {
-  apple: "red";
-  banana: "yellow";
-  orange: "orange";
+apple: "red";
+banana: "yellow";
+orange: "orange";
 }
 </code></pre>
 <blockquote>
@@ -4535,7 +5534,7 @@ type ValuesAsUnionOfTuples = F[keyof F];
 <p>We can do it like this:</p>
 </blockquote>
 <pre><code>type TransformedFruit = {
-  [K in keyof FruitMap]: `${K}:${FruitMap[K]}`;
+[K in keyof FruitMap]: `${K}:${FruitMap[K]}`;
 }[keyof FruitMap];
 </code></pre>
 <p><strong>Array to union / Tuple to union type</strong></p>
@@ -4554,7 +5553,7 @@ type ValuesAsUnionOfTuples = F[keyof F];
 <p>How to type a function with generics to return what is passed in?</p>
 </blockquote>
 <pre><code>const returnWhatIPassIn = &#x3C;E>(t: E) => {
-  return t;
+return t;
 };
 </code></pre>
 <blockquote>
@@ -4574,7 +5573,7 @@ type Two = ReturnWhatIPassIn&#x3C;2> // returns 2
 <p>We could also anotate the return type explicitely. But TS infers it correctly:</p>
 </blockquote>
 <pre><code>const returnWhatIPassIn = &#x3C;E>(t: E):E => {
-  return t;
+return t;
 };
 </code></pre>
 <blockquote>
@@ -4586,18 +5585,18 @@ type Two = ReturnWhatIPassIn&#x3C;2> // returns 2
 <p>What if we want to pass in 2 parameters?</p>
 </blockquote>
 <pre><code>const returnBothOfWhatIPassIn = &#x3C;T, U>(a: T, b: U) => {
-  return {
-    a,
-    b,
-  };
+return {
+a,
+b,
+};
 };
 </code></pre>
 <blockquote>
 <p>Above syntax is same as</p>
 </blockquote>
 <pre><code>type Result&#x3C;A, B> = {
-  a: A,
-  b: B
+a: A,
+b: B
 }
 </code></pre>
 <blockquote>
@@ -4609,10 +5608,10 @@ type Two = ReturnWhatIPassIn&#x3C;2> // returns 2
 <p>If we want them to be literal, we can extend each</p>
 </blockquote>
 <pre><code>const returnBothOfWhatIPassIn = &#x3C;T extends string, U extends number>(a: T, b: U) => {
-  return {
-    a,
-    b,
-  };
+return {
+a,
+b,
+};
 };
 </code></pre>
 <blockquote>
@@ -4622,9 +5621,9 @@ type Two = ReturnWhatIPassIn&#x3C;2> // returns 2
 <p>Similar example. What if we have a function like this which receives array of statuses and returns them? We dont want however the return type to be array of strings, we want it to be array of individual status (their literal values).</p>
 </blockquote>
 <pre><code>const makeStatus = &#x3C;TStatuses extends string[]>(
-  statuses: TStatuses
+statuses: TStatuses
 ) => {
-  return statuses;
+return statuses;
 };
 
 const statuses = makeStatus(["INFO", "DEBUG", "ERROR", "WARNING"]);
@@ -4633,9 +5632,9 @@ const statuses = makeStatus(["INFO", "DEBUG", "ERROR", "WARNING"]);
 <p>Solution:</p>
 </blockquote>
 <pre><code>const makeStatus = &#x3C;TStatuses extends string>(
-  statuses: Array&#x3C;TStatuses>
+statuses: Array&#x3C;TStatuses>
 ): Array&#x3C;TStatuses> => {
-  return statuses;
+return statuses;
 };
 
 const statuses = makeStatus(["INFO", "DEBUG", "ERROR", "WARNING"]);
@@ -4648,13 +5647,13 @@ const statuses = makeStatus(["INFO", "DEBUG", "ERROR", "WARNING"]);
 <p>Imagine we have a component like this</p>
 </blockquote>
 <pre><code>export class Component{
-  private props: unknown;
+private props: unknown;
 
-  constructor(props: unknown) {
-    this.props = props;
-  }
+constructor(props: unknown) {
+this.props = props;
+}
 
-  getProps = () => this.props;
+getProps = () => this.props;
 }
 
 const component = new Component({ a: 1, b: 2, c: 3 });
@@ -4666,13 +5665,13 @@ const component = new Component({ a: 1, b: 2, c: 3 });
 <p>Solution looks like this</p>
 </blockquote>
 <pre><code>export class Component&#x3C;TProps> {
-  private props: TProps;
+private props: TProps;
 
-  constructor(props: TProps) {
-    this.props = props;
-  }
+constructor(props: TProps) {
+this.props = props;
+}
 
-  getProps = () => this.props;
+getProps = () => this.props;
 }
 
 const component = new Component({ a: 1, b: 2, c: 3 });
@@ -4681,30 +5680,30 @@ const component = new Component({ a: 1, b: 2, c: 3 });
 <p>Now what if we want our clone function to infer the props of the object we are passing in?</p>
 </blockquote>
 <pre><code>export class Component&#x3C;TProps> {
-  private props: TProps;
-  constructor(props: TProps) {
-    this.props = props;
-  }
-  getProps = () => this.props;
+private props: TProps;
+constructor(props: TProps) {
+this.props = props;
+}
+getProps = () => this.props;
 }
 
 const cloneComponent = (component) => {
-  return new Component(component.getProps());
+return new Component(component.getProps());
 };
 </code></pre>
 <blockquote>
 <p>Solution</p>
 </blockquote>
 <pre><code>export class Component&#x3C;TProps> {
-  private props: TProps;
-  constructor(props: TProps) {
-    this.props = props;
-  }
-  getProps = () => this.props;
+private props: TProps;
+constructor(props: TProps) {
+this.props = props;
+}
+getProps = () => this.props;
 }
 
 const cloneComponent = &#x3C;TProps>(component: Component&#x3C;TProps>) => {
-  return new Component(component.getProps());
+return new Component(component.getProps());
 };
 </code></pre>
 <p><strong>How to create generics with Sets</strong></p>
@@ -4715,7 +5714,7 @@ const cloneComponent = &#x3C;TProps>(component: Component&#x3C;TProps>) => {
 <p>Imagine we have a set like this:</p>
 </blockquote>
 <pre><code>export const createSet = ()=> {
-  return new Set();
+return new Set();
 };
 const stringSet = createSet&#x3C;string>();
 const numberSet = createSet&#x3C;number>();
@@ -4725,7 +5724,7 @@ const unknownSet = createSet();
 <p>And we want this to be infered as set of strings for the first one, set of number for seconds one and set of unknown for third one. Here is how:</p>
 </blockquote>
 <pre><code>export const createSet = &#x3C;T>(): Set&#x3C;T> => {
-  return new Set();
+return new Set();
 };
 const stringSet = createSet&#x3C;string>();
 const numberSet = createSet&#x3C;number>();
@@ -4735,7 +5734,7 @@ const unknownSet = createSet();
 <p>Another way ho to do it:</p>
 </blockquote>
 <pre><code>export const createSet = &#x3C;T>() => {
-  return new Set&#x3C;T>();
+return new Set&#x3C;T>();
 };
 const stringSet = createSet&#x3C;string>();
 const numberSet = createSet&#x3C;number>();
@@ -4752,7 +5751,7 @@ mySet.add("hi") // error
 <p>In above problem, how to set a default type if we dont pass anything? TS would infer unknown, but what if we want it to be string?</p>
 </blockquote>
 <pre><code>export const createSet = &#x3C;T = string>() => {
-  return new Set&#x3C;T>();
+return new Set&#x3C;T>();
 };
 const numberSet = createSet&#x3C;number>();
 const stringSet = createSet&#x3C;string>();
@@ -4763,40 +5762,40 @@ const otherStringSet = createSet();
 <p>How to type in a fetch function which should receive a type?</p>
 </blockquote>
 <pre><code>const fetchData = async &#x3C;T>(url: string): Promise&#x3C;T> => {
-  const data = await fetch(url).then((response) => response.json());
-  return data;
+const data = await fetch(url).then((response) => response.json());
+return data;
 };
 </code></pre>
 <blockquote>
 <p>Then when we call it we should prove its type:</p>
 </blockquote>
 <pre><code>async () => {
-  const data = await fetchData&#x3C;{ name: string }>(
-    "https://swapi.dev/api/people/1"
-  );
+const data = await fetchData&#x3C;{ name: string }>(
+"https://swapi.dev/api/people/1"
+);
 </code></pre>
 <blockquote>
 <p>We could also do it like this:</p>
 </blockquote>
 <pre><code>const fetchData = async &#x3C;T>(url: string) => {
-  const data = await fetch(url).then((response) => response.json());
-  return data as T;
+const data = await fetch(url).then((response) => response.json());
+return data as T;
 };
 </code></pre>
 <blockquote>
 <p>But there is a better way:</p>
 </blockquote>
 <pre><code>const fetchData = async &#x3C;T>(url: string) => {
-  const data: T = await fetch(url).then((response) => response.json());
-  return data;
+const data: T = await fetch(url).then((response) => response.json());
+return data;
 };
 </code></pre>
 <blockquote>
 <p>Or even:</p>
 </blockquote>
 <pre><code>const fetchData = async &#x3C;T>(url: string) => {
-  const data: T = await fetch(url).then((response): Promise&#x3C;T> => response.json());
-  return data;
+const data: T = await fetch(url).then((response): Promise&#x3C;T> => response.json());
+return data;
 };
 </code></pre>
 <blockquote>
@@ -4814,7 +5813,7 @@ const otherStringSet = createSet();
 <p>Let's consider a function that returns a welcome message to a particular person:</p>
 </blockquote>
 <pre><code>function greet(person: string): string {
-  return `Hello, ${person}!`;
+return `Hello, ${person}!`;
 }
 </code></pre>
 <blockquote>
@@ -4835,18 +5834,18 @@ const otherStringSet = createSet();
 <p>Here's how greet() looks after updating the parameter and return types:</p>
 </blockquote>
 <pre><code>function greet(person: string | string[]): string | string[] {
-  if (typeof person === 'string') {
-    return `Hello, ${person}!`;
-  } else if (Array.isArray(person)) {
-    return person.map(name => `Hello, ${name}!`);
-  }
-  throw new Error('Unable to greet');
+if (typeof person === 'string') {
+return `Hello, ${person}!`;
+} else if (Array.isArray(person)) {
+return person.map(name => `Hello, ${name}!`);
+}
+throw new Error('Unable to greet');
 }
 </code></pre>
 <blockquote>
 <p>Now you can invoke greet() in 2 ways:</p>
 </blockquote>
-<pre><code>greet('World');          // 'Hello, World!'
+<pre><code>greet('World'); // 'Hello, World!'
 greet(['Jane', 'Joe']); // ['Hello, Jane!', 'Hello, Joe!']
 </code></pre>
 <blockquote>
@@ -4873,12 +5872,12 @@ function greet(persons: string[]): string[];
 
 // Implementation signature
 function greet(person: unknown): unknown {
-  if (typeof person === 'string') {
-    return `Hello, ${person}!`;
-  } else if (Array.isArray(person)) {
-    return person.map(name => `Hello, ${name}!`);
-  }
-  throw new Error('Unable to greet');
+if (typeof person === 'string') {
+return `Hello, ${person}!`;
+} else if (Array.isArray(person)) {
+return person.map(name => `Hello, ${name}!`);
+}
+throw new Error('Unable to greet');
 }
 </code></pre>
 <blockquote>
@@ -4893,8 +5892,8 @@ function greet(person: unknown): unknown {
 <blockquote>
 <p>Now, as before, you can invoke greet() with the arguments of type string or array of strings:</p>
 </blockquote>
-<pre><code>greet('World');          // 'Hello, World!'
-greet(['Jane', 'Joe']);  // ['Hello, Jane!', 'Hello, Joe!']
+<pre><code>greet('World'); // 'Hello, World!'
+greet(['Jane', 'Joe']); // ['Hello, Jane!', 'Hello, Joe!']
 </code></pre>
 <blockquote>
 <p>You should think carefully, because function overloads are at their best when you have a different return type based on something that you pass in. If you just have the same return type, no matter what happens, it's always going to return a string, then you should probably be using a union to express these parameters instead.</p>
@@ -4938,7 +5937,7 @@ greet(['Jane', 'Joe']);  // ['Hello, Jane!', 'Hello, Joe!']
 <blockquote>
 <p>Branded type is created as a base type and then intersection with object, where we label the Brand as for example Email:</p>
 </blockquote>
-<pre><code>type Mail = string &#x26; { __brand: "Email" }
+<pre><code>type Mail = string &#x26; { \_\_brand: "Email" }
 </code></pre>
 <blockquote>
 <p>String cannot be intersected with an object but notice that this is now not typed as never! Assigning value to this type will now not be possible.</p>
@@ -4949,7 +5948,7 @@ greet(['Jane', 'Joe']);  // ['Hello, Jane!', 'Hello, Joe!']
 <p>What we are missing still is a rule which will detect if it is a valid email address, like contains @, etc.</p>
 </blockquote>
 <pre><code>const isEmail = (email: string): email is Mail => {
-  return email.includes("@gmail.com")
+return email.includes("@gmail.com")
 }
 </code></pre>
 <blockquote>
@@ -4958,40 +5957,40 @@ greet(['Jane', 'Joe']);  // ['Hello, Jane!', 'Hello, Joe!']
 <blockquote>
 <p>We can then use our function like this:</p>
 </blockquote>
-<pre><code>type Mail = string &#x26; { __brand: "Email" }
+<pre><code>type Mail = string &#x26; { \_\_brand: "Email" }
 
 const isEmail = (email: string): email is Mail => {
-  return email.includes("@gmail.com")
+return email.includes("@gmail.com")
 }
 
 const sendWelcomeEmail = (email: Mail) => {
-  //
+//
 }
 
 const signUp = (email: string) => {
-  if (isEmail){
-     sendWelcomeEmail(email) // email will be correctly typed as Mail
-  }
+if (isEmail){
+sendWelcomeEmail(email) // email will be correctly typed as Mail
+}
 }
 </code></pre>
 <blockquote>
 <p>Another way to approach this topic is to use assert and then throw error if the condition for email address is not met:</p>
 </blockquote>
-<pre><code>type Mail = string &#x26; { __brand: "Email" }
+<pre><code>type Mail = string &#x26; { \_\_brand: "Email" }
 
 const asserEmail = (email: string): asserts email is Mail => {
-  if (!email.includes("@gmail.com")){
-    throw new Error(`Invalid argument: [${email}] is not a valid email`)
-  }
+if (!email.includes("@gmail.com")){
+throw new Error(`Invalid argument: [${email}] is not a valid email`)
+}
 }
 
 const sendWelcomeEmail = (email: Mail) => {
-  //
+//
 }
 
 const signUp = (email: string) => {
-  assertEmail(email);
-  sendWelcomeEmail(email) // email will be correctly typed as Mail, cause we reached so far here without error
+assertEmail(email);
+sendWelcomeEmail(email) // email will be correctly typed as Mail, cause we reached so far here without error
 }
 </code></pre>
 <p><strong>Global scope</strong></p>
@@ -4999,8 +5998,8 @@ const signUp = (email: string) => {
 <p>howto declare and type in global scope</p>
 </blockquote>
 <pre><code>declare global {
-  function myFunc(): boolean;
-  var myVar: number;
+function myFunc(): boolean;
+var myVar: number;
 }
 
 globalThis.myFunc = () => true;
@@ -5019,39 +6018,39 @@ globalThis.myVar = 1;
 <p>File 1</p>
 </blockquote>
 <pre><code>declare global {
-  interface DispatchableEvent {
-    LOG_IN: {
-      username: string;
-      password: string;
-    };
-  }
+interface DispatchableEvent {
+LOG_IN: {
+username: string;
+password: string;
+};
+}
 }
 </code></pre>
 <blockquote>
 <p>File 2</p>
 </blockquote>
 <pre><code>declare global {
-  interface DispatchableEvent {
-    LOG_OUT: {};
-    UPDATE_USERNAME: {
-      username: string;
-    };
-  }
+interface DispatchableEvent {
+LOG_OUT: {};
+UPDATE_USERNAME: {
+username: string;
+};
+}
 }
 </code></pre>
 <blockquote>
 <p>Result:</p>
 </blockquote>
 <pre><code>interface DispatchableEvent {
-    LOG_IN: {
-      username: string;
-      password: string;
-    };
-    LOG_OUT: {};
-    UPDATE_USERNAME: {
-      username: string;
-    };
-  }
+LOG_IN: {
+username: string;
+password: string;
+};
+LOG_OUT: {};
+UPDATE_USERNAME: {
+username: string;
+};
+}
 </code></pre>
 <blockquote>
 <p>It's a combination of declaration merging and declaring global. Having this global interface that you can append to gives you a really nice solution for certain problems.</p>
@@ -5071,7 +6070,7 @@ globalThis.myVar = 1;
 <p>To define a user-defined type guard, we simply need to define a function whose return type is a type predicate:</p>
 </blockquote>
 <pre><code>function isFish(pet: Fish | Bird): pet is Fish {
-  return (pet as Fish).swim !== undefined;
+return (pet as Fish).swim !== undefined;
 }
 </code></pre>
 <blockquote>
@@ -5087,36 +6086,36 @@ globalThis.myVar = 1;
 <p>If we have a function which does not return anything (is void) and maybe only throws error,it would not be enough to use the predicate. We will need to use <code>asserts</code> keyword</p>
 </blockquote>
 <pre><code>interface User {
-  id: string;
-  name: string;
+id: string;
+name: string;
 }
 
 interface AdminUser extends User {
-  role: "admin";
-  organisations: string[];
+role: "admin";
+organisations: string[];
 }
 
 interface NormalUser extends User {
-  role: "normal";
+role: "normal";
 }
 
 function assertUserIsAdmin(
-  user: NormalUser | AdminUser
+user: NormalUser | AdminUser
 ): asserts user is AdminUser {
-  if (user.role !== "admin") {
-    throw new Error("Not an admin user");
-  }
+if (user.role !== "admin") {
+throw new Error("Not an admin user");
+}
 }
 </code></pre>
 <blockquote>
 <p>please note that asserts only works with function declaration and not with arrow functions. workaround is always to use function declaration or such a workaround:</p>
 </blockquote>
 <pre><code>const assertUserIsAdmin: (
-  user: NormalUser | AdminUser
+user: NormalUser | AdminUser
 ) => asserts user is AdminUser = (user) => {
-  if (user.role !== "admin") {
-    throw new Error("Not an admin user");
-  }
+if (user.role !== "admin") {
+throw new Error("Not an admin user");
+}
 };
 </code></pre>
 <blockquote>
@@ -5135,11 +6134,11 @@ function assertUserIsAdmin(
 <pre><code>type FilterFunction&#x3C;T> = (item: T) => boolean;
 
 function filter&#x3C;T>(items: T[], predicate: FilterFunction&#x3C;T>): T[] {
-  return items.filter(predicate);
+return items.filter(predicate);
 }
 
 function isNumber(value: unknown): value is number {
-  return typeof value === "number";
+return typeof value === "number";
 }
 
 const numbers = [1, 2, 3, "four"];
@@ -5163,16 +6162,16 @@ console.log(filteredNumbers); // [1, 2, 3]
 <p>Q: given the above explanation, how would you then turn isNode to a predicate in this piece of code?</p>
 </blockquote>
 <pre><code>interface DOMNodeExtractorConfig&#x3C;T, Result> {
-  isNode: (node: unknown) => boolean;
-  transform: (node: T) => Result;
+isNode: (node: unknown) => boolean;
+transform: (node: T) => Result;
 }
 </code></pre>
 <blockquote>
 <p>To turn isNode into a predicate, you need to change its return type to node is T. This tells TypeScript that if isNode returns true for a value, that value is of type T. Here's how you can update the DOMNodeExtractorConfig interface with a predicate type for isNode:</p>
 </blockquote>
 <pre><code>interface DOMNodeExtractorConfig&#x3C;T, Result> {
-  isNode: (node: unknown) => node is T;
-  transform: (node: T) => Result;
+isNode: (node: unknown) => node is T;
+transform: (node: T) => Result;
 }
 </code></pre>
 <blockquote>
@@ -5182,12 +6181,12 @@ console.log(filteredNumbers); // [1, 2, 3]
 <p>Here's an example of how you can use DOMNodeExtractorConfig with a predicate for isNode:</p>
 </blockquote>
 <pre><code>function extractNodes&#x3C;T, Result>(config: DOMNodeExtractorConfig&#x3C;T, Result>, nodes: unknown[]): Result[] {
-  return nodes.filter(config.isNode).map(config.transform);
+return nodes.filter(config.isNode).map(config.transform);
 }
 
 const divExtractor: DOMNodeExtractorConfig&#x3C;HTMLDivElement, string> = {
-  isNode: (node: unknown): node is HTMLDivElement => node instanceof HTMLDivElement,
-  transform: (div: HTMLDivElement) => div.textContent || "",
+isNode: (node: unknown): node is HTMLDivElement => node instanceof HTMLDivElement,
+transform: (div: HTMLDivElement) => div.textContent || "",
 };
 
 const nodes: unknown[] = [document.createElement("div"), document.createElement("p")];
@@ -5210,13 +6209,13 @@ A: You're welcome! I'm glad I could help. If you have any more questions, feel f
 <p>We can actually use the name of the class as a type in Typescript. Classes have this funny property where they can actually cross boundaries a little bit and be used as either a type or a runtime value. Pretty cool!</p>
 </blockquote>
 <pre><code>class CustomError extends Error {
-  constructor(message: string, public code: number) {
-    super(message);
-    this.name = "CustomError";
-  }
+constructor(message: string, public code: number) {
+super(message);
+this.name = "CustomError";
+}
 }
 const handleCustomError = (error: CustomError) => {
-  console.error(error.code);
+console.error(error.code);
 };
 </code></pre>
 <p><strong>Builder patterns</strong></p>
@@ -5227,56 +6226,56 @@ const handleCustomError = (error: CustomError) => {
 <p>Here's an example to help illustrate how the builder pattern works in TypeScript:</p>
 </blockquote>
 <pre><code>class User {
-  constructor(
-    public readonly firstName: string,
-    public readonly lastName: string,
-    public readonly email: string,
-    public readonly age: number,
-    public readonly address?: string
-  ) {}
+constructor(
+public readonly firstName: string,
+public readonly lastName: string,
+public readonly email: string,
+public readonly age: number,
+public readonly address?: string
+) {}
 }
 
 class UserBuilder {
-  private firstName: string = '';
-  private lastName: string = '';
-  private email: string = '';
-  private age: number = 0;
-  private address?: string;
+private firstName: string = '';
+private lastName: string = '';
+private email: string = '';
+private age: number = 0;
+private address?: string;
 
-  setFirstName(firstName: string): UserBuilder {
-    this.firstName = firstName;
-    return this;
-  }
+setFirstName(firstName: string): UserBuilder {
+this.firstName = firstName;
+return this;
+}
 
-  setLastName(lastName: string): UserBuilder {
-    this.lastName = lastName;
-    return this;
-  }
+setLastName(lastName: string): UserBuilder {
+this.lastName = lastName;
+return this;
+}
 
-  setEmail(email: string): UserBuilder {
-    this.email = email;
-    return this;
-  }
+setEmail(email: string): UserBuilder {
+this.email = email;
+return this;
+}
 
-  setAge(age: number): UserBuilder {
-    this.age = age;
-    return this;
-  }
+setAge(age: number): UserBuilder {
+this.age = age;
+return this;
+}
 
-  setAddress(address: string): UserBuilder {
-    this.address = address;
-    return this;
-  }
+setAddress(address: string): UserBuilder {
+this.address = address;
+return this;
+}
 
-  build(): User {
-    return new User(
-      this.firstName,
-      this.lastName,
-      this.email,
-      this.age,
-      this.address
-    );
-  }
+build(): User {
+return new User(
+this.firstName,
+this.lastName,
+this.email,
+this.age,
+this.address
+);
+}
 }
 </code></pre>
 <blockquote>
@@ -5286,12 +6285,12 @@ class UserBuilder {
 <p>To create a User object using the builder pattern, you would first create a new UserBuilder object, set its properties using the builder's setXXX methods, and then call the build method to create the User object. Here's an example:</p>
 </blockquote>
 <pre><code>const user = new UserBuilder()
-  .setFirstName('John')
-  .setLastName('Doe')
-  .setEmail('john.doe@example.com')
-  .setAge(30)
-  .setAddress('123 Main St')
-  .build();
+.setFirstName('John')
+.setLastName('Doe')
+.setEmail('john.doe@example.com')
+.setAge(30)
+.setAddress('123 Main St')
+.build();
 </code></pre>
 <blockquote>
 <p>In the example above, we create a new User object with the UserBuilder class by setting its properties using the builder's setXXX methods and then calling the build method to create the User object.</p>
@@ -5308,15 +6307,15 @@ class UserBuilder {
 <p>What if we use a function from external library which is poorly typed and returns a string instead of union of:</p>
 </blockquote>
 <pre><code>export const getAnimatingState = (): string => {
-  if (Math.random() > 0.5) {
-    return "before-animation";
-  }
+if (Math.random() > 0.5) {
+return "before-animation";
+}
 
-  if (Math.random() > 0.5) {
-    return "animating";
-  }
+if (Math.random() > 0.5) {
+return "animating";
+}
 
-  return "after-animation";
+return "after-animation";
 };
 </code></pre>
 <blockquote>
@@ -5333,8 +6332,8 @@ const animatingState = getAnimatingState();
 <p>In this file we will <code>declare module</code> and type our getAnimatingState properly</p>
 </blockquote>
 <pre><code>declare module "fake-lib" {
-  export type Mytype = "before-animation" | "animating" | "after-animation";
-  export function getAnimatingState(): Mytype;
+export type Mytype = "before-animation" | "animating" | "after-animation";
+export function getAnimatingState(): Mytype;
 }
 </code></pre>
 <blockquote>
@@ -5357,14 +6356,14 @@ const animatingState = getAnimatingState();
 <p>If we call this function with array of object like this:</p>
 </blockquote>
 <pre><code>const fruits = asConst([
-  {
-    name: "apple",
-    price: 1,
-  },
-  {
-    name: "banana",
-    price: 2,
-  },
+{
+name: "apple",
+price: 1,
+},
+{
+name: "banana",
+price: 2,
+},
 ]);
 </code></pre>
 <blockquote>
@@ -5384,52 +6383,13 @@ export const asConst = &#x3C;T>(t: F.Narrow&#x3C;T>) => t;
 <p>Now the inferred type will be:</p>
 </blockquote>
 <pre><code>[
-  {
-    name: "apple",
-    price: 1,
-  },
-  {
-    name: "banana",
-    price: 2,
-  },
+{
+name: "apple",
+price: 1,
+},
+{
+name: "banana",
+price: 2,
+},
 ]
-</code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre>
-<pre><code></code></pre></div><hr/><footer style="padding-bottom:20px;z-index:10"><p style="text-align:center;font-size:14px;margin-bottom:0;color:grey;z-index:10">© <!-- -->2023<!-- --> Design and Development by<!-- --> <!-- -->Addania</p></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/TypeScript/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-9889f2fc6470691a380a.js"],"app":["/app-90dd64ce38e848c22d7b.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-2f9004dcb1f826313e67.js"],"component---src-pages-about-css-modules-js":["/component---src-pages-about-css-modules-js-35985b40574beb831667.js"],"component---src-pages-about-js":["/component---src-pages-about-js-00b1f41b2d1a6994addc.js"],"component---src-pages-contact-js":["/component---src-pages-contact-js-b55dde69b5725f5f82b4.js"],"component---src-pages-impressions-backup-all-js":["/component---src-pages-impressions-backup-all-js-c55acc3a57bdd2944048.js"],"component---src-pages-impressions-js":["/component---src-pages-impressions-js-8292c16b1f7bf72141f6.js"],"component---src-pages-index-js":["/component---src-pages-index-js-0a3aa76be90306b14260.js"],"component---src-pages-knowledge-js":["/component---src-pages-knowledge-js-d333dfa55878661ebc54.js"],"component---src-pages-my-files-js":["/component---src-pages-my-files-js-055b79a987f45aec5d38.js"],"component---src-pages-portfolio-js":["/component---src-pages-portfolio-js-f9252dee860d6946ca0c.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-c45e3e919b1e8e21ef2b.js"]};/*]]>*/</script><script src="/coding/polyfill-9889f2fc6470691a380a.js" nomodule=""></script><script src="/coding/component---src-templates-blog-post-js-c45e3e919b1e8e21ef2b.js" async=""></script><script src="/coding/cbfa64f297729dbbde51069fca69778ac367d80c-4b72cfa83fda0043013e.js" async=""></script><script src="/coding/d594ffd7fab4baaf9dd819e6d1639307be597074-d526e0af231ec4542051.js" async=""></script><script src="/coding/app-90dd64ce38e848c22d7b.js" async=""></script><script src="/coding/framework-8f8cadd211f03ea7e319.js" async=""></script><script src="/coding/styles-29147cbc04bbc833f6a0.js" async=""></script><script src="/coding/webpack-runtime-b28c03c04ad51fc6b209.js" async=""></script></body></html>
+</code></pre></div><hr/><footer style="padding-bottom:20px;z-index:10"><p style="text-align:center;font-size:14px;margin-bottom:0;color:grey;z-index:10">© <!-- -->2024<!-- --> Design and Development by<!-- --> <!-- -->Addania</p></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/TypeScript/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-9889f2fc6470691a380a.js"],"app":["/app-90dd64ce38e848c22d7b.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-2f9004dcb1f826313e67.js"],"component---src-pages-about-css-modules-js":["/component---src-pages-about-css-modules-js-35985b40574beb831667.js"],"component---src-pages-about-js":["/component---src-pages-about-js-00b1f41b2d1a6994addc.js"],"component---src-pages-contact-js":["/component---src-pages-contact-js-b55dde69b5725f5f82b4.js"],"component---src-pages-impressions-backup-all-js":["/component---src-pages-impressions-backup-all-js-c55acc3a57bdd2944048.js"],"component---src-pages-impressions-js":["/component---src-pages-impressions-js-8292c16b1f7bf72141f6.js"],"component---src-pages-index-js":["/component---src-pages-index-js-0a3aa76be90306b14260.js"],"component---src-pages-knowledge-js":["/component---src-pages-knowledge-js-d333dfa55878661ebc54.js"],"component---src-pages-my-files-js":["/component---src-pages-my-files-js-055b79a987f45aec5d38.js"],"component---src-pages-portfolio-js":["/component---src-pages-portfolio-js-f9252dee860d6946ca0c.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-c45e3e919b1e8e21ef2b.js"]};/*]]>*/</script><script src="/coding/polyfill-9889f2fc6470691a380a.js" nomodule=""></script><script src="/coding/component---src-templates-blog-post-js-c45e3e919b1e8e21ef2b.js" async=""></script><script src="/coding/cbfa64f297729dbbde51069fca69778ac367d80c-4b72cfa83fda0043013e.js" async=""></script><script src="/coding/d594ffd7fab4baaf9dd819e6d1639307be597074-d526e0af231ec4542051.js" async=""></script><script src="/coding/app-90dd64ce38e848c22d7b.js" async=""></script><script src="/coding/framework-8f8cadd211f03ea7e319.js" async=""></script><script src="/coding/styles-29147cbc04bbc833f6a0.js" async=""></script><script src="/coding/webpack-runtime-b28c03c04ad51fc6b209.js" async=""></script></body></html>
