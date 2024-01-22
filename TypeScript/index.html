@@ -6392,4 +6392,297 @@ name: "banana",
 price: 2,
 },
 ]
-</code></pre></div><hr/><footer style="padding-bottom:20px;z-index:10"><p style="text-align:center;font-size:14px;margin-bottom:0;color:grey;z-index:10">© <!-- -->2024<!-- --> Design and Development by<!-- --> <!-- -->Addania</p></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/TypeScript/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-9889f2fc6470691a380a.js"],"app":["/app-90dd64ce38e848c22d7b.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-2f9004dcb1f826313e67.js"],"component---src-pages-about-css-modules-js":["/component---src-pages-about-css-modules-js-35985b40574beb831667.js"],"component---src-pages-about-js":["/component---src-pages-about-js-00b1f41b2d1a6994addc.js"],"component---src-pages-contact-js":["/component---src-pages-contact-js-b55dde69b5725f5f82b4.js"],"component---src-pages-impressions-backup-all-js":["/component---src-pages-impressions-backup-all-js-c55acc3a57bdd2944048.js"],"component---src-pages-impressions-js":["/component---src-pages-impressions-js-8292c16b1f7bf72141f6.js"],"component---src-pages-index-js":["/component---src-pages-index-js-0a3aa76be90306b14260.js"],"component---src-pages-knowledge-js":["/component---src-pages-knowledge-js-d333dfa55878661ebc54.js"],"component---src-pages-my-files-js":["/component---src-pages-my-files-js-055b79a987f45aec5d38.js"],"component---src-pages-portfolio-js":["/component---src-pages-portfolio-js-f9252dee860d6946ca0c.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-c45e3e919b1e8e21ef2b.js"]};/*]]>*/</script><script src="/coding/polyfill-9889f2fc6470691a380a.js" nomodule=""></script><script src="/coding/component---src-templates-blog-post-js-c45e3e919b1e8e21ef2b.js" async=""></script><script src="/coding/cbfa64f297729dbbde51069fca69778ac367d80c-4b72cfa83fda0043013e.js" async=""></script><script src="/coding/d594ffd7fab4baaf9dd819e6d1639307be597074-d526e0af231ec4542051.js" async=""></script><script src="/coding/app-90dd64ce38e848c22d7b.js" async=""></script><script src="/coding/framework-8f8cadd211f03ea7e319.js" async=""></script><script src="/coding/styles-29147cbc04bbc833f6a0.js" async=""></script><script src="/coding/webpack-runtime-b28c03c04ad51fc6b209.js" async=""></script></body></html>
+</code></pre>
+<p><strong>Projects</strong></p>
+<p><strong>Drag &#x26; Drop Project - initial setup</strong></p>
+<blockquote>
+<p>Create a new folder on your local machine</p>
+</blockquote>
+<blockquote>
+<p>Copy the content of the initial project setup (html, app.ts) provided in the course from folder: <code>prj-00-initial-starting-setup</code></p>
+</blockquote>
+<blockquote>
+<p>!!!! OMIT THIS STEP WHEN YOU ARE USING LITE SERVER which actually creates the dist folder with the app.ts in it !!!! In the html change the script tag from <code>&#x3C;script src="dist/app.js" defer>&#x3C;/script></code> to <code>&#x3C;script src="src/app.js" defer>&#x3C;/script></code></p>
+</blockquote>
+<blockquote>
+<p>In the html file add a random h1 tag with some content</p>
+</blockquote>
+<blockquote>
+<p>In the app.ts add a random console.log</p>
+</blockquote>
+<blockquote>
+<p>The run this code one by one:</p>
+</blockquote>
+<pre><code>sudo npm install -g typescript
+npm init
+npm install --save-dev lite-server
+npm install
+</code></pre>
+<blockquote>
+<p>Go to src folder (where app.ts is) and compile:</p>
+</blockquote>
+<pre><code>tsc app.ts
+</code></pre>
+<blockquote>
+<p>It will generate an app.js file</p>
+</blockquote>
+<blockquote>
+<p>Go to package.json file and check if you have those scripts there:</p>
+</blockquote>
+<pre><code>"test": "echo \"Error: no test specified\" &#x26;&#x26; exit 1",
+"start": "lite-server"
+</code></pre>
+<p>then go to main root folder and start the local server:</p>
+<pre><code>npm start
+</code></pre>
+<blockquote>
+<p>Your application runs at: <code>http://localhost:3000/</code>
+Make sure you dont start: <code>https://localhost:3000/</code></p>
+</blockquote>
+<blockquote>
+<p>If it does not work on with http on Chrome, try Firefox</p>
+</blockquote>
+<blockquote>
+<p>In order to then see anything, we need to go to src folder where our app.ts lives and then we compile it to app.js via:</p>
+</blockquote>
+<pre><code>tsc app.ts
+</code></pre>
+<blockquote>
+<p>Then go to main folder and initialize git:</p>
+</blockquote>
+<pre><code>git init
+</code></pre>
+<blockquote>
+<p>Add a commit:</p>
+</blockquote>
+<pre><code>git add .
+git commit -m "Getting started"
+</code></pre>
+<blockquote>
+<p>Go to github and create new repo. Click + and name your project. Make it private/public. Do not check any other options</p>
+</blockquote>
+<blockquote>
+<p>It will give you then these commands, which you paste to your terminal:</p>
+</blockquote>
+<pre><code>git remote add origin git@github.com:addania/drag.git
+git branch -M main
+git push -u origin main
+</code></pre>
+<blockquote>
+<p>Your code should now be on github in the <code>drag</code> repository. Yay</p>
+</blockquote>
+<blockquote>
+<p>How to work with the project, alway do:</p>
+</blockquote>
+<pre><code>npm start
+</code></pre>
+<blockquote>
+<p>And then in another terminal window:</p>
+</blockquote>
+<pre><code>tsc -w
+</code></pre>
+<blockquote>
+<p>Then replace the <code>index.html</code> with a project skeleton file from: <code>index.html.zip</code></p>
+</blockquote>
+<blockquote>
+<p>!!!! OMIT THIS STEP WHEN YOU ARE USING LITE SERVER which actually creates the dist folder with the app.ts in it !!!! Do not forget to overwrite the script tag as well:</p>
+</blockquote>
+<pre><code>&#x3C;script src="src/app.js" defer>&#x3C;/script>
+</code></pre>
+<blockquote>
+<p>Also add the <code>app.css</code> file provided in the course next to the <code>index.html</code> file.</p>
+</blockquote>
+<blockquote>
+<p><code>index.html</code> file contains some template tags. What are template tags? This is a default HTML tag which is not rendered immediately. It is just a template, which then can be rendered when we need it to (for example via scripts).</p>
+</blockquote>
+<p><strong>Singletons</strong></p>
+<blockquote>
+<p>The <code>Singleton Pattern</code> ensures that a class can only have a single instance throughout the lifetime of an application. By restricting the instantiation of a class to one object, you can ensure that shared resources or data are managed consistently across different parts of your application. Can be useful for simple state management.</p>
+</blockquote>
+<blockquote>
+<p>Let's imagine we have a simple class like this which contains the global list of projects:</p>
+</blockquote>
+<pre><code>class ProjectState {
+  projects: any[] = [];
+
+  addProject(title: string, description: string, numberOfPeople: number) {
+    const newProject = {
+      id: Math.random(),
+      title: title,
+      description: description,
+      people: numberOfPeople,
+    };
+    this.projects.push(newProject);
+  }
+}
+
+const projects = new ProjectState();
+</code></pre>
+<blockquote>
+<p>We want to turn it into singleton, which will then only have 1 single instance of it. The code will look like this:</p>
+</blockquote>
+<pre><code>class ProjectState {
+  projects: any[] = [];
+  private static instance: ProjectState
+
+  private constructor() {}
+
+  static getInstance() {
+    if (this.instance) {
+      return this.instance;
+    }
+    this.instance = new ProjectState();
+    return this.instance;
+  }
+
+  addProject(title: string, description: string, numberOfPeople: number) {
+    const newProject = {
+      id: Math.random(),
+      title: title,
+      description: description,
+      people: numberOfPeople,
+    };
+    this.projects.push(newProject);
+  }
+}
+
+const projects = ProjectState.getInstance();
+</code></pre>
+<blockquote>
+<p>We added a private constructor, which then guarantees that this is a singleton class. We added a private property called instance which is of type: ProjectState. And we added a static method called getInstance which checks if the this.instance exists and if yes, we return it. Otherwise we create a new one: this.instance = new ProjectState()</p>
+</blockquote>
+<blockquote>
+<p>Notice we also initialize it by <code>ProjectState.getInstance()</code> instead of <code>new ProjectState()</code></p>
+</blockquote>
+<blockquote>
+<p>This guarantees that we always work with the exact same object and that we will always have one object of that type in the entire application. We only want to have one instance of the state object for the entire application.</p>
+</blockquote>
+<p><strong>Classes as types</strong></p>
+<blockquote>
+<p>Interestingly enough classes can be used as types 😱</p>
+</blockquote>
+<pre><code>class Project {
+    public id: string,
+    public title: string,
+    public description: string,
+    ...
+}
+
+class ProjectState {
+  projects: Project[] = [];
+  ...
+}
+</code></pre>
+<p><strong>Classes - property declaration shortcut</strong></p>
+<blockquote>
+<p>Normally if we wanted to have some properties in our class, we would need to declare them and initialize them in the constructor like so:</p>
+</blockquote>
+<pre><code>class Project {
+  title: string;
+  description: string;
+  people: number;
+
+  constructor(t: string, d: string, p: number) {
+    this.title = t;
+    this.description = d;
+    this.people = p;
+  }
+}
+</code></pre>
+<blockquote>
+<p>But we can use shorthand properties in the constructor, which will declare them and initialize them:</p>
+</blockquote>
+<pre><code>class Project {
+  constructor(
+    public id: string,
+    public title: string,
+    public description: string,
+  ) {
+  }
+}
+</code></pre>
+<p><strong>Abstract classes and abstract methods</strong></p>
+<blockquote>
+<p>Abstract classes should never be instantiated directly, they are only used as inheritance</p>
+</blockquote>
+<pre><code>abstract class Component {
+  ...
+}
+</code></pre>
+<blockquote>
+<p>Abstract class can have abstract methods, which means, abstract class will not implement any details for those methods, but it forces other classes which inherit from the abstract class, to implement those methods. Example:</p>
+</blockquote>
+<pre><code>abstract class Component {
+  ...
+  abstract configure(): void;
+  abstract render(): void;
+}
+</code></pre>
+<blockquote>
+<p>This means that each class which inherits from Component needs to have configure and render methods! These methods cant be private though. This is a restriction.</p>
+</blockquote>
+<p><strong>Super in a class</strong></p>
+<blockquote>
+<p><code>super()</code> calls the constructor of the base class from which our class inherits. Example:</p>
+</blockquote>
+<pre><code>abstract class Component {
+  constructor() {
+    ...
+  }
+  ...
+}
+
+class ProjectList extends Component {
+  constructor() {
+    super();
+  }
+  ...
+}
+</code></pre>
+<blockquote>
+<p>In above, ProjectList extends Component. And in order to call the constructor of Component in ProjectList we need to call: <code>super()</code></p>
+</blockquote>
+<blockquote>
+<p>If the constructor of the bse class needs some arguments, we need to pass them to super:</p>
+</blockquote>
+<pre><code>abstract class Component {
+  constructor(title: string, id: string) {
+    ...
+  }
+  ...
+}
+
+class ProjectList extends Component {
+  constructor() {
+    super("this is my title", "this is my id");
+  }
+  ...
+}
+</code></pre>
+<p><strong>Class getters</strong></p>
+<blockquote>
+<p>By convention you declare getters after the properties in the class</p>
+</blockquote>
+<blockquote>
+<p>Getter is a function with a specific name. Example:</p>
+</blockquote>
+<pre><code>class ProjectItem{
+  project: Project;
+
+  get persons() {
+    if (this.project.people === 1) {
+      return "1 person";
+    } else {
+      return `${this.project.people} persons`;
+    }
+  }
+
+  constructor(project: Project) {
+    this.project = project;
+    const text = this.persons;
+  }
+}
+</code></pre>
+<blockquote>
+<p>Getter is not triggered with <code>this.persons()</code>. It is accessed as a property: <code>this.persons</code></p>
+</blockquote></div><hr/><footer style="padding-bottom:20px;z-index:10"><p style="text-align:center;font-size:14px;margin-bottom:0;color:grey;z-index:10">© <!-- -->2024<!-- --> Design and Development by<!-- --> <!-- -->Addania</p></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/TypeScript/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-9889f2fc6470691a380a.js"],"app":["/app-90dd64ce38e848c22d7b.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-2f9004dcb1f826313e67.js"],"component---src-pages-about-css-modules-js":["/component---src-pages-about-css-modules-js-35985b40574beb831667.js"],"component---src-pages-about-js":["/component---src-pages-about-js-00b1f41b2d1a6994addc.js"],"component---src-pages-contact-js":["/component---src-pages-contact-js-b55dde69b5725f5f82b4.js"],"component---src-pages-impressions-backup-all-js":["/component---src-pages-impressions-backup-all-js-c55acc3a57bdd2944048.js"],"component---src-pages-impressions-js":["/component---src-pages-impressions-js-8292c16b1f7bf72141f6.js"],"component---src-pages-index-js":["/component---src-pages-index-js-0a3aa76be90306b14260.js"],"component---src-pages-knowledge-js":["/component---src-pages-knowledge-js-d333dfa55878661ebc54.js"],"component---src-pages-my-files-js":["/component---src-pages-my-files-js-055b79a987f45aec5d38.js"],"component---src-pages-portfolio-js":["/component---src-pages-portfolio-js-f9252dee860d6946ca0c.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-c45e3e919b1e8e21ef2b.js"]};/*]]>*/</script><script src="/coding/polyfill-9889f2fc6470691a380a.js" nomodule=""></script><script src="/coding/component---src-templates-blog-post-js-c45e3e919b1e8e21ef2b.js" async=""></script><script src="/coding/cbfa64f297729dbbde51069fca69778ac367d80c-4b72cfa83fda0043013e.js" async=""></script><script src="/coding/d594ffd7fab4baaf9dd819e6d1639307be597074-d526e0af231ec4542051.js" async=""></script><script src="/coding/app-90dd64ce38e848c22d7b.js" async=""></script><script src="/coding/framework-8f8cadd211f03ea7e319.js" async=""></script><script src="/coding/styles-29147cbc04bbc833f6a0.js" async=""></script><script src="/coding/webpack-runtime-b28c03c04ad51fc6b209.js" async=""></script></body></html>
