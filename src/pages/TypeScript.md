@@ -7240,3 +7240,306 @@ price: 2,
 ]
 
 ```
+
+**Projects**
+
+**Drag & Drop Project - initial setup**
+
+> Create a new folder on your local machine
+
+> Copy the content of the initial project setup (html, app.ts) provided in the course from folder: `prj-00-initial-starting-setup`
+
+> !!!! OMIT THIS STEP WHEN YOU ARE USING LITE SERVER which actually creates the dist folder with the app.ts in it !!!! In the html change the script tag from `<script src="dist/app.js" defer></script>` to `<script src="src/app.js" defer></script>`
+
+> In the html file add a random h1 tag with some content
+
+> In the app.ts add a random console.log
+
+> The run this code one by one:
+
+```
+sudo npm install -g typescript
+npm init
+npm install --save-dev lite-server
+npm install
+```
+
+> Go to src folder (where app.ts is) and compile:
+
+```
+tsc app.ts
+```
+
+> It will generate an app.js file
+
+> Go to package.json file and check if you have those scripts there:
+
+```
+"test": "echo \"Error: no test specified\" && exit 1",
+"start": "lite-server"
+```
+
+then go to main root folder and start the local server:
+
+```
+npm start
+```
+
+> Your application runs at: `http://localhost:3000/`
+> Make sure you dont start: `https://localhost:3000/`
+
+> If it does not work on with http on Chrome, try Firefox
+
+> In order to then see anything, we need to go to src folder where our app.ts lives and then we compile it to app.js via:
+
+```
+tsc app.ts
+```
+
+> Then go to main folder and initialize git:
+
+```
+git init
+```
+
+> Add a commit:
+
+```
+git add .
+git commit -m "Getting started"
+```
+
+> Go to github and create new repo. Click + and name your project. Make it private/public. Do not check any other options
+
+> It will give you then these commands, which you paste to your terminal:
+
+```
+git remote add origin git@github.com:addania/drag.git
+git branch -M main
+git push -u origin main
+```
+
+> Your code should now be on github in the `drag` repository. Yay
+
+> How to work with the project, alway do:
+
+```
+npm start
+```
+
+> And then in another terminal window:
+
+```
+tsc -w
+```
+
+> Then replace the `index.html` with a project skeleton file from: `index.html.zip`
+
+> !!!! OMIT THIS STEP WHEN YOU ARE USING LITE SERVER which actually creates the dist folder with the app.ts in it !!!! Do not forget to overwrite the script tag as well:
+
+```
+<script src="src/app.js" defer></script>
+```
+
+> Also add the `app.css` file provided in the course next to the `index.html` file.
+
+> `index.html` file contains some template tags. What are template tags? This is a default HTML tag which is not rendered immediately. It is just a template, which then can be rendered when we need it to (for example via scripts).
+
+**Singletons**
+
+> The `Singleton Pattern` ensures that a class can only have a single instance throughout the lifetime of an application. By restricting the instantiation of a class to one object, you can ensure that shared resources or data are managed consistently across different parts of your application. Can be useful for simple state management.
+
+> Let's imagine we have a simple class like this which contains the global list of projects:
+
+```
+class ProjectState {
+  projects: any[] = [];
+
+  addProject(title: string, description: string, numberOfPeople: number) {
+    const newProject = {
+      id: Math.random(),
+      title: title,
+      description: description,
+      people: numberOfPeople,
+    };
+    this.projects.push(newProject);
+  }
+}
+
+const projects = new ProjectState();
+```
+
+> We want to turn it into singleton, which will then only have 1 single instance of it. The code will look like this:
+
+```
+class ProjectState {
+  projects: any[] = [];
+  private static instance: ProjectState
+
+  private constructor() {}
+
+  static getInstance() {
+    if (this.instance) {
+      return this.instance;
+    }
+    this.instance = new ProjectState();
+    return this.instance;
+  }
+
+  addProject(title: string, description: string, numberOfPeople: number) {
+    const newProject = {
+      id: Math.random(),
+      title: title,
+      description: description,
+      people: numberOfPeople,
+    };
+    this.projects.push(newProject);
+  }
+}
+
+const projects = ProjectState.getInstance();
+```
+
+> We added a private constructor, which then guarantees that this is a singleton class. We added a private property called instance which is of type: ProjectState. And we added a static method called getInstance which checks if the this.instance exists and if yes, we return it. Otherwise we create a new one: this.instance = new ProjectState()
+
+> Notice we also initialize it by `ProjectState.getInstance()` instead of `new ProjectState()`
+
+> This guarantees that we always work with the exact same object and that we will always have one object of that type in the entire application. We only want to have one instance of the state object for the entire application.
+
+**Classes as types**
+
+> Interestingly enough classes can be used as types 😱
+
+```
+class Project {
+    public id: string,
+    public title: string,
+    public description: string,
+    ...
+}
+
+class ProjectState {
+  projects: Project[] = [];
+  ...
+}
+```
+
+**Classes - property declaration shortcut**
+
+> Normally if we wanted to have some properties in our class, we would need to declare them and initialize them in the constructor like so:
+
+```
+class Project {
+  title: string;
+  description: string;
+  people: number;
+
+  constructor(t: string, d: string, p: number) {
+    this.title = t;
+    this.description = d;
+    this.people = p;
+  }
+}
+```
+
+> But we can use shorthand properties in the constructor, which will declare them and initialize them:
+
+```
+class Project {
+  constructor(
+    public id: string,
+    public title: string,
+    public description: string,
+  ) {
+  }
+}
+```
+
+**Abstract classes and abstract methods**
+
+> Abstract classes should never be instantiated directly, they are only used as inheritance
+
+```
+abstract class Component {
+  ...
+}
+```
+
+> Abstract class can have abstract methods, which means, abstract class will not implement any details for those methods, but it forces other classes which inherit from the abstract class, to implement those methods. Example:
+
+```
+abstract class Component {
+  ...
+  abstract configure(): void;
+  abstract render(): void;
+}
+```
+
+> This means that each class which inherits from Component needs to have configure and render methods! These methods cant be private though. This is a restriction.
+
+**Super in a class**
+
+> `super()` calls the constructor of the base class from which our class inherits. Example:
+
+```
+abstract class Component {
+  constructor() {
+    ...
+  }
+  ...
+}
+
+class ProjectList extends Component {
+  constructor() {
+    super();
+  }
+  ...
+}
+```
+
+> In above, ProjectList extends Component. And in order to call the constructor of Component in ProjectList we need to call: `super()`
+
+> If the constructor of the bse class needs some arguments, we need to pass them to super:
+
+```
+abstract class Component {
+  constructor(title: string, id: string) {
+    ...
+  }
+  ...
+}
+
+class ProjectList extends Component {
+  constructor() {
+    super("this is my title", "this is my id");
+  }
+  ...
+}
+```
+
+**Class getters**
+
+> By convention you declare getters after the properties in the class
+
+> Getter is a function with a specific name. Example:
+
+```
+class ProjectItem{
+  project: Project;
+
+  get persons() {
+    if (this.project.people === 1) {
+      return "1 person";
+    } else {
+      return `${this.project.people} persons`;
+    }
+  }
+
+  constructor(project: Project) {
+    this.project = project;
+    const text = this.persons;
+  }
+}
+```
+
+> Getter is not triggered with `this.persons()`. It is accessed as a property: `this.persons`
