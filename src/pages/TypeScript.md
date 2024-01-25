@@ -7543,3 +7543,945 @@ class ProjectItem{
 ```
 
 > Getter is not triggered with `this.persons()`. It is accessed as a property: `this.persons`
+
+**Implementing drag & drop with interfaces**
+
+> Let's implement 2 interfaces: `Draggable` and `DragTarget`.
+
+> `Draggable` is an item we want to drag. For example an item list.
+
+> `DragTarget` is where we want to drop our Draggable item. For example a Box with all finished projects, where we want to drag it the items to.
+
+> `Draggable` interface will have two methods: `dragStartHandler` and `dragStopHandler`.
+
+```
+interface Draggable {
+  dragStartHandler(event: DragEvent): void;
+  dragEndHandler(event: DragEvent): void;
+}
+```
+
+> Each of them will receive an event of a TS built-in type: `DragEvent`.
+
+> Each dragging event has a start and an end of it and for each we need an event listener.
+
+> `DragTarget` will implement 3 methods: `dragOverHandler`, `dropHandler` and `dragLeaveHandler`.
+
+```
+interface DragTarget {
+  dragOverHandler(event: DragEvent): void;
+  dropHandler(event: DragEvent): void;
+  dragLeaveHandler(event: DragEvent): void;
+}
+```
+
+> `dragOverHandler` signals to browser that the target of the drag is a valid drag target, so basically that the box we are dragging our item over, is a valid target. Dropping wont be possible if we dont have a valid target. `dragOverHandler` permits the drop
+
+> `dropHandler` is needed to react to an actual drop when it happens. We will use it to handle the drop. We can update data and ui.
+
+> `dragLeaveHandler` can be used to revert the visual update, if no drop happens, or if the drag is cancelled or user moves the element away.
+
+> We can then use those defined interfaces not only as a TS object type, but we can use it as a contract on a class with the keyword `implements`, in order to force the class to implement methods defined in the interface:
+
+```
+class ListItem extends Component implements Draggable {
+  dragStartHandler(event: DragEvent){
+    console.log("Drag starts")
+  };
+  dragEndHandler(event: DragEvent){
+    console.log("Drag ends")
+  };
+}
+```
+
+> What we firther need to do is to add our eventListeners which will listen to the DOM events `dragstar` and `dragend`. We can do this in configure method for our item which we want to drag:
+
+```
+class ProjectItem
+  extends Component<HTMLUListElement, HTMLLIElement>
+  implements Draggable
+{
+  private project: Project;
+
+  get persons() {
+    if (this.project.people === 1) {
+      return "1 person";
+    } else {
+      return `${this.project.people} persons`;
+    }
+  }
+
+  constructor(hostId: string, project: Project) {
+    super("single-project", hostId, false, project.id);
+    this.project = project;
+    this.configure();
+    this.renderContent();
+  }
+
+  @autobind
+  dragStartHandler(event: DragEvent) {
+    console.log("Drag Starts");
+    console.log("Event", event);
+  }
+
+  @autobind
+  dragEndHandler(_: DragEvent) {
+    console.log("Drag Ends");
+  }
+
+  configure() {
+    this.element.addEventListener("dragstart", this.dragStartHandler);
+    this.element.addEventListener("dragend", this.dragEndHandler);
+  }
+  renderContent() {
+    this.element.querySelector("h2")!.textContent = this.project.title;
+    this.element.querySelector("h3")!.textContent = this.persons;
+    this.element.querySelector("p")!.textContent = this.project.description;
+  }
+}
+```
+
+> This alone wont trigger the draggin though. We need to go tonour HTML file and add draggable="true" to our list item element.
+
+```
+<template id="single-project">
+      <li draggable="true">
+        <h2></h2>
+        <h3></h3>
+        <p></p>
+      </li>
+</template>
+```
+
+> Now we can successfully drag it! Yay 🎉🎉🎉. This prop tells the browser, that this item will be draggable.
+
+> Now let's handle the drag target. This will be the ProjectList box/class which then needs to implement DragTarget interface and add the 3 methods: `dragOverHandler`, `dropHandler` and `dragLeaveHandler`
+
+```
+class ProjectList
+  extends Component<HTMLDivElement, HTMLElement>
+  implements DragTarget
+{
+  assignedProjects: Project[];
+  // private type: "active" | "inactive" means that now we will have type property on the whole ProjectList class
+  constructor(private type: "active" | "finished") {
+    super("project-list", "app", false, `${type}-projects`);
+    this.assignedProjects = [];
+
+    this.element.id = `${this.type}-projects`;
+    this.configure();
+    this.renderContent();
+  }
+
+  private renderProjects() {
+    const listEl = document.getElementById(
+      `${this.type}-projects-list`
+    )! as HTMLUListElement;
+    listEl.innerHTML = "";
+    for (const prjItem of this.assignedProjects) {
+      new ProjectItem(this.element.querySelector("ul")!.id, prjItem);
+    }
+  }
+
+  @autobind
+  dragOverHandler(event: DragEvent) {
+    console.log("dragOverHandler fired");
+  }
+
+  @autobind
+  dropHandler(event: DragEvent) {
+    console.log("dropHandler fired");
+  }
+
+  @autobind
+  dragLeaveHandler(event: DragEvent) {
+    console.log("dragLeaveHandler fired");
+  }
+
+  configure() {
+    projectState.addListener((projects: Project[]) => {
+      const relevantProjects = projects.filter((prj) => {
+        if (this.type === "active") {
+          return prj.status === ProjectStatus.Active;
+        }
+        return prj.status === ProjectStatus.Finished;
+      });
+      this.assignedProjects = relevantProjects;
+      this.renderProjects();
+    });
+  }
+
+  renderContent() {
+    const listId = `${this.type}-projects-list`;
+    this.element.querySelector("ul")!.id = listId;
+    this.element.querySelector("h2")!.textContent =
+      this.type.toUpperCase() + " PROJECTS";
+  }
+}
+```
+
+> In `dragOverHandler` we want to change the ui, so that the box visually shows, the item can be dropped there. For example, we can add a css class to the ul element like this, which will change the background color of it when item is being dragged over it:
+
+```
+ @autobind
+  dragOverHandler(event: DragEvent) {
+    console.log("dragOverHandler fired");
+    const listEl = this.element.querySelector("ul")!;
+    listEl.classList.add("droppable");
+  }
+```
+
+> And when we leave this droppable target, we want to reset the color to white background, by removing the droppable class from the item:
+
+```
+  @autobind
+  dragLeaveHandler(event: DragEvent) {
+    console.log("dragLeaveHandler fired", event);
+    const listEl = this.element.querySelector("ul")!;
+    listEl.classList.remove("droppable");
+  }
+```
+
+> So overall our ProjectList will look like this:
+
+```
+class ProjectList
+  extends Component<HTMLDivElement, HTMLElement>
+  implements DragTarget
+{
+  assignedProjects: Project[];
+  // private type: "active" | "inactive" means that now we will have type property on the whole ProjectList class
+  constructor(private type: "active" | "finished") {
+    super("project-list", "app", false, `${type}-projects`);
+    this.assignedProjects = [];
+
+    this.element.id = `${this.type}-projects`;
+    this.configure();
+    this.renderContent();
+  }
+
+  private renderProjects() {
+    const listEl = document.getElementById(
+      `${this.type}-projects-list`
+    )! as HTMLUListElement;
+    listEl.innerHTML = "";
+    for (const prjItem of this.assignedProjects) {
+      new ProjectItem(this.element.querySelector("ul")!.id, prjItem);
+    }
+  }
+
+  @autobind
+  dragOverHandler(event: DragEvent) {
+    console.log("dragOverHandler fired", event);
+    const listEl = this.element.querySelector("ul")!;
+    listEl.classList.add("droppable");
+  }
+
+  @autobind
+  dropHandler(event: DragEvent) {
+    console.log("dropHandler fired", event);
+
+  }
+
+  @autobind
+  dragLeaveHandler(event: DragEvent) {
+    console.log("dragLeaveHandler fired", event);
+    const listEl = this.element.querySelector("ul")!;
+    listEl.classList.remove("droppable");
+  }
+
+  configure() {
+    this.element.addEventListener("dragover", this.dragOverHandler);
+    this.element.addEventListener("drop", this.dropHandler);
+    this.element.addEventListener("dragleave", this.dragLeaveHandler);
+
+    projectState.addListener((projects: Project[]) => {
+      const relevantProjects = projects.filter((prj) => {
+        if (this.type === "active") {
+          return prj.status === ProjectStatus.Active;
+        }
+        return prj.status === ProjectStatus.Finished;
+      });
+      this.assignedProjects = relevantProjects;
+      this.renderProjects();
+    });
+  }
+
+  renderContent() {
+    const listId = `${this.type}-projects-list`;
+    this.element.querySelector("ul")!.id = listId;
+    this.element.querySelector("h2")!.textContent =
+      this.type.toUpperCase() + " PROJECTS";
+  }
+}
+```
+
+> So visually dragging works, but the javascript has no clue about which element from list we are dragging, where we are dropping it and that it needs to update the state when we drop the item to the finished projects list.
+
+> We will need to use a special feature of the `DragEvent` which is called `dataTransfer`. This will attach a data to the `DragEvent` from the `ItemList` and we will be able to retrieve this data in for example Drop Target. Please note that we only want to attach small amount of data. Project id will suffice cause with it we can retrieve the whole project, and the format of the data will be plain text. This all will go to ProjectItem
+
+```
+  @autobind
+  dragStartHandler(event: DragEvent) {
+    event.dataTransfer!.setData("text/plain" ,this.project.id )
+  }
+```
+
+> We can also change cursor to "move" when dragging with: `event.dataTransfer!.effectAllowed = "move";`
+
+```
+  @autobind
+  dragStartHandler(event: DragEvent) {
+    event.dataTransfer!.setData("text/plain", this.project.id);
+    event.dataTransfer!.effectAllowed = "move";
+  }
+```
+
+> Now in te drop target element: ProjectList we wnat to make sure that we only allow dropping such elements which have a data attched to them and of a correct format: `text/plain`. we will need if statement in the dragOverHandler and if the condition we met, we will need to trigger `event.preventDefault()`. Drag and drop in javascript is implemented in a way that only if we call `event.preventDefault()` in dragOverHandler, then dropping is allowed and dropHandler is triggered!!!
+
+```
+@autobind
+  dragOverHandler(event: DragEvent) {
+    if(event.dataTransfer && event.dataTransfer.types[0] === "text/plain"){
+      event.preventDefault()
+      console.log("dragOverHandler fired", event);
+      const listEl = this.element.querySelector("ul")!;
+      listEl.classList.add("droppable");
+    }
+}
+```
+
+> Now when we allow the dropping for data with project id, we can then retrieve this project id in the dropHandler like this:
+
+```
+  @autobind
+  dropHandler(event: DragEvent) {
+    console.log("dropHandler fired", event);
+    const projectId = event.dataTransfer!.getData("text/plain");
+    console.log("projectId", projectId);
+  }
+```
+
+> Last step is then to use the project id to update the status of given project and refresh the interface. We will do so by adding moveProject method to the projectStatus and then using this method in our dropHandler. We will pass in the id pf the project and the new status.
+
+```
+  @autobind
+  dropHandler(event: DragEvent) {
+    console.log("dropHandler fired", event);
+    const projectId = event.dataTransfer!.getData("text/plain");
+    console.log("projectId", projectId);
+    projectState.moveProject(
+      projectId,
+      this.type === "active" ? ProjectStatus.Active : ProjectStatus.Finished
+    );
+  }
+```
+
+> Then in the ProjectStatus we will add this method:
+
+```
+ moveProject(projectId: string, newStatus: ProjectStatus) {
+    const project = this.projects.find((prj) => prj.id === projectId);
+    if (project && project.status !== newStatus) {
+      project.status = newStatus;
+    }
+    this.updateListeners();
+  }
+```
+
+> Whole project code looks like this:
+
+```
+//Drag & Drop interfaces
+
+interface Draggable {
+  dragStartHandler(event: DragEvent): void;
+  dragEndHandler(eent: DragEvent): void;
+}
+
+interface DragTarget {
+  dragOverHandler(event: DragEvent): void;
+  dropHandler(event: DragEvent): void;
+  dragLeaveHandler(event: DragEvent): void;
+}
+
+/*class Project {
+  title: string;
+  description: string;
+  people: number;
+  id: number;
+  status: "active" | "passive";
+
+  constructor(t: string, d: string, p: number) {
+    this.title = t;
+    this.description = d;
+    this.people = p;
+    this.id = Math.random();
+    this.status = "active";
+  }
+}*/
+
+enum ProjectStatus {
+  Active,
+  Finished,
+}
+// Project
+class Project {
+  constructor(
+    public id: string,
+    public title: string,
+    public description: string,
+    public people: number,
+    public status: ProjectStatus
+  ) {
+    /* this.title = title;
+    this.description = description;
+    this.people = people;
+    this.id = Math.random();
+    this.status = "active";*/
+  }
+}
+
+type Listener<T> = (items: T[]) => void;
+
+// State class
+class State<T> {
+  protected listeners: Listener<T>[] = [];
+
+  addListener(listenerFn: Listener<T>) {
+    this.listeners.push(listenerFn);
+  }
+}
+
+// Project State Management
+class ProjectState extends State<Project> {
+  private projects: Project[] = [];
+  private static instance: ProjectState;
+
+  private constructor() {
+    super();
+  }
+
+  static getInstance() {
+    if (this.instance) {
+      return this.instance;
+    }
+    this.instance = new ProjectState();
+    return this.instance;
+  }
+
+  addProject(title: string, description: string, numberOfPeople: number) {
+    const newProject = new Project(
+      Math.random().toString(),
+      title,
+      description,
+      numberOfPeople,
+      ProjectStatus.Active
+    );
+    this.projects.push(newProject);
+    this.updateListeners();
+  }
+
+  moveProject(projectId: string, newStatus: ProjectStatus) {
+    const project = this.projects.find((prj) => prj.id === projectId);
+    if (project && project.status !== newStatus) {
+      project.status = newStatus;
+    }
+    this.updateListeners();
+  }
+
+  private updateListeners() {
+    for (const listener of this.listeners) {
+      listener(this.projects.slice());
+    }
+  }
+}
+
+// global project constant which can be used anywhere
+const projectState = ProjectState.getInstance();
+
+// Autobind method decorator instead of this.submitHandler.bind(this) in configure method
+function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
+  const adjustedMethod: PropertyDescriptor = {
+    configurable: true,
+    get() {
+      const boundFn = originalMethod.bind(this);
+      return boundFn;
+    },
+  };
+  return adjustedMethod;
+}
+
+//Validation
+interface Validatable {
+  value: string | number;
+  isRequired?: boolean;
+  minLength?: number;
+  maxLength?: number;
+  min?: number;
+  max?: number;
+}
+
+function validate(validatableInput: Validatable) {
+  let isValid = true;
+  if (validatableInput.isRequired) {
+    isValid = isValid && validatableInput.value.toString().trim().length !== 0;
+  }
+  if (
+    validatableInput.minLength != null &&
+    typeof validatableInput.value == "string"
+  ) {
+    isValid =
+      isValid &&
+      validatableInput.value.trim().length >= validatableInput.minLength;
+  }
+  if (
+    validatableInput.maxLength != null &&
+    typeof validatableInput.value == "string"
+  ) {
+    isValid =
+      isValid &&
+      validatableInput.value.trim().length <= validatableInput.maxLength;
+  }
+  if (
+    validatableInput.min != null &&
+    typeof validatableInput.value == "number"
+  ) {
+    isValid = isValid && validatableInput.value >= validatableInput.min;
+  }
+  if (
+    validatableInput.max != null &&
+    typeof validatableInput.value == "number"
+  ) {
+    isValid = isValid && validatableInput.value <= validatableInput.max;
+  }
+
+  return isValid;
+}
+
+// Base Component Class - abstract class, can only be used for inheritance, cant be instantiated directly
+abstract class Component<T extends HTMLElement, U extends HTMLElement> {
+  templateElement: HTMLTemplateElement;
+  hostElement: T;
+  element: U;
+
+  constructor(
+    templateId: string,
+    hostElementId: string,
+    insertAtStart: boolean,
+    newElementId?: string
+  ) {
+    this.templateElement = document.getElementById(
+      templateId
+    )! as HTMLTemplateElement;
+    this.hostElement = document.getElementById(hostElementId)! as T;
+
+    const importedNode = document.importNode(
+      this.templateElement.content,
+      true
+    )!;
+    this.element = importedNode.firstElementChild as U;
+    if (newElementId) {
+      this.element.id = newElementId;
+    }
+    this.attach(insertAtStart);
+  }
+
+  private attach(insertAtBeginning: boolean) {
+    this.hostElement.insertAdjacentElement(
+      insertAtBeginning ? "afterbegin" : "beforeend",
+      this.element
+    );
+  }
+
+  abstract configure(): void;
+  abstract renderContent(): void;
+}
+
+// Project Item Class
+
+class ProjectItem
+  extends Component<HTMLUListElement, HTMLLIElement>
+  implements Draggable
+{
+  private project: Project;
+
+  get persons() {
+    if (this.project.people === 1) {
+      return "1 person";
+    } else {
+      return `${this.project.people} persons`;
+    }
+  }
+
+  constructor(hostId: string, project: Project) {
+    super("single-project", hostId, false, project.id);
+    this.project = project;
+    this.configure();
+    this.renderContent();
+  }
+
+  @autobind
+  dragStartHandler(event: DragEvent) {
+    console.log("Drag Starts");
+    console.log("Event", event);
+    event.dataTransfer!.setData("text/plain", this.project.id);
+    event.dataTransfer!.effectAllowed = "move";
+  }
+
+  @autobind
+  dragEndHandler(_: DragEvent) {
+    console.log("Drag Ends");
+  }
+
+  configure() {
+    this.element.addEventListener("dragstart", this.dragStartHandler);
+    this.element.addEventListener("dragend", this.dragEndHandler);
+  }
+  renderContent() {
+    this.element.querySelector("h2")!.textContent = this.project.title;
+    this.element.querySelector("h3")!.textContent = this.persons;
+    this.element.querySelector("p")!.textContent = this.project.description;
+  }
+}
+
+// Project List Class
+class ProjectList
+  extends Component<HTMLDivElement, HTMLElement>
+  implements DragTarget
+{
+  assignedProjects: Project[];
+  // private type: "active" | "inactive" means that now we will have type property on the whole ProjectList class
+  constructor(private type: "active" | "finished") {
+    super("project-list", "app", false, `${type}-projects`);
+    this.assignedProjects = [];
+
+    this.element.id = `${this.type}-projects`;
+    this.configure();
+    this.renderContent();
+  }
+
+  private renderProjects() {
+    const listEl = document.getElementById(
+      `${this.type}-projects-list`
+    )! as HTMLUListElement;
+    listEl.innerHTML = "";
+    for (const prjItem of this.assignedProjects) {
+      new ProjectItem(this.element.querySelector("ul")!.id, prjItem);
+    }
+  }
+
+  @autobind
+  dragOverHandler(event: DragEvent) {
+    if (event.dataTransfer && event.dataTransfer.types[0] === "text/plain") {
+      event.preventDefault();
+      console.log("dragOverHandler fired", event);
+      const listEl = this.element.querySelector("ul")!;
+      listEl.classList.add("droppable");
+    }
+  }
+
+  @autobind
+  dropHandler(event: DragEvent) {
+    console.log("dropHandler fired", event);
+    const projectId = event.dataTransfer!.getData("text/plain");
+    console.log("projectId", projectId);
+    projectState.moveProject(
+      projectId,
+      this.type === "active" ? ProjectStatus.Active : ProjectStatus.Finished
+    );
+  }
+
+  @autobind
+  dragLeaveHandler(event: DragEvent) {
+    console.log("dragLeaveHandler fired", event);
+    const listEl = this.element.querySelector("ul")!;
+    listEl.classList.remove("droppable");
+  }
+
+  configure() {
+    this.element.addEventListener("dragover", this.dragOverHandler);
+    this.element.addEventListener("drop", this.dropHandler);
+    this.element.addEventListener("dragleave", this.dragLeaveHandler);
+
+    projectState.addListener((projects: Project[]) => {
+      const relevantProjects = projects.filter((prj) => {
+        if (this.type === "active") {
+          return prj.status === ProjectStatus.Active;
+        }
+        return prj.status === ProjectStatus.Finished;
+      });
+      this.assignedProjects = relevantProjects;
+      this.renderProjects();
+    });
+  }
+
+  renderContent() {
+    const listId = `${this.type}-projects-list`;
+    this.element.querySelector("ul")!.id = listId;
+    this.element.querySelector("h2")!.textContent =
+      this.type.toUpperCase() + " PROJECTS";
+  }
+}
+
+// Project Input class
+class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
+  titleInputElement: HTMLInputElement;
+  descriptionInputElement: HTMLTextAreaElement;
+  peopleInputElement: HTMLInputElement;
+
+  constructor() {
+    super("project-input", "app", true, "user-input");
+    this.titleInputElement = this.element.querySelector(
+      "#title"
+    )! as HTMLInputElement;
+    this.descriptionInputElement = this.element.querySelector(
+      "#description"
+    )! as HTMLTextAreaElement;
+    this.peopleInputElement = this.element.querySelector(
+      "#people"
+    )! as HTMLInputElement;
+    this.configure();
+    this.renderContent();
+  }
+
+  private clearInputs() {
+    this.titleInputElement.value = "";
+    this.descriptionInputElement.value = "";
+    this.peopleInputElement.value = "";
+  }
+
+  private gatherUserInput(): [string, string, number] | void {
+    const enteredTitle = this.titleInputElement.value;
+    const enteredDesc = this.descriptionInputElement.value;
+    const enteredPeople = this.peopleInputElement.value;
+
+    const titleValidatable = {
+      value: enteredTitle,
+      isRequired: true,
+      minLength: 3,
+    };
+
+    const descriptionValidatable = {
+      value: enteredDesc,
+      isRequired: true,
+      minLength: 5,
+    };
+
+    const peopleValidatable = {
+      value: +enteredPeople,
+      isRequired: true,
+      min: 1,
+      max: 5,
+    };
+
+    if (
+      !validate(titleValidatable) ||
+      !validate(descriptionValidatable) ||
+      !validate(peopleValidatable)
+    ) {
+      alert("Invalid input, try again");
+      return;
+    } else {
+      return [enteredTitle, enteredDesc, Number(enteredPeople)];
+    }
+  }
+  @autobind
+  private sumbitHandler(event: Event) {
+    event.preventDefault();
+    const userInput = this.gatherUserInput();
+    if (Array.isArray(userInput)) {
+      const [title, description, people] = userInput;
+      projectState.addProject(title, description, people);
+      this.clearInputs();
+    }
+  }
+
+  configure() {
+    this.element.addEventListener("submit", this.sumbitHandler.bind(this));
+  }
+
+  renderContent(): void {}
+}
+
+const myProject = new ProjectInput();
+
+const myList = new ProjectList("active");
+const myList2 = new ProjectList("finished");
+
+```
+
+**Namespaces and modules**
+
+> Instead of writing all code in one single file which can be huge, we can split our code into multiple files and then import from and into each one. But if we have multiple files, we would need to manually import all of the files to the html script tag. But we do not want to make this manually. Then we have 2 options: use namespaces or ES6 modules ( ES6 imports and exports).
+
+> Namespaces is a speacial typescript syntax feature which adds special code to our code. It allows up to group code together below a namespace and then import namespaces to other files. We can have a namespace per file for example. Typescript also bundles our code into one file, so that we can write code in multiple files, and we dont need to manage multiple imports to the HTML file.
+
+> ES6 modules or ES6 imports and exports are modern alternative to namespace. This is a feature of the modern Javascript (it has nothing to do with Typescript) which has a solution to the problem of splitting code to multiple files. Moder JS out of the box supports imports and export statements which define which file depends on which file and modern browsers manage that automatically so that we dont need to import files manually. We only need one import to HTML script tag, browsers will resolve the file dependencies. One disadvantage here is that we still have multiple files we work with, even if we only have one import to HTML script tag. This means that we will have multiple http requests to download each file individually. But in order to sihp to production only one file, and still have multiple files in development, we will need 3rd party tools like Webpack which will take care of bundling.
+
+**Namespaces**
+
+> From our big file, we will create a new file with name: `drag-drop-interfaces.ts` where we add all interfaces under a given namespace called App like this:
+
+```
+namespace App{
+ interface Draggable {
+  dragStartHandler(event: DragEvent): void;
+  dragEndHandler(eent: DragEvent): void;
+ }
+
+ interface DragTarget {
+  dragOverHandler(event: DragEvent): void;
+  dropHandler(event: DragEvent): void;
+  dragLeaveHandler(event: DragEvent): void;
+ }
+}
+```
+
+> Notice how we need to use a keyword namespace, then the name of the namespace and then curly braces. To that namespace we then add anything that we want: const, let, class, interface, etc. The TS will then create a namespace object and Draggable and Dragtarget will be the properties of that object.
+
+> Our interfaces will then be only available inside of that namespace. In order to be able to use them insode of other files, we can then also export our interfaces from inside of the namespace.
+
+```
+namespace App{
+ export interface Draggable {
+  dragStartHandler(event: DragEvent): void;
+  dragEndHandler(eent: DragEvent): void;
+ }
+
+ export interface DragTarget {
+  dragOverHandler(event: DragEvent): void;
+  dropHandler(event: DragEvent): void;
+  dragLeaveHandler(event: DragEvent): void;
+ }
+}
+```
+
+> How to then import this to our file where we need them? We will use 3 forward slashes - which is a special syntax TS understand - like a special comment. After that we write a self-closing HTML tag with reference and path to the file with the namespace we want to import:
+
+```
+/// <reference path="drag-drop-interfaces.ts" />
+```
+
+> Please note this is not vanilla Javascript. This ensures though that the DDInterfaces namespace is available in the file where we need it.
+
+> But there is a plot twist, to make this work, we will also need `namespace App{}` in our file where we need those interfaces and we need to wrap the entire code in in that App namespace.
+
+```
+/// <reference path="drag-drop-interfaces.ts" />
+
+namespace App{
+  all the code that depends on the interfaces
+}
+```
+
+> When we want to create another file with other stuff in it, we need ot use same namespace App:
+
+```
+namespace App {
+  export class ..
+  export const ..
+  export let ..
+}
+```
+
+> The concept of namespaces will only work properly on all features TS and JS when we go to tsconfig.json file and enable: `"outFile": "./dist/bundle.js"` and when we change the module to for example amd: `"module": "amd"`
+
+> outFile tells TS that we want to concatenate all namespace files (all those references we set in our main file) and add them to a single javascript file at the location: `./dist/bundle.js` instead of compiling multiple js files.
+
+**ES6 modules**
+
+> This is to export something from one file with export keyword and import it to another file with import keyword:
+
+```
+export interface Draggable {
+  dragStartHandler(event: DragEvent): void;
+  dragEndHandler(eent: DragEvent): void;
+ }
+```
+
+```
+import { Draggable } from "../interfaces/draggable.js"
+```
+
+> Please note we import from .js files, not ts.files. We will need to specify the file extension! We will only be able to not specify the file extension when we add Webpack
+
+> Please note that in Network tab, we will then need to fetch all our files! As soon as a file imports something, browser will need to fetch that file
+
+> When we want to import multiple things from a single file under a certain name, we use `*` and `as` and a name/alias we want to give it, for example React. Then we access all the item from that file whic are exported with a dot notation: `React.useState`
+
+```
+import * as React from "react"
+const x = React.useState()
+```
+
+> We can assign an alias even if we import stuff individually with `as` keyword:
+
+```
+import { Draggable as Drag } from "../interfaces/draggable.js"
+```
+
+> All of above are called named exports, cause they are exported and then imported with their corresponding names (and we need to import them by the exact name).
+
+> We can also use default exports if we only export one thing from a file. Although I can still have named exports in the file, but we can only have one default export per file.
+
+```
+export default class Abc {}
+```
+
+```
+import WhateverILike from ""
+```
+
+> Advantage is that I can name the thing Im exporting whatever I want. Notice that we omit the curly braces with default import.
+
+> Recommendation is to use named exports for organization and auto-completion.
+
+> Interesting fact is that if we have a file from which we export a const for example and we use it in 5 other files, how mayn times, will that file run? 5 times? No. Actually it only runs once and hence the first time any other file imports it, it will run.
+
+> ES modules (import/exports) are recommended way to go. But they only run on modern browsers. When we build applications, we also need to support older browsers. In order to make that work in older browsers, we can using a bundling tool, for example Webpack - to bundle all of our individual files into one big Javascript file. So that when we develop we have all those nicely split files, but when we deliver it to production, we have only 1 file which is served. Advantage is that browser does not have to download all those multiple files, only one. Cause each file that needs to be downloaded is an extra http request, extra roundtrip. Each http request takes time to setup, even for small files. So doing less requests is a good idea anyway.
+
+**Webpack**
+
+> Disadvantage of splitting code into multiple files is that we will then in production have mutiple http requests and each file needs to be fetched separately. This is not performant because each http request has an base overhead (base duration it always takes) becasue the request needs to be setup, which takes time, even for small files. We can see this in the Network time in the waterfall as a white box in front of the actual doanloading time. Plus then it also needs to download the file, which is another waiting time. This gets even worse in production and there can be a lot of latency, just due to the sheer amount of http requests.
+
+> Solution to this problem is a Webpack which will bundle our fiels together: https://webpack.js.org/
+
+> Webpackis bundling and Build Orchestration tool. It helps us to reduce the amount of http requests, by bundling code together, so that we can write code split up across multiple files, but Webpack then takes all these files and bundles them together.
+
+> Webpack also does more: optimizes our code (it is called minify the code) and allows to add more build steps or more build tools (for example to help with the CSS files, and so on).
+
+> Code optimization means that the code is as small as possible - for example: shorten function and variable names. As a developer we want to write a readable code, which is self-explanatory, but Webpack can shorten the code automatically, use some abbreviation when we build our code. Less code means users can download the code faster, which can start up our application faster.
+
+> At the moment we use `npm start` to start our project and another package - development server: lite server (which we run with `tsc -w`) which then makes sure that when we change the code in a file, it reloads the localhost page automatically. It would be nice to have one command which will do both. Webpack can help with this as well.
+
+> Let's then install Webpack. We will want to install it to the dev dependencies which are dependencies only for development, so in our terminal we run this statement and install couple of packages:
+
+```
+npm install --save-dev webpack webpack-cli webpack-dev-server typescript ts-loader
+```
+
+> webpack package which we installed is the heart of our new setup. It is package for bundling and tranforming code: transform our typescript code to javascript and then emit a bundled javascript file.
+
+> webpack-cli - we need it to run webpack commands in our project
+
+> webpack-dev-server - we need it to have that built-in development server which starts webpack under the hood which watches our files for changes, automatically triggers webpack to re-compile when something changes and automatically serve our page.
+
+> typescript - this installs the copy of typescript for this specific project with a certain version (even though we installed typescript globally on our machine - good practice is to do it also per project). Advantage is that we can lock in a specific version of typescript per project and then change our global version of typescript if we want to.
+
+> ts-loader is a package which will work together with Webpack. It tells Webpack how to convert Typescript to Javascript. Webpack compiles our code with the help of ts-loader (which uses typescript compiler under the hood from the typescript package) anf then the webpack package is able to bundle our code and emit one javascript file.
+
+> to get started let's go to tsconfig.json.
+
+> `target` should be es5 (support also for older browsers) or es6 (support of only more modern browsers)
+
+> set `module` to `es2015` or to `es6`
+
+> `outDir` should be `./dist` folder, or any other where you want your bundled code to be outputted.
+
+> We dont need `rootDir` anymore, so we can comment it out, because Webpack will take over and determine where your root files are.
+
+> Next to `tsconfig.json` file, let's create a new one: `webpack.config.js` file. Not json but js file. This must be exact that name, it tells Webpack how to work with our project. This file is a config file for Webpack and it uses node.js syntax.
+
+>
