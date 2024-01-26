@@ -29,6 +29,7 @@
     "gatsby-transformer-remark": "^2.6.30",
     "react": "^16.10.2",
     "react-bootstrap": "^1.0.0-beta.14",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1",
     "react-particles": "^2.9.3",

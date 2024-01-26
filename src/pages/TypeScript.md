@@ -8482,6 +8482,533 @@ npm install --save-dev webpack webpack-cli webpack-dev-server typescript ts-load
 
 > We dont need `rootDir` anymore, so we can comment it out, because Webpack will take over and determine where your root files are.
 
-> Next to `tsconfig.json` file, let's create a new one: `webpack.config.js` file. Not json but js file. This must be exact that name, it tells Webpack how to work with our project. This file is a config file for Webpack and it uses node.js syntax.
+> In order to make it work we need to remove all the `.js` in our import paths, which we needed to specify when we were not using Webpack. Now with Webpack we don't want that. It automatically searches for .js extensions, if we leave the extension there, it will look for double extensions.
 
->
+> Next to `tsconfig.json` file, let's create a new one: `webpack.config.js` file. Not json but js file. This must be exact that name, it tells Webpack how to work with our project. This file is a config file for Webpack and it uses Javascript and node.js features.
+
+> First we will need to use the node.js export syntax to export javascript object (our configuration object which will be picked up by Webpack):
+
+```
+module.exports = {};
+```
+
+> Webpack needs to know couple of things, for example with which project our whole application starts, where the entry point it. In our case it is `app.ts` file. This is the file where Webpack should start first. Then it will look at the imports in this file, and go to those files and have a look at their imports, etc. Until it knows all files our project uses. Then it goes through all the content of file and compile them form ts to js with the help of the ts-loader.
+
+```
+module.exports = {
+  entry: "./src/app.ts",
+};
+```
+
+> Then we need to specify `output` which will be an object file `filename` - name of the single file which Webpack will output. In our case we will call it `bundle.js` but you can also add dynamic partslike hashes if you use square bracket: `bundle.[contenthash].js` - this tells Webpack to create a unique hash for every build which can help with caching in the browser.
+
+```
+module.exports = {
+  entry: "./src/app.ts",
+  output: {
+    filename: "bundle.js",
+  },
+};
+```
+
+> We will also need a `path` where we should store the output file. It should match the `tsconfig.json` `outDir`. In our case: `./dist`. But Webpack config does not want a relative path like in tsconfig, it will want an absolute path. To build one we can use node.js module. We can use node.js import syntax with the keyword `require` and import the `path` module. We do not need to install it as a library, this is a core node.js module which I already have. We can then call path.resolve() method there which allows to build an absolute path to a certain folder. For that as a firt parameter we use a special constant `__dirname` which is available globally in node.js environment and Webpack uses node.js to execute our files. As the second parameter we use `dist` - name of our folder. `path: path.resolve(__dirname, "dist")`This just constructs an absolute path to the dist folder which Webpack then uses to write our output there.
+
+```
+const path = require("path");
+
+module.exports = {
+  entry: "./src/app.ts",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+};
+```
+
+> With this we have entry an output files, but we still dont tell Webpack what to do with our typescrpt files. By default Webpack does not know that, by default Webpack is just a bundler. Any other functionality like compiling typescript to javascript, has to be taught to Webpack.
+
+> How to teach Webpack about compiling ts to js with the help of ts-loader? We will use the webpack.config.js file for that. We will add module property which will be an object. Module means just a file.In module object we tell Webpack how to work with files it finds.
+
+> In `module` object we add `rules` array. Rules will be then executed upon each file. There can be many rules setup (for example different rules for CSS or images).
+
+```
+const path = require("path");
+
+module.exports = {
+  entry: "./src/app.ts",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  module: {
+    rules: [{}],
+  },
+};
+```
+
+> Rule is an object which has the `test` property. It is a test which Webpack will apply to a file which it find and then it will either pass and rule will be applied or if it fails, this rule wont be applied. And the test is a regular expression. Here we want to tell Webpack, that any file with `.ts` extension should use this rule.
+
+```
+const path = require("path");
+
+module.exports = {
+  entry: "./src/app.ts",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  module: {
+    rules: [{ test: /\.ts$/ }],
+  },
+};
+```
+
+> Then we need to specity what Webpack needs to do with such .ts files and we do it with `use` keyword where we specify the loader.
+
+> Loader is a package which tells Webpack how to handle certain files - we have one ts-loader which tells Webpack how to deal with typescript files.
+
+```
+const path = require("path");
+
+module.exports = {
+  entry: "./src/app.ts",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  module: {
+    rules: [{ test: /\.ts$/ }],
+    use: "ts-loader",
+  },
+};
+```
+
+> This rules tells Webpack, that any time it finds a ts file, it should use ts-loader on it. ts-loader then knows what to do with such a file. ts-loader will automatically take tsconfig.json file
+
+> What we want additonally in our rules - which is always a good idea: we want to exclude node_modules.
+
+```
+const path = require("path");
+
+module.exports = {
+  entry: "./src/app.ts",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  devtool: "inline-source-map",
+  module: {
+    rules: [{ test: /\.ts$/, use: "ts-loader", exclude: /node_modules/ }],
+  },
+};
+
+```
+
+> We still need one more configuration of the Webpack and that is `resolve` keyword which will be an object with extensions property where extensions will be an array of strings. This tells Webpack which file ending it should add to the imports it finds. Webpack will add extensions on its own and by default it would be .js. But we want them to have .ts ending. Because all our files have .ts extensions and those files Webpack should be searching for.
+
+```
+const path = require("path");
+
+module.exports = {
+  entry: "./src/app.ts",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  module: {
+    rules: [{ test: /\.ts$/, use: "ts-loader", exclude: /node_modules/ }],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+};
+
+```
+
+> With this we are almost done, we need to go to `tsconfig.json` file and make sure sourceMap is set to true:
+
+```
+"sourceMap": true,
+```
+
+> It will help us to debug our code.
+
+> We also need to go back to our webpack.config.js file and add `debug` keyword like this `devtool: "inline-source-map",`:
+
+```
+const path = require("path");
+
+module.exports = {
+  entry: "./src/app.ts",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  devtool: "inline-source-map",
+  module: {
+    rules: [{ test: /\.ts$/, use: "ts-loader", exclude: /node_modules/ }],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+};
+
+```
+
+> It tells Webpack that there will be generated source maps already and we can use them to debug.
+
+> We will also need to add `mode` to the config with value development, so that Webpack knows we are in dev mode and hence do less optimizations:
+
+```
+mode: "development",
+```
+
+> Our config file will look like this:
+
+```
+const path = require("path");
+
+module.exports = {
+  mode: "development",
+  entry: "./src/app.ts",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  devtool: "inline-source-map",
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+};
+```
+
+> How to use Webpack? Let's head to package.json file and let's add a script for example called build and we just say "webpack" there:
+
+```
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server",
+    "build": "webpack"
+  },
+```
+
+> Then lets go to dist folder and remove everything that is there. Save and then go to terminal and run: `npm run build`
+
+> If you get some errors regarding webpack-cli, try removing and adding webpack & webpack-cli again with `--legacy-peer-deps`.
+
+> This is how errors look:
+
+```
+[webpack-cli] TypeError: Cannot read properties of undefined (reading 'getArguments')
+    at WebpackCLI.getBuiltInOptions
+```
+
+> These are scripts which helped:
+
+```
+npm remove webpack webpack-cli --legacy-peer-deps
+```
+
+```
+npm install --save-dev webpack webpack-cli --legacy-peer-deps
+```
+
+> Then hopefully you will be able to do `npm run build`.
+
+> If the build cant be executed because some files cant be resolved, maybe you left .js extensions somewhere, like in app.ts file. Errors:
+
+```
+Module not found: Error: Can't resolve './components/project-list.js' in '/home/miaschwabova/projects/drag/src'
+resolve './components/project-list.js' in ...
+```
+
+> Now if the npm run build runs correctly, output will be one bundle.js file in dist folder.
+
+> We then need to go to our HTML file and point our script to bundle.js instead of app.js
+
+```
+<script type="module" src="dist/bundle.js"></script>
+```
+
+> Let's now try to run `npm start` to see our app locally.
+
+> In network tab we will see we only import bundle.js file, instead of all individual files. It reduced number of http requests.
+
+> Then in `Sources` or `Debugger`, thanks to source-map, we will then see our original file structure, and we can add a breaking point and inspect. Great for debugging.
+
+> Next we want to add webpack-dev-server which will spin up our local app and hot reload it. In order to do so, we will need to add: `publicPath: '/dist/',` to output in `webpack.config.js` and we will need to add `devServer` as well:
+
+```
+  devServer: {
+    static: [
+      {
+        directory: path.join(__dirname),
+      },
+    ],
+  },
+```
+
+> The whole `webpack.config.js` should look like this:
+
+```
+const path = require('path');
+
+module.exports = {
+  mode: 'development',
+  entry: './src/app.ts',
+  devServer: {
+    static: [
+      {
+        directory: path.join(__dirname),
+      },
+    ],
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/dist/',
+  },
+  devtool: "inline-source-map",
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
+};
+```
+
+> In the package.json file, we should spin up `webpack-dev-server` instead of `lite-server` in the start script:
+
+```
+ "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server",
+    "build": "webpack"
+  },
+```
+
+> This will then spin up local on 8080 port (instead of 3000) by running `npm start`.
+
+> With that we finished our development environment workflow. We will also need a production workflow, because there we want different output. When we want to prepare our code to be uploaded to a server, to be served to our end users, we want a different workflow.
+
+> Let's then add a new file: `webpack.config.prod.js`. Name is up to me, because Webpack will not by default look for it. But we will tell it to look for it. Let's copy everything from the `webpack.config,js` file:
+
+```
+const path = require("path");
+
+module.exports = {
+  mode: "development",
+  entry: "./src/app.ts",
+  devServer: {
+    static: [
+      {
+        directory: path.join(__dirname),
+      },
+    ],
+  },
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/dist/",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+};
+```
+
+> Let's fine tune it for production. `mode` should be `production`
+
+> In `output`, we can get rid of the `publicPath` - it was only required for localhost (webpack-dev-server)
+
+> We can set `devtool` to `none` in order not to generate any source maps.
+
+> Rest can stay as it is but soon we will add more:
+
+```
+const path = require("path");
+
+module.exports = {
+  mode: "production",
+  entry: "./src/app.ts",
+  devServer: {
+    static: [
+      {
+        directory: path.join(__dirname),
+      },
+    ],
+  },
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+};
+```
+
+> We want to add `plugins` entry which will be an array. Plugins are extra extensions which can be added to our Webpack workflow and will be applied to entire project. Rules in the `module` are applied on per file basis. Because `module` means file. Plugins are applied to the general workflow.
+
+> Here we will want to add a plugin which will automatically delete everything from the dist folder before a new bundle.js file is generated there, so that we always have the latest, most recent output in that folder. For that we will install a new package: `npm install --save-dev clean-webpack-plugin`. If you get errors with peer dependencies, use:
+
+```
+npm install --save-dev clean-webpack-plugin --legacy-peer-deps
+```
+
+> `clean-webpack-plugin` will help us clean-up the dist folder when we want to build our project.
+
+> In `webpack.config.prod.js` we will first need to import the `clean-webpack-plugin`:
+
+```
+const CleanPlugin = require("clean-webpack-plugin");
+```
+
+> And then we can instantiate it to our plugins array:
+
+```
+  plugins: [
+    new CleanPlugin.CleanWebpackPlugin()
+  ]
+```
+
+> Whole file will look like this:
+
+```
+const path = require("path");
+const CleanPlugin = require("clean-webpack-plugin");
+
+module.exports = {
+  mode: "production",
+  entry: "./src/app.ts",
+  devServer: {
+    static: [
+      {
+        directory: path.join(__dirname),
+      },
+    ],
+  },
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+  plugins: [new CleanPlugin.CleanWebpackPlugin()],
+};
+```
+
+> This tells Webpack that before it writes anything to dist folder, it will clean anything that might be in there.
+
+> Now we have finished the production workflow. Let's now use it. Let's go to `package.json` file.
+
+> There ins the script tag, I want to tell to the Webpack, that when we build our project, we want to use `webpack.config.prod.js` or any other name of the file you chose. We can do it by adjusting the build script:
+
+```
+build: "webpack --config webpack.config.prod.js"
+```
+
+> If we then run: `npm run build`, it will run the app for production.
+
+> Now if we inspect the bundle.js this is the most optimized code built for production. This file: bundle.js, our index.html and app.css file is what we would put on the server if we wanted to deploy our application.
+
+> Conclusion: if we write an app with many files, Webpack like tools (bundlers) are a must-have. Webpack is most prominent tool, highly configurable.
+
+**Using third party libraries with Typescript**
+
+> We use 3rd party librabries so that we don't need to re-invent the wheel, rather utilize already created pieces of code. There are normal libraries, which can be uses in Javascript or typescript projects. And then there are Typescript specific libraries.
+
+> We will start with popular utility library: lodash. It is a Javascript library. We don't need Typescript to use it.
+
+> We can install it with: `npm install --save lodash` or `npm i --save lodash`
+
+> If we wanted to import it and use, we would write this:
+
+```
+import _ from "lodash";
+
+console.log(_.shuffle([1,2,3]));
+```
+
+> But we will get an error:
+
+```
+Could not find a declaration file for module 'lodash'. '...node_modules/lodash/lodash.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/lodash` if it exists or add a new declaration (.d.ts) file containing `declare module 'lodash';`
+```
+
+> Problem is that lodash is a simple vanilla Javascript library and it is built for a vanilla Javascript library. All of its code (in node_modules) are .js files. Our Typescript does not understand those files and their exports.
+
+> Our code though works though, we have a correct syntax:
+
+```
+import _ from "lodash";
+
+console.log(_.shuffle([1,2,3]));
+```
+
+> But due to TS error, it wont emit a file.
+
+> It is a common scenario, that we have a TS project and want to use a JS librabry.
+
+> We can actually use any JS library in a TS project, we just need to translate it. One way to do this is to install the library types. You can search for lodash types. We can fined npm package called: `@types/lodash`: https://www.npmjs.com/package/@types/lodash
+
+> On that page, we can see how to install the library but also its github repository for DefinitelyTyped - huge repository which contains translations of all kinds of 3rd party libraries: https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/lodash
+
+> This contains lots of `.d.ts` files. We can search for shuffle.d.ts for example and see what it contains. These are so-called declaration files. It contains no logic whatsoever, just instructions to Typescript. Those instructions tell Typescipt how something works and what is included in this package. These files contain translation form plain Javascript to Typescript. They define types this library works with.
+
+> I can write such `.d.ts` files myself, if I want to use a 3rd party library which is in Javascript, I cant find the translations on DefinitelyTyped and this library does not come with `.d.ts` files
+
+> Then let's install our translation package for lodash:
+
+```
+npm install --save @types/lodash
+```
+
+> As soon as this is installed, our TS error is gone. We also get auto-completion. Our code works!
