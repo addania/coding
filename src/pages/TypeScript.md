@@ -9012,3 +9012,519 @@ npm install --save @types/lodash
 ```
 
 > As soon as this is installed, our TS error is gone. We also get auto-completion. Our code works!
+
+**Google maps project**
+
+> We will build a google maps project with the help of Google maps Javascript SDK.
+
+> How to start a new project from scratch using the course template.
+
+> Go to your github repository and start a new repo there. Git it a name but do not add README. Do not check any options.
+
+> On the next page you will see couple of commands, one of which refer to already existing project on your local machine and bunch of commands related to them. Let's not use them yet:
+
+```
+…or push an existing repository from the command line
+git remote add origin git@github.com:addania/google_maps.git
+git branch -M main
+git push -u origin main
+```
+
+> On our local machine, let's create a new folder for example called google_maps and lets copy there the initial template provided by the course.
+
+> Then in the console, navigate to that project folder with `cd google_maps` and let's initialize git there with:
+
+```
+git init
+```
+
+> Then let's commit all our files:
+
+```
+git add .
+git commit -m "Initial setup"
+```
+
+> Now run all the commands from github:
+
+```
+git remote add origin git@github.com:addania/google_maps.git
+git branch -M main
+git push -u origin main
+```
+
+> You won't be able to create the branch, if you dont have a commit in your new project!!
+
+> Then run `npm install` to install dependencies
+
+> To start server locally run: `npm start`
+
+> For our project, we will need 2 libraries: Google maps and HTTP
+
+> In the html file, let's add some body and then lets link there our css stylesheet: `<link rel="stylesheet" href="app.css" />`. HTML file will look like this:
+
+```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="app.css" />
+    <title>Understanding TypeScript</title>
+    <script src="dist/bundle.js" defer></script>
+  </head>
+  <body>
+    <div id="map">
+      <p>Please enter an address</p>
+    </div>
+    <form>
+      <input type="text" id="address" />
+      <button type="submit">Search Address</button>
+    </form>
+  </body>
+</html>
+```
+
+> Let's then create app.css file with this content:
+
+```
+html {
+  font-family: sans-serif;
+}
+
+#map {
+  width: 90%;
+  height: 20rem;
+  border: 1px solid #ccc;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+form {
+  text-align: center;
+  margin: 2rem auto;
+}
+```
+
+> In the app.ts we will add some form and input selectors so that we retreive the address that user gave to our input:
+
+```
+const form = document.querySelector("form")! as HTMLFormElement;
+const addressInput = document.getElementById("address")! as HTMLInputElement;
+
+function searchAddressHandler(event: Event) {
+  event.preventDefault();
+  const enteredAddress = addressInput.value;
+  // send this to Google API
+}
+
+form.addEventListener("submit", searchAddressHandler);
+```
+
+> Next step is to integrate Google API and send the address there.
+
+> On Google we can search for Google geocoding API and you will find official docs: https://developers.google.com/maps/documentation/geocoding/overview
+
+> Google geocoding API is an open Api which uses address to translate it to the pair of coordinates or a pair of coordinates to an address.
+
+> We want the first scenario, which we can find in the docs with an example of:
+
+```
+Geocoding request and response (latitude/longitude lookup)
+The following example requests the latitude and longitude of "1600 Amphitheatre Parkway, Mountain View, CA", and specifies that the output must be in JSON format.
+
+https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=
+
+```
+
+> This means that we can send a request to that url. But we need and API key to do so. We can get one for free, all we need is a google account and a credit card. There is a very generous free tier, where we do not need to pay for it every month, because we will not exceed the threshold. But the credit card is needed to use google api features.
+
+> When you have a google account, you can click on the same page https://developers.google.com/maps/documentation/geocoding/start: `Get started` button. You will need to login, finish account setup where you add your address and credit card. After all steps and a questionaire, they will give you your API key. You can also restrict who can access your API key, for example, only certain IP addresses. You can check your current api address on this page: https://whatismyipaddress.com/
+
+> You can always come back here to change the setting: https://console.cloud.google.com/google/maps-apis/credentials?authuser=1&project=united-perigee-412420
+
+> Now we can copy that key and use it in our project. Let's store it as a const in our `app.ts` as a `GOOGLE_API_KEY`
+
+> So we will need to build similar url:
+
+```
+https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=
+```
+
+> Where the `address` is user input and `key` is our `GOOGLE_API_KEY`
+
+> In modern javascript it is possible send http request without using a 3rd party library. In modern browser we have the `fetch()` api. It is built into browsers, it is globally available function and we can use it to send requetss to urls. There is nothing that speaks against using this api, only the error handling is a bit clunky.
+
+> This is how we can implement the fetch() function:
+
+```
+const form = document.querySelector("form")! as HTMLFormElement;
+const addressInput = document.getElementById("address")! as HTMLInputElement;
+
+const GOOGLE_API_KEY = "...";
+
+function searchAddressHandler(event: Event) {
+  event.preventDefault();
+  const enteredAddress = addressInput.value;
+
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${enteredAddress}&key=${GOOGLE_API_KEY}`;
+
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => console.log("my data", data.results[0].geometry.location));
+}
+
+form.addEventListener("submit", searchAddressHandler);
+```
+
+> Here I am console logging and object with longitude and latitude.
+
+> Important syntax to notice here is `fetch(url).then().then()`.
+
+> The first then will return `response.json()` and once it does, it will trigger the second `.then()` which will then get the data. IN order to access the data we will need to go to `results`, grab the first entry and then dive into `geometry` and `location` to get an object with the `lat` and `lng`.
+
+> Another way how to do this is to use 3rd party libraries. Very popular package for http requests is `axios` package.
+
+> To install axios we do following command:
+
+```
+npm install --save axios
+```
+
+> How to use it? First I need to it:
+
+```
+import axios from "axios"
+```
+
+> Then I can start using axios. For example it has a get method which will send a get request to a url. And it has a built-in typescript support. If we check node_modules and axios folder, you will notice that we have .d.ts files which means they are already shiping declaration files which provide translation from JS to TS. As a result, we have nice auto-completion and no TS errors.
+
+> We can now use the get method from axios and pass in there a url. IN the url, we will add address and api key as dynamic elements. We will also makes sure that we use built-in encodeURI method on our address, because users can add special characters, but urls do not support them. So we need to convert those special characters.
+
+```
+const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(
+    enteredAddress
+  )}&key=${GOOGLE_API_KEY}`;
+
+axios.get(url);
+
+```
+
+> Sending such a get request is an asychronous task, so we will get back a promise which means we can do .then() when we succeed and .catch() if we have an error.
+
+```
+  axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+```
+
+> Let's see what we get. We get an object with data property and in the data we have results array. The first one is probably the best one. In there we have geometry and that one contains location with lan and lng which are our coordinates.
+
+```
+  axios
+    .get(url)
+    .then((response) => {
+      console.log("response", response);
+      const coordinates = response.data.results[0].geometry.location;
+      console.log("coordinates", coordinates);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+```
+
+> We can also type get method, bacause it is a generic function.
+
+```
+type GoogleGeoCodingResponse = {
+  results: Array<{ geometry: { location: { lan: number; lng: number } } }>;
+  status: "OK" | "ZERO_RESULTS";
+};
+axios
+    .get<GoogleGeoCodingResponse>(url)
+    .then((response) => {
+      console.log("response", response);
+      const coordinates = response.data.results[0].geometry.location;
+      console.log("coordinates", coordinates);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+```
+
+> Whole file then looks like this:
+
+```
+import axios from "axios";
+
+const form = document.querySelector("form")! as HTMLFormElement;
+const addressInput = document.getElementById("address")! as HTMLInputElement;
+
+const GOOGLE_API_KEY = "...";
+
+type GoogleGeoCodingResponse = {
+  results: Array<{ geometry: { location: { lan: number; lng: number } } }>;
+  status: "OK" | "ZERO_RESULTS";
+};
+
+function searchAddressHandler(event: Event) {
+  event.preventDefault();
+  const enteredAddress = addressInput.value;
+
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(
+    enteredAddress
+  )}&key=${GOOGLE_API_KEY}`;
+
+  axios
+    .get<GoogleGeoCodingResponse>(url)
+    .then((response) => {
+      console.log("response", response);
+      const coordinates = response.data.results[0].geometry.location;
+      console.log("coordinates", coordinates);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+form.addEventListener("submit", searchAddressHandler);
+```
+
+> We can then check for status. If it is not OK, then we throw and error and we end up in the catch block.
+
+```
+  axios
+    .get<GoogleGeoCodingResponse>(url)
+    .then((response) => {
+      if (response.data.status !== "OK") {
+        throw new Error("Ouch");
+      }
+      const coordinates = response.data.results[0].geometry.location;
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+```
+
+> Now we want to output coordinates on a map now :) Let's search for Google javascript maps we can find official documentation: https://developers.google.com/maps/documentation/javascript/overview
+
+> Firstly, in our HTML file we will need to use this script which will add Google Maps SDK to our project. SDK is the acronym for “Software Development Kit”.
+
+```
+<script>
+      ((g) => {
+        var h,
+          a,
+          k,
+          p = "The Google Maps JavaScript API",
+          c = "google",
+          l = "importLibrary",
+          q = "__ib__",
+          m = document,
+          b = window;
+        b = b[c] || (b[c] = {});
+        var d = b.maps || (b.maps = {}),
+          r = new Set(),
+          e = new URLSearchParams(),
+          u = () =>
+            h ||
+            (h = new Promise(async (f, n) => {
+              await (a = m.createElement("script"));
+              e.set("libraries", [...r] + "");
+              for (k in g)
+                e.set(
+                  k.replace(/[A-Z]/g, (t) => "_" + t[0].toLowerCase()),
+                  g[k]
+                );
+              e.set("callback", c + ".maps." + q);
+              a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+              d[q] = f;
+              a.onerror = () => (h = n(Error(p + " could not load.")));
+              a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+              m.head.append(a);
+            }));
+        d[l]
+          ? console.warn(p + " only loads once. Ignoring:", g)
+          : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
+      })({
+        key: "",
+        v: "weekly",
+        // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+        // Add other bootstrap parameters as needed, using camel case.
+      });
+    </script>
+```
+
+> To the `key: ""` we need to add our API key. Without quotes "".
+
+> Then we can go to our app.ts file and add a google map.
+
+```
+let map: google.maps.Map;
+      async function initMap(): Promise<void> {
+        const { Map } = (await google.maps.importLibrary(
+          "maps"
+        )) as google.maps.MapsLibrary;
+        map = new Map(document.getElementById("map") as HTMLElement, {
+          center: {
+            lat: coordinates.lat,
+            lng: coordinates.lng,
+          },
+          zoom: 13,
+        });
+
+        new google.maps.Marker({
+          position: { lat: coordinates.lat, lng: coordinates.lng },
+          map: map,
+        });
+      }
+
+      initMap();
+```
+
+> Please note that we need to have a div in our HTML file with id="map".
+
+```
+<div id="map">
+      <p>Please enter an address</p>
+</div>
+```
+
+> Please note that you might get errors that google is not defined. It is because Google maps is a Javascript library and hence we need translation for it. You can find @types/google.maps: https://www.npmjs.com/package/@types/google.maps
+> Where you have instructions on how to install google maps types:
+
+```
+npm install --save @types/google.maps
+```
+
+> Restart your local host and here we go, it should work.
+
+> Whole content of our app.ts looks then like this. Please note you need to add there your GOOGLE API KEY:
+
+```
+import axios from "axios";
+
+const form = document.querySelector("form")! as HTMLFormElement;
+const addressInput = document.getElementById("address")! as HTMLInputElement;
+
+const GOOGLE_API_KEY = "";
+
+type GoogleGeoCodingResponse = {
+  results: Array<{
+    geometry: {
+      location: { lat: number; lng: number };
+    };
+  }>;
+  status: "OK" | "ZERO_RESULTS";
+};
+
+function searchAddressHandler(event: Event) {
+  event.preventDefault();
+  const enteredAddress = addressInput.value;
+
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(
+    enteredAddress
+  )}&key=${GOOGLE_API_KEY}`;
+
+  axios
+    .get<GoogleGeoCodingResponse>(url)
+    .then((response) => {
+      if (response.data.status !== "OK") {
+        throw new Error(
+          "Something went wrong. Your IP address might not be allowed to use this API key. Contact Support"
+        );
+      }
+      const coordinates = response.data.results[0].geometry.location;
+      let map: google.maps.Map;
+      async function initMap(): Promise<void> {
+        const { Map } = (await google.maps.importLibrary(
+          "maps"
+        )) as google.maps.MapsLibrary;
+        map = new Map(document.getElementById("map") as HTMLElement, {
+          center: {
+            lat: coordinates.lat,
+            lng: coordinates.lng,
+          },
+          zoom: 13,
+        });
+
+        new google.maps.Marker({
+          // The below line is equivalent to writing:
+          // position: new google.maps.LatLng(-34.397, 150.644)
+          position: { lat: coordinates.lat, lng: coordinates.lng },
+          map: map,
+        });
+      }
+
+      initMap();
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+}
+
+form.addEventListener("submit", searchAddressHandler);
+```
+
+> The best is to always follow [official documentation](https://developers.google.com/maps/documentation/javascript/examples/map-simple), because the course content is outdated.
+
+> Please note that this project will only work when you enable a concrete IP address in: https://console.cloud.google.com/google/maps-apis/credentials?authuser=1&project=united-perigee-412420
+
+> This prevents that someone would abuse my API key and would the blow up the free threshold. So in order to check this app out, you will need to contact me :)
+
+> Just a summary of useful links for the google maps:
+
+- Google Maps Pricing: https://cloud.google.com/maps-platform/pricing/sheet/
+
+- Google Geocoding API: https://developers.google.com/maps/documentation/geocoding/start
+
+- Google Maps JS SDK: https://developers.google.com/maps/documentation/javascript/tutorial
+
+> Google maps are great but you need a credit card to get the API key. Free alternative would be: https://openlayers.org/en/latest/doc/quickstart.html
+
+> Include this in your HTML file:
+
+```
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/css/ol.css" type="text/css">
+<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/build/ol.js"></script>
+```
+
+> Include this in your `app.ts`:
+
+```
+declare var ol: any;
+
+function searchAddressHandler(event: Event) {
+  event.preventDefault();
+
+  const coordinates = {lat: 40.41, lng: -73.99}; // Can't fetch coordinates from Google API, use dummy ones
+
+  document.getElementById('map')!.innerHTML = ''; // clear <p> from <div id="map">
+  new ol.Map({
+    target: 'map',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM()
+      })
+    ],
+    view: new ol.View({
+      center: ol.proj.fromLonLat([coordinates.lng, coordinates.lat]),
+      zoom: 16
+    })
+  });
+}
+```
