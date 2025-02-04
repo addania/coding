@@ -25,7 +25,10 @@ npm install -g gatsby-cli
 To setup the project:
 
 ```shell
-git clone
+git clone <repo url>
+git checkout gh-pages
+nvm install 18
+nvm use 18
 npm install
 ```
 
@@ -37,6 +40,7 @@ npm start
 ```
 
 Your local will run under: http://localhost:8000/
+Please note that it runs under http and not https. Maybe you need to remove the 's' from there!
 
 In this repository, the page is built on the master branch. Therefore all code commits should go to gh-pages. Deploy should go to master branch.
 

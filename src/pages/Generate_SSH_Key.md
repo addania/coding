@@ -70,6 +70,12 @@ ssh-add ~/.ssh/id_rsa
 ```
 clip < ~/.ssh/id_rsa.pub
 ```
+
+> If `clip`does not work, then use `cat`instead:
+```
+cat < ~/.ssh/id_rsa.pub
+```
+
 > Now it was copied to the clipboard
 
 > We can go to our Github
@@ -82,7 +88,20 @@ clip < ~/.ssh/id_rsa.pub
 
 > Click the button <code>Add SSH Key</code>
 
-> We are **DONE** :)
+> Now try to go to the repository and copy the url to download the code. In the terminal write:
+```
+git clone <repo url>
+```
+> If it works and the code downloads, we are all setup. However, if you get some permissions issues, we still need to authorize the SSH key.
+
+> Some organizations may require SSO (single-sign-on) or 2-factor authentication so that the SSH keys can be used. If that is the case, go to the Github, click on  picture -> Settings -> SSH and GPG keys and click on `Configure SSO` next to the SSH key. There you will need to log into the organization to authorize the SSH key.
+
+> Now try to go to the repository again, copy the url to download the code and in the terminal write:
+```
+git clone <repo url>
+```
+
+> If the code starts to download, we are **DONE** :)
 
 References:
 

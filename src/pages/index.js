@@ -4,7 +4,7 @@ import Layout from "../components/layout.js"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./index.css"
 import mia1 from "../images/mia1.jpg"
-import { Polygons } from "../components/animationEffects/Polygons"
+// import { Polygons } from "../components/animationEffects/Polygons"
 
 import { quotes } from "../constants/quotes"
 import { jobs } from "../constants/jobs"
@@ -78,7 +78,7 @@ export default ({ data }) => {
       <Layout>
         <div id="container" style={{ ...containerStyle, zIndex: 1 }}>
           <div id="tsparticles">
-            <Polygons style={{ width: "100%", height: "300px" }} />
+            {/*<Polygons style={{ width: "100%", height: "300px" }} />*/}
           </div>
           <Tag title="Frontend Developer" position="30%" timer={2} />
           <Tag title="Passionate about coding" position="50%" timer={2.5} />
