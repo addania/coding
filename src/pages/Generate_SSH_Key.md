@@ -88,6 +88,14 @@ cat < ~/.ssh/id_rsa.pub
 
 > Click the button <code>Add SSH Key</code>
 
+> In terminal test if the SSH key works: 
+```
+ssh -T git@github.com
+```
+
+> It should give you this message: `Hi username! You've successfully authenticated, but GitHub does not provide shell access.`
+
+
 > Now try to go to the repository and copy the url to download the code. In the terminal write:
 ```
 git clone <repo url>
