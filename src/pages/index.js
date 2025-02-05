@@ -77,9 +77,9 @@ export default ({ data }) => {
     <div>
       <Layout>
         <div id="container" style={{ ...containerStyle, zIndex: 1 }}>
-          <div id="tsparticles">
-            {/*<Polygons style={{ width: "100%", height: "300px" }} />*/}
-          </div>
+         {/* <div id="tsparticles">
+            <Polygons style={{ width: "100%", height: "300px" }} />
+          </div>*/}
           <Tag title="Frontend Developer" position="30%" timer={2} />
           <Tag title="Passionate about coding" position="50%" timer={2.5} />
           <Tag title="Experienced Team Lead" position="70%" timer={3} />
