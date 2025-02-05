@@ -32,7 +32,7 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 Enter a file in which to save the key (/Home/.ssh/id_rsa):
 ```
 
-> You will be asked to enter your passphrase:
+> You will be asked to enter your passphrase (it is secure to add a passphrase, but also annoying cause it asks on every commit and deploy, if you just press ENTER, it will be set without a passphrase):
 ```
 Enter passphrase (empty for no passphrase):
 ```
@@ -110,6 +110,19 @@ git clone <repo url>
 ```
 
 > If the code starts to download, we are **DONE** :)
+
+> If you want to remove a passphrase from your SSH key, once it was set: 
+```
+ssh-keygen -p -f ~/.ssh/id_rsa
+```
+> Verify if it worked: 
+```
+ssh -T git@github.com
+```
+> Update SSH Agent: 
+```
+ssh-add ~/.ssh/id_rsa
+```
 
 References:
 
