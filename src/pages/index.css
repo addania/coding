@@ -64,3 +64,46 @@ blockquote {
   margin: 0;
   z-index: 0; /* if you use -1 you have to set to `"window"` the interactivity.detectsOn property */
 }
+
+@media (max-width: 768px) {
+  #container {
+    display: block !important;
+    height: auto !important;
+  }
+
+  #container img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    display: block;
+  }
+
+  .tag {
+    width: 80% !important;
+    height: auto !important;
+    padding: 8px 12px;
+    font-size: clamp(12px, 4vw, 14px) !important;
+    transform: translateX(-50%) !important;
+    left: 50% !important;
+  }
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  margin: auto;
+}
+
+.video-container video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .video-container {
+    max-width: 100%;
+  }
+}

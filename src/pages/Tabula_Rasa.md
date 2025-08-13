@@ -388,11 +388,15 @@ code .
 
 > Navigate to Text Editor -> Formatting and tick the box <code>Format on Save</code>
 
+> Try saving a file, if it does not work, then go to settings again and try to search for default formatter
+
+> Select Prettier there!
+
 ---
 
 <h2>Flow Language Support</h2>
 
-Flow Language Support is also another useful extension for the Visual Studio Code if your projects are using Flow (like Typescript) to define types.
+Flow Language Support is also another useful extension for the Visual Studio Code if your projects are using Flow (like Typescript) to define types. It allows you to create branch names easily.
 
 > Open the VCS:
 
@@ -412,7 +416,14 @@ code .
 
 ![](https://i.imgur.com/Ly5LiZx.jpg "Photo by Janko Ferlic from Pexels")<p style="font-size: 12px; text-align: right">_Photo by Janko Ferlic from Pexels_</p>
 
-Here is a list of useful extensions for Visual Studio Code which you might consider:
+> Here is a list of core extensions for Visual Studio Code:
+
+- Github Copilot (- needs to be requested via Github to your organization which needs to approve the request. For that go to your Github repository -> Copilot -> Request)
+- Github Copilot Chat
+- ESLint
+- Javascript and Typescript Nightly
+
+> Here is a list of other useful extensions for Visual Studio Code which you might consider:
 
 -     auto-rename-tag	- 	Automatically rename paired HTML/XML tag
 -     bracket-pair-colorizer	- 	Colorizes bracket pairs
@@ -440,6 +451,32 @@ Here is a list of useful extensions for Visual Studio Code which you might consi
 -     vscode-language-babel	- 	JavaScript syntax highlighting for ES201x, React JSX, Flow and GraphQL.
 -     vscode-npm-script	- Supports running npm scripts defined in the package.json file and validating the installed modules against the dependencies defined in the package.json.
 -     vscode-pigments	- 	Adds color previews to vscode instantly.
+
+---
+
+<h2>Flameshot</h2>
+
+> Is a useful extention to capture screenshots on Ubuntu.
+
+> You can install it with this command
+
+```
+sudo apt update
+sudo apt install flameshot
+```
+
+---
+
+<h2>Peek</h2>
+
+> Is a useful extention to record the screen as a GIF on Ubuntu.
+
+> You can install it with this command
+
+```
+sudo apt update
+sudo apt install peek
+```
 
 ---
 

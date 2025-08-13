@@ -15,18 +15,18 @@ import { Section } from "../components/section"
 const containerStyle = {
   display: "flex",
   alignItems: "center",
-  height: "80vh",
   justifyContent: "flex-end",
   position: "relative",
 }
 
 const imageStyle = {
-  flex: "0 0 50%",
-  height: "100%",
   objectFit: "cover",
   objectPosition: "right",
   alignItems: "flex-end",
   margin: 0,
+  maxHeight: "768px",
+  width: "100%",
+  height: "auto",
 }
 
 const contentStyles = {
@@ -41,30 +41,29 @@ const contentStyles = {
 const Tag = ({ title, position, timer }) => {
   return (
     <div
+      className="tag"
       style={{
         borderRadius: "10px",
         position: "absolute",
-        left: 0,
         top: position,
-        transform: `translateY(-${position})`,
-        transform: `translateX(-100%)`,
-        width: "50%",
-        height: "10%",
+        left: "0",
+        transform: `translateX(-100%) translateY(-50%)`,
+        width: "clamp(100px, 50%, 450px)", // min 150px, preferred 50% of parent, max 300px
+        padding: "0.5em 1em",
         background: "rgba(0, 0, 0, 0.7)",
         zIndex: 1,
         animation: `slide-in ${timer}s forwards`,
       }}
     >
-      <div
+      <h3
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100%",
+          color: "white",
+          fontSize: "clamp(14px, 2.5vw, 30px)",
+          margin: 0,
         }}
       >
-        <h3 style={{ color: "white", alignItems: "center" }}>{title}</h3>
-      </div>
+        {title}
+      </h3>
     </div>
   )
 }
@@ -77,12 +76,12 @@ export default ({ data }) => {
     <div>
       <Layout>
         <div id="container" style={{ ...containerStyle, zIndex: 1 }}>
-         {/* <div id="tsparticles">
+          {/* <div id="tsparticles">
             <Polygons style={{ width: "100%", height: "300px" }} />
           </div>*/}
-          <Tag title="Frontend Developer" position="30%" timer={2} />
-          <Tag title="Passionate about coding" position="50%" timer={2.5} />
-          <Tag title="Experienced Team Lead" position="70%" timer={3} />
+          <Tag title="Senior Frontend Engineer" position="50%" timer={2} />
+          <Tag title="Passionate about coding" position="70%" timer={2.5} />
+          <Tag title="Experienced Team Lead" position="90%" timer={3} />
           <img
             src={mia1}
             alt="Portrait Image"
@@ -100,6 +99,7 @@ export default ({ data }) => {
                 year={job.year}
               />
             ))}
+            <div>* including 14 months of maternity / parental leave</div>
           </div>
         </div>
         <div style={{ color: "grey", marginTop: "64px", marginBottom: "64px" }}>
