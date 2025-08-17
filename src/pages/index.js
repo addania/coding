@@ -7,6 +7,8 @@ import mia1 from "../images/mia1.jpg"
 // import { Polygons } from "../components/animationEffects/Polygons"
 
 import { quotes } from "../constants/quotes"
+import { recommendations } from "../constants/recommendations"
+import { references } from "../constants/references"
 import { jobs } from "../constants/jobs"
 import { QuoteCard } from "../components/quoteCard"
 import { JobCard } from "../components/jobCard"
@@ -114,6 +116,31 @@ export default ({ data }) => {
             ))}
           </div>
         </div>
+
+        <div style={{ color: "grey", marginTop: "64px", marginBottom: "64px" }}>
+          <Section text="LinkedIn recommendation" />
+          <div style={contentStyles}>
+            {recommendations.map(quote => (
+              <QuoteCard
+                image={quote.image}
+                text={quote.text}
+                position={quote.position}
+              />
+            ))}
+          </div>
+        </div>
+        {/*<div style={{ color: "grey", marginTop: "64px", marginBottom: "64px" }}>
+          <Section text="Employment references" />
+          <div style={contentStyles}>
+            {references.map(quote => (
+              <QuoteCard
+                image={quote.image}
+                text={quote.text}
+                position={quote.position}
+              />
+            ))}
+          </div>
+        </div>*/}
       </Layout>
     </div>
   )
