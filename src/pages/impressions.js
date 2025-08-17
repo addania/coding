@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "./index.css"
 
 export default ({ data }) => {
-  const [sorting, setSorting] = React.useState("ASC")
+  const [sorting, setSorting] = React.useState("DESC")
   console.log(data)
   const posts = data.allMarkdownRemark.edges.reverse()
   return (

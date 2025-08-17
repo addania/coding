@@ -10,10 +10,10 @@ After a long long time I took courage and made a code review... Or better my men
 
 And guess what. I MADE A CHANGE REQUEST
 
-Found a cute repo, made nmy day to create a BUG report :))
+Found a cute repo, made my day to create a BUG report :))
 
 <img src="https://i.imgur.com/bJKjDn6.png" alt="Photo by Addania" />
 
 flotejshon divajs
 
-BUG!!! in my üassive destination scheduling OMG OMG OMG I broke it
+BUG!!! in my passive destination scheduling. OMG OMG OMG. I broke it.

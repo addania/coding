@@ -6,11 +6,10 @@ category: "impressions"
 
 **04.05.2020 - Monday**
 
-WASNT MY FAULT!!! weeeee
+WASNT MY FAULT!!! Weeeee.
 
-Ook next issue was ym falut. Deleted a from work action. Dammin and boss sent it to my face. 
+Ok next issue was ym falut. Deleted a from work action. Dammin and boss sent it to my face.
 
 /Cryyy
-
 
 AMAZING YOGA. /flex videooo

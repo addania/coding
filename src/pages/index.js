@@ -48,7 +48,7 @@ const Tag = ({ title, position, timer }) => {
         top: position,
         left: "0",
         transform: `translateX(-100%) translateY(-50%)`,
-        width: "clamp(100px, 50%, 450px)", // min 150px, preferred 50% of parent, max 300px
+        width: "clamp(100px, 50%, 450px)",
         padding: "0.5em 1em",
         background: "rgba(0, 0, 0, 0.7)",
         zIndex: 1,
@@ -106,7 +106,11 @@ export default ({ data }) => {
           <Section text="Said about me" />
           <div style={contentStyles}>
             {quotes.map(quote => (
-              <QuoteCard image={quote.image} text={quote.text} />
+              <QuoteCard
+                image={quote.image}
+                text={quote.text}
+                position={quote.position}
+              />
             ))}
           </div>
         </div>

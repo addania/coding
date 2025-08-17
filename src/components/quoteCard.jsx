@@ -1,6 +1,6 @@
 import React from "react"
 
-export const QuoteCard = ({ image, text }) => {
+export const QuoteCard = ({ image, text, position }) => {
   return (
     <div
       style={{
@@ -26,6 +26,15 @@ export const QuoteCard = ({ image, text }) => {
         }}
       >
         {text}
+      </div>
+      <div
+        style={{
+          width: "100%",
+          textAlign: "right",
+          marginTop: "12px",
+        }}
+      >
+        {position}
       </div>
     </div>
   )
