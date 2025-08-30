@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "./index.css"
 
 export default ({ data }) => {
-  const [sorting, setSorting] = React.useState("DESC")
+  const [sorting, setSorting] = React.useState("ASC")
   console.log(data)
   const posts = data.allMarkdownRemark.edges.reverse()
   return (
@@ -63,7 +63,7 @@ export default ({ data }) => {
 export const query = graphql`
   query {
     allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: ASC }
+      sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { category: { eq: "impressions" } } }
     ) {
       edges {

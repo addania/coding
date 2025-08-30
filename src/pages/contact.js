@@ -9,25 +9,26 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 
 import Layout from "../components/layout.js"
 import mia3 from "../images/mia3.png"
-// import { Polygons } from "../components/animationEffects/Polygons"
+import { Polygons } from "../components/animationEffects/polygons"
 
 const containerStyle = {
   display: "flex",
-  alignItems: "center",
+  width: "100%",
   height: "80vh",
-  justifyContent: "flex-end",
   position: "relative",
 }
 
 const imageStyle = {
-  flex: "0 0 50%",
+  flex: "1",
   height: "100%",
   objectFit: "cover",
   objectPosition: "right",
-  alignItems: "flex-end",
   zIndex: 1,
-  margin: 0,
-  marginRight: -1,
+}
+
+const polygonStyle = {
+  flex: "1",
+  position: "relative",
 }
 
 const ContactIcon = ({ icon, text, link }) => {
@@ -50,10 +51,10 @@ const ContactForm = () => {
       style={{
         borderRadius: "10px",
         position: "absolute",
-        left: 0,
+        // left: 0,
         top: "15%",
-        transform: `translateY(-15%)`,
-        transform: `translateX(-100%)`,
+        left: "05%",
+        transform: `translateY(-15%) translateX(-50%)`,
         width: "50%",
         height: "30%",
         background: "rgba(0, 0, 0, 0.8)",
@@ -98,12 +99,19 @@ const ContactForm = () => {
 
 export default () => (
   <Layout>
-    <div id="container" style={containerStyle}>
-      {/*<div id="tsparticles">
-        <Polygons style={{ width: "100%", height: "300px" }} />
-      </div>*/}
+    <div style={containerStyle}>
+      {/* Polygons on the left */}
+      <div style={polygonStyle}>
+        <Polygons />
+      </div>
+
+      {/* Image on the right */}
+      <div style={{ flex: "1" }}>
+        <img src={mia3} alt="Portrait Image" style={imageStyle} />
+      </div>
+
+      {/* Contact Form overlay */}
       <ContactForm />
-      <img src={mia3} alt="Portrait Image" style={imageStyle} />
     </div>
   </Layout>
 )

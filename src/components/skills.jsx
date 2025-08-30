@@ -147,7 +147,7 @@ export const Skills = () => {
                 margin: 0,
                 padding: "10px 12px",
                 fontSize: "14px",
-                backgroundColor: "#4682B4",
+                backgroundColor: "#8b8b8b",
                 color: "white",
               }}
             >
@@ -205,7 +205,7 @@ export const Skills = () => {
                       padding: "4px 8px",
                       fontSize: "12px",
                       border: "none",
-                      background: "#4682B4",
+                      background: "rgba(0, 0, 0, 0.8)",
                       color: "white",
                       borderRadius: "5px",
                       cursor: "pointer",
@@ -232,7 +232,7 @@ export const Skills = () => {
                       padding: "4px 8px",
                       fontSize: "12px",
                       border: "none",
-                      background: "#4682B4",
+                      backgroundColor: "rgba(0, 0, 0, 0.8)",
                       color: "white",
                       borderRadius: "5px",
                       cursor: "pointer",
