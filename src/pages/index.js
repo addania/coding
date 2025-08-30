@@ -13,6 +13,7 @@ import { jobs } from "../constants/jobs"
 import { QuoteCard } from "../components/quoteCard"
 import { JobCard } from "../components/jobCard"
 import { Section } from "../components/section"
+import { Skills } from "../components/skills"
 
 const containerStyle = {
   display: "flex",
@@ -111,6 +112,24 @@ export default ({ data }) => {
           </div>
         </div>
         <div style={{ color: "grey", marginTop: "64px", marginBottom: "64px" }}>
+          <Section text="Skills" />
+          <div style={contentStyles}>
+            <Skills />
+          </div>
+        </div>
+        <div style={{ color: "grey", marginTop: "64px", marginBottom: "64px" }}>
+          <Section text="LinkedIn recommendation" />
+          <div style={contentStyles}>
+            {recommendations.map(quote => (
+              <QuoteCard
+                image={quote.image}
+                text={quote.text}
+                position={quote.position}
+              />
+            ))}
+          </div>
+        </div>
+        <div style={{ color: "grey", marginTop: "64px", marginBottom: "64px" }}>
           <Section text="Said about me" />
           <div style={contentStyles}>
             {quotes.map(quote => (
@@ -124,16 +143,7 @@ export default ({ data }) => {
         </div>
 
         <div style={{ color: "grey", marginTop: "64px", marginBottom: "64px" }}>
-          <Section text="LinkedIn recommendation" />
-          <div style={contentStyles}>
-            {recommendations.map(quote => (
-              <QuoteCard
-                image={quote.image}
-                text={quote.text}
-                position={quote.position}
-              />
-            ))}
-          </div>
+          <Section text="When in doubt, try harder" />
         </div>
         {/*<div style={{ color: "grey", marginTop: "64px", marginBottom: "64px" }}>
           <Section text="Employment references" />
