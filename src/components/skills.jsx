@@ -124,6 +124,7 @@ export const Skills = () => {
         gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
         gap: "20px",
         width: "100%",
+        textAlign: "left",
       }}
     >
       {Object.entries(skillsData).map(([category, items]) => {

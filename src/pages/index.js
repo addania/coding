@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "./index.css"
 import mia1 from "../images/mia1.jpg"
 import { Polygons } from "../components/animationEffects/polygons"
+import { BouncingSkills } from "../components/animationEffects/bouncingSkills"
 
 import { quotes } from "../constants/quotes"
 import { recommendations } from "../constants/recommendations"
@@ -12,6 +13,7 @@ import { QuoteCard } from "../components/quoteCard"
 import { JobCard } from "../components/jobCard"
 import { Section } from "../components/section"
 import { Skills } from "../components/skills"
+import { CollapsibleSkills } from "../components/collapsibleSkills"
 
 const containerStyle = {
   display: "flex",
@@ -110,15 +112,10 @@ export default ({ data }) => {
 
       <div style={{ color: "grey", marginTop: "64px", marginBottom: "64px" }}>
         <Section text="Skills" />
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "12px",
-          }}
-        >
-          <Skills />
-        </div>
+        <div style={{ marginTop: "20px" }} />
+        <BouncingSkills />
+
+        <CollapsibleSkills />
       </div>
 
       <div style={{ color: "grey", marginTop: "64px", marginBottom: "64px" }}>
