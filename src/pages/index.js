@@ -65,16 +65,41 @@ const Tag = ({ title, position, timer }) => (
 )
 
 export default ({ data }) => {
+  const isDesktop = typeof window !== "undefined" && window.innerWidth > 768
   return (
     <Layout>
       <div style={containerStyle}>
-        <div style={{ flex: 1, position: "relative" }}>
-          <Polygons />
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            height: "768px",
+            position: "relative",
+          }}
+        >
+          {isDesktop && (
+            <div style={{ flex: 1, position: "relative" }}>
+              <Polygons />
+            </div>
+          )}
+          <div
+            style={{
+              flex: isDesktop ? 1 : "none",
+              width: isDesktop ? "50%" : "100%",
+            }}
+          >
+            <img
+              src={mia1}
+              alt="Portrait Image"
+              style={{
+                objectFit: "cover",
+                objectPosition: "right",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          </div>
         </div>
-        <div style={{ flex: 1 }}>
-          <img src={mia1} alt="Portrait Image" style={imageStyle} />
-        </div>
-
         <Tag title="Senior Frontend Engineer" position="50%" timer={2} />
         <Tag title="Passionate about coding" position="70%" timer={2.5} />
         <Tag title="Experienced Team Lead" position="90%" timer={3} />
