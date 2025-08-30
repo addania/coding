@@ -32,14 +32,11 @@ const imageStyle = {
 }
 
 const contentStyles = {
-  fontSize: "12px",
-  display: "flex",
-  flexDirection: "row",
-  flexGrowth: 1,
-  justifyContent: "space-around",
-  flexWrap: "wrap",
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+  gap: "12px",
+  alignItems: "start",
 }
-
 const Tag = ({ title, position, timer }) => {
   return (
     <div
@@ -101,7 +98,16 @@ export default ({ data }) => {
                 year={job.year}
               />
             ))}
-            <div>* including 14 months of maternity / parental leave</div>
+            <div
+              style={{
+                gridColumn: "1 / -1",
+                textAlign: "center",
+                fontSize: "12px",
+                marginTop: "8px",
+              }}
+            >
+              * including 14 months of maternity / parental leave
+            </div>
           </div>
         </div>
         <div style={{ color: "grey", marginTop: "64px", marginBottom: "64px" }}>

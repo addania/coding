@@ -6,10 +6,11 @@ export const JobCard = ({ image, text, company, year }) => {
       style={{
         display: "flex",
         flexDirection: "column",
-        flexGrowth: 1,
+        flexGrow: 1,
         alignItems: "center",
         minWidth: "200px",
         padding: "24px",
+        fontSize: "14px",
       }}
     >
       <img

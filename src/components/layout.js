@@ -24,7 +24,7 @@ export default ({ children }) => {
     <div
       style={{
         margin: `3rem auto`,
-        maxWidth: 1000,
+        maxWidth: 1100,
         padding: `0 1rem`,
         zIndex: 10,
       }}

@@ -6,10 +6,11 @@ export const QuoteCard = ({ image, text, position }) => {
       style={{
         display: "flex",
         flexDirection: "column",
-        flexGrowth: 1,
+        flexGrow: 1,
         alignItems: "center",
         minWidth: "200px",
         padding: "24px",
+        fontSize: "14px",
       }}
     >
       <img
@@ -21,7 +22,7 @@ export const QuoteCard = ({ image, text, position }) => {
       <div
         style={{
           display: "flex",
-          maxWidth: "200px",
+          maxWidth: "305px",
           textAlign: "justify",
         }}
       >
@@ -32,6 +33,7 @@ export const QuoteCard = ({ image, text, position }) => {
           width: "100%",
           textAlign: "right",
           marginTop: "12px",
+          maxWidth: "305px",
         }}
       >
         {position}

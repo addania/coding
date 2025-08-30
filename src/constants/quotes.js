@@ -22,10 +22,10 @@ export const quotes = [
       "Mia, you know im your fan 🙂 Your professionalism, delivery focus, and leadership attitude - it's something I will take with me. You're a lifetime learner, and I'm confident you will grow and succeed in your current and every future role.",
   },
   {
-    image: a7,
-    position: "Engineering Manager",
+    image: a9,
+    position: "Product Manager",
     text:
-      "Mia's leadership style is one that I admire. You constantly go the extra mile to keep your Pod informed with everything that is happening around them. That's true leadership.",
+      "Mia & Sara, thanks and congrats on the Bazaar. There where{` >70 `} people listening and giving feedback and were clearly happy to see already implemented feedback from bazaars earlier this quarter implemented. This is true role modeling of getting feedback early and improving with quick feedback cycles. I think every other team can benefit from adopting the way you participate in this format regularly, gathering feedback and improving iteratively. This is a great example of very good product development practices in work.",
   },
   {
     image: a3,
@@ -34,11 +34,12 @@ export const quotes = [
       "Secondly, to Mia Schwabova, my first female boss, THANK YOU for being my guide in transitioning from creative marketing to tech sales. You supported me with your knowledge, skills and friendly approach, and you showed me that it's possible to be a strong and skilled woman in a male-dominated industry while breakingdown stereotypes and following your dreams.",
   },
   {
-    image: a9,
-    position: "Product Manager",
+    image: a7,
+    position: "Engineering Manager",
     text:
-      "Mia & Sara, thanks and congrats on the Bazaar. There where{` >70 `} people listening and giving feedback and were clearly happy to see already implemented feedback from bazaars earlier this quarter implemented. This is true role modeling of getting feedback early and improving with quick feedback cycles. I think every other team can benefit from adopting the way you participate in this format regularly, gathering feedback and improving iteratively. This is a great example of very good product development practices in work.",
+      "Mia's leadership style is one that I admire. You constantly go the extra mile to keep your Pod informed with everything that is happening around them. That's true leadership.",
   },
+
   {
     image: a5,
     position: "Tech Lead",
