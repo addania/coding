@@ -61,7 +61,7 @@ const ContactForm = ({ isDesktop }) => {
         top: `${isDesktop ? "15%" : "50%"}`,
         left: "5%",
         transform: `translateY(-15%) translateX(-50%)`,
-        width: "50%",
+        width: `${isDesktop ? "50%" : "80%"}`,
         height: "30%",
         background: "rgba(0, 0, 0, 0.8)",
         zIndex: 2,
