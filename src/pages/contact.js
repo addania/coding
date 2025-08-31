@@ -31,7 +31,7 @@ const polygonStyle = {
   position: "relative",
 }
 
-const ContactIcon = ({ icon, text, link }) => {
+const ContactItem = ({ icon, text, link, isDesktop }) => {
   return (
     <a
       href={link}
@@ -40,20 +40,26 @@ const ContactIcon = ({ icon, text, link }) => {
       style={{ color: "white" }}
     >
       <FontAwesomeIcon icon={icon} style={{ color: "white" }} />
-      <span style={{ paddingLeft: "16px" }}>{text}</span>
+      <span
+        style={{
+          paddingLeft: "16px",
+          fontSize: `${isDesktop ? "20px" : "14px"}`,
+        }}
+      >
+        {text}
+      </span>
     </a>
   )
 }
 
-const ContactForm = () => {
+const ContactForm = ({ isDesktop }) => {
   return (
     <div
       style={{
         borderRadius: "10px",
         position: "absolute",
-        // left: 0,
-        top: "15%",
-        left: "05%",
+        top: `${isDesktop ? "15%" : "50%"}`,
+        left: "5%",
         transform: `translateY(-15%) translateX(-50%)`,
         width: "50%",
         height: "30%",
@@ -71,47 +77,60 @@ const ContactForm = () => {
           padding: "24px",
         }}
       >
-        <h5 style={{ color: "white" }}>Feel free to contact me:</h5>
-        <ContactIcon
+        <h5
+          style={{ color: "white", fontSize: `${isDesktop ? "25px" : "16px"}` }}
+        >
+          Feel free to contact me:
+        </h5>
+        <ContactItem
           icon={faLinkedin}
           text="mia-schwabova"
           link={"https://www.linkedin.com/in/mia-schwabova-333b12168"}
+          isDesktop={isDesktop}
         />
-        <ContactIcon
+        <ContactItem
           icon={faInstagram}
           text="_sportsoul"
           link="https://www.instagram.com/_sportsoul"
+          isDesktop={isDesktop}
         />
-        <ContactIcon
+        <ContactItem
           icon={faGithub}
           text="addania"
           link="https://www.github.com/addania"
+          isDesktop={isDesktop}
         />
-        <ContactIcon
+        <ContactItem
           icon={faEnvelope}
           text="zabacinka@yahoo.com"
           link="mailto:zabacinka@yahoo.com"
+          isDesktop={isDesktop}
         />
       </div>
     </div>
   )
 }
 
-export default () => (
-  <Layout>
-    <div style={containerStyle}>
-      {/* Polygons on the left */}
-      <div style={polygonStyle}>
-        <Polygons />
-      </div>
+export default () => {
+  const isDesktop = typeof window !== "undefined" && window.innerWidth > 768
 
-      {/* Image on the right */}
-      <div style={{ flex: "1" }}>
-        <img src={mia3} alt="Portrait Image" style={imageStyle} />
+  return (
+    <Layout>
+      <div style={containerStyle}>
+        {isDesktop && (
+          <div style={polygonStyle}>
+            <Polygons />
+          </div>
+        )}
+        <div style={{ flex: "1", flexGrow: 1 }}>
+          <img
+            src={mia3}
+            alt="Portrait Image"
+            style={{ ...imageStyle, width: "100%", justifySelf: "center" }}
+          />
+        </div>
+        <ContactForm isDesktop={isDesktop} />
       </div>
-
-      {/* Contact Form overlay */}
-      <ContactForm />
-    </div>
-  </Layout>
-)
+    </Layout>
+  )
+}
