@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Layout from "../components/layout.js"
 import { Link, graphql } from "gatsby"
 import { Carousel } from "../components/carousel.js"
@@ -6,7 +6,20 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "./index.css"
 
 export default ({ data }) => {
-  console.log(data)
+  const [query, setQuery] = useState("")
+  const [search, setSearch] = useState("")
+
+  const handleSearch = e => {
+    e.preventDefault()
+    setSearch(query.toLowerCase())
+  }
+
+  const filteredArticles = data.allMarkdownRemark.edges.filter(({ node }) => {
+    const title = node.frontmatter.title.toLowerCase()
+    const excerpt = node.excerpt.toLowerCase()
+    return title.includes(search) || excerpt.includes(search)
+  })
+
   return (
     <div>
       <Layout>
@@ -19,8 +32,43 @@ export default ({ data }) => {
 
         <h3 style={{ textAlign: "center" }}>ALL ARTICLES</h3>
         <p style={{ textAlign: "center", fontSize: "15px", color: "grey" }}>
-          {data.allMarkdownRemark.totalCount} Posts
+          {filteredArticles.length} Posts
         </p>
+        <form
+          onSubmit={handleSearch}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "10px",
+            marginBottom: "20px",
+          }}
+        >
+          <input
+            type="text"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder="Search articles..."
+            style={{
+              padding: "8px 12px",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              width: "250px",
+            }}
+          />
+          <button
+            type="submit"
+            style={{
+              padding: "8px 16px",
+              backgroundColor: "teal",
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+          >
+            Search
+          </button>
+        </form>
 
         <table style={{ textAlign: "justify", textJustify: "inter-word" }}>
           <thead>
@@ -31,7 +79,7 @@ export default ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {data.allMarkdownRemark.edges.map(({ node }, index) => (
+            {filteredArticles.map(({ node }, index) => (
               <tr key={index}>
                 <td>{node.frontmatter.date}</td>
                 <Link to={node.fields.slug}>
@@ -74,6 +122,7 @@ export const query = graphql`
     }
   }
 `
+
 const removeImageTextFromExcerpt = string => {
   return string.replace(
     /(Photo by .+ from Pexels)|(Photo by .+ from Pixabay)|(Photo from \b(\w*.com\w*)\b)|(Photo from \w+)/,
