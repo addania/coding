@@ -55,7 +55,7 @@ const Tag = ({ title, position, timer }) => (
     <h3
       style={{
         color: "white",
-        fontSize: "clamp(14px, 2.5vw, 30px)",
+        fontSize: "clamp(20px, 2.5vw, 30px)",
         margin: 0,
       }}
     >
@@ -100,9 +100,21 @@ export default ({ data }) => {
             />
           </div>
         </div>
-        <Tag title="Senior Frontend Engineer" position="50%" timer={2} />
-        <Tag title="Passionate about coding" position="70%" timer={2.5} />
-        <Tag title="Experienced Team Lead" position="90%" timer={3} />
+        <Tag
+          title="Senior Frontend Engineer"
+          position={isDesktop ? "50%" : "55%"}
+          timer={2}
+        />
+        <Tag
+          title="Passionate about coding"
+          position={isDesktop ? "70%" : "75%"}
+          timer={2.5}
+        />
+        <Tag
+          title="Experienced Team Lead"
+          position={isDesktop ? "90%" : "95%"}
+          timer={3}
+        />
       </div>
       <div style={{ color: "grey", marginTop: "64px", marginBottom: "64px" }}>
         <Section text="Professional Experience" />
@@ -144,7 +156,7 @@ export default ({ data }) => {
       </div>
 
       <div style={{ color: "grey", marginTop: "64px", marginBottom: "64px" }}>
-        <Section text="LinkedIn recommendation" />
+        <Section text="Recommendations" />
         <div
           style={{
             display: "grid",

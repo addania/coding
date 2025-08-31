@@ -4,7 +4,7 @@ import { graphql } from "gatsby"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./index.css"
 import landscaping from "../assets/videos/landscaping.mp4"
-import obstacleAssaultNew from "../assets/videos/obstacleAssaultNew.mp4"
+import obstacleAssaultNew from "../assets/videos/obstacleAssaultNew_fixed.mp4"
 import warehouseWrackageNew from "../assets/videos/warehouseWrackageNew.mp4"
 import cryptRaider from "../assets/videos/cryptRaider.mp4"
 import yogata from "../assets/gifs/yoga.gif"
@@ -18,6 +18,7 @@ import { VideoCard } from "../components/videoCard.js"
 import "../components/videoCard.css"
 import { ImageCard } from "../components/imageCard.js"
 import { SectionHeading } from "../components/sectionHeading.js"
+
 export default ({ data }) => {
   console.log(data)
   const cardContainerStyle = {
@@ -26,7 +27,7 @@ export default ({ data }) => {
     justifyContent: "center",
     gap: "20px",
   }
-
+  const isDesktop = typeof window !== "undefined" && window.innerWidth > 768
   return (
     <div>
       <Layout>
@@ -41,16 +42,19 @@ export default ({ data }) => {
             title="Obstacle Assault"
             tech="Unreal Engine"
             src={obstacleAssaultNew}
+            isDesktop={isDesktop}
           />
           <VideoCard
             title="Crypt Raider"
             tech="Unreal Engine"
             src={cryptRaider}
+            isDesktop={isDesktop}
           />
           <VideoCard
             title="Warehouse Wreckage"
             tech="Unreal Engine"
             src={warehouseWrackageNew}
+            isDesktop={isDesktop}
           />
         </div>
 

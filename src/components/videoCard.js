@@ -1,7 +1,7 @@
 import React from "react"
 import "./videoCard.css"
 
-export const VideoCard = ({ title, tech, src }) => {
+export const VideoCard = ({ title, tech, src, isDesktop }) => {
   return (
     <div className="video-card">
       <div className="video-card-header">
@@ -12,7 +12,7 @@ export const VideoCard = ({ title, tech, src }) => {
         <video
           controls
           playsInline
-          muted
+          muted={!isDesktop}
           preload="metadata"
           style={{ width: "100%", borderRadius: "10px" }}
         >
