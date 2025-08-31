@@ -9,7 +9,13 @@ export const VideoCard = ({ title, tech, src }) => {
         <div className="video-tech">{tech}</div>
       </div>
       <div className="video-container">
-        <video controls>
+        <video
+          controls
+          playsInline
+          muted
+          preload="metadata"
+          style={{ width: "100%", borderRadius: "10px" }}
+        >
           <source src={src} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
