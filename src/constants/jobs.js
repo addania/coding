@@ -5,7 +5,7 @@ export const jobs = [
   {
     image: adverity,
     company: "Adverity",
-    year: "2023 - now*",
+    year: "2023 - now",
     position: "Senior Frontend Engineer",
   },
   {

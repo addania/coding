@@ -134,16 +134,6 @@ export default ({ data }) => {
               year={job.year}
             />
           ))}
-          <div
-            style={{
-              gridColumn: "1 / -1",
-              textAlign: "center",
-              fontSize: "12px",
-              marginTop: "8px",
-            }}
-          >
-            * including 14 months of maternity / parental leave
-          </div>
         </div>
       </div>
 
